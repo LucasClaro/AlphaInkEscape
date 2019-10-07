@@ -7,6 +7,7 @@
 #include <allegro5/allegro_native_dialog.h>
 
 #include "Struct.h"
+#include "tabelaPeri.h"
 //#include "Fase0.h"
 //#include "Fase1.h"
 //#include "Fase2.h"
@@ -20,14 +21,14 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 {
 	switch (progresso->proximaSala)
 	{
-	case 0: JogarFase0(janela, fila_eventos, progresso);
-		return;
+	case 0:JogarTabelaPeri(janela, fila_eventos, progresso); //JogarFase0(janela, fila_eventos, progresso);
+		return;/*
 	case 1: JogarFase1(janela, fila_eventos, progresso);
 		return;
 	case 2: JogarFase2(janela, fila_eventos, progresso);
 		return;
 	case 3: JogarFase3(janela, fila_eventos, progresso);
-		return;
+		return;*/
 	default: printf("Fase não encontrada"); return;
 		break;
 	}
