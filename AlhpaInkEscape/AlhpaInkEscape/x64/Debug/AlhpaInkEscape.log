@@ -1,0 +1,27 @@
+﻿  Origem.c
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(52,13): warning C4013:  'inicializar' indefinido; assumindo extern retornando int
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(83,63): warning C4133:  '=': tipos incompatíveis - de 'ALLEGRO_SAMPLE *' para 'ALLEGRO_AUDIO_STREAM *'
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(265,34): warning C4267:  '=': conversão de 'size_t' para 'int', possível perda de dados
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(185,1): warning C4267:  'inicializando': conversão de 'size_t' para 'int', possível perda de dados
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(228,1): warning C4267:  'inicializando': conversão de 'size_t' para 'int', possível perda de dados
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(60): warning C4716:  'caregaInventario': deve retornar um valor
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_init_image_addon referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_load_font referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_draw_text referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_destroy_font referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_init_font_addon referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_init_ttf_addon referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_destroy_sample referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_destroy_audio_stream referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_set_audio_stream_gain referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_set_audio_stream_playmode referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_attach_audio_stream_to_mixer referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_install_audio referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_reserve_samples referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_get_default_mixer referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_play_sample referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_load_sample referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_load_audio_stream referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido __imp_al_init_acodec_addon referenciado na função JogarFase4Binary
+Origem.obj : error LNK2019: símbolo externo indefinido inicializar referenciado na função JogarFase4Binary
+D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\x64\Debug\AlhpaInkEscape.exe : fatal error LNK1120: 19 externo não resolvidos

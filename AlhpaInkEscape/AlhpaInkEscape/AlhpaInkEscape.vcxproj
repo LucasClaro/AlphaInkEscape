@@ -141,6 +141,7 @@
     <ClCompile Include="Origem.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fase4Binary.h" />
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="Struct.h" />
