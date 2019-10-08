@@ -12,8 +12,8 @@
 #define Funcoes_H
 
 // Desenha um bitmap dado um Objeto
-void DesenharImagem(Objeto objeto) {
-	al_draw_bitmap(objeto.bitmap, objeto.x, objeto.y, 0);
+void DesenharImagem(Objeto *objeto) {
+	al_draw_bitmap(objeto->bitmap, objeto->x, objeto->y, 0);
 }
 
 // Vereifica se as coordenadas (X,Y) estão dentro de uma imagem

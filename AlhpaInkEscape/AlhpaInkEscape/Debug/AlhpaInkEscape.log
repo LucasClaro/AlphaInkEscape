@@ -1,0 +1,8 @@
+﻿  Origem.c
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(97,9): warning C4101:  'saidaBaixo': variável local não referenciada
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(90,9): warning C4101:  'saidaCima': variável local não referenciada
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(26,20): warning C4013:  'al_init_font_addon' indefinido; assumindo extern retornando int
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013:  'al_init_ttf_addon' indefinido; assumindo extern retornando int
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(60): warning C4716:  'caregaInventario': deve retornar um valor
+C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(150): warning C4715:  'JogarFase3Brasil': nem todos os caminhos de controle retornam um valor
+  AlhpaInkEscape.vcxproj -> C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
