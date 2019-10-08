@@ -1,4 +1,0 @@
-﻿  Origem.c
-D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(95,63): warning C4133:  '=': tipos incompatíveis - de 'ALLEGRO_SAMPLE *' para 'ALLEGRO_AUDIO_STREAM *'
-D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(60): warning C4716:  'caregaInventario': deve retornar um valor
-  AlhpaInkEscape.vcxproj -> D:\Senac\2-semestre\PI 2\EscapeRoom\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
