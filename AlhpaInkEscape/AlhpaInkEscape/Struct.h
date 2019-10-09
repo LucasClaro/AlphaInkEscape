@@ -10,8 +10,8 @@
 #define Struct_H
 
 // Tamanho da tela
-#define LARGURA_TELA 1100
-#define ALTURA_TELA 600
+#define LARGURA_TELA 1280
+#define ALTURA_TELA 720
 // Tamanho do Inventário
 #define TAMANHO_INVENTARIO 7
 
