@@ -38,8 +38,8 @@ int VerificarBordas(int x, int y, Objeto *imagem) {
 }
 
 // Verifica se uma imagem está dentro da outra
-int IsInsideImagem(Objeto menor, Objeto maior) {
-	if (menor.x >= maior.x && menor.x + menor.largura <= maior.x + maior.largura && menor.y >= maior.y && menor.y + menor.altura <= maior.y + maior.altura) {
+int IsInsideImagem(Objeto *menor, Objeto *maior) {
+	if (menor->x >= maior->x && menor->x + menor->largura <= maior->x + maior->largura && menor->y >= maior->y && menor->y + menor->altura <= maior->y + maior->altura) {
 		return 1;
 	}
 	return 0;
