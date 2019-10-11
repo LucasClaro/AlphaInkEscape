@@ -10,11 +10,12 @@
 //Posições corretas
 int
 posNa[] = { 200,204 },
-posBa[] = {249, 369},
+posBa[] = {248, 369},
 posCo[] = {589, 259},
 posC[] = {834, 149},
 posN[] = {881, 149},
-posSe[] = {929, 260};
+posSe[] = {929, 260},
+tamFundo[] = { 60,65 };
 
 Objeto* SaidaBaixo = NULL, * SaidaEsquerda = NULL, * Ba = NULL, * Co = NULL, * N = NULL, * Se = NULL, * Na = NULL, * C = NULL;
 Objeto* fundoBa = NULL, * fundoCo = NULL, * fundoN = NULL, * fundoSe = NULL, * fundoNa = NULL, * fundoC = NULL;
@@ -82,43 +83,43 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 
 	//////////////////
 	fundoBa = (Objeto*)malloc(sizeof(Objeto));
-	fundoBa->altura = 63;
-	fundoBa->largura = 56;
+	fundoBa->altura = tamFundo[1];
+	fundoBa->largura = tamFundo[0];
 	fundoBa->x = posBa[0];
 	fundoBa->y = posBa[1];
 	fundoBa->bitmap = NULL;
 
 	fundoCo = (Objeto*)malloc(sizeof(Objeto));
-	fundoCo->altura = 63;
-	fundoCo->largura = 56;
+	fundoCo->altura = tamFundo[1];
+	fundoCo->largura = tamFundo[0];
 	fundoCo->x = posCo[0];
 	fundoCo->y = posCo[1];
 	fundoCo->bitmap = NULL;
 
 	fundoN = (Objeto*)malloc(sizeof(Objeto));
-	fundoN->altura = 63;
-	fundoN->largura = 56;
+	fundoN->altura = tamFundo[1];
+	fundoN->largura = tamFundo[0];
 	fundoN->x = posN[0];
 	fundoN->y = posN[1];
 	fundoN->bitmap = NULL;
 
 	fundoSe = (Objeto*)malloc(sizeof(Objeto));
-	fundoSe->altura = 63;
-	fundoSe->largura = 56;
+	fundoSe->altura = tamFundo[1];
+	fundoSe->largura = tamFundo[0];
 	fundoSe->x = posSe[0];
 	fundoSe->y = posSe[1];
 	fundoSe->bitmap = NULL;
 
 	fundoNa = (Objeto*)malloc(sizeof(Objeto));
-	fundoNa->altura = 63;
-	fundoNa->largura = 56;
+	fundoNa->altura = tamFundo[1];
+	fundoNa->largura = tamFundo[0];
 	fundoNa->x = posNa[0];
 	fundoNa->y = posNa[1];
 	fundoNa->bitmap = NULL;
 
 	fundoC = (Objeto*)malloc(sizeof(Objeto));
-	fundoC->altura = 63;
-	fundoC->largura = 56;
+	fundoC->altura = tamFundo[1];
+	fundoC->largura = tamFundo[0];
 	fundoC->x = posC[0];
 	fundoC->y = posC[1];
 	fundoC->bitmap = NULL;
@@ -134,12 +135,12 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 	Na->bitmap = al_load_bitmap("Imgs/Na.png");
 	C->bitmap = al_load_bitmap("Imgs/C.png");
 
-	fundoBa->bitmap = al_load_bitmap("Imgs/Ba.png");
-	fundoCo->bitmap = al_load_bitmap("Imgs/Ba.png");
-	fundoN->bitmap = al_load_bitmap("Imgs/Ba.png");
-	fundoSe->bitmap = al_load_bitmap("Imgs/Ba.png");
-	fundoNa->bitmap = al_load_bitmap("Imgs/Ba.png");
-	fundoC->bitmap = al_load_bitmap("Imgs/Ba.png");
+	fundoBa->bitmap = al_load_bitmap("Imgs/teste.png");
+	fundoCo->bitmap = al_load_bitmap("Imgs/teste.png");
+	fundoN->bitmap = al_load_bitmap("Imgs/teste.png");
+	fundoSe->bitmap = al_load_bitmap("Imgs/teste.png");
+	fundoNa->bitmap = al_load_bitmap("Imgs/teste.png");
+	fundoC->bitmap = al_load_bitmap("Imgs/teste.png");
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 	ALLEGRO_BITMAP* Tabela = al_load_bitmap("Imgs/tab2.png");
@@ -267,6 +268,13 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 					break;
 				}
 			}
+
+			if (IsInsideImagem(Ba, fundoBa) && IsInsideImagem(Co, fundoCo) && IsInsideImagem(N, fundoN) && IsInsideImagem(Se, fundoSe) && IsInsideImagem(Na, fundoNa) && IsInsideImagem(C, fundoC))// 
+			{
+				gameOver = 1;
+				printf("feito");
+			}
+
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
@@ -289,12 +297,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 		al_draw_bitmap(Se->bitmap, Se->x, Se->y, 0);
 		al_draw_bitmap(Na->bitmap, Na->x, Na->y, 0);
 		al_draw_bitmap(C->bitmap, C->x, C->y, 0);
-
-		if (IsInsideImagem(fundoBa, Ba))//&& IsInsideImagem(fundoCo, Co) && IsInsideImagem(fundoN, N) && IsInsideImagem(fundoSe, Se) && IsInsideImagem(fundoNa, Na) && IsInsideImagem(fundoC, C)
-		{
-			printf("feito");
-		}
-
+		
 		//caregaInventario(progresso);
 		al_flip_display();
 	}
