@@ -44,7 +44,7 @@ int main(void) {
 
 	// Cria a nossa janela
 	janela = al_create_display(LARGURA_TELA, ALTURA_TELA);
-	al_set_display_flag(janela, ALLEGRO_FULLSCREEN, true);
+
 	if (!janela) {
 		fprintf(stderr, "Falha ao iniciar janela\n");
 		return -1;
@@ -84,12 +84,14 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 4;
+	progresso.proximaSala = 1;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
 	progresso.Salas[2] = 0;
 	progresso.Salas[3] = 0;
+	progresso.Salas[4] = 0;
+	progresso.Salas[5] = 0;
 
 	// Cria o ponteiro para progresso que será mandado para o resto do programa
 	Progresso* prog = &progresso;

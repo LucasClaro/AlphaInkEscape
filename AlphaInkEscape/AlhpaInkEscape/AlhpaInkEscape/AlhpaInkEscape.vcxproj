@@ -155,6 +155,7 @@
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="tabelaPeri.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
