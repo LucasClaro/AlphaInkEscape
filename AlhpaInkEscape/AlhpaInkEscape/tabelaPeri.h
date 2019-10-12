@@ -21,7 +21,7 @@ Objeto* SaidaBaixo = NULL, * SaidaEsquerda = NULL, * Ba = NULL, * Co = NULL, * N
 Objeto* fundoBa = NULL, * fundoCo = NULL, * fundoN = NULL, * fundoSe = NULL, * fundoNa = NULL, * fundoC = NULL;
 int Arrastando = 0;
 
-
+ALLEGRO_BITMAP* Background = NULL, * Tabela = NULL;
 
 int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos, Progresso * progresso)
 {
@@ -142,8 +142,8 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 	fundoNa->bitmap = al_load_bitmap("Imgs/teste.png");
 	fundoC->bitmap = al_load_bitmap("Imgs/teste.png");
 
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
-	ALLEGRO_BITMAP* Tabela = al_load_bitmap("Imgs/tab2.png");
+	Background = al_load_bitmap("Imgs/fundo.png");
+	Tabela = al_load_bitmap("Imgs/tab2.png");
 
 	if (!SaidaBaixo->bitmap || !SaidaEsquerda->bitmap || !Background || ! Tabela || !Ba->bitmap || !Co->bitmap || !N->bitmap || !Se->bitmap || !Na->bitmap || !C->bitmap)
 	{
