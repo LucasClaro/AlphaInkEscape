@@ -22,15 +22,28 @@ int main(void) {
 	}
 
 	// Inicializa o add-on para utilização de imagens e fontes
+
 	al_init_image_addon();
+
 	al_init_font_addon();
+
 	al_init_ttf_addon();
 
-	ALLEGRO_DISPLAY_MODE mode;
-	al_get_display_mode(al_get_num_display_modes()-1, &mode);
+	al_install_audio();
+
+	al_init_acodec_addon();
+
+	al_reserve_samples(6);
+
+	al_install_mouse();
+
+	al_install_keyboard();
+
+	/*ALLEGRO_DISPLAY_MODE mode;
+	al_get_display_mode(al_get_num_display_modes()-1, &mode);*/
 
 	// Cria a nossa janela
-	janela = al_create_display(mode.width,mode.height );
+	janela = al_create_display(LARGURA_TELA, ALTURA_TELA);
 	al_set_display_flag(janela, ALLEGRO_FULLSCREEN, true);
 	if (!janela) {
 		fprintf(stderr, "Falha ao iniciar janela\n");
