@@ -176,7 +176,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 				{
-					progresso->proximaSala = 0;
+					progresso->proximaSala = 4;
 					//return;
 					gameOver = 1;
 				}
