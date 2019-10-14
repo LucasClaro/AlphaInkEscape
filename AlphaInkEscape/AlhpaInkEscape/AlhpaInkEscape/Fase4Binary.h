@@ -23,7 +23,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* apagar;
 	apagar = (Objeto*)malloc(sizeof(Objeto));
-	apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
+	apagar->bitmap = al_load_bitmap("ArquivosAux/imagens/apagar.png");
 	apagar->largura = 50;
 	apagar->altura = 50;
 	apagar->x = 600;
@@ -31,7 +31,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* campo;
 	campo = (Objeto*)malloc(sizeof(Objeto));
-	campo->bitmap = al_load_bitmap("Imgs/campo2.png");
+	campo->bitmap = al_load_bitmap("ArquivosAux/imagens/campo2.png");
 	campo->altura = 70;
 	campo->largura = 400;
 	campo->x = (LARGURA_TELA / 2) - (campo->largura / 2);
@@ -45,19 +45,10 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	fundo->y = 0;
 	fundo->x = 0;
 
-
-	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* background = al_load_bitmap("ArquivosAux/imagens/background2.png");
 	ALLEGRO_BITMAP* certo = al_load_bitmap("ArquivosAux/imagens/acerto.png");
 	ALLEGRO_BITMAP* errado = al_load_bitmap("ArquivosAux/imagens/errou.png");
 	
-	Objeto* setaDireita;
-	setaDireita = (Objeto*)malloc(sizeof(Objeto));
-	setaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-	setaDireita->altura = 20;
-	setaDireita->largura = 20;
-	setaDireita->x = 1200;
-	setaDireita->y = (ALTURA_TELA / 2);
-
 	/*Objeto* errado;
 	errado = (Objeto*)malloc(sizeof(Objeto));
 	errado->bitmap = al_load_bitmap("ArquivosAux/imagens/errou.png");
@@ -68,7 +59,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* audio;
 	audio = (Objeto*)malloc(sizeof(Objeto));
-	audio->bitmap = al_load_bitmap("Imgs/comaudio.png");
+	audio->bitmap = al_load_bitmap("ArquivosAux/imagens/comaudio.png");
 	audio->altura = 50;
 	audio->largura = 50;
 	audio->x = 550;
@@ -76,7 +67,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* semAudio;
 	semAudio = (Objeto*)malloc(sizeof(Objeto));
-	semAudio->bitmap = al_load_bitmap("Imgs/semaudio.png");
+	semAudio->bitmap = al_load_bitmap("ArquivosAux/imagens/semaudio.png");
 	semAudio->altura = 50;
 	semAudio->largura = 50;
 	semAudio->x = 550;
@@ -118,8 +109,9 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	sampleVoltar = al_load_sample("ArquivosAux/sounds/arrow_hit.ogg");
 
 
-	
-	
+	al_register_event_source(fila_eventos, al_get_display_event_source(janela));
+	al_register_event_source(fila_eventos, al_get_mouse_event_source());
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_set_window_title(janela, "Ink Escape - Pagina Inicial");
 	bool btnAudio = true;
 	char enigmaText[] = "0100";
@@ -140,7 +132,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 
-			if (IsInside(evento.mouse.x, evento.mouse.y, audio)) {
+			if (IsInside(evento.mouse.x, evento.mouse.y, *audio)) {
 				btnAudio = !btnAudio;
 				if (!btnAudio)
 				{
@@ -155,18 +147,13 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, apagar)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, *apagar)) {
 					al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
 					for (int j = strlen(digitadoText); 0 <= j; j--)
 					{
 						digitadoText[j] = 0;
 					}
 					fundo->bitmap = background;
-			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
-				prog->proximaSala = 1;
-				//return;
-				sair = true;
 			}
 
 		}
@@ -224,7 +211,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_text(digitado, al_map_rgb(0, 0, 0), campo->x , campo->y, 0, digitadoText);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), 40, 145, ALLEGRO_ALIGN_LEFT, enigmaText);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), 40, 175, ALLEGRO_ALIGN_LEFT, enigmaText2);
-		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+
 		switch (btnAudio)
 		{
 		case true:
@@ -244,6 +231,8 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	al_destroy_bitmap(background);
 	al_destroy_display(display);
 	al_destroy_audio_stream(musica);
+	al_uninstall_keyboard();
+	al_uninstall_mouse();
 	al_destroy_sample(musicaFundo);
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);

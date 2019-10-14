@@ -82,9 +82,6 @@ int main(void) {
 	// Registra eventos da janela em fila_eventos
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
-	//regitra teclado
-	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
-
 	// Preenche o objeto de progresso
 	Progresso progresso;
 	progresso.proximaSala = 1;
