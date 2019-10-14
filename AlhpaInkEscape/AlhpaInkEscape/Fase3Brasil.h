@@ -10,11 +10,12 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
+Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
+Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
+Objeto* saidaDireita, * saidaBaixo, * saidaCima;
+
 int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
-	
-
-	Objeto *notaOnca;
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
 	notaOnca->x = 120;
@@ -22,7 +23,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaOnca->largura = 230;
 	notaOnca->altura = 200;
 
-	Objeto* mapa;
 	mapa = (Objeto*)malloc(sizeof(Objeto));
 	mapa->bitmap = NULL;
 	mapa->largura = 650;
@@ -30,7 +30,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	mapa->x = notaOnca->largura + notaOnca->x + 20;
 	mapa->y = ALTURA_TELA / 2 - 330;
 
-	Objeto* notaTatu;
 	notaTatu = (Objeto*)malloc(sizeof(Objeto));
 	notaTatu->bitmap = NULL;
 	notaTatu->x = 120;
@@ -38,7 +37,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaTatu->largura = 230;
 	notaTatu->altura = 200;
 
-	Objeto* notaJacare;
 	notaJacare = (Objeto*)malloc(sizeof(Objeto));
 	notaJacare->bitmap = NULL;
 	notaJacare->x = LARGURA_TELA - 240;
@@ -46,7 +44,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaJacare->largura = 230;
 	notaJacare->altura = 200;
 
-	Objeto* notaMico;
 	notaMico = (Objeto*)malloc(sizeof(Objeto));
 	notaMico->bitmap = NULL;
 	notaMico->x = LARGURA_TELA - 240;
@@ -54,7 +51,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaMico->largura = 230;
 	notaMico->altura = 200;
 
-	Objeto* marcaOnca;
 	marcaOnca = (Objeto*)malloc(sizeof(Objeto));
 	marcaOnca->bitmap = NULL;
 	marcaOnca->x = notaOnca->x + notaOnca->largura - 55;
@@ -62,7 +58,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaOnca->largura = 50;
 	marcaOnca->altura = 50;
 
-	Objeto *marcaTatu;
 	marcaTatu = (Objeto*)malloc(sizeof(Objeto));
 	marcaTatu->bitmap = NULL;
 	marcaTatu->x = notaTatu->x + notaTatu->largura - 55;
@@ -70,7 +65,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->largura = 50;
 	marcaTatu->altura = 50;
 
-	Objeto *marcaJacare;
 	marcaJacare = (Objeto*)malloc(sizeof(Objeto));
 	marcaJacare->bitmap = NULL;
 	marcaJacare->x = notaJacare->x + notaJacare->largura - 55;
@@ -78,7 +72,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaJacare->largura = 50;
 	marcaJacare->altura = 50;
 
-	Objeto *marcaMico;
 	marcaMico = (Objeto*)malloc(sizeof(Objeto));
 	marcaMico->bitmap = NULL;
 	marcaMico->x = notaMico->x + notaMico->largura - 55;
@@ -86,26 +79,26 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaMico->largura = 50;
 	marcaMico->altura = 50;
 
-	Objeto saidaDireita;
-	saidaDireita.bitmap = NULL;
-	//mapa.x = LARGURA_TELA - 100;
-	//mapa.y = ALTURA_TELA / 2 - 50;
-	//mapa.largura = 100;
-	//mapa.altura = 100;
+	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	saidaDireita->bitmap = NULL;
+	saidaDireita->x = LARGURA_TELA - 20;
+	saidaDireita->y = ALTURA_TELA/2 - 10;
+	saidaDireita->largura = 20;
+	saidaDireita->altura = 20;
 
-	Objeto saidaCima;
-	saidaDireita.bitmap = NULL;
-	//mapa.x = LARGURA_TELA - 100;
-	//mapa.y = ALTURA_TELA / 2 - 50;
-	//mapa.largura = 100;
-	//mapa.altura = 100;
+	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	saidaCima->bitmap = NULL;
+	saidaCima->x = LARGURA_TELA / 2 - 10;
+	saidaCima->y = 0;
+	saidaCima->largura = 20;
+	saidaCima->altura = 20;
 
-	Objeto saidaBaixo;
-	saidaDireita.bitmap = NULL;
-	//mapa.x = LARGURA_TELA - 100;
-	//mapa.y = ALTURA_TELA / 2 - 50;
-	//mapa.largura = 100;
-	//mapa.altura = 100;
+	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
+	saidaBaixo->bitmap = NULL;
+	saidaBaixo->x = LARGURA_TELA / 2 - 10;
+	saidaBaixo->y = ALTURA_TELA - 20;
+	saidaBaixo->largura = 20;
+	saidaBaixo->altura = 20;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -120,6 +113,10 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->bitmap = al_load_bitmap("Imgs/mtatu.png");
 	marcaJacare->bitmap = al_load_bitmap("Imgs/mjacare.png");
 	marcaMico->bitmap = al_load_bitmap("Imgs/mmico.png");
+
+	saidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
+	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
+	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -140,7 +137,23 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
+				printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
+				{
+					prog->proximaSala = 1;////////////////////////////////
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
+				{
+					prog->proximaSala = 0;////////////////////////////////
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
+				{
+					prog->proximaSala = 1;////////////////////////////////
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
 				{
 					arrastando = 1;
 					marcaOnca->cliqueX = MapearDistancia(evento.mouse.x, marcaOnca->x);
@@ -213,8 +226,13 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(Background, 0, 0, 0);
 		al_draw_bitmap(mapa->bitmap,mapa->x,mapa->y,0);
 
+		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
+		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
+		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+
 		al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
-		al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);
+		if(InNordeste())
+			al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);
 		al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
 		al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
 
@@ -225,4 +243,46 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		al_flip_display();
 	}
+
+	printf("entrei");
+	al_destroy_bitmap(Background);
+	al_destroy_bitmap(mapa->bitmap);
+	free(mapa);
+
+	al_destroy_bitmap(notaOnca->bitmap);
+	al_destroy_bitmap(notaJacare->bitmap);
+	al_destroy_bitmap(notaMico->bitmap);
+	al_destroy_bitmap(notaTatu->bitmap);
+	free(notaJacare);
+	free(notaMico);
+	free(notaTatu);
+	free(notaOnca);
+
+	al_destroy_bitmap(marcaJacare->bitmap);
+	al_destroy_bitmap(marcaMico->bitmap);
+	al_destroy_bitmap(marcaOnca->bitmap);
+	al_destroy_bitmap(marcaTatu->bitmap);
+	free(marcaJacare);
+	free(marcaMico);
+	free(marcaOnca);
+	free(marcaTatu);
+
+	al_destroy_bitmap(saidaBaixo->bitmap);
+	al_destroy_bitmap(saidaCima->bitmap);
+	al_destroy_bitmap(saidaDireita->bitmap);
+	free(saidaBaixo);
+	free(saidaCima);
+	free(saidaDireita);
+
+	return;
 }
+
+int InNordeste() {
+	if (marcaTatu->x+10 >= 809 && marcaTatu->x+10 <= 945 && marcaTatu->y+10 >= 154 && marcaTatu->y+10 <= 357)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+
