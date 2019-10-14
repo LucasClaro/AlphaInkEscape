@@ -1,8 +1,8 @@
 ﻿  Origem.c
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(103,9): warning C4101:  'saidaBaixo': variável local não referenciada
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(96,9): warning C4101:  'saidaCima': variável local não referenciada
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(26,20): warning C4013:  'al_init_font_addon' indefinido; assumindo extern retornando int
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013:  'al_init_ttf_addon' indefinido; assumindo extern retornando int
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(55): warning C4716:  'caregaInventario': deve retornar um valor
-C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(228): warning C4716:  'JogarFase3Brasil': deve retornar um valor
-  AlhpaInkEscape.vcxproj -> C:\Users\lucas\Documents\GitHub\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(103,9): warning C4101: 'saidaBaixo': variável local não referenciada
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(96,9): warning C4101: 'saidaCima': variável local não referenciada
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(26,20): warning C4013: 'al_init_font_addon' indefinido; assumindo extern retornando int
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013: 'al_init_ttf_addon' indefinido; assumindo extern retornando int
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(55): warning C4716: 'caregaInventario': deve retornar um valor
+G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(228): warning C4716: 'JogarFase3Brasil': deve retornar um valor
+  AlhpaInkEscape.vcxproj -> G:\Github\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
