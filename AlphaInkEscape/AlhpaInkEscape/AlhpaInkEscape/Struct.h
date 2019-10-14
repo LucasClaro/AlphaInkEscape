@@ -37,14 +37,4 @@ typedef struct prog
 	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 } Progresso;
 
-
-//enigma
-typedef struct EnigmaStr
-{
-	ALLEGRO_FONT* fonte;
-	char* enigmaText;
-	char* enigmaCerto;
-	char* digitado;
-	int verCampo;
-} enigmaStr;
 #endif
