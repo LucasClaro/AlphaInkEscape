@@ -102,7 +102,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
-	mapa->bitmap = al_load_bitmap("Imgs/mapabrasil.png");
+	mapa->bitmap = al_load_bitmap("Imgs/bioma.png");
 
 	notaOnca->bitmap = al_load_bitmap("Imgs/nonca.png");
 	notaTatu->bitmap = al_load_bitmap("Imgs/ntatu.png");
@@ -230,11 +230,14 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
-		al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
-		if(InNordeste())
+		if(InAmazonia())
+			al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
+		if(InCaatinga())
 			al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);
-		al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
-		al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
+		if (InPantanal())
+			al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
+		if(InMata())
+			al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
 
 		al_draw_bitmap(marcaOnca->bitmap, marcaOnca->x, marcaOnca->y, 0);
 		al_draw_bitmap(marcaTatu->bitmap, marcaTatu->x, marcaTatu->y, 0);
@@ -277,12 +280,35 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	return;
 }
 
-int InNordeste() {
-	if (marcaTatu->x+10 >= 809 && marcaTatu->x+10 <= 945 && marcaTatu->y+10 >= 154 && marcaTatu->y+10 <= 357)
+int InCaatinga() {
+	if (marcaTatu->x+10 >= 887 && marcaTatu->x+10 <= 953 && marcaTatu->y+10 >= 146 && marcaTatu->y+10 <= 348 || marcaTatu->x + 10 >= 946 && marcaTatu->x + 10 <= 1003 && marcaTatu->y + 10 >= 165 && marcaTatu->y + 10 <= 334)
 	{
 		return 1;
 	}
 	return 0;
 }
 
+int InPantanal() {
+	if (marcaJacare->x + 10 >= 611 && marcaJacare->x + 10 <= 703 && marcaJacare->y + 10 >= 393 && marcaJacare->y + 10 <= 490)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+int InMata() {
+	if (marcaMico->x + 10 >= 685 && marcaMico->x + 10 <= 782 && marcaMico->y + 10 >= 508 && marcaMico->y + 10 <= 579 || marcaMico->x + 10 >= 742 && marcaMico->x + 10 <= 779 && marcaMico->y + 10 >= 435 && marcaMico->y + 10 <= 530 || marcaMico->x + 10 >= 780 && marcaMico->x + 10 <= 913 && marcaMico->y + 10 >= 470 && marcaMico->y + 10 <= 515 || marcaMico->x + 10 >= 890 && marcaMico->x + 10 <= 952 && marcaMico->y + 10 >= 352 && marcaMico->y + 10 <= 505 || marcaMico->x + 10 >= 780 && marcaMico->x + 10 <= 913 && marcaMico->y + 10 >= 470 && marcaMico->y + 10 <= 515 || marcaMico->x + 10 >= 865 && marcaMico->x + 10 <= 906 && marcaMico->y + 10 >= 445 && marcaMico->y + 10 <= 490)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+int InAmazonia() {
+	if (marcaOnca->x + 10 >= 419 && marcaOnca->x + 10 <= 733 && marcaOnca->y + 10 >= 88 && marcaOnca->y + 10 <= 310 || marcaOnca->x + 10 >= 375 && marcaOnca->x + 10 <= 605 && marcaOnca->y + 10 >= 252 && marcaOnca->y + 10 <= 341 || marcaOnca->x + 10 >= 531 && marcaOnca->x + 10 <= 603 && marcaOnca->y + 10 >= 32 && marcaOnca->y + 10 <= 120 || marcaOnca->x + 10 >= 709 && marcaOnca->x + 10 <= 762 && marcaOnca->y + 10 >= 34 && marcaOnca->y + 10 <= 125 || marcaOnca->x + 10 >= 637 && marcaOnca->x + 10 <= 847 && marcaOnca->y + 10 >= 124 && marcaOnca->y + 10 <= 225)
+	{
+		return 1;
+	}
+	return 0;
+}
 
