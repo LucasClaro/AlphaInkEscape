@@ -10,6 +10,94 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
+int digitarCampo(enigmaStr (*enigma), ALLEGRO_EVENT evento, bool sair, Progresso* prog) {
+	char letra[1];
+
+	if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
+		//backspace, volta uma posicao no texto
+		if (enigma->digitado[strlen(enigma->digitado) - 1] > -1)
+		{
+			enigma->digitado[strlen(enigma->digitado) - 1] = '\0';
+		}
+
+	}
+	else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
+	{
+		if (strncmp(enigma->enigmaCerto, enigma->digitado, 9) == 0) {
+
+			//fundo->bitmap = certo;
+			//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		}
+		else {
+			//fundo->bitmap = errado;
+			//al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		}
+	}
+	if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+	{
+		sair = true;
+		prog->Gameover = true;
+	}
+	else
+	{
+
+		if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
+			if ((strlen(enigma->digitado)) < 10) {
+				//*letra = evento.keyboard.unichar;
+				int uni = evento.keyboard.unichar;
+				enigma->digitado[strlen(enigma->digitado)] = uni;
+
+			}
+		}
+	}
+
+	return 0;
+}
+//}int digitarCampo(char *certo, char *digitado, ALLEGRO_EVENT evento, bool sair, Progresso* prog) {
+//	char letra[1];
+//
+//		if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
+//			//backspace, volta uma posicao no texto
+//			if (digitado[strlen(digitado) - 1] > -1)
+//			{
+//				digitado[strlen(digitado) - 1] = '\0';
+//			}
+//
+//		}
+//		else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
+//		{
+//			if (strncmp(certo, digitado, 9) == 0) {
+//
+//				//fundo->bitmap = certo;
+//				//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+//			}
+//			else {
+//				//fundo->bitmap = errado;
+//				//al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+//			}
+//		}
+//		if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+//		{
+//			sair = true;
+//			prog->Gameover = true;
+//		}
+//		else
+//		{
+//
+//			if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
+//				if ((strlen(digitado)) < 10) {
+//					//*letra = evento.keyboard.unichar;
+//					int uni = evento.keyboard.unichar;
+//					digitado[strlen(digitado)] = uni;
+//
+//				}
+//			}
+//		}
+//	
+//	
+//	
+//	return 0;
+//}
 
 int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
@@ -19,17 +107,75 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	ALLEGRO_FONT* enigma = NULL;
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
-	ALLEGRO_BITMAP* btnAbrirCampo = NULL;
-	ALLEGRO_BITMAP* apagar = NULL;
-	ALLEGRO_BITMAP* campo = NULL;
-	ALLEGRO_BITMAP* voltar = NULL;
-	ALLEGRO_BITMAP* fundo = NULL;
-	ALLEGRO_BITMAP* fundo2 = NULL;
+
+
+	Objeto* campo;
+	campo = (Objeto*)malloc(sizeof(Objeto));
+	campo->bitmap = al_load_bitmap("Imgs/campo2.png");
+	campo->altura = 70;
+	campo->largura = 400;
+	campo->x = (LARGURA_TELA / 2);
+	campo->y = (ALTURA_TELA / 4) - (campo->altura / 2);
+		
+	Objeto* campo2;
+	campo2 = (Objeto*)malloc(sizeof(Objeto));
+	campo2->bitmap = al_load_bitmap("Imgs/campo2.png");
+	campo2->altura = 70;
+	campo2->largura = 400;
+	campo2->x = (LARGURA_TELA / 2);
+	campo2->y = (ALTURA_TELA / 2) - (campo2->altura / 2);
+
+	Objeto* fundo;
+	fundo = (Objeto*)malloc(sizeof(Objeto));
+	fundo->bitmap = NULL;
+	fundo->altura = 720;
+	fundo->largura = 1280;
+	fundo->y = 0;
+	fundo->x = 0;
+
+
+	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* certo = al_load_bitmap("ArquivosAux/imagens/acerto.png");
+	ALLEGRO_BITMAP* errado = al_load_bitmap("ArquivosAux/imagens/errou.png");
+	
+	Objeto* setaDireita;
+	setaDireita = (Objeto*)malloc(sizeof(Objeto));
+	setaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
+	setaDireita->altura = 20;
+	setaDireita->largura = 20;
+	setaDireita->x = 1200;
+	setaDireita->y = (ALTURA_TELA / 2);
+
+	Objeto* apagar;
+	apagar = (Objeto*)malloc(sizeof(Objeto));
+	apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
+	apagar->largura = 50;
+	apagar->altura = 50;
+	apagar->x = (LARGURA_TELA/2) + (campo->largura/2);
+	apagar->y = (ALTURA_TELA/2) - (apagar->altura/2);
+
+
+
+	Objeto* audio;
+	audio = (Objeto*)malloc(sizeof(Objeto));
+	audio->bitmap = al_load_bitmap("Imgs/comaudio.png");
+	audio->altura = 50;
+	audio->largura = 50;
+	audio->x = 550;
+	audio->y = 535;
+
+	Objeto* semAudio;
+	semAudio = (Objeto*)malloc(sizeof(Objeto));
+	semAudio->bitmap = al_load_bitmap("Imgs/semaudio.png");
+	semAudio->altura = 50;
+	semAudio->largura = 50;
+	semAudio->x = 550;
+	semAudio->y = 535;
+	
+	
+
+
 	ALLEGRO_BITMAP* logo = NULL;
-	ALLEGRO_BITMAP* certo = NULL;
-	ALLEGRO_BITMAP* errado = NULL;
-	ALLEGRO_BITMAP* audio = NULL;
-	ALLEGRO_BITMAP* semaudio = NULL;
 
 	ALLEGRO_SAMPLE* musicaon = NULL;
 	ALLEGRO_SAMPLE* musicaoff = NULL;
@@ -37,58 +183,16 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	ALLEGRO_SAMPLE* sampleVoltar = NULL;
 	ALLEGRO_AUDIO_STREAM* musica = NULL;
 	ALLEGRO_SAMPLE* musicaFundo = NULL;
-	ALLEGRO_SAMPLE* acerto = NULL;
 	ALLEGRO_SAMPLE* erro = NULL;
 	ALLEGRO_SAMPLE* botaosample = NULL;
 	ALLEGRO_EVENT_QUEUE* eventQueue = NULL;
 
-
-	//inicializar
-	/*inicializar();*/
-	//al_init();
-
-	al_init_image_addon();
-
-	al_init_font_addon();
-
-	al_init_ttf_addon();
-
-	al_install_audio();
-
-	al_init_acodec_addon();
-
-	al_reserve_samples(6);
-
-	al_install_mouse();
-
-	al_install_keyboard();
-
-
-	//definir valores
-	//display = al_create_display(800, 600);
-	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 30, 0);
+	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 90, 0);
 	digitado = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 80, 0);
 
-	btnAbrirCampo = al_create_bitmap(400, 70);
-	al_set_target_bitmap(btnAbrirCampo);
-	al_clear_to_color(al_map_rgb(155, 155, 155));
 
 
-	campo = al_create_bitmap(400, 70);
-	al_set_target_bitmap(campo);
-	al_clear_to_color(al_map_rgb(0, 0, 0));
 	logo = al_load_bitmap("ArquivosAux/imagens/logo.png");
-
-
-
-	fundo = al_load_bitmap("ArquivosAux/imagens/background.png");
-	campo = al_load_bitmap("ArquivosAux/imagens/campo2.png");
-	btnAbrirCampo = al_load_bitmap("ArquivosAux/imagens/botao.png");
-	fundo2 = al_load_bitmap("ArquivosAux/imagens/background2.png");
-
-	voltar = al_load_bitmap("ArquivosAux/imagens/voltar.png");
-	apagar = al_load_bitmap("ArquivosAux/imagens/apagar.png");
-
 
 	musicaoff = al_load_sample("ArquivosAux/sounds/desligada.ogg");
 	musicaon = al_load_sample("ArquivosAux/sounds/ligada.ogg");
@@ -100,196 +204,149 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	musicaFundo = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
 	botaosample = al_load_sample("ArquivosAux/sounds/click.ogg");
 	sampleVoltar = al_load_sample("ArquivosAux/sounds/arrow_hit.ogg");
-	acerto = al_load_sample("ArquivosAux/sounds/acertou.ogg");
-	erro = al_load_sample("ArquivosAux/sounds/errou.ogg");
 
-	audio = al_load_bitmap("ArquivosAux/imagens/comaudio.png");
 
 	
-
-	eventQueue = al_create_event_queue();
-	al_register_event_source(eventQueue, al_get_display_event_source(janela));
-	al_register_event_source(eventQueue, al_get_mouse_event_source());
-	al_register_event_source(eventQueue, al_get_keyboard_event_source());
+	
 	al_set_window_title(janela, "Ink Escape - Pagina Inicial");
-	if (btnAbrirCampo) {
-
-	}
-	else {
-
-	}
-	bool btnJogar = false;
 	bool btnAudio = true;
-	/*char enigmaText[] = "01110100 01100101 01110011 01110100 01100101 00001010";*/
-	char enigmaText[] = "0100";
-	char enigmaText2[] = "0010";
-	char enigmaCerto[] = "0110";
-	char digitadoText[50] = "";
+
+	enigmaStr* enigma1;
+	enigma1 = (enigmaStr*)malloc(sizeof(enigmaStr));
+	enigma1->fonte = enigma;
+	enigma1->enigmaCerto = "0000 1000";
+	enigma1->enigmaText = "0100 X 0010";;
+	enigma1->verCampo = 1;
+	enigma1->digitado = "";
+	
+	enigmaStr* enigma2;
+	enigma2 = (enigmaStr*)malloc(sizeof(enigmaStr));
+	enigma2->fonte = enigma;
+	enigma2->enigmaCerto = "0001 1110";
+	enigma2->enigmaText = "0110 X 0101";
+	enigma2->verCampo = 2;
+	enigma2->digitado = "";
+
 	char letra[2];
 	int pos;
-	int corR = 0;
-	int corG = 0;
-	int corB = 0;
+	int verCampo;
 
+
+
+	fundo->bitmap = background;
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
-		al_wait_for_event(eventQueue, &evento);
-
-
+		al_wait_for_event(fila_eventos, &evento);
 		al_set_target_bitmap(al_get_backbuffer(janela));
-		al_clear_to_color(al_map_rgb(corR, corG, corB));
-		al_draw_bitmap(fundo, 0, 0, 0);
-
-		if (!btnJogar)
-		{
-			/*al_draw_text*/
-			al_draw_bitmap(btnAbrirCampo, (800 / 2) - (400 / 2), (600 / 2) - (70 / 2), 0);
-
-		}
-		else
-		{
-			al_draw_bitmap(fundo2, 0, 0, 0);
-			al_draw_bitmap(voltar, 25, 25, 0);
-			al_draw_bitmap(apagar, 600, 257, 0);
-			al_draw_bitmap(campo, (800 / 2) - (400 / 2), (600 / 2) - (100 / 2), 0);
-			al_draw_text(digitado, al_map_rgb(0, 0, 0), (800 / 2) - (400 / 2), (600 / 2) - (100 / 2), 0, digitadoText);
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), 40, 145, ALLEGRO_ALIGN_LEFT, enigmaText);
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), 40, 175, ALLEGRO_ALIGN_LEFT, enigmaText2);
-
-		}
-		al_draw_bitmap(audio, 550, 535, 0);
-
-		al_flip_display();
-
-
+		al_clear_to_color(al_map_rgb(0,0,0));		
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
-			if (evento.mouse.x >= (800 / 2) - (400 / 2) && evento.mouse.x <= (800 / 2) - (400 / 2) + 400 && evento.mouse.y >= (600 / 2) - (70 / 2) && evento.mouse.y <= (600 / 2) - (70 / 2) + 70)
-			{
 
-				if (!btnJogar) {
-					btnJogar = !btnJogar;
-					al_play_sample(botaosample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-					al_set_window_title(janela, "Ink Escape - Pergunta 1");
-
-
-					for (int j = strlen(digitadoText); 0 <= j; j--)
-					{
-						digitadoText[j] = 0;
-					}
-
-
-
-				}
-				al_flip_display();
-
-			}
-			else if (evento.mouse.x >= 25 && evento.mouse.x <= 75 && evento.mouse.y >= 25 && evento.mouse.y <= 75) {
-
-				if (btnJogar) {
-					btnJogar = !btnJogar;
-					al_play_sample(sampleVoltar, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-					fundo2 = al_load_bitmap("ArquivosAux/imagens/background2.png");
-					al_set_window_title(janela, "Ink Escape - Pagina Inicial");
-				}
-			}
-
-			else if (evento.mouse.x >= 550 && evento.mouse.x <= 600 && evento.mouse.y >= 535 && evento.mouse.y <= 585) {
+			if (IsInside(evento.mouse.x, evento.mouse.y, audio)) {
 				btnAudio = !btnAudio;
-				if (btnAudio)
+				if (!btnAudio)
 				{
 					al_set_audio_stream_gain(musica, 0.0);
-					audio = al_load_bitmap("ArquivosAux/imagens/semaudio.png");
 					al_play_sample(musicaoff, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 				}
 				else
 				{
 					al_set_audio_stream_gain(musica, 1.0);
-					al_play_sample(musicaon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-					audio = al_load_bitmap("ArquivosAux/imagens/comaudio.png");
+					al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
 				}
 
 			}
-			else if (evento.mouse.x >= 600 && evento.mouse.x <= 650 && evento.mouse.y >= 250 && evento.mouse.y <= 300) {
-
-				if (btnJogar)
-				{
-					fundo2 = al_load_bitmap("ArquivosAux/imagens/background2.png");
+			/*else if (IsInside(evento.mouse.x, evento.mouse.y, apagar)) {
+					al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
 					for (int j = strlen(digitadoText); 0 <= j; j--)
 					{
 						digitadoText[j] = 0;
 					}
-
-				}
+					fundo->bitmap = background;
+			}*/
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+				prog->proximaSala = 1;
+				//return;
+				sair = true;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campo))
+			{
+				verCampo = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campo2))
+			{
+				verCampo = 2;
+			}
+			
 
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
-			if (btnJogar) {
-				if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
-					//backspace, volta uma posicao no texto
-					if (digitadoText[strlen(digitadoText) - 1] > -1)
-					{
-						digitadoText[strlen(digitadoText) - 1] = '\0';
-					}
+			if (verCampo == 1)
+			{
+				digitarCampo(enigma1, evento, sair, prog);
+				//digitarCampo(enigma1->enigmaCerto, enigma1->digitado, evento, sair, prog);
 
-				}
-				else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
-				{
-					if (strncmp(enigmaCerto, digitadoText, 6) == 0) {
-
-						fundo2 = al_load_bitmap("ArquivosAux/imagens/acerto.png");
-						al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-					}
-					else {
-						fundo2 = al_load_bitmap("ArquivosAux/imagens/errou.png");
-						al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-
-					}
-				}
-				 if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-				{
-					sair = true;
-					prog->Gameover = true;
-				}
-				else
-				{
-
-					if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
-						if ((strlen(digitadoText)) < 10) {
-							pos = strlen(digitadoText);
-							*letra = evento.keyboard.unichar;
-							digitadoText[strlen(digitadoText)] = letra[0];
-						}
-					}
-				}
 			}
-			//al_flip_display();
-		}
+			else
+			{
+				//digitarCampo(enigma2->enigmaCerto, enigma2->digitado, evento, sair, prog);
+				digitarCampo(enigma2, evento, sair, prog);
 
+			}
+
+		}
+			
+		
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			sair = true;
+			prog->Gameover = true;
 		}
+
+		
+		al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
+		al_draw_bitmap(apagar->bitmap, apagar->x, apagar->y, 0);
+		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);
+		al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
+		al_draw_text(enigma, al_map_rgb(0, 0, 0), campo->x , (ALTURA_TELA / 4) - 10, 0, enigma1->digitado);
+		al_draw_text(enigma, al_map_rgb(0, 0, 0), campo->x , (ALTURA_TELA / 3) + 100, 0, enigma2->digitado);
+		al_draw_text(enigma, al_map_rgb(0, 0, 0), 170, (ALTURA_TELA/4) - 10, ALLEGRO_ALIGN_LEFT, enigma1->enigmaText);
+		al_draw_text(enigma, al_map_rgb(0, 0, 0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
+		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+		
+		
+		
+		switch (btnAudio)
+		{
+		case true:
+			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
+			break;
+		case false:
+			al_draw_bitmap(semAudio->bitmap, semAudio->x, semAudio->y, 0);
+			break;
+		}
+
+		al_flip_display();
 	}
 
-	al_uninstall_keyboard();
-	al_uninstall_mouse();
-	al_destroy_sample(musicaFundo);
-	al_destroy_sample(acerto);
-	al_destroy_sample(erro);
-	al_destroy_sample(sampleVoltar);
-	al_destroy_event_queue(eventQueue);
-	al_destroy_font(enigma);
-	al_destroy_font(digitado);
-	al_destroy_bitmap(btnAbrirCampo);
-	al_destroy_bitmap(campo);
-	al_destroy_bitmap(fundo);
-	al_destroy_bitmap(fundo2);
+
+	al_destroy_bitmap(certo);
+	al_destroy_bitmap(errado);
+	al_destroy_bitmap(background);
 	al_destroy_display(display);
 	al_destroy_audio_stream(musica);
+	al_destroy_sample(musicaFundo);
+	al_destroy_font(enigma);
+	al_destroy_font(digitado);
+
+	free(apagar);
+	free(campo);
+	free(fundo);
+	free(semAudio);
+	free(audio);
+	
 	//system("pause");
 
 	return 0;

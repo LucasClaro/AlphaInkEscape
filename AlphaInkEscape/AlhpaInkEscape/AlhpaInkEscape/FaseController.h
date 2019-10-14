@@ -7,6 +7,7 @@
 #include <allegro5/allegro_native_dialog.h>
 
 #include "Struct.h"
+#include "tabelaPeri.h"
 #include "Fase4Binary.h"
 //#include "Fase0.h"
 //#include "Fase1.h"
@@ -21,29 +22,15 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 {
 	switch (progresso->proximaSala)
 	{
-<<<<<<< HEAD:AlphaInkEscape/AlhpaInkEscape/AlhpaInkEscape/FaseController.h
-	case 0: 
-		//JogarFase0(janela, fila_eventos, progresso);
+	case 0: //JogarFase0(janela, fila_eventos, progresso);
 		return;
-	case 1: //JogarFase1(janela, fila_eventos, progresso);
-=======
-	case 0:JogarTabelaPeri(janela, fila_eventos, progresso); //JogarFase0(janela, fila_eventos, progresso);
-		return;/*
-	case 1: JogarFase1(janela, fila_eventos, progresso);
->>>>>>> parent of 7817ad0... Mudança minima:AlhpaInkEscape/AlhpaInkEscape/FaseController.h
+	case 1: JogarTabelaPeri(janela, fila_eventos, progresso);
 		return;
-	case 2: //JogarFase2(janela, fila_eventos, progresso);
-		return;
-<<<<<<< HEAD:AlphaInkEscape/AlhpaInkEscape/AlhpaInkEscape/FaseController.h
 	case 3: //JogarFase3(janela, fila_eventos, progresso);
 		return;
 	case 4: 
 		JogarFase4Binary(janela, fila_eventos, progresso);
 		return;
-=======
-	case 3: JogarFase3(janela, fila_eventos, progresso);
-		return;*/
->>>>>>> parent of 7817ad0... Mudança minima:AlhpaInkEscape/AlhpaInkEscape/FaseController.h
 	default: printf("Fase n�o encontrada"); return;
 		break;
 	}

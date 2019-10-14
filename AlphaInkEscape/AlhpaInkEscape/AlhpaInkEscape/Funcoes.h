@@ -16,9 +16,9 @@ void DesenharImagem(Objeto objeto) {
 	al_draw_bitmap(objeto.bitmap, objeto.x, objeto.y, 0);
 }
 
-// Vereifica se as coordenadas (X,Y) estão dentro de uma imagem
-int IsInside(int x, int y, Objeto objeto) {
-	if (x >= objeto.x && x <= (objeto.x + objeto.largura) && y >= objeto.y && y <= (objeto.y + objeto.altura)) {
+// Verifica se as coordenadas (X,Y) estão dentro de uma imagem
+int IsInside(int x, int y, Objeto *objeto) {
+	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
 		return 1;
 	}
 	return 0;
@@ -30,16 +30,16 @@ int MapearDistancia(int ponto, int c) {
 }
 
 // Verifica se uma imagem sendo arrastada ultrapassou as bordas da tela
-int VerificarBordas(int x, int y, Objeto imagem) {
-	if (x - imagem.cliqueX <= 0 || x - imagem.cliqueX + imagem.largura >= LARGURA_TELA || y - imagem.cliqueY <= 0 || y - imagem.cliqueY + imagem.altura >= ALTURA_TELA) {
+int VerificarBordas(int x, int y, Objeto *imagem) {
+	if (x - imagem->cliqueX <= 0 || x - imagem->cliqueX + imagem->largura >= LARGURA_TELA || y - imagem->cliqueY <= 0 || y - imagem->cliqueY + imagem->altura >= ALTURA_TELA) {
 		return 1;
 	}
 	return 0;
 }
 
 // Verifica se uma imagem está dentro da outra
-int IsInsideImagem(Objeto menor, Objeto maior) {
-	if (menor.x >= maior.x && menor.x + menor.largura <= maior.x + maior.largura && menor.y >= maior.y && menor.y + menor.altura <= maior.y + maior.altura) {
+int IsInsideImagem(Objeto *menor, Objeto *maior) {
+	if (menor->x >= maior->x && menor->x + menor->largura <= maior->x + maior->largura && menor->y >= maior->y && menor->y + menor->altura <= maior->y + maior->altura) {
 		return 1;
 	}
 	return 0;

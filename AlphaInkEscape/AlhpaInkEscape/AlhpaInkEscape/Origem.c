@@ -22,16 +22,29 @@ int main(void) {
 	}
 
 	// Inicializa o add-on para utilização de imagens e fontes
+
 	al_init_image_addon();
+
 	al_init_font_addon();
+
 	al_init_ttf_addon();
 
-	ALLEGRO_DISPLAY_MODE mode;
-	al_get_display_mode(al_get_num_display_modes()-1, &mode);
+	al_install_audio();
+
+	al_init_acodec_addon();
+
+	al_reserve_samples(6);
+
+	al_install_mouse();
+
+	al_install_keyboard();
+
+	/*ALLEGRO_DISPLAY_MODE mode;
+	al_get_display_mode(al_get_num_display_modes()-1, &mode);*/
 
 	// Cria a nossa janela
-	janela = al_create_display(mode.width,mode.height );
-	al_set_display_flag(janela, ALLEGRO_FULLSCREEN, true);
+	janela = al_create_display(LARGURA_TELA, ALTURA_TELA);
+
 	if (!janela) {
 		fprintf(stderr, "Falha ao iniciar janela\n");
 		return -1;
@@ -69,14 +82,19 @@ int main(void) {
 	// Registra eventos da janela em fila_eventos
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
+	//regitra teclado
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
+
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 4;
+	progresso.proximaSala = 1;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
 	progresso.Salas[2] = 0;
 	progresso.Salas[3] = 0;
+	progresso.Salas[4] = 0;
+	progresso.Salas[5] = 0;
 
 	// Cria o ponteiro para progresso que será mandado para o resto do programa
 	Progresso* prog = &progresso;

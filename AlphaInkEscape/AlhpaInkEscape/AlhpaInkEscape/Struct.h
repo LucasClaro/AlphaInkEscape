@@ -10,8 +10,8 @@
 #define Struct_H
 
 // Tamanho da tela
-#define LARGURA_TELA 800
-#define ALTURA_TELA 600
+#define LARGURA_TELA 1280
+#define ALTURA_TELA 720
 // Tamanho do Inventário
 #define TAMANHO_INVENTARIO 7
 
@@ -37,4 +37,14 @@ typedef struct prog
 	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 } Progresso;
 
+
+//enigma
+typedef struct EnigmaStr
+{
+	ALLEGRO_FONT* fonte;
+	char* enigmaText;
+	char* enigmaCerto;
+	char* digitado;
+	int verCampo;
+} enigmaStr;
 #endif
