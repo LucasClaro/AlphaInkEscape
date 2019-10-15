@@ -145,7 +145,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
-					prog->proximaSala = 0;////////////////////////////////
+					prog->proximaSala = 4;////////////////////////////////
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))

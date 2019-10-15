@@ -111,6 +111,14 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaDireita->x = 1200;
 	setaDireita->y = (ALTURA_TELA / 2);
 
+	Objeto* setaBaixo;
+	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
+	setaBaixo->altura = 20;
+	setaBaixo->largura = 20;
+	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
+	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
+	setaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");;
+
 	Objeto* apagar;
 	apagar = (Objeto*)malloc(sizeof(Objeto));
 	apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
@@ -235,6 +243,11 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//return;
 				sair = true;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+				prog->proximaSala = 3;
+				//return;
+				sair = true;
+			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo))
 			{
 				verCampo = 1;
@@ -280,6 +293,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), 170, (ALTURA_TELA / 4) - 10, ALLEGRO_ALIGN_LEFT, enigma1->enigmaText);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
 		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 
 
 
@@ -300,6 +314,9 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	al_destroy_bitmap(certo);
 	al_destroy_bitmap(errado);
 	al_destroy_bitmap(background);
+	al_destroy_bitmap(setaBaixo->bitmap);
+	al_destroy_bitmap(setaDireita->bitmap);
+
 	al_destroy_display(display);
 	al_destroy_audio_stream(musica);
 	al_destroy_sample(musicaFundo);
@@ -311,6 +328,8 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(fundo);
 	free(semAudio);
 	free(audio);
+	free(setaBaixo);
+	free(setaDireita);
 
 	//system("pause");
 
