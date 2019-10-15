@@ -1,7 +1,7 @@
 #include <stdio.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeï¿½alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeï¿½alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -12,12 +12,12 @@
 //#include "Fase0.h"
 //#include "Fase1.h"
 //#include "Fase2.h"
-//#include "Fase3.h"
+#include "Fase3Brasil.h"
 
 #ifndef FaseController_H
 #define FaseController_H
 
-//Pega por referencia o lugar onde está guardado o progresso do jogo
+//Pega por referencia o lugar onde estï¿½ guardado o progresso do jogo
 void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 	switch (progresso->proximaSala)
@@ -26,12 +26,12 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 1: JogarTabelaPeri(janela, fila_eventos, progresso);
 		return;
-	case 3: //JogarFase3(janela, fila_eventos, progresso);
+	case 3: JogarFase3Brasil(janela, fila_eventos, progresso);
 		return;
 	case 4: 
 		JogarFase4Binary(janela, fila_eventos, progresso);
 		return;
-	default: printf("Fase não encontrada"); return;
+	default: printf("Fase nï¿½o encontrada"); return;
 		break;
 	}
 }

@@ -1,7 +1,7 @@
 #include <stdio.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeï¿½alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeï¿½alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -11,12 +11,7 @@
 #ifndef Funcoes_H
 #define Funcoes_H
 
-// Desenha um bitmap dado um Objeto
-void DesenharImagem(Objeto objeto) {
-	al_draw_bitmap(objeto.bitmap, objeto.x, objeto.y, 0);
-}
-
-// Verifica se as coordenadas (X,Y) estão dentro de uma imagem
+// Vereifica se as coordenadas (X,Y) estï¿½o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
 		return 1;
@@ -24,7 +19,7 @@ int IsInside(int x, int y, Objeto *objeto) {
 	return 0;
 }
 
-// Mapeia a distância entre o lugar do clique e o canto da imagem
+// Mapeia a distï¿½ncia entre o lugar do clique e o canto da imagem
 int MapearDistancia(int ponto, int c) {
 	return ponto - c;
 }
@@ -37,7 +32,7 @@ int VerificarBordas(int x, int y, Objeto *imagem) {
 	return 0;
 }
 
-// Verifica se uma imagem está dentro da outra
+// Verifica se uma imagem estï¿½ dentro da outra
 int IsInsideImagem(Objeto *menor, Objeto *maior) {
 	if (menor->x >= maior->x && menor->x + menor->largura <= maior->x + maior->largura && menor->y >= maior->y && menor->y + menor->altura <= maior->y + maior->altura) {
 		return 1;
@@ -51,9 +46,9 @@ int caregaInventario(Progresso *prog)
 	float scale = 0.7;
 	for (i = 0; i < TAMANHO_INVENTARIO; i++)
 	{
-		if (prog->Inventário[i])
+		if (prog->Inventï¿½rio[i])
 		{
-			//bitmap, começoX, começoY, larg, alt, posX, posY, novaLarg, novaAlt, flags
+			//bitmap, comeï¿½oX, comeï¿½oY, larg, alt, posX, posY, novaLarg, novaAlt, flags
 			al_draw_scaled_bitmap(prog->Itens[i].bitmap, 0, 0, prog->Itens[i].largura, prog->Itens[i].altura, 0, i * ALTURA_TELA / 10, prog->Itens[i].largura * scale, prog->Itens[i].altura * scale, 0);
 		}		
 	}
