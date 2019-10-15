@@ -9,95 +9,15 @@
 #include <allegro5/allegro_native_dialog.h>
 #include "Funcoes.h"
 #include "Struct.h"
-
-int digitarCampo(enigmaStr (*enigma), ALLEGRO_EVENT evento, bool sair, Progresso* prog) {
-	char letra[1];
-
-	if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
-		//backspace, volta uma posicao no texto
-		if (enigma->digitado[strlen(enigma->digitado) - 1] > -1)
-		{
-			enigma->digitado[strlen(enigma->digitado) - 1] = '\0';
-		}
-
-	}
-	else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
-	{
-		if (strncmp(enigma->enigmaCerto, enigma->digitado, 9) == 0) {
-
-			//fundo->bitmap = certo;
-			//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		}
-		else {
-			//fundo->bitmap = errado;
-			//al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		}
-	}
-	if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-	{
-		sair = true;
-		prog->Gameover = true;
-	}
-	else
-	{
-
-		if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
-			if ((strlen(enigma->digitado)) < 10) {
-				//*letra = evento.keyboard.unichar;
-				int uni = evento.keyboard.unichar;
-				enigma->digitado[strlen(enigma->digitado)] = uni;
-
-			}
-		}
-	}
-
-	return 0;
-}
-//}int digitarCampo(char *certo, char *digitado, ALLEGRO_EVENT evento, bool sair, Progresso* prog) {
-//	char letra[1];
-//
-//		if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
-//			//backspace, volta uma posicao no texto
-//			if (digitado[strlen(digitado) - 1] > -1)
-//			{
-//				digitado[strlen(digitado) - 1] = '\0';
-//			}
-//
-//		}
-//		else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
-//		{
-//			if (strncmp(certo, digitado, 9) == 0) {
-//
-//				//fundo->bitmap = certo;
-//				//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-//			}
-//			else {
-//				//fundo->bitmap = errado;
-//				//al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-//			}
-//		}
-//		if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-//		{
-//			sair = true;
-//			prog->Gameover = true;
-//		}
-//		else
-//		{
-//
-//			if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
-//				if ((strlen(digitado)) < 10) {
-//					//*letra = evento.keyboard.unichar;
-//					int uni = evento.keyboard.unichar;
-//					digitado[strlen(digitado)] = uni;
-//
-//				}
-//			}
-//		}
-//	
-//	
-//	
-//	return 0;
-//}
+//enigma
+typedef struct EnigmaStr
+{
+	ALLEGRO_FONT* fonte;
+	char* enigmaText;
+	char* enigmaCerto;
+	char* digitado;
+	int verCampo;
+} enigmaStr;
 
 int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
@@ -290,7 +210,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//digitarCampo(enigma1->enigmaCerto, enigma1->digitado, evento, sair, prog);
 
 			}
-			else
+			else if (verCampo == 2)
 			{
 				//digitarCampo(enigma2->enigmaCerto, enigma2->digitado, evento, sair, prog);
 				digitarCampo(enigma2, evento, sair, prog);
@@ -348,6 +268,50 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(audio);
 	
 	//system("pause");
+
+	return 0;
+}
+
+int digitarCampo(enigmaStr(*enigma), ALLEGRO_EVENT evento, bool sair, Progresso* prog) {
+	char letra[1];
+
+	if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
+		//backspace, volta uma posicao no texto
+		if (enigma->digitado[strlen(enigma->digitado) - 1] > -1)
+		{
+			enigma->digitado[strlen(enigma->digitado) - 1] = '\0';
+		}
+
+	}
+	else if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
+	{
+		if (strncmp(enigma->enigmaCerto, enigma->digitado, 9) == 0) {
+
+			//fundo->bitmap = certo;
+			//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		}
+		else {
+			//fundo->bitmap = errado;
+			//al_play_sample(erro, 15.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		}
+	}
+	if (evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+	{
+		sair = true;
+		prog->Gameover = true;
+	}
+	else
+	{
+
+		if (evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) {
+			if ((strlen(enigma->digitado)) < 10) {
+				//*letra = evento.keyboard.unichar;
+				int uni = evento.keyboard.unichar;
+				enigma->digitado[strlen(enigma->digitado)] = uni;
+
+			}
+		}
+	}
 
 	return 0;
 }
