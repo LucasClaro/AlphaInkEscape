@@ -39,12 +39,5 @@ typedef struct prog
 
 
 //enigma
-typedef struct EnigmaStr
-{
-	ALLEGRO_FONT* fonte;
-	char* enigmaText;
-	char* enigmaCerto;
-	char* digitado;
-	int verCampo;
-} enigmaStr;
+
 #endif

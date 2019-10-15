@@ -1,5 +1,1 @@
-﻿  Origem.c
-D:\Senac\2Sem\PI2\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(26,20): warning C4013:  'al_init_font_addon' undefined; assuming extern returning int
-D:\Senac\2Sem\PI2\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013:  'al_init_ttf_addon' undefined; assuming extern returning int
-D:\Senac\2Sem\PI2\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013: D:\Senac\2Sem\PI2\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(60) : warning C4716: 'caregaInventario': must return a value
-  AlhpaInkEscape.vcxproj -> D:\Senac\2Sem\PI2\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
+﻿  AlhpaInkEscape.vcxproj -> C:\Users\gustavo.ysreis\Documents\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
