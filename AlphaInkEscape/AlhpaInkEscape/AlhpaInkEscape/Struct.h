@@ -34,7 +34,9 @@ typedef struct prog
 	int Gameover;
 	int Salas[16];// Progresso de cada sala
 	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
-	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
+	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 } Progresso;
 
+//contador de itens no inventario
+int inventCount;
 #endif

@@ -44,13 +44,13 @@ int caregaInventario(Progresso *prog)
 {
 	int i;
 	float scale = 0.7;
-	for (i = 0; i < TAMANHO_INVENTARIO; i++)
+	for (i = 0; i < inventCount; i++)
 	{
-		if (prog->Inventario[i])
-		{
+		/*if (prog->Inventario[i])
+		{*/
 			//bitmap, come�oX, come�oY, larg, alt, posX, posY, novaLarg, novaAlt, flags
-			al_draw_scaled_bitmap(prog->Itens[i].bitmap, 0, 0, prog->Itens[i].largura, prog->Itens[i].altura, 0, i * ALTURA_TELA / 10, prog->Itens[i].largura * scale, prog->Itens[i].altura * scale, 0);
-		}		
+			al_draw_scaled_bitmap(prog->Itens[i]->bitmap, 0, 0, prog->Itens[i]->largura, prog->Itens[i]->altura, 0, i * ALTURA_TELA / 10, prog->Itens[i]->largura * scale, prog->Itens[i]->altura * scale, 0);
+		//}		
 	}
 }
 
