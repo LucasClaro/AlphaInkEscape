@@ -67,7 +67,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 0;
+	progresso.proximaSala = 1;
 	progresso.Gameover = 0;
 
 	// Cria o ponteiro para progresso que será mandado para o resto do programa

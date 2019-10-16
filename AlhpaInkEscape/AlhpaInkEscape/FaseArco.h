@@ -15,6 +15,7 @@
 
 Objeto* saidaDireita, * saidaBaixo, * saidaCima;
 Objeto* arco, *barraV, *barraH, *marcaV, *marcaH, *btn, *bala;
+Objeto* alvo1, * alvo2, * alvo3;
 
 int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
@@ -31,6 +32,27 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	bala->y = 0;
 	bala->largura = 20;
 	bala->altura = 20;
+
+	alvo1 = (Objeto*)malloc(sizeof(Objeto));
+	alvo1->bitmap = NULL;
+	alvo1->x = 600;
+	alvo1->y = 200;
+	alvo1->largura = 50;
+	alvo1->altura = 50;
+
+	alvo2 = (Objeto*)malloc(sizeof(Objeto));
+	alvo2->bitmap = NULL;
+	alvo2->x = 600;
+	alvo2->y = 400;
+	alvo2->largura = 50;
+	alvo2->altura = 50;
+
+	alvo3 = (Objeto*)malloc(sizeof(Objeto));
+	alvo3->bitmap = NULL;
+	alvo3->x = 600;
+	alvo3->y = 600;
+	alvo3->largura = 50;
+	alvo3->altura = 50;
 
 	btn = (Objeto*)malloc(sizeof(Objeto));
 	btn->bitmap = NULL;
@@ -103,12 +125,17 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	btn->bitmap = al_load_bitmap("Imgs/btn.png");
 	arco->bitmap = al_load_bitmap("Imgs/arco.png");
 	bala->bitmap = al_load_bitmap("Imgs/x.png");
+	alvo1->bitmap = al_load_bitmap("Imgs/alvo.png");
+	alvo2->bitmap = al_load_bitmap("Imgs/alvo.png");
+	alvo3->bitmap = al_load_bitmap("Imgs/alvo.png");
 
 	int gameOver = 0;
 	int arrastando = 0;
 	int angulo = 0;
 	int velocidade = 0;
 	int contador = 0;
+	int acertos[] = { 0, 0, 0};
+
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -133,6 +160,7 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				{
 					prog->proximaSala = 0;////////////////////////////////
 					gameOver = 1;
+					
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
@@ -142,7 +170,7 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				else if (IsInside(evento.mouse.x, evento.mouse.y, btn)) {
 					angulo = 90 + (barraV->y - marcaV->y);
 					velocidade = (marcaH->x - barraH->x)/3;
-					contador = LARGURA_TELA - 30;
+					contador = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaH))
 				{
@@ -208,7 +236,7 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		al_draw_bitmap(Background, 0, 0, 0);
 
-		contador = CalcularTiro(angulo, velocidade, contador);
+		contador = CalcularTiro(angulo, velocidade, contador, acertos);
 		
 		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
@@ -224,6 +252,14 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		al_draw_bitmap(arco->bitmap, arco->x, arco->y, 0);
 
+		if(!acertos[0])
+			al_draw_bitmap(alvo1->bitmap, alvo1->x, alvo1->y, 0);
+		if(!acertos[1])
+			al_draw_bitmap(alvo2->bitmap, alvo2->x, alvo2->y, 0);
+		if(!acertos[2])
+			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
+
+
 		al_flip_display();
 	}
 	al_destroy_bitmap(Background);
@@ -238,29 +274,34 @@ int JogarFaseTeste(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	return;
 }
 
-//Remover o contador talvez/////////////////
-int CalcularTiro(int angulo, int velocidade, int cont) {	
+int CalcularTiro(int angulo, int velocidade, int cont, int *acertos) {	
 	if (!velocidade == 0)
 	{
 		float VelVertical = sin(angulo * PI / 180) * velocidade;
 		VelVertical *= -1;
 		float VelHorizontal = cos(angulo * PI / 180) * velocidade;
-		int x;
+		int t;
 		int posX = arco->x + arco->largura;
 		int posY = arco->y;
 
-		for (x = arco->x + arco->largura; x <= cont; x++)
+		for (t = 0; t <= cont; t++)
 		{
 			posX += VelHorizontal;
 			posY += VelVertical;
 			VelVertical += 0.5;
 
-			if(x == cont)
-				al_draw_bitmap(saidaDireita->bitmap, posX, posY, 0);
-			else
-				al_draw_bitmap(bala->bitmap, posX, posY, 0);
+			
+			if (IsInside(posX, posY, alvo1) && !acertos[0])
+				acertos[0] = 1;
+			if (IsInside(posX, posY, alvo2) && !acertos[1])
+				acertos[1] = 1;
+			if (IsInside(posX, posY, alvo3) && !acertos[2])
+				acertos[2] = 1;
+			
+			
+			al_draw_bitmap(bala->bitmap, posX, posY, 0);
 		}
 	}
 
-	return cont-1;
+	return cont += 1;
 }
