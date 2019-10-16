@@ -11,6 +11,7 @@
 //#include "Fase1.h"
 //#include "Fase2.h"
 #include "Fase3Brasil.h"
+#include "FaseArco.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -24,7 +25,7 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		JogarFase3Brasil(janela, fila_eventos, progresso);
 		return;
 	case 1: 
-		//JogarFase1(janela, fila_eventos, progresso);
+		JogarFaseTeste(janela, fila_eventos, progresso);
 		return;
 	default: printf("Fase não encontrada"); return;
 		break;
