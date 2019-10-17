@@ -33,11 +33,8 @@ typedef struct prog
 	int proximaSala;
 	int Gameover;
 	int Salas[16];// Progresso de cada sala
-	int Inventário[TAMANHO_INVENTARIO];// Ter ou não o item
+	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
 	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 } Progresso;
-
-
-//enigma
 
 #endif
