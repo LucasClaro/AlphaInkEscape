@@ -192,9 +192,11 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, item))
 				{
-					progresso->Itens[inventCount++] = item;
-					item->x = -500;
-					item->y = -500;
+					progresso->Itens[progresso->inventCount] = item;
+					progresso->Inventario[progresso->inventCount] = 1;
+					progresso->inventCount++;
+					// item->x = -500;
+					//item->y = -500;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, Ba) && !Arrastando) {
 					Arrastando = 1;
@@ -301,6 +303,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 
+
 		al_draw_bitmap(fundoBa->bitmap, fundoBa->x, fundoBa->y, 0);
 		al_draw_bitmap(fundoCo->bitmap, fundoCo->x, fundoCo->y, 0);
 		al_draw_bitmap(fundoN->bitmap, fundoN->x, fundoN->y, 0);
@@ -308,10 +311,12 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 		al_draw_bitmap(fundoNa->bitmap, fundoNa->x, fundoNa->y, 0);
 		al_draw_bitmap(fundoC->bitmap, fundoC->x, fundoC->y, 0);
 
-		if (progresso->Salas[1])//arrumar
+
+		if (progresso->Salas[1] && !progresso->Inventario[0])//arrumar
 		{
 			al_draw_bitmap(item->bitmap, item->x, item->y, 0);
 		}
+
 
 		if(!progresso->Salas[1])
 		{
@@ -357,7 +362,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 	al_destroy_bitmap(fundoNa->bitmap);
 	al_destroy_bitmap(fundoC->bitmap);
 
-	al_destroy_bitmap(item->bitmap);
+	//al_destroy_bitmap(item->bitmap);
 
 	free(SaidaBaixo);
 	free(SaidaEsquerda);
@@ -375,7 +380,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 	free(fundoNa);
 	free(fundoC);
 
-	free(item);
+	//free(item);
 
 	return 0;
 }

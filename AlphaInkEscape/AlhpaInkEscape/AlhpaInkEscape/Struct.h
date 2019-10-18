@@ -35,8 +35,8 @@ typedef struct prog
 	int Salas[16];// Progresso de cada sala
 	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
 	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
+	int inventCount;//contador de itens no  inventario
 } Progresso;
 
-//contador de itens no inventario
-int inventCount;
+
 #endif

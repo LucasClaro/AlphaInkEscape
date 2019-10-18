@@ -44,7 +44,7 @@ int caregaInventario(Progresso *prog)
 {
 	int i;
 	float scale = 0.7;
-	for (i = 0; i < inventCount; i++)
+	for (i = 0; i < prog->inventCount; i++)
 	{
 		/*if (prog->Inventario[i])
 		{*/
