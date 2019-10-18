@@ -37,4 +37,7 @@ typedef struct prog
 	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 } Progresso;
 
+
+
+
 #endif
