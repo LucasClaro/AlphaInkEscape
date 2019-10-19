@@ -379,18 +379,41 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	/*al_destroy_bitmap(certo);
 	al_destroy_bitmap(errado);
 	al_destroy_bitmap(background);*/
-	al_destroy_bitmap(setaBaixo->bitmap);
-	al_destroy_bitmap(setaDireita->bitmap);
-	al_destroy_display(display);
 	//al_destroy_audio_stream(musica);
 	//al_destroy_sample(musicaFundo);
+	//free(apagar);
+	//free(audio);
+	al_destroy_bitmap(setaBaixo->bitmap);
+	al_destroy_bitmap(setaDireita->bitmap);
+	al_destroy_bitmap(conta1->bitmap);
+	al_destroy_bitmap(conta2->bitmap);
+	al_destroy_bitmap(campo1->bitmap);
+	al_destroy_bitmap(campo2->bitmap);
+	al_destroy_bitmap(campo3->bitmap);
+	al_destroy_bitmap(campo4->bitmap);
+	al_destroy_bitmap(xis->bitmap);
+	al_destroy_bitmap(igual->bitmap);
+	al_destroy_bitmap(contaSeta->bitmap);
+
+	al_destroy_display(display);
+	
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);
-	//free(apagar);
+	
 	free(campo1);
+	free(campo2);
+	free(campo3);
+	free(campo4);
+	free(xis);
+	free(igual);
+	free(contaSeta);
+	free(enigma1);
+	free(enigma2);
+	free(enigma3);
+	free(enigma4);
 	free(fundo);
 	free(conta1);
-	//free(audio);
+	free(conta2);
 	free(setaBaixo);
 	free(setaDireita);
 
