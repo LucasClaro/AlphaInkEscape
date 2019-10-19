@@ -13,11 +13,8 @@
 typedef struct EnigmaStr
 {
 	ALLEGRO_FONT* fonte;
-	char* enigmaText;
 	char* enigmaCerto;
-	char* digitado;
 	int verCampo;
-	int cor[3];
 	bool acertou;
 } enigmaStr;
 
@@ -31,42 +28,92 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	ALLEGRO_FONT* fonte = NULL;
 
 	
-	Objeto* campo;
-	campo = (Objeto*)malloc(sizeof(Objeto));
-	campo->bitmap = al_load_bitmap("Imgs/campo2.png");
-	campo->altura = 70;
-	campo->largura = 400;
-	campo->x = (LARGURA_TELA / 2);
-	campo->y = (ALTURA_TELA / 4) - (campo->altura / 2);
+	Objeto* conta1;
+	conta1 = (Objeto*)malloc(sizeof(Objeto));
+	conta1->bitmap = al_load_bitmap("Imgs/slide1.png");
+	conta1->altura = 250;
+	conta1->largura = 500;
+	conta1->x = (LARGURA_TELA / 2) - conta1->largura;
+	conta1->y = (ALTURA_TELA / 4) - (conta1->altura / 2);
+
+	Objeto* campo1;
+	campo1 = (Objeto*)malloc(sizeof(Objeto));
+	campo1->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo1->altura = 250;
+	campo1->largura = 500;
+	campo1->x = (LARGURA_TELA / 2);
+	campo1->y = (ALTURA_TELA / 4) - (campo1->altura / 2);
+
+	Objeto* conta2;
+	conta2 = (Objeto*)malloc(sizeof(Objeto));
+	conta2->bitmap = al_load_bitmap("Imgs/slide2.png");
+	conta2->altura = 250;
+	conta2->largura = 500;
+	conta2->x = (LARGURA_TELA / 2) - conta2->largura;
+	conta2->y = (ALTURA_TELA / 2) - (conta2->altura / 2);
+
 
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
-	campo2->bitmap = al_load_bitmap("Imgs/campo2.png");
-	campo2->altura = 70;
-	campo2->largura = 400;
-	campo2->x = (LARGURA_TELA / 2);
+	campo2->bitmap = al_load_bitmap("Imgs/slide4.png");
+	campo2->altura = 250;
+	campo2->largura = 500;
+	campo2->x = (LARGURA_TELA / 2) - campo2->largura + 71;
 	campo2->y = (ALTURA_TELA / 2) - (campo2->altura / 2);
+
+	//Objeto* campo2;
+	//campo2 = (Objeto*)malloc(sizeof(Objeto));
+	//campo2->bitmap = al_load_bitmap("Imgs/campo2.png");
+	//campo2->altura = 70;
+	//campo2->largura = 400;
+	//campo2->x = (LARGURA_TELA / 2);
+	//campo2->y = (ALTURA_TELA / 2) - (campo2->altura / 2);
 
 	Objeto* campo3;
 	campo3 = (Objeto*)malloc(sizeof(Objeto));
-	campo3->bitmap = al_load_bitmap("Imgs/campo2.png");
-	campo3->altura = 70;
-	campo3->largura = 400;
+	campo3->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo3->altura = 250;
+	campo3->largura = 500;
 	campo3->x = (LARGURA_TELA / 2);
-	campo3->y = (ALTURA_TELA / 3 * 2.2) - (campo3->altura / 2);
+	campo3->y = (ALTURA_TELA / 2) - (campo3->altura / 2);
+	
+	Objeto* xis;
+	xis = (Objeto*)malloc(sizeof(Objeto));
+	xis->bitmap = al_load_bitmap("Imgs/xis.png");
+	xis->altura = 250;
+	xis->largura = 500;
+	xis->x = (LARGURA_TELA / 2);
+	xis->y = (ALTURA_TELA / 4 * 1.5) - (xis->altura / 2);
+
+
+	Objeto* igual;
+	igual = (Objeto*)malloc(sizeof(Objeto));
+	igual->bitmap = al_load_bitmap("Imgs/igual.png");
+	igual->altura = 250;
+	igual->largura = 500;
+	igual->x = (LARGURA_TELA / 2);
+	igual->y = (ALTURA_TELA / 3 * 2) - (igual->altura / 2) - 40;
+
+	Objeto* campo4;
+	campo4 = (Objeto*)malloc(sizeof(Objeto));
+	campo4->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo4->altura = 250;
+	campo4->largura = 500;
+	campo4->x = (LARGURA_TELA / 2);
+	campo4->y = (ALTURA_TELA / 3 * 2.2) - (campo4->altura / 2);
 
 	Objeto* fundo;
 	fundo = (Objeto*)malloc(sizeof(Objeto));
-	fundo->bitmap = NULL;
+	fundo->bitmap = al_load_bitmap("Imgs/fundo.png");;
 	fundo->altura = 720;
 	fundo->largura = 1280;
 	fundo->y = 0;
 	fundo->x = 0;
 	
 
-	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
-	ALLEGRO_BITMAP* certo = al_load_bitmap("ArquivosAux/imagens/acerto.png");
-	ALLEGRO_BITMAP* errado = al_load_bitmap("ArquivosAux/imagens/errou.png");
+	//ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	//ALLEGRO_BITMAP* certo = al_load_bitmap("ArquivosAux/imagens/acerto.png");
+	//ALLEGRO_BITMAP* errado = al_load_bitmap("ArquivosAux/imagens/errou.png");
 
 	Objeto* setaDireita;
 	setaDireita = (Objeto*)malloc(sizeof(Objeto));
@@ -83,27 +130,28 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
 	setaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");;
+	
+	
+	Objeto* contaSeta;
+	contaSeta = (Objeto*)malloc(sizeof(Objeto));
+	contaSeta->altura = 250;
+	contaSeta->largura = 500;
+	contaSeta->x = (LARGURA_TELA / 2) - (contaSeta->largura / 2) + 20;
+	contaSeta->y = (ALTURA_TELA / 3 * 1.3 + 20) - contaSeta->altura;
+	contaSeta->bitmap = al_load_bitmap("Imgs/slide3.png");
 
-	Objeto* apagar;
-	apagar = (Objeto*)malloc(sizeof(Objeto));
-	apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
-	apagar->largura = 50;
-	apagar->altura = 50;
-	apagar->x = (LARGURA_TELA / 2) + (campo->largura / 2);
-	apagar->y = (ALTURA_TELA / 2) - (apagar->altura / 2);
+	
+
+	//Objeto* apagar;
+	//apagar = (Objeto*)malloc(sizeof(Objeto));
+	//apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
+	//apagar->largura = 50;
+	//apagar->altura = 50;
+	//apagar->x = (LARGURA_TELA / 2) + (campo->largura / 2);
+	//apagar->y = (ALTURA_TELA / 2) - (apagar->altura / 2);
 
 
-
-
-	//Objeto* semAudio;
-	//semAudio = (Objeto*)malloc(sizeof(Objeto));
-	//semAudio->bitmap = 
-	//semAudio->altura = 50;
-	//semAudio->largura = 50;
-	//semAudio->x = 550;
-	//semAudio->y = 535;
-
-	Objeto* audio;
+	/*Objeto* audio;
 	audio = (Objeto*)malloc(sizeof(Objeto));
 	audio->bitmap = NULL; 
 	audio->altura = 50;
@@ -114,37 +162,36 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	ALLEGRO_BITMAP * comAudio = al_load_bitmap("Imgs/comaudio.png");
 	ALLEGRO_BITMAP * semAudio = al_load_bitmap("Imgs/semaudio.png");
 
-	audio->bitmap = comAudio;
+	audio->bitmap = comAudio;*/
 
-	ALLEGRO_BITMAP* logo = NULL;
+	//ALLEGRO_BITMAP* logo = NULL;
 
-	ALLEGRO_SAMPLE* musicaon = NULL;
-	ALLEGRO_SAMPLE* musicaoff = NULL;
+	//ALLEGRO_SAMPLE* musicaon = NULL;
+	//ALLEGRO_SAMPLE* musicaoff = NULL;
 
-	ALLEGRO_SAMPLE* sampleVoltar = NULL;
-	ALLEGRO_AUDIO_STREAM* musica = NULL;
-	ALLEGRO_SAMPLE* musicaFundo = NULL;
-	ALLEGRO_SAMPLE* erro = NULL;
-	ALLEGRO_SAMPLE* botaosample = NULL;
-	ALLEGRO_EVENT_QUEUE* eventQueue = NULL;
+	//ALLEGRO_SAMPLE* sampleVoltar = NULL;
+	//ALLEGRO_AUDIO_STREAM* musica = NULL;
+	//ALLEGRO_SAMPLE* musicaFundo = NULL;
+	//ALLEGRO_SAMPLE* erro = NULL;
+	//ALLEGRO_SAMPLE* botaosample = NULL;
 
-	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 90, 0);
-	digitado = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 80, 0);
-
+	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
+	digitado = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 
 
-	logo = al_load_bitmap("ArquivosAux/imagens/logo.png");
 
-	musicaoff = al_load_sample("ArquivosAux/sounds/desligada.ogg");
-	musicaon = al_load_sample("ArquivosAux/sounds/ligada.ogg");
-	musica = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
-	musica = al_load_audio_stream("ArquivosAux/sounds/musicafundo.ogg", 4, 1024);
-	al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
-	al_set_audio_stream_playmode(musica, ALLEGRO_PLAYMODE_LOOP);
+	//logo = al_load_bitmap("ArquivosAux/imagens/logo.png");
 
-	musicaFundo = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
-	botaosample = al_load_sample("ArquivosAux/sounds/click.ogg");
-	sampleVoltar = al_load_sample("ArquivosAux/sounds/arrow_hit.ogg");
+	//musicaoff = al_load_sample("ArquivosAux/sounds/desligada.ogg");
+	//musicaon = al_load_sample("ArquivosAux/sounds/ligada.ogg");
+	//musica = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
+	//musica = al_load_audio_stream("ArquivosAux/sounds/musicafundo.ogg", 4, 1024);
+	//al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
+	//al_set_audio_stream_playmode(musica, ALLEGRO_PLAYMODE_LOOP);
+
+	//musicaFundo = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
+	//botaosample = al_load_sample("ArquivosAux/sounds/click.ogg");
+	//sampleVoltar = al_load_sample("ArquivosAux/sounds/arrow_hit.ogg");
 
 
 	al_set_window_title(janela, "Ink Escape - Pagina Inicial");
@@ -153,39 +200,35 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	enigmaStr* enigma1;
 	enigma1 = (enigmaStr*)malloc(sizeof(enigmaStr));
 	enigma1->fonte = enigma;
-	enigma1->enigmaCerto = "00001000";
-	enigma1->enigmaText = "0100 X 0010";
-	enigma1->cor[0] = 0;
-	enigma1->cor[1] = 0;
-	enigma1->cor[2] = 0;
-	enigma1->verCampo = 1;
+	enigma1->enigmaCerto = "0110";
 	enigma1->acertou = false;
+	enigma1->verCampo = 1;
 	char arrEnigma1[10] = "";
 
 
 	enigmaStr* enigma2;
 	enigma2 = (enigmaStr*)malloc(sizeof(enigmaStr));
 	enigma2->fonte = enigma;
-	enigma2->enigmaCerto = "00011110";
-	enigma2->enigmaText = "0110 X 0101";
-	enigma2->verCampo = 2;
-	enigma2->cor[0] = 0;
-	enigma2->cor[1] = 0;
-	enigma2->cor[2] = 0;
+	enigma2->enigmaCerto = "0110";
 	enigma2->acertou = false;
+	enigma2->verCampo = 2;
+	char arrEnigma2[10] = "";
 
 	enigmaStr* enigma3;
 	enigma3 = (enigmaStr*)malloc(sizeof(enigmaStr));
 	enigma3->fonte = enigma;
-	enigma3->enigmaCerto = "1";
-	enigma3->enigmaText = "Resultado ";
-	enigma3->verCampo = 2;
-	enigma3->cor[0] = 0;
-	enigma3->cor[1] = 0;
-	enigma3->cor[2] = 0;
+	enigma3->enigmaCerto = "0100";
 	enigma3->acertou = false;
-
-	char arrEnigma2[10] = "";
+	enigma3->verCampo = 3;
+	char arrEnigma3[10] = "";
+	
+	enigmaStr* enigma4;
+	enigma4 = (enigmaStr*)malloc(sizeof(enigmaStr));
+	enigma4->fonte = enigma;
+	enigma4->enigmaCerto = "00011000";
+	enigma4->acertou = false;
+	enigma4->verCampo = 4;
+	char arrEnigma4[10] = "";
 
 
 	int pos;
@@ -193,7 +236,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 
 
-	fundo->bitmap = background;
+
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -204,7 +247,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 
-			if (IsInside(evento.mouse.x, evento.mouse.y, audio)) {
+			/*if (IsInside(evento.mouse.x, evento.mouse.y, audio)) {
 				btnAudio = !btnAudio;
 				if (!btnAudio)
 				{
@@ -220,16 +263,8 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
 				}
 
-			}
-			/*else if (IsInside(evento.mouse.x, evento.mouse.y, apagar)) {
-					al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
-					for (int j = strlen(digitadoText); 0 <= j; j--)
-					{
-						digitadoText[j] = 0;
-					}
-					fundo->bitmap = background;
 			}*/
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 1;
 				//return;
 				sair = true;
@@ -239,13 +274,21 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//return;
 				sair = true;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, campo))
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
 			{
 				verCampo = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo2))
 			{
 				verCampo = 2;
+			}
+			else if(IsInside(evento.mouse.x, evento.mouse.y, campo3))
+			{
+				verCampo = 3;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campo4))
+			{
+				verCampo = 4;
 			}
 			else {
 				verCampo = 0;
@@ -256,12 +299,12 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			 if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
 			{
-				 if (strncmp(enigma1->enigmaCerto, arrEnigma1, 9) == 0 && strncmp(enigma2->enigmaCerto, arrEnigma2, 9) == 0) {
+				 if (strncmp(enigma1->enigmaCerto, arrEnigma1, 5) == 0 && strncmp(enigma2->enigmaCerto, arrEnigma2, 5) == 0 && strncmp(enigma3->enigmaCerto, arrEnigma3, 5) == 0 && strncmp(enigma4->enigmaCerto, arrEnigma4, 9) == 0) {
 
 					enigma1->acertou = true;
 					enigma2->acertou = true;
-					enigma1->cor[1] = 255;
-					enigma2->cor[1] = 255;
+					enigma3->acertou = true;
+					enigma4->acertou = true;
 					//fundo->bitmap = certo;
 					//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				}
@@ -279,6 +322,14 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					digitarCampo(enigma2, arrEnigma2, evento, sair, prog);
 
 				}
+				else if(verCampo == 3)
+				{
+					digitarCampo(enigma3, arrEnigma3, evento, sair, prog);
+				}
+				else if (verCampo == 4)
+				{
+					digitarCampo(enigma4, arrEnigma4, evento, sair, prog);
+				}
 			 }
 		}
 
@@ -290,20 +341,28 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 
 		al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
-		al_draw_bitmap(apagar->bitmap, apagar->x, apagar->y, 0);
-		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);
+		//al_draw_bitmap(apagar->bitmap, apagar->x, apagar->y, 0);
+		al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
 		al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
 		al_draw_bitmap(campo3->bitmap, campo3->x, campo3->y, 0);
-		al_draw_text(enigma, al_map_rgb(enigma1->cor[0], enigma1->cor[1], enigma1->cor[2]), campo->x, (ALTURA_TELA / 4) - 10, 0, arrEnigma1);
-		al_draw_text(enigma, al_map_rgb(enigma2->cor[0], enigma2->cor[1], enigma2->cor[2]), campo->x, (ALTURA_TELA / 3) + 100, 0, arrEnigma2);
-		al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 4) - 10, ALLEGRO_ALIGN_LEFT, enigma1->enigmaText);
-		al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
+		al_draw_bitmap(campo4->bitmap, campo4->x, campo4->y, 0);
+		al_draw_bitmap(igual->bitmap, igual->x, igual->y, 0);
+		al_draw_bitmap(conta1->bitmap, conta1->x, conta1->y, 0);
+		al_draw_bitmap(conta2->bitmap, conta2->x, conta2->y, 0);
+		al_draw_bitmap(xis->bitmap, xis->x, xis->y, 0);
+		al_draw_bitmap(contaSeta->bitmap, contaSeta->x, contaSeta->y, 0);
+		//al_draw_bitmap(quadrado->bitmap, quadrado->x, quadrado->y, 0);
+		al_draw_text(enigma, al_map_rgb(0,0,0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, arrEnigma1);
+		al_draw_text(enigma, al_map_rgb(0,0,0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, arrEnigma2);
+		al_draw_text(enigma, al_map_rgb(0,0,0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, arrEnigma3);
+		al_draw_text(enigma, al_map_rgb(0,0,0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
+		//al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
 		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
 		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 
 
 
-		switch (btnAudio)
+		/*switch (btnAudio)
 		{
 		case true:
 			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
@@ -311,28 +370,27 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		case false:
 			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
 			break;
-		}
+		}*/
 
 		al_flip_display();
 	}
 
 
-	al_destroy_bitmap(certo);
+	/*al_destroy_bitmap(certo);
 	al_destroy_bitmap(errado);
-	al_destroy_bitmap(background);
+	al_destroy_bitmap(background);*/
 	al_destroy_bitmap(setaBaixo->bitmap);
 	al_destroy_bitmap(setaDireita->bitmap);
-
 	al_destroy_display(display);
-	al_destroy_audio_stream(musica);
-	al_destroy_sample(musicaFundo);
+	//al_destroy_audio_stream(musica);
+	//al_destroy_sample(musicaFundo);
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);
-
-	free(apagar);
-	free(campo);
+	//free(apagar);
+	free(campo1);
 	free(fundo);
-	free(audio);
+	free(conta1);
+	//free(audio);
 	free(setaBaixo);
 	free(setaDireita);
 
@@ -362,15 +420,17 @@ int digitarCampo(enigmaStr* enigma, char arrEnigma[], ALLEGRO_EVENT evento, bool
 	{
 
 		if ((evento.keyboard.keycode == ALLEGRO_KEY_0 || evento.keyboard.keycode == ALLEGRO_KEY_1 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_0 || evento.keyboard.keycode == ALLEGRO_KEY_PAD_1) && (enigma->acertou == false)) {
-			if ((strlen(arrEnigma)) < 10) {
-				//printf("%c \n", arrEnigma);
-
+			if (enigma->verCampo == 4) {
+				if ((strlen(arrEnigma)) < 8) {
+					int uni = evento.keyboard.unichar;
+					letra[0] = (char)uni;
+					arrEnigma[strlen(arrEnigma)] = letra[0];
+				}
+			}
+			else if ((strlen(arrEnigma)) < 4) {
 				int uni = evento.keyboard.unichar;
-				//printf("%c \n", uni);
 				letra[0] = (char)uni;
 				arrEnigma[strlen(arrEnigma)] = letra[0];
-				//printf("%c == ", arrEnigma);
-
 			}
 		}
 	}
