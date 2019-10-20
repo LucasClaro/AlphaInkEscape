@@ -1,7 +1,7 @@
 #include <stdio.h>
-// Inclui o arquivo de cabeÁalho da biblioteca Allegro 5
+// Inclui o arquivo de cabe√ßalho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeÁalho do add-on para uso de imagens
+// Inclui o cabe√ßalho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -12,7 +12,7 @@
 // Tamanho da tela
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
-// Tamanho do Invent·rio
+// Tamanho do Invent√°rio
 #define TAMANHO_INVENTARIO 7
 
 // Struct para imagens
@@ -33,11 +33,9 @@ typedef struct prog
 	int proximaSala;
 	int Gameover;
 	int Salas[16];// Progresso de cada sala
-	int Inventario[TAMANHO_INVENTARIO];// Ter ou n„o o item
-	Objeto Itens[TAMANHO_INVENTARIO];// Item propriamente dito
+	int Inventario[TAMANHO_INVENTARIO];// Ter ou n√£o o item
+	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
+	int inventCount;//contador de itens no  inventario
 } Progresso;
-
-
-
 
 #endif

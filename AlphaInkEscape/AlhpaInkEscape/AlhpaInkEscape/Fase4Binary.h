@@ -371,7 +371,6 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
 			break;
 		}*/
-
 		al_flip_display();
 	}
 
