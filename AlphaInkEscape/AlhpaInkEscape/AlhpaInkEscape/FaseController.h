@@ -9,7 +9,7 @@
 #include "Struct.h"
 #include "tabelaPeri.h"
 #include "Fase4Binary.h"
-//#include "Fase0.h"
+#include "Fase0Conta.h"
 //#include "Fase1.h"
 //#include "Fase2.h"
 #include "Fase3Brasil.h"
@@ -22,9 +22,11 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 {
 	switch (progresso->proximaSala)
 	{
-	case 0: //JogarFase0(janela, fila_eventos, progresso);
+	case 0: JogarFase0Conta(janela, fila_eventos, progresso);
 		return;
 	case 1: JogarTabelaPeri(janela, fila_eventos, progresso);
+		return;
+	case 2: //JogarTabelaPeri(janela, fila_eventos, progresso);
 		return;
 	case 3: JogarFase3Brasil(janela, fila_eventos, progresso);
 		return;

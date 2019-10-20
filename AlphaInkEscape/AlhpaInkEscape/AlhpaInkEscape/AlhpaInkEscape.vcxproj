@@ -151,6 +151,7 @@
     <ClCompile Include="Origem.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fase0Conta.h" />
     <ClInclude Include="Fase4Binary.h" />
     <ClInclude Include="Fase3Brasil.h" />
     <ClInclude Include="FaseController.h" />
