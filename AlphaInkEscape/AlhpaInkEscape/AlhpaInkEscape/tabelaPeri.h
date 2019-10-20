@@ -190,7 +190,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 					//return;
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, item))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, item) && !progresso->Inventario[0])
 				{
 					progresso->Itens[progresso->inventCount] = item;
 					progresso->Inventario[progresso->inventCount] = 1;
