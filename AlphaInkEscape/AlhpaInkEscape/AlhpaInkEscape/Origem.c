@@ -96,7 +96,11 @@ int main(void) {
 	progresso.Salas[4] = 0;
 	progresso.Salas[5] = 0;
 
-
+	progresso.Inventario[0] = 0;
+	progresso.Inventario[1] = 0;
+	progresso.Inventario[2] = 0;
+	
+	progresso.inventCount = 0;
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
 	// Looping central do jogo
