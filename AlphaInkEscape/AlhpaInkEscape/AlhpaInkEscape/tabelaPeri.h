@@ -181,13 +181,12 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
-					//progresso->proximaSala = 1;
-					//return;
+					progresso->proximaSala = 0;
+					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 				{
 					progresso->proximaSala = 4;
-					//return;
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, item) && !progresso->Inventario[0])
@@ -287,7 +286,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 				}
 			}
 
-			if (IsInsideImagem(Ba, fundoBa) && IsInsideImagem(Co, fundoCo) && IsInsideImagem(N, fundoN) && IsInsideImagem(Se, fundoSe) && IsInsideImagem(Na, fundoNa) && IsInsideImagem(C, fundoC))// 
+			if (!progresso->Salas[1] && IsInsideImagem(Ba, fundoBa) && IsInsideImagem(Co, fundoCo) && IsInsideImagem(N, fundoN) && IsInsideImagem(Se, fundoSe) && IsInsideImagem(Na, fundoNa) && IsInsideImagem(C, fundoC))// 
 			{
 				progresso->Salas[1] = 1;
 				item->x = (LARGURA_TELA / 2) - (item->largura / 2);
