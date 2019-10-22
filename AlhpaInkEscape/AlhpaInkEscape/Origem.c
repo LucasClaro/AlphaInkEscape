@@ -1,7 +1,7 @@
 #include <stdio.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeÃ§alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeÃ§alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -21,7 +21,7 @@ int main(void) {
 		return -1;
 	}
 
-	// Inicializa o add-on para utilização de imagens e fontes
+	// Inicializa o add-on para utilizaÃ§Ã£o de imagens e fontes
 	al_init_image_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
@@ -32,7 +32,7 @@ int main(void) {
 		fprintf(stderr, "Falha ao iniciar janela\n");
 		return -1;
 	}
-	// Configura o título da janela
+	// Configura o tÃ­tulo da janela
 	al_set_window_title(janela, "Ink Escape Alhpa");
 
 	// Cria a Fila de eventos
@@ -44,7 +44,7 @@ int main(void) {
 		return -1;
 	}
 
-	// Torna apto o uso de mouse na aplicação
+	// Torna apto o uso de mouse na aplicaÃ§Ã£o
 	if (!al_install_mouse()) {
 		fprintf(stderr, "Falha ao iniciar o mouse\n");
 		al_destroy_display(janela);
@@ -52,7 +52,7 @@ int main(void) {
 
 		return -1;
 	}
-	// Atribui o cursor padrão do sistema para ser usado
+	// Atribui o cursor padrÃ£o do sistema para ser usado
 	if (!al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT)) {
 		fprintf(stderr, "Falha ao atribur ponteiro ao mouse\n");
 		al_destroy_display(janela);
@@ -67,10 +67,10 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 1;
+	progresso.proximaSala = 0;
 	progresso.Gameover = 0;
 
-	// Cria o ponteiro para progresso que será mandado para o resto do programa
+	// Cria o ponteiro para progresso que serÃ¡ mandado para o resto do programa
 	Progresso* prog = &progresso;
 	// Looping central do jogo
 	while (!prog->Gameover)
