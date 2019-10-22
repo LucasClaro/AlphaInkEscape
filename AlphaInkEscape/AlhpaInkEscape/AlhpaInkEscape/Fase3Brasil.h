@@ -12,7 +12,7 @@
 
 Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
 Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
-Objeto* saidaDireita, * saidaBaixo, * saidaCima;
+Objeto* saidaDireita;// , * saidaBaixo, * saidaCima;
 
 int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
@@ -86,7 +86,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaDireita->largura = 20;
 	saidaDireita->altura = 20;
 
-	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	/*saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = NULL;
 	saidaCima->x = LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
@@ -98,7 +98,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaBaixo->x = LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
 	saidaBaixo->largura = 20;
-	saidaBaixo->altura = 20;
+	saidaBaixo->altura = 20;*/
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -113,9 +113,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->bitmap = al_load_bitmap("Imgs/mtatu.png");
 	marcaJacare->bitmap = al_load_bitmap("Imgs/mjacare.png");
 	marcaMico->bitmap = al_load_bitmap("Imgs/mmico.png");
-
-	saidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
-	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
+	
 	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
@@ -137,20 +135,11 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
+				//printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
-					prog->proximaSala = 1;////////////////////////////////
-					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
-				{
-					prog->proximaSala = 4;////////////////////////////////
-					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
-				{
-					prog->proximaSala = 1;////////////////////////////////
+					prog->proximaSala = 0;////////////////////////////////
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
@@ -226,8 +215,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(Background, 0, 0, 0);
 		al_draw_bitmap(mapa->bitmap,mapa->x,mapa->y,0);
 
-		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
-		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
 		if(InAmazonia())
@@ -269,12 +256,8 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(marcaMico);
 	free(marcaOnca);
 	free(marcaTatu);
-
-	al_destroy_bitmap(saidaBaixo->bitmap);
-	al_destroy_bitmap(saidaCima->bitmap);
 	al_destroy_bitmap(saidaDireita->bitmap);
-	free(saidaBaixo);
-	free(saidaCima);
+
 	free(saidaDireita);
 
 	return;

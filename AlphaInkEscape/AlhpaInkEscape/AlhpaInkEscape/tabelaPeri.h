@@ -184,7 +184,7 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 					progresso->proximaSala = 0;
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda) && progresso->Salas[1])
 				{
 					progresso->proximaSala = 4;
 					gameOver = 1;
@@ -298,9 +298,11 @@ int JogarTabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos,
 		al_draw_bitmap(Background, 0, 0, 0);
 		al_draw_bitmap(Tabela, (LARGURA_TELA / 2) - ( 887/ 2), 90, 0);
 
-
+		if (progresso->Salas[1])
+		{
+			al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
+		}
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
-		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 
 
 		al_draw_bitmap(fundoBa->bitmap, fundoBa->x, fundoBa->y, 0);

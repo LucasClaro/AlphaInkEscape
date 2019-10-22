@@ -123,13 +123,13 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaDireita->x = 1200;
 	setaDireita->y = (ALTURA_TELA / 2);
 
-	Objeto* setaBaixo;
+	/*Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	setaBaixo->altura = 20;
 	setaBaixo->largura = 20;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
-	setaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");;
+	setaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");;*/
 	
 	
 	Objeto* contaSeta;
@@ -269,11 +269,11 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//return;
 				sair = true;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
-				prog->proximaSala = 3;
-				//return;
-				sair = true;
-			}
+			//else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+			//	prog->proximaSala = 3;
+			//	//return;
+			//	sair = true;
+			//}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
 			{
 				verCampo = 1;
@@ -358,7 +358,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_text(enigma, al_map_rgb(0,0,0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
 		//al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
 		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
-		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
+		//al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 
 
 
@@ -382,7 +382,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	//al_destroy_sample(musicaFundo);
 	//free(apagar);
 	//free(audio);
-	al_destroy_bitmap(setaBaixo->bitmap);
+	//al_destroy_bitmap(setaBaixo->bitmap);
 	al_destroy_bitmap(setaDireita->bitmap);
 	al_destroy_bitmap(conta1->bitmap);
 	al_destroy_bitmap(conta2->bitmap);
@@ -413,7 +413,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(fundo);
 	free(conta1);
 	free(conta2);
-	free(setaBaixo);
+	//free(setaBaixo);
 	free(setaDireita);
 
 	//system("pause");
