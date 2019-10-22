@@ -13,6 +13,7 @@
 //#include "Fase1.h"
 //#include "Fase2.h"
 #include "Fase3Brasil.h"
+#include "Fase2Arco.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -26,7 +27,7 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 1: JogarTabelaPeri(janela, fila_eventos, progresso);
 		return;
-	case 2: //JogarTabelaPeri(janela, fila_eventos, progresso);
+	case 2: JogarFaseArco(janela, fila_eventos, progresso);
 		return;
 	case 3: JogarFase3Brasil(janela, fila_eventos, progresso);
 		return;
