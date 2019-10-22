@@ -13,6 +13,7 @@
 Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
 Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
 Objeto* saidaDireita;// , * saidaBaixo, * saidaCima;
+Objeto* postIt3 = NULL;
 
 int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
@@ -86,6 +87,13 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaDireita->largura = 20;
 	saidaDireita->altura = 20;
 
+	postIt3 = (Objeto*)malloc(sizeof(Objeto));
+	postIt3->altura = 183;
+	postIt3->largura = 201;
+	postIt3->x = -500;
+	postIt3->y = -500;
+	postIt3->bitmap = NULL;
+
 	/*saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = NULL;
 	saidaCima->x = LARGURA_TELA / 2 - 10;
@@ -113,6 +121,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->bitmap = al_load_bitmap("Imgs/mtatu.png");
 	marcaJacare->bitmap = al_load_bitmap("Imgs/mjacare.png");
 	marcaMico->bitmap = al_load_bitmap("Imgs/mmico.png");
+	postIt3->bitmap = al_load_bitmap("Imgs/postitHomem.png");
 	
 	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
@@ -166,6 +175,12 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					marcaMico->cliqueX = MapearDistancia(evento.mouse.x, marcaMico->x);
 					marcaMico->cliqueY = MapearDistancia(evento.mouse.y, marcaMico->y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, postIt3) && !prog->Inventario[1])
+				{
+					prog->Itens[prog->inventCount] = postIt3;
+					prog->Inventario[prog->inventCount] = 1;
+					prog->inventCount++;
+				}
 				else {
 					arrastando = 0;
 				}
@@ -210,6 +225,13 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					break;
 				}
 			}
+
+			if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
+			{
+				prog->Salas[3] = 1;
+				postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
+				postIt3->y = ALTURA_TELA - postIt3->altura;
+			}
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
@@ -227,6 +249,12 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(marcaJacare->bitmap, marcaJacare->x, marcaJacare->y, 0);
 		al_draw_bitmap(marcaMico->bitmap, marcaMico->x, marcaMico->y, 0);
 
+		if (prog->Salas[3] && !prog->Inventario[1])//arrumar
+		{
+			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
+		}
+
+		caregaInventario(prog);
 		al_flip_display();
 	}
 

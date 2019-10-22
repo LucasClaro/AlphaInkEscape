@@ -16,7 +16,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->largura = 20;
-	SaidaBaixo->x = (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
+	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - (SaidaBaixo->altura * 2);
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
 
@@ -32,7 +32,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->altura = 20;
 	SaidaCima->largura = 20;
-	SaidaCima->x =(LARGURA_TELA / 2) - (SaidaCima->largura / 2);
+	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 
@@ -152,7 +152,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
 		
-
+		caregaInventario(prog);
 		al_flip_display();
 	}
 

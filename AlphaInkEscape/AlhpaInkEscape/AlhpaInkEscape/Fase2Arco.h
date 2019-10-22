@@ -97,7 +97,7 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = NULL;
-	saidaCima->x = LARGURA_TELA / 2 - 10;
+	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
 	saidaCima->largura = 20;
 	saidaCima->altura = 20;
@@ -258,7 +258,7 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		if (!acertos[2])
 			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
 
-
+		caregaInventario(prog);
 		al_flip_display();
 	}
 	al_destroy_bitmap(Background);

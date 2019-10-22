@@ -43,7 +43,7 @@ int IsInsideImagem(Objeto *menor, Objeto *maior) {
 int caregaInventario(Progresso *prog)
 {
 	int i;
-	float scale = 0.7;
+	float scale = 0.5;
 	for (i = 0; i < prog->inventCount; i++)
 	{
 		/*if (prog->Inventario[i])
