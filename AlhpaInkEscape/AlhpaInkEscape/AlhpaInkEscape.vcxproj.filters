@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Arquivos de Origem">
@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Origem.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -32,14 +29,26 @@
     <ClInclude Include="FaseController.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Fase4Binary.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="tabelaPeri.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
     <ClInclude Include="Fase3Brasil.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="FaseArco.h">
+    <ClInclude Include="Fase0Conta.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
      <ClInclude Include="FaseArco.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+     <ClInclude Include="FaseArco.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
