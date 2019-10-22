@@ -217,14 +217,10 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
-		if(InAmazonia())
-			al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
-		if(InCaatinga())
-			al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);
-		if (InPantanal())
-			al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
-		if(InMata())
-			al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
+		al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
+		al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);
+		al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
+		al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
 
 		al_draw_bitmap(marcaOnca->bitmap, marcaOnca->x, marcaOnca->y, 0);
 		al_draw_bitmap(marcaTatu->bitmap, marcaTatu->x, marcaTatu->y, 0);
@@ -234,7 +230,6 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_flip_display();
 	}
 
-	printf("entrei");
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(mapa->bitmap);
 	free(mapa);

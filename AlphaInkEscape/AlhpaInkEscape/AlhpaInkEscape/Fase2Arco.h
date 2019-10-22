@@ -88,12 +88,12 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	marcaV->largura = 30;
 	marcaV->altura = 10;
 
-	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	/*saidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	saidaDireita->bitmap = NULL;
 	saidaDireita->x = LARGURA_TELA - 20;
 	saidaDireita->y = ALTURA_TELA / 2 - 10;
 	saidaDireita->largura = 20;
-	saidaDireita->altura = 20;
+	saidaDireita->altura = 20;*/
 
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = NULL;
@@ -102,18 +102,18 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	saidaCima->largura = 20;
 	saidaCima->altura = 20;
 
-	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
+	/*saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	saidaBaixo->bitmap = NULL;
 	saidaBaixo->x = LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
 	saidaBaixo->largura = 20;
-	saidaBaixo->altura = 20;
+	saidaBaixo->altura = 20;*/
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
-	saidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
+	//saidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
 	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
-	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
+	//saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
 	barraH->bitmap = al_load_bitmap("Imgs/barraH.png");
 	barraV->bitmap = al_load_bitmap("Imgs/barraV.png");
@@ -150,22 +150,22 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
-				{
-					prog->proximaSala = 1;////////////////////////////////
-					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
+				//if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
+				//{
+				//	prog->proximaSala = 1;////////////////////////////////
+				//	gameOver = 1;
+				//}else
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
 					prog->proximaSala = 0;////////////////////////////////
 					gameOver = 1;
 
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
-				{
-					prog->proximaSala = 1;////////////////////////////////
-					gameOver = 1;
-				}
+				//else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
+				//{
+				//	prog->proximaSala = 1;////////////////////////////////
+				//	gameOver = 1;
+				//}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, btn)) {
 					angulo = 90 + (barraV->y - marcaV->y);
 					velocidade = (marcaH->x - barraH->x) / 3;
@@ -237,9 +237,9 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 		contador = CalcularTiro(angulo, velocidade, contador, acertos);
 
-		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
+		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
-		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		//al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
 		al_draw_bitmap(barraH->bitmap, barraH->x, barraH->y, 0);
 		al_draw_bitmap(barraV->bitmap, barraV->x, barraV->y, 0);
@@ -263,12 +263,12 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	}
 	al_destroy_bitmap(Background);
 
-	al_destroy_bitmap(saidaBaixo->bitmap);
+	//al_destroy_bitmap(saidaBaixo->bitmap);
 	al_destroy_bitmap(saidaCima->bitmap);
-	al_destroy_bitmap(saidaDireita->bitmap);
-	free(saidaBaixo);
+	//al_destroy_bitmap(saidaDireita->bitmap);
+	//free(saidaBaixo);
 	free(saidaCima);
-	free(saidaDireita);
+	//free(saidaDireita);
 
 	return;
 }
