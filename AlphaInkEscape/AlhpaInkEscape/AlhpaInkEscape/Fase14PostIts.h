@@ -1,0 +1,189 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro5/allegro.h>
+#include <allegro5/bitmap.h>
+#include <allegro5/allegro_native_dialog.h>
+
+#include "Struct.h"
+#include "Funcoes.h"
+
+
+int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
+{
+
+	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
+	int Arrastando = 0, p1 = 0;
+
+	ALLEGRO_BITMAP* Background = NULL,*mural = NULL;
+
+	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
+	SaidaCima->largura = 20;
+	SaidaCima->altura = 20;
+	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
+	SaidaCima->y = 0;
+	SaidaCima->bitmap = NULL;
+
+	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
+	SaidaEsquerda->largura = 20;
+	SaidaEsquerda->altura = 20;
+	SaidaEsquerda->x = 110;
+	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaCima->altura / 2);
+	SaidaEsquerda->bitmap = NULL;
+
+	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	SaidaDireita->largura = 20;
+	SaidaDireita->altura = 20;
+	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
+	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
+	SaidaDireita->bitmap = NULL;
+
+	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
+	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
+	SaidaDireita->bitmap = al_load_bitmap("Imgs/Direita.png");
+
+	Background = al_load_bitmap("Imgs/fundo.png");
+	mural = al_load_bitmap("Imgs/Separacao.png");
+
+	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
+	{
+		fprintf(stderr, "Falha ao iniciar imagem\n");
+		al_destroy_display(janela);
+		return -1;
+	}
+
+	int gameOver = 0;
+
+	while (!gameOver)
+	{
+		while (!al_is_event_queue_empty(fila_eventos))
+		{
+			//Cria um evento
+			ALLEGRO_EVENT evento;
+			//espero por um evento da fila, e guarda em evento
+			al_wait_for_event(fila_eventos, &evento);
+
+			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+				progresso->Gameover = 1;
+				gameOver = 1;
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
+				{
+					progresso->proximaSala = 2;
+					gameOver = 1;
+				}
+				//else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
+				//{
+				//	progresso->proximaSala = 4;
+				//	gameOver = 1;
+				//}
+				/*else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
+				{
+					progresso->proximaSala = 2;
+					gameOver = 1;
+				}*/
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura))
+				{
+					//i* ALTURA_TELA / 10 
+					printf("OK");
+					p1 = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
+					Arrastando = 1;
+					progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
+					progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
+				}/*
+				else if (IsInside(evento.mouse.x, evento.mouse.y, Co) && !Arrastando) {
+					Arrastando = 2;
+					Co->cliqueX = MapearDistancia(evento.mouse.x, Co->x);
+					Co->cliqueY = MapearDistancia(evento.mouse.y, Co->y);
+				}*/
+				else
+				{
+					Arrastando = 0;
+				}
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+				Arrastando = 0;
+			}
+
+			ALLEGRO_MOUSE_STATE state;
+			al_get_mouse_state(&state);
+
+			if (state.buttons & 1 && Arrastando) {
+				switch (Arrastando)
+				{
+				case 1:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, progresso->Itens[0])) {
+						progresso->Itens[0]->x = evento.mouse.x - progresso->Itens[0]->cliqueX;
+						progresso->Itens[0]->y = evento.mouse.y - progresso->Itens[0]->cliqueY;
+					}
+					break;
+				/*case 2:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, Co)) {
+						Co->x = evento.mouse.x - Co->cliqueX;
+						Co->y = evento.mouse.y - Co->cliqueY;
+					}
+					break;
+				case 3:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, N)) {
+						N->x = evento.mouse.x - N->cliqueX;
+						N->y = evento.mouse.y - N->cliqueY;
+					}
+					break;
+				case 4:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, Se)) {
+						Se->x = evento.mouse.x - Se->cliqueX;
+						Se->y = evento.mouse.y - Se->cliqueY;
+					}
+					break;
+				case 5:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, Na)) {
+						Na->x = evento.mouse.x - Na->cliqueX;
+						Na->y = evento.mouse.y - Na->cliqueY;
+					}
+					break;
+				case 6:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, C)) {
+						C->x = evento.mouse.x - C->cliqueX;
+						C->y = evento.mouse.y - C->cliqueY;
+					}
+					break;*/
+				default: Arrastando = 0;
+					break;
+				}
+			}
+		}
+
+		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(mural, (LARGURA_TELA/2) - 400, 0, 0);
+
+		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
+		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
+		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
+
+		if(p1)
+			al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
+
+		caregaInventario(progresso);
+		al_flip_display();
+	}
+
+	//Desalocação das coisas
+	al_destroy_bitmap(SaidaCima->bitmap);
+	al_destroy_bitmap(SaidaEsquerda->bitmap);
+	al_destroy_bitmap(SaidaDireita->bitmap);
+
+	al_destroy_bitmap(Background);
+	al_destroy_bitmap(mural);
+	//al_destroy_bitmap(item->bitmap);
+
+	free(SaidaCima);
+	free(SaidaEsquerda);
+	free(SaidaDireita);
+	
+	//free(item);
+
+	return 0;
+}

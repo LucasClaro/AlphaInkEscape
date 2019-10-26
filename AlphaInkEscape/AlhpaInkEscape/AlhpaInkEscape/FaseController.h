@@ -14,6 +14,7 @@
 //#include "Fase2.h"
 #include "Fase3Brasil.h"
 #include "Fase2Arco.h"
+#include "Fase14PostIts.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -33,6 +34,8 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 4: 
 		JogarFase4Binary(janela, fila_eventos, progresso);
+		return;
+	case 14: JogarFase14PostIts(janela, fila_eventos, progresso);
 		return;
 	default: printf("Fase n�o encontrada"); return;
 		break;
