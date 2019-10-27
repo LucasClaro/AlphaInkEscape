@@ -26,7 +26,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
+	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
 	
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
@@ -43,6 +43,22 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	campo1->largura = 500;
 	campo1->x = 0;
 	campo1->y = ALTURA_TELA - campo1->altura;
+
+	Objeto* campoesquerda;
+	campoesquerda = (Objeto*)malloc(sizeof(Objeto));
+	campoesquerda->bitmap = al_load_bitmap("Imgs/botao.png");
+	campoesquerda->altura = 250;
+	campoesquerda->largura = 500;
+	campoesquerda->x = 110;
+	campoesquerda->y = 350;
+
+	Objeto* campodireita;
+	campodireita = (Objeto*)malloc(sizeof(Objeto));
+	campodireita->bitmap = al_load_bitmap("Imgs/botao.png");
+	campodireita->altura = 250;
+	campodireita->largura = 500;
+	campodireita->x = 1100;
+	campodireita->y = 350;
 
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
@@ -63,21 +79,21 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
-	conta->altura = 50;
-	conta->largura = 50;
-	conta->x = (LARGURA_TELA / 2) - (conta->largura / 2);
+	conta->altura =  500;
+	conta->largura = 250;
+	conta->x = (LARGURA_TELA / 2) - (conta->largura);
 	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
 
-	ALLEGRO_BITMAP* padrao = al_load_bitmap("Imgs/mjacare.png");
-	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/mmico.png");
-	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/mtatu.png");
+	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
+	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
+	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
 
 
-	conta->bitmap = padrao;
+
 
 	bool sair = false;
-
+	bool drawNull = true;
 	bool arrastando = false;
 	while (!sair)
 	{
@@ -125,14 +141,17 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			if (IsInsideImagem(bola, campo1))
 			{
 				conta->bitmap = conta1;
+				drawNull = false;
 			}
 			else if (IsInsideImagem(bola, campo2))
 			{
 				conta->bitmap = conta2;
+				drawNull = false;
 			}
 			else
 			{
-				conta->bitmap = padrao;
+				drawNull = true;
+
 			}
 		}
 
@@ -146,9 +165,15 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
-		al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);
+
+		if(!drawNull)
+			al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);
+		
+		
 		al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
 		al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
+		al_draw_bitmap(campoesquerda->bitmap, campoesquerda->x, campoesquerda->y, 0);
+		al_draw_bitmap(campodireita->bitmap, campodireita->x, campodireita->y, 0);
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
 		
@@ -160,11 +185,13 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	al_destroy_bitmap(SaidaCima->bitmap);
 	al_destroy_bitmap(SaidaEsquerda->bitmap);
 	al_destroy_bitmap(SaidaBaixo->bitmap);
-	al_destroy_bitmap(padrao);
+	/*al_destroy_bitmap(padrao);*/
 	al_destroy_bitmap(conta1);
 	al_destroy_bitmap(conta2);
 	al_destroy_bitmap(campo1->bitmap);
 	al_destroy_bitmap(campo2->bitmap);
+	al_destroy_bitmap(campoesquerda->bitmap);
+	al_destroy_bitmap(campodireita->bitmap);
 	al_destroy_bitmap(bola->bitmap);
 
 	free(SaidaBaixo);
@@ -172,6 +199,8 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	free(SaidaEsquerda);
 	free(campo1);
 	free(campo2);
+	free(campoesquerda);
+	free(campodireita);
 	free(bola);
 	free(conta);
 

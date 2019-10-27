@@ -1,11 +1,14 @@
 ﻿  Origem.c
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(233,16): warning C4013: 'InAmazonia' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(235,16): warning C4013: 'InCaatinga' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(237,17): warning C4013: 'InPantanal' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(239,12): warning C4013: 'InMata' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(280,8): warning C4033: 'JogarFase3Brasil' deve retornar um valor
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(26,20): warning C4013: 'al_init_font_addon' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Origem.c(27,19): warning C4013: 'al_init_ttf_addon' indefinido; assumindo extern retornando int
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(55): warning C4716: 'caregaInventario': deve retornar um valor
-G:\Github\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(281): warning C4716: 'JogarFase3Brasil': deve retornar um valor
-  AlhpaInkEscape.vcxproj -> G:\Github\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(335,18): warning C4013: 'digitarCampo' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(245,6): warning C4101: 'pos': variável local não referenciada
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,18): warning C4013: 'InCaatinga' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,34): warning C4013: 'InAmazonia' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,50): warning C4013: 'InPantanal' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,62): warning C4013: 'InMata' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(286,8): warning C4033: 'JogarFase3Brasil' deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(238,26): warning C4013: 'CalcularTiro' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(273,8): warning C4033: 'JogarFaseArco' deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(55): warning C4716: 'caregaInventario': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(287): warning C4716: 'JogarFase3Brasil': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(274): warning C4716: 'JogarFaseArco': deve retornar um valor
+  AlhpaInkEscape.vcxproj -> C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
