@@ -151,14 +151,14 @@
     <ClCompile Include="Origem.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Fase0Conta.h" />
-    <ClInclude Include="Fase4Binary.h" />
-    <ClInclude Include="Fase3Brasil.h" />
-    <ClInclude Include="Fase2Arco.h" />
+    <ClInclude Include="Fase6Conta.h" />
+    <ClInclude Include="Fase1Binary.h" />
+    <ClInclude Include="Fase5Brasil.h" />
+    <ClInclude Include="Fase10Arco.h" />
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="Struct.h" />
-    <ClInclude Include="tabelaPeri.h" />
+    <ClInclude Include="Fase2tabelaPeri.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

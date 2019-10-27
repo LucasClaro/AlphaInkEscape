@@ -11,7 +11,7 @@
 #include "Struct.h"
 
 
-int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
@@ -92,17 +92,17 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
-				prog->proximaSala = 1;
+				prog->proximaSala = 2;
 				sair = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 			{
-				prog->proximaSala = 3;
+				prog->proximaSala = 5;
 				sair = 1;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 			{
-				prog->proximaSala = 2;
+				prog->proximaSala = 10;
 				sair = 1;
 			}
 		}
