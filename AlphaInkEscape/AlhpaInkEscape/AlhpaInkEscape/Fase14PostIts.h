@@ -12,6 +12,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 {
 
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
+	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0, p1 = 0;
 
 	ALLEGRO_BITMAP* Background = NULL,*mural = NULL;
@@ -36,6 +37,34 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = NULL;
+
+	fundoA = (Objeto*)malloc(sizeof(Objeto));
+	fundoA->largura = 220;
+	fundoA->altura = 230;
+	fundoA->x = 330;
+	fundoA->y = 86;
+	fundoA->bitmap = NULL;
+
+	fundoB = (Objeto*)malloc(sizeof(Objeto));
+	fundoB->largura = 220;
+	fundoB->altura = 230;
+	fundoB->x = 730;
+	fundoB->y = 86;
+	fundoB->bitmap = NULL;
+
+	fundoC = (Objeto*)malloc(sizeof(Objeto));
+	fundoC->largura = 220;
+	fundoC->altura = 230;
+	fundoC->x = 330;
+	fundoC->y = 485;
+	fundoC->bitmap = NULL;
+
+	fundoD = (Objeto*)malloc(sizeof(Objeto));
+	fundoD->largura = 220;
+	fundoD->altura = 230;
+	fundoD->x = 730;
+	fundoD->y = 485;
+	fundoD->bitmap = NULL;
 
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
@@ -83,10 +112,9 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					progresso->proximaSala = 2;
 					gameOver = 1;
 				}*/
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura))
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura) && !p1)
 				{
 					//i* ALTURA_TELA / 10 
-					printf("OK");
 					p1 = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
@@ -154,6 +182,16 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					break;
 				}
 			}
+			else if (state.buttons & 2)
+			{
+				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
+			}
+
+			if (IsInsideImagem(progresso->Itens[0], fundoA))
+			{
+				printf("OK");
+			}
+
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
@@ -182,6 +220,10 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	free(SaidaCima);
 	free(SaidaEsquerda);
 	free(SaidaDireita);
+	free(fundoA);
+	free(fundoB);
+	free(fundoC);
+	free(fundoD);
 	
 	//free(item);
 
