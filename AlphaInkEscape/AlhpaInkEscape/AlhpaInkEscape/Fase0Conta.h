@@ -10,7 +10,7 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
-
+//a
 int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
