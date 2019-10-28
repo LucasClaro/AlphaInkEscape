@@ -155,6 +155,7 @@
     <ClInclude Include="Fase4Binary.h" />
     <ClInclude Include="Fase5Brasil.h" />
     <ClInclude Include="Fase10Arco.h" />
+    <ClInclude Include="Fase9TimeLine.h" />
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="Struct.h" />
