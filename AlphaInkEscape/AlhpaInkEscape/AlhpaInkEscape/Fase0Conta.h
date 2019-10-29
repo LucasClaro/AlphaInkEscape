@@ -9,7 +9,63 @@
 #include <allegro5/allegro_native_dialog.h>
 #include "Funcoes.h"
 #include "Struct.h"
+#include <string.h>
 
+
+
+int FilaCheia(Fila* f) {
+	if (f->total >= f->tamanho) {
+		return 1;
+	}
+	return 0;
+}
+
+int FilaVazia(Fila* f) {
+	if (f->total <= 0) {
+		return 1;
+	}
+	return 0;
+}
+
+void CriarFila(Fila* f) {
+	f->tamanho = 10;
+	f->inicio = 0;
+	f->fim = 0;
+	f->total = 0;
+}
+
+void EmQueue(Fila* f, int x) {
+	if (!FilaCheia(f)) {
+		f->vetor[f->fim] = x;
+		f->fim++;
+		f->total++;
+	}
+}
+
+int VerificaFila(int *fila, int *resp) {
+	if (FilaCheia(fila)) {
+		int i;
+		for (i = 0; i < 10; i++) {
+			if (!fila[i] == resp[i])
+				return 0;
+		}
+		return 1;
+	}	
+}
+
+int DeQueue(Fila* f) {
+	int x;
+	if (!FilaVazia(f)) {
+		x = f->vetor[f->inicio];
+		f->inicio++;
+		f->total--;
+		if (f->fim >= f->tamanho)
+			f->fim = 0;
+		if (f->inicio >= f->tamanho)
+			f->inicio = 0;
+		return x;
+	}
+}
 //a
 int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
@@ -89,23 +145,47 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
 
+	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
+	
 
-
-
+	bool digitado = false;
 	bool sair = false;
 	bool drawNull = true;
 	bool arrastando = false;
+	int i = 0;
+
+	Fila fila;
+	Fila* f = &fila;
+	CriarFila(f);
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
 		al_wait_for_event(fila_eventos, &evento);
-
+		
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
 				bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
 				bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campoesquerda)) {
+				if (FilaCheia(f)) {
+					DeQueue(f);
+				}
+				EmQueue(f,1);
+				if (VerificaFila(f, vetorResposta))
+					prog->Salas[0] = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, campodireita)) {
+				if (FilaCheia(f)) {
+					DeQueue(f, vetorResposta);
+				}
+				EmQueue(f, 2);
+				if (VerificaFila(f, vetorResposta))
+					prog->Salas[0] = 1;
+			}
+
+
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
 				prog->proximaSala = 1;
@@ -162,7 +242,10 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 
 		al_draw_bitmap(background, 0, 0, 0);
-		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
+		if(prog->Salas[0])
+			al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
+		
+		
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 

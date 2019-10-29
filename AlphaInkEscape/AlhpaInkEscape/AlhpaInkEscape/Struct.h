@@ -38,4 +38,9 @@ typedef struct prog
 	int inventCount;//contador de itens no  inventario
 } Progresso;
 
+typedef struct fila {
+	int vetor[11];
+	int tamanho, inicio, fim, total;
+}Fila;
+
 #endif
