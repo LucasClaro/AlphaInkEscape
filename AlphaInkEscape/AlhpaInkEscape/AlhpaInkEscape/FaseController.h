@@ -10,6 +10,7 @@
 #include "tabelaPeri.h"
 #include "Fase4Binary.h"
 #include "Fase0Conta.h"
+#include "Fase7Mapa.h"
 //#include "Fase1.h"
 //#include "Fase2.h"
 #include "Fase3Brasil.h"
@@ -33,6 +34,9 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 4: 
 		JogarFase4Binary(janela, fila_eventos, progresso);
+		return;
+	case 7:
+		JogarFase7Mapa(janela, fila_eventos, progresso);
 		return;
 	default: printf("Fase n�o encontrada"); return;
 		break;

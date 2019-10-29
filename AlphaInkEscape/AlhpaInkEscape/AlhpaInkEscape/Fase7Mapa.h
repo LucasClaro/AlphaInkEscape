@@ -13,62 +13,7 @@
 
 
 
-int FilaCheia(Fila* f) {
-	if (f->total >= f->tamanho) {
-		return 1;
-	}
-	return 0;
-}
-
-int FilaVazia(Fila* f) {
-	if (f->total <= 0) {
-		return 1;
-	}
-	return 0;
-}
-
-void CriarFila(Fila* f) {
-	f->tamanho = 10;
-	f->inicio = 0;
-	f->fim = 0;
-	f->total = 0;
-}
-
-void EmQueue(Fila* f, int x) {
-	if (!FilaCheia(f)) {
-		f->vetor[f->fim] = x;
-		f->fim++;
-		f->total++;
-	}
-}
-
-int VerificaFila(int *fila, int *resp) {
-	if (FilaCheia(fila)) {
-		int i;
-		for (i = 0; i < 10; i++) {
-			printf("%d, %d\n",fila[i],resp[i]);
-			if (fila[i] != resp[i])
-				return 0;
-		}
-		return 1;
-	}	
-}
-
-int DeQueue(Fila* f) {
-	int x;
-	if (!FilaVazia(f)) {
-		x = f->vetor[f->inicio];
-		f->inicio++;
-		f->total--;
-		if (f->fim >= f->tamanho)
-			f->fim = 0;
-		if (f->inicio >= f->tamanho)
-			f->inicio = 0;
-		return x;
-	}
-}
-//a
-int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
@@ -84,7 +29,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
-	
+
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->altura = 20;
@@ -130,8 +75,8 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	campo2->altura = 250;
 	campo2->largura = 500;
 	campo2->x = LARGURA_TELA - campo2->largura;
-	campo2->y = ALTURA_TELA - campo2->altura;	
-	
+	campo2->y = ALTURA_TELA - campo2->altura;
+
 	Objeto* bola;
 	bola = (Objeto*)malloc(sizeof(Objeto));
 	bola->bitmap = al_load_bitmap("Imgs/monca.png");
@@ -143,7 +88,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
-	conta->altura =  500;
+	conta->altura = 500;
 	conta->largura = 250;
 	conta->x = (LARGURA_TELA / 2) - (conta->largura);
 	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
@@ -154,7 +99,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
 
 	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
-	
+
 
 	bool digitado = false;
 	bool sair = false;
@@ -174,18 +119,18 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	{
 		ALLEGRO_EVENT evento;
 		al_wait_for_event(fila_eventos, &evento);
-		
+
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
-			
-					bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
-					bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
+
+				bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
+				bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
 			}
-			
+
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campoesquerda)) {
 				if (!pressionado && state.buttons & 1)
 				{
@@ -196,7 +141,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				if (FilaCheia(f)) {
 					DeQueue(f);
 				}
-				EmQueue(f,1);
+				EmQueue(f, 1);
 				if (VerificaFila(f, vetorResposta))
 					prog->Salas[0] = 1;
 			}
@@ -225,7 +170,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				prog->proximaSala = 3;
 				sair = 1;
 			}
-			else if(IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
+			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 			{
 				prog->proximaSala = 2;
 				sair = 1;
@@ -276,24 +221,24 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 
 		al_draw_bitmap(background, 0, 0, 0);
-		if(prog->Salas[0])
+		if (prog->Salas[0])
 			al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
-		
-		
+
+
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
-		if(!drawNull)
+		if (!drawNull)
 			al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);
-		
-		
+
+
 		al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
 		al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
 		al_draw_bitmap(campoesquerda->bitmap, campoesquerda->x, campoesquerda->y, 0);
 		al_draw_bitmap(campodireita->bitmap, campodireita->x, campodireita->y, 0);
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
-		
+
 		caregaInventario(prog);
 		al_flip_display();
 	}
