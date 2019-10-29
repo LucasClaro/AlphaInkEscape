@@ -15,7 +15,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0, p1 = 0, p2 = 0;
 
-	ALLEGRO_BITMAP* Background = NULL,*mural = NULL;
+	ALLEGRO_BITMAP* Background = NULL,*mural = NULL, *usado = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -72,6 +72,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 	mural = al_load_bitmap("Imgs/Separacao.png");
+	usado = al_load_bitmap("Imgs/apagar.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -213,6 +214,12 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
 
 		caregaInventario(progresso);
+		if (p1)
+			al_draw_bitmap(usado, 5, 5, 0);
+
+		if (p2)
+			al_draw_bitmap(usado, 5, ((1 * ALTURA_TELA / 10) + 25), 0);
+
 		al_flip_display();
 	}
 
