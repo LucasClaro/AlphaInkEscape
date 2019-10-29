@@ -124,9 +124,11 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	fundoC->y = posC[1];
 	fundoC->bitmap = NULL;
 	///////////////////
+	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
+	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");
 
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
+	SaidaEsquerda->bitmap = cadeado;
 
 	Ba->bitmap = al_load_bitmap("Imgs/Ba.png");
 	Co->bitmap = al_load_bitmap("Imgs/Co.png");
@@ -272,9 +274,9 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 				}
 			}
 
-			if (!progresso->Salas[1] && IsInsideImagem(Ba, fundoBa) && IsInsideImagem(Co, fundoCo) && IsInsideImagem(N, fundoN) && IsInsideImagem(Se, fundoSe) && IsInsideImagem(Na, fundoNa) && IsInsideImagem(C, fundoC))// 
+			if (!progresso->Salas[2] && IsInsideImagem(Ba, fundoBa) && IsInsideImagem(Co, fundoCo) && IsInsideImagem(N, fundoN) && IsInsideImagem(Se, fundoSe) && IsInsideImagem(Na, fundoNa) && IsInsideImagem(C, fundoC))// 
 			{
-				progresso->Salas[1] = 1;
+				progresso->Salas[2] = 1;
 			}
 
 		}
@@ -282,10 +284,11 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		al_draw_bitmap(Background, 0, 0, 0);
 		al_draw_bitmap(Tabela, (LARGURA_TELA / 2) - ( 887/ 2), 90, 0);
 
-		if (progresso->Salas[2]);
+		if (progresso->Salas[2])
 		{
-			al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
+			SaidaEsquerda->bitmap = saida;
 		}
+		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
 

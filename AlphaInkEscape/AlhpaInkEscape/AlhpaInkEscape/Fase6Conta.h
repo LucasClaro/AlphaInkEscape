@@ -26,8 +26,11 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
+	SaidaEsquerda->bitmap = NULL;
+
+
 	
+
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->altura = 20;
@@ -60,6 +63,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
 	bola->y = (ALTURA_TELA / 4) - (bola->altura / 2);
 
+
+
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
@@ -72,6 +77,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/mmico.png");
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/mtatu.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
+	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");
 
 
 	conta->bitmap = padrao;
@@ -79,11 +86,12 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	bool sair = false;
 
 	bool arrastando = false;
+	SaidaEsquerda->bitmap = cadeado;
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
 		al_wait_for_event(fila_eventos, &evento);
-
+		
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
@@ -142,9 +150,13 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		}
 
 
+		if (prog->Salas[1]) {
+			SaidaEsquerda->bitmap = saida;
+		}
+
 		al_draw_bitmap(background, 0, 0, 0);
-		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
+		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 		al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);
 		al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
@@ -154,6 +166,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		
 		caregaInventario(prog);
 		al_flip_display();
+
 	}
 
 	al_destroy_bitmap(background);

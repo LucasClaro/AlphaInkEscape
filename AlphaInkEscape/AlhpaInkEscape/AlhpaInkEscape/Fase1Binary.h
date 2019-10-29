@@ -415,12 +415,12 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		}
 		else {
 			al_draw_text(enigma, al_map_rgb(cor[0], 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, arrEnigma1);
-			al_draw_text(enigma, al_map_rgb(cor[1], 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, arrEnigma2);
+			al_draw_text(enigma, al_map_rgb(cor[1], 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, arrEnigma1);
 			al_draw_text(enigma, al_map_rgb(cor[2], 0, 0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, arrEnigma3);
 			al_draw_text(enigma, al_map_rgb(cor[3], 0, 0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
 		}
 
-		if (prog->Salas[4] && !prog->Inventario[0])//arrumar
+		if (prog->Salas[1] && !prog->Inventario[0])//arrumar
 		{
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}

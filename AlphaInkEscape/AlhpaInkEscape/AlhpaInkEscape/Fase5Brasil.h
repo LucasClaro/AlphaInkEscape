@@ -101,12 +101,12 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaCima->largura = 20;
 	saidaCima->altura = 20;*/
 
-	//saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	//saidaBaixo->bitmap = NULL;
-	//saidaBaixo->x = LARGURA_TELA / 2 - 10;
-	//saidaBaixo->y = ALTURA_TELA - 20;
-	//saidaBaixo->largura = 20;
-	//saidaBaixo->altura = 20;
+	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
+	saidaBaixo->bitmap = NULL;
+	saidaBaixo->x = LARGURA_TELA / 2 - 10;
+	saidaBaixo->y = ALTURA_TELA - 20;
+	saidaBaixo->largura = 20;
+	saidaBaixo->altura = 20;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -234,7 +234,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 			if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
 			{
-				prog->Salas[3] = 1;
+				prog->Salas[5] = 1;
 				postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
 				postIt3->y = ALTURA_TELA - postIt3->altura;
 			}
@@ -256,7 +256,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(marcaJacare->bitmap, marcaJacare->x, marcaJacare->y, 0);
 		al_draw_bitmap(marcaMico->bitmap, marcaMico->x, marcaMico->y, 0);
 
-		if (prog->Salas[3] && !prog->Inventario[1])//arrumar
+		if (prog->Salas[5] && !prog->Inventario[1])//arrumar
 		{
 			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
 		}
