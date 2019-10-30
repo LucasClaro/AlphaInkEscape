@@ -7,13 +7,14 @@
 #include "Struct.h"
 #include "Funcoes.h"
 
+int p1 = 0, p2 = 0;
 
 int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
 	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
-	int Arrastando = 0, p1 = 0, p2 = 0;
+	int Arrastando = 0;
 
 	ALLEGRO_BITMAP* Background = NULL,*mural = NULL, *usado = NULL;
 
