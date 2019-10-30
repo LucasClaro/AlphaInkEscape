@@ -105,6 +105,7 @@ int main(void) {
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
 	// Looping central do jogo
+
 	while (!prog->Gameover)
 	{
 		selecionaFase(janela, fila_eventos, prog);

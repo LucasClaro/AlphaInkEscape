@@ -7,6 +7,7 @@
 #include <allegro5/allegro_native_dialog.h>
 
 #include "Struct.h"
+
 #include "tabelaPeri.h"
 #include "Fase4Binary.h"
 #include "Fase0Conta.h"
