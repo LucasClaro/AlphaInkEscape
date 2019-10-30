@@ -222,12 +222,12 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 			{
-				prog->proximaSala = 3;
+				prog->proximaSala = 5;
 				sair = 1;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 			{
-				prog->proximaSala = 2;
+				prog->proximaSala = 10;
 				sair = 1;
 			}
 		}

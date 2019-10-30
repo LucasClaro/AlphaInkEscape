@@ -15,7 +15,7 @@ Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
 Objeto* saidaDireita;// , * saidaBaixo, * saidaCima;
 Objeto* postIt3 = NULL;
 
-int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
@@ -144,32 +144,32 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				//printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
 				
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
 					prog->proximaSala = 0;////////////////////////////////
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca) && !prog->Salas[5])
 				{
 					arrastando = 1;
 					marcaOnca->cliqueX = MapearDistancia(evento.mouse.x, marcaOnca->x);
 					marcaOnca->cliqueY = MapearDistancia(evento.mouse.y, marcaOnca->y);
 				}
-				else if(IsInside(evento.mouse.x, evento.mouse.y, marcaTatu))
+				else if(IsInside(evento.mouse.x, evento.mouse.y, marcaTatu) && !prog->Salas[5])
 				{
 					arrastando = 2;
 					marcaTatu->cliqueX = MapearDistancia(evento.mouse.x, marcaTatu->x);
 					marcaTatu->cliqueY = MapearDistancia(evento.mouse.y, marcaTatu->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaJacare))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaJacare) && !prog->Salas[5])
 				{
 					arrastando = 3;
 					marcaJacare->cliqueX = MapearDistancia(evento.mouse.x, marcaJacare->x);
 					marcaJacare->cliqueY = MapearDistancia(evento.mouse.y, marcaJacare->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaMico))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaMico) && !prog->Salas[5])
 				{
 					arrastando = 4;
 					marcaMico->cliqueX = MapearDistancia(evento.mouse.x, marcaMico->x);
@@ -228,7 +228,7 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 			if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
 			{
-				prog->Salas[3] = 1;
+				prog->Salas[5] = 1;
 				postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
 				postIt3->y = ALTURA_TELA - postIt3->altura;
 			}
@@ -244,12 +244,20 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(notaJacare->bitmap, notaJacare->x, notaJacare->y, 0);
 		al_draw_bitmap(notaMico->bitmap, notaMico->x, notaMico->y, 0);
 
-		al_draw_bitmap(marcaOnca->bitmap, marcaOnca->x, marcaOnca->y, 0);
-		al_draw_bitmap(marcaTatu->bitmap, marcaTatu->x, marcaTatu->y, 0);
-		al_draw_bitmap(marcaJacare->bitmap, marcaJacare->x, marcaJacare->y, 0);
-		al_draw_bitmap(marcaMico->bitmap, marcaMico->x, marcaMico->y, 0);
+		if (prog->Salas[5]) {
+			al_draw_bitmap(marcaOnca->bitmap, 555, 185, 0);
+			al_draw_bitmap(marcaTatu->bitmap, 928, 235, 0);
+			al_draw_bitmap(marcaJacare->bitmap, 641, 426, 0);
+			al_draw_bitmap(marcaMico->bitmap, 902, 427, 0);
+		}
+		else {
+			al_draw_bitmap(marcaOnca->bitmap, marcaOnca->x, marcaOnca->y, 0);
+			al_draw_bitmap(marcaTatu->bitmap, marcaTatu->x, marcaTatu->y, 0);
+			al_draw_bitmap(marcaJacare->bitmap, marcaJacare->x, marcaJacare->y, 0);
+			al_draw_bitmap(marcaMico->bitmap, marcaMico->x, marcaMico->y, 0);
+		}
 
-		if (prog->Salas[3] && !prog->Inventario[1])//arrumar
+		if (prog->Salas[5] && !prog->Inventario[1])//arrumar
 		{
 			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
 		}

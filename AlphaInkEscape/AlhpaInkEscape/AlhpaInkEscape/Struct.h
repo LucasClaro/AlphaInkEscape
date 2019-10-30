@@ -32,7 +32,7 @@ typedef struct prog
 {
 	int proximaSala;
 	int Gameover;
-	int Salas[16];// Progresso de cada sala
+	int Salas[17];// Progresso de cada sala. Deixei 17 pois a fase 0 vai ser o menu. 
 	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
 	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 	int inventCount;//contador de itens no  inventario
