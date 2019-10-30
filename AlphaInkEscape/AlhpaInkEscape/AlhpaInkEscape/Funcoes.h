@@ -10,7 +10,7 @@
 
 #ifndef Funcoes_H
 #define Funcoes_H
-
+ALLEGRO_BITMAP * usado = NULL;
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -44,14 +44,21 @@ int caregaInventario(Progresso *prog)
 {
 	int i;
 	float scale = 0.5;
-	for (i = 0; i < prog->inventCount; i++)
+	for (i = 0; i < TAMANHO_INVENTARIO; i++)
 	{
-		/*if (prog->Inventario[i])
-		{*/
+		if (prog->Inventario[i])
+		{
 			//bitmap, come�oX, come�oY, larg, alt, posX, posY, novaLarg, novaAlt, flags
 			al_draw_scaled_bitmap(prog->Itens[i]->bitmap, 0, 0, prog->Itens[i]->largura, prog->Itens[i]->altura, 0, i * ALTURA_TELA / 10, prog->Itens[i]->largura * scale, prog->Itens[i]->altura * scale, 0);
-		//}		
+			if (prog->inventClick[i])
+				al_draw_bitmap(usado, 25, ((i * ALTURA_TELA / 10) + 25), 0);
+		}		
 	}
+}
+
+int loadFotoInvent()
+{
+	usado = al_load_bitmap("Imgs/apagar.png");
 }
 
 #endif

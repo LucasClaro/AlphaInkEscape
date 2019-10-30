@@ -7,8 +7,6 @@
 #include "Struct.h"
 #include "Funcoes.h"
 
-int p1 = 0, p2 = 0;
-
 int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 
@@ -16,7 +14,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL,*mural = NULL, *usado = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * mural = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -73,7 +71,6 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 	mural = al_load_bitmap("Imgs/Separacao.png");
-	usado = al_load_bitmap("Imgs/apagar.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -114,15 +111,15 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					progresso->proximaSala = 2;
 					gameOver = 1;
 				}*/
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !p1)
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
 				{
 					//i* ALTURA_TELA / 10 
-					p1 = 1;
+					progresso->inventClick[0] = 1;
 				}
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && evento.mouse.y <= ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !p2)
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && evento.mouse.y <= ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
 				{
 					//i* ALTURA_TELA / 10 
-					p2 = 1;
+					progresso->inventClick[1] = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
 					Arrastando = 1;
@@ -208,19 +205,13 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
 
-		if(p1)
+		if(progresso->inventClick[0])
 			al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
 
-		if (p2)
+		if (progresso->inventClick[1])
 			al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
 
 		caregaInventario(progresso);
-		if (p1)
-			al_draw_bitmap(usado, 5, 5, 0);
-
-		if (p2)
-			al_draw_bitmap(usado, 5, ((1 * ALTURA_TELA / 10) + 25), 0);
-
 		al_flip_display();
 	}
 

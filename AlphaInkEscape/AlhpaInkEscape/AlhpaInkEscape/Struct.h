@@ -36,6 +36,7 @@ typedef struct prog
 	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
 	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 	int inventCount;//contador de itens no  inventario
+	int inventClick[TAMANHO_INVENTARIO];//saber qual item ja foi usado no inventario
 } Progresso;
 
 #endif

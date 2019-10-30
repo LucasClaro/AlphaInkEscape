@@ -177,8 +177,8 @@ int JogarFase3Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, postIt3) && !prog->Inventario[1])
 				{
-					prog->Itens[prog->inventCount] = postIt3;
-					prog->Inventario[prog->inventCount] = 1;
+					prog->Itens[1] = postIt3;
+					prog->Inventario[1] = 1;
 					prog->inventCount++;
 				}
 				else {
