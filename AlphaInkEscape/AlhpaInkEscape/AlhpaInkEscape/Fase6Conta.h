@@ -68,7 +68,7 @@ int DeQueue(Fila* f) {
 	}
 }
 //a
-int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
@@ -204,7 +204,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				}
 				EmQueue(f,1);
 				if (VerificaFila(f, vetorResposta))
-					prog->Salas[0] = 1;
+					prog->Salas[6] = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campodireita)) {
 				if (!pressionado && state.buttons & 1)
@@ -217,7 +217,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				}
 				EmQueue(f, 2);
 				if (VerificaFila(f, vetorResposta))
-					prog->Salas[0] = 1;
+					prog->Salas[6] = 1;
 			}
 
 

@@ -14,8 +14,8 @@ Objeto* linha1, * linha2, * linha3, * linha4;
 Objeto* eventos, * notas, * datas;
 Objeto* saidaDireita, * saidaBaixo, * saidaCima;
 
-int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
-	int i,j;
+int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+	int i, j;
 
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
@@ -33,7 +33,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 	linha1 = (Objeto*)malloc(sizeof(Objeto));
 	linha1->bitmap = NULL;
-	linha1->x = LARGURA_TELA/2 - 450;
+	linha1->x = LARGURA_TELA / 2 - 450;
 	linha1->y = 300;
 	linha1->largura = 1000;
 	linha1->altura = 100;
@@ -55,11 +55,11 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	linha4 = (Objeto*)malloc(sizeof(Objeto));
 	linha4->bitmap = NULL;
 	linha4->x = LARGURA_TELA / 2 - 450;
-	linha4->y = linha3->y  + linha3->altura + 10;;
+	linha4->y = linha3->y + linha3->altura + 10;;
 	linha4->largura = 1000;
 	linha4->altura = 100;
 
-	eventos = (Objeto*)malloc(sizeof(Objeto)*24);
+	eventos = (Objeto*)malloc(sizeof(Objeto) * 24);
 	notas = (Objeto*)malloc(sizeof(Objeto) * 24);
 	datas = (Objeto*)malloc(sizeof(Objeto) * 24);
 
@@ -70,7 +70,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	datas[0].altura = 100;
 
 	datas[1].bitmap = al_load_bitmap("Imgs/Timeline/data.png");
-	datas[1].x = linha1->x + 150; 
+	datas[1].x = linha1->x + 150;
 	datas[1].y = linha1->y;
 	datas[1].largura = 100;
 	datas[1].altura = 100;
@@ -213,8 +213,8 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	for (i = 0; i < 6; i++) {//Percorre do 1º ao 6º elemento de uma linha do tempo
 		for (j = 0; j < 4; j++) {//Percorre as 4 linhas do tempo
 			eventos[i + 6 * j].bitmap = NULL;
-			eventos[i + 6 * j].x = linha1->x + 100*mx;//Divide os 6 elementos da linha do tempo em 3 colunas
-			eventos[i + 6 * j].y = 100 + 120*my;//Divide os 6 elementos da linha do tempo em 2 linhas
+			eventos[i + 6 * j].x = linha1->x + 100 * mx;//Divide os 6 elementos da linha do tempo em 3 colunas
+			eventos[i + 6 * j].y = 100 + 120 * my;//Divide os 6 elementos da linha do tempo em 2 linhas
 			eventos[i + 6 * j].largura = 50;
 			eventos[i + 6 * j].altura = 50;
 			if (count % 4 == 0)
@@ -222,9 +222,9 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 			if (count % 12 == 0) {
 				my++;
 				mx = 0;
-			}				
+			}
 			count++;
-		}		
+		}
 	}
 	for (i = 0; i < 24; i++) {
 		notas[i].bitmap = NULL;
@@ -310,7 +310,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if(IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]){
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
 					prog->proximaSala = 5;////////////////////////////////
 					gameOver = 1;
 				}
@@ -318,7 +318,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					prog->proximaSala = 10;
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6*linhaInGame]) && !prog->Salas[9])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6 * linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 1;
 					eventos[0 + 6 * linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[0 + 6 * linhaInGame].x);
@@ -360,15 +360,15 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
-				arrastando = 0;				
+				arrastando = 0;
 				if (VerificarLinha(linhaInGame))
 					linhaInGame++;
 				if (linhaInGame >= 4) {
 					prog->Salas[9] = 1;
 				}
-			}	
+			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_AXES) {////////////////
-				if(DentroDe(evento) >= 0)
+				if (DentroDe(evento) >= 0)
 					Dentro = DentroDe(evento);
 			}
 
@@ -427,11 +427,11 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		printf("%d", prog->Salas[9]);
 
 		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
-		if(prog->Salas[9])
+		if (prog->Salas[9])
 			al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
-		
+
 		al_draw_bitmap(linha1->bitmap, linha1->x, linha1->y, 0);
 		if (linhaInGame >= 1)
 			al_draw_bitmap(linha2->bitmap, linha2->x, linha2->y, 0);
@@ -450,7 +450,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		}
 		if (linhaInGame >= 1) {
 			for (i = 6; i < 12; i++) {
-				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);				
+				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);
 			}
 			for (i = 6; i < 12; i++)
 			{
@@ -459,7 +459,7 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		}
 		if (linhaInGame >= 2) {
 			for (i = 12; i < 18; i++) {
-				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);				
+				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);
 			}
 			for (i = 12; i < 18; i++) {
 				al_draw_bitmap(eventos[i].bitmap, eventos[i].x, eventos[i].y, 0);
@@ -467,12 +467,12 @@ int JogarFaseTimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		}
 		if (linhaInGame >= 3) {
 			for (i = 18; i < 24; i++) {
-				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);				
+				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);
 			}
 			for (i = 18; i < 24; i++) {
 				al_draw_bitmap(eventos[i].bitmap, eventos[i].x, eventos[i].y, 0);
 			}
-		}		
+		}
 
 		caregaInventario(prog);
 		al_flip_display();
@@ -490,5 +490,5 @@ int DentroDe(ALLEGRO_EVENT evento) {
 }
 
 int VerificarLinha(int linha) {
-	if (IsInsideImagem(&eventos[0 + 6 * linha],&datas[0 + 6 * linha]) && IsInsideImagem(&eventos[1 + 6 * linha], &datas[1 + 6 * linha]) && IsInsideImagem(&eventos[2 + 6 * linha], &datas[2 + 6 * linha]) && IsInsideImagem(&eventos[3 + 6 * linha], &datas[3 + 6 * linha]) && IsInsideImagem(&eventos[4 + 6 * linha], &datas[4 + 6 * linha]) && IsInsideImagem(&eventos[5 + 6 * linha], &datas[5 + 6 * linha]));
+	if (IsInsideImagem(&eventos[0 + 6 * linha], &datas[0 + 6 * linha]) && IsInsideImagem(&eventos[1 + 6 * linha], &datas[1 + 6 * linha]) && IsInsideImagem(&eventos[2 + 6 * linha], &datas[2 + 6 * linha]) && IsInsideImagem(&eventos[3 + 6 * linha], &datas[3 + 6 * linha]) && IsInsideImagem(&eventos[4 + 6 * linha], &datas[4 + 6 * linha]) && IsInsideImagem(&eventos[5 + 6 * linha], &datas[5 + 6 * linha]));
 }
