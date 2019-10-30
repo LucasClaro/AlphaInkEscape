@@ -16,7 +16,7 @@ Objeto * saidaDireita, * saidaBaixo, * saidaCima;
 Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * btn, * bala;
 Objeto* alvo1, * alvo2, * alvo3;
 
-int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
 	arco = (Objeto*)malloc(sizeof(Objeto));
 	arco->bitmap = NULL;
@@ -157,7 +157,7 @@ int JogarFaseArco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				//}else
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
-					prog->proximaSala = 0;////////////////////////////////
+					prog->proximaSala = 6;////////////////////////////////
 					gameOver = 1;
 
 				}

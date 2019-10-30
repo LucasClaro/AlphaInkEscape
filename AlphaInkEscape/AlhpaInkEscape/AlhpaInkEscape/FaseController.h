@@ -7,16 +7,11 @@
 #include <allegro5/allegro_native_dialog.h>
 
 #include "Struct.h"
-
-#include "tabelaPeri.h"
-#include "Fase4Binary.h"
-#include "Fase0Conta.h"
-#include "Fase7Mapa.h"
-//#include "Fase1.h"
-//#include "Fase2.h"
+#include "Fase1Binary.h"
+#include "Fase2tabelaPeri.h"
 #include "Fase5Brasil.h"
+#include "Fase6Conta.h"
 #include "Fase10Arco.h"
-#include "Fase9TimeLine.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -26,16 +21,27 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 {
 	switch (progresso->proximaSala)
 	{
-	case 0: JogarFase0Conta(janela, fila_eventos, progresso);
+	case 0: 
 		return;
-	case 1: JogarTabelaPeri(janela, fila_eventos, progresso);
+	case 1: JogarFase1Binary(janela, fila_eventos, progresso);
 		return;
-	case 2: //JogarFaseArco(janela, fila_eventos, progresso);
+	case 2: JogarFase2TabelaPeri(janela, fila_eventos, progresso);
 		return;
-	case 3: //JogarFase3Brasil(janela, fila_eventos, progresso);
+	case 3: //
 		return;
-	case 4: 
-		JogarFase4Binary(janela, fila_eventos, progresso);
+	case 4: //
+		return;
+	case 5: JogarFase5Brasil(janela, fila_eventos, progresso);
+		return;
+	case 6: JogarFase6Conta(janela, fila_eventos, progresso);
+		return;
+	case 7: //
+		return;
+	case 8: //
+		return;
+	case 9: //
+		return;
+	case 10: JogarFase10Arco(janela, fila_eventos, progresso);
 		return;
 	case 5:
 		JogarFaseBrasil(janela, fila_eventos, progresso);

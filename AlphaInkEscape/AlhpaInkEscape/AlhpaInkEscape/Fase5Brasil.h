@@ -1,8 +1,8 @@
 
 #include <stdio.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeï¿½alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeï¿½alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -12,10 +12,10 @@
 
 Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
 Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
-Objeto* saidaDireita;// , * saidaBaixo, * saidaCima;
+Objeto* saidaDireita, * saidaBaixo;// * saidaCima;
 Objeto* postIt3 = NULL;
 
-int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
@@ -99,14 +99,14 @@ int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	saidaCima->x = LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
 	saidaCima->largura = 20;
-	saidaCima->altura = 20;
+	saidaCima->altura = 20;*/
 
 	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	saidaBaixo->bitmap = NULL;
 	saidaBaixo->x = LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
 	saidaBaixo->largura = 20;
-	saidaBaixo->altura = 20;*/
+	saidaBaixo->altura = 20;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -138,7 +138,7 @@ int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			//se teve eventos e foi um evento de fechar janela, encerra repetiï¿½ï¿½o			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
@@ -148,10 +148,16 @@ int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
-					prog->proximaSala = 0;////////////////////////////////
+					prog->proximaSala = 6;////////////////////////////////
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca) && !prog->Salas[5])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
+				{
+					prog->proximaSala = 6;////////////////////////////////
+					gameOver = 1;
+
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
 				{
 					arrastando = 1;
 					marcaOnca->cliqueX = MapearDistancia(evento.mouse.x, marcaOnca->x);
@@ -238,6 +244,7 @@ int JogarFaseBrasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(mapa->bitmap,mapa->x,mapa->y,0);
 
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 
 		al_draw_bitmap(notaOnca->bitmap, notaOnca->x, notaOnca->y, 0);
 		al_draw_bitmap(notaTatu->bitmap, notaTatu->x, notaTatu->y, 0);

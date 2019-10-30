@@ -20,7 +20,7 @@ typedef struct EnigmaStr
 
 Objeto* postIt4 = NULL;
 
-int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
 	bool sair = false;
 	//ponteiros
@@ -134,13 +134,13 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaDireita->x = 1200;
 	setaDireita->y = (ALTURA_TELA / 2);
 
-	/*Objeto* setaBaixo;
+	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	setaBaixo->altura = 20;
 	setaBaixo->largura = 20;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
-	setaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");;*/
+	setaBaixo->bitmap = al_load_bitmap("Imgs/direita.png");;
 	
 	
 	Objeto* contaSeta;
@@ -247,7 +247,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 
 
-
+	int cor[4];
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -276,7 +276,7 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 			}*/
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
-				prog->proximaSala = 1;
+				prog->proximaSala = 2;
 				//return;
 				sair = true;
 			}
@@ -294,21 +294,41 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
 			{
 				verCampo = 1;
+				cor[0] = 255;
+				cor[1] = 0;
+				cor[2] = 0;
+				cor[3] = 0;
+
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo2))
 			{
 				verCampo = 2;
+				cor[0] = 0;
+				cor[1] = 255;
+				cor[2] = 0;
+				cor[3] = 0;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, campo3))
 			{
 				verCampo = 3;
+				cor[0] = 0;
+				cor[1] = 0;
+				cor[2] = 255;
+				cor[3] = 0;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo4))
 			{
 				verCampo = 4;
+				cor[0] = 0;
+				cor[1] = 0;
+				cor[2] = 0;
+				cor[3] = 255;
 			}
 			else {
-				verCampo = 0;
+				cor[0] = 0;
+				cor[1] = 0;
+				cor[2] = 0;
+				cor[3] = 0;
 			}
 
 
@@ -322,23 +342,32 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					enigma2->acertou = true;
 					enigma3->acertou = true;
 					enigma4->acertou = true;
-					prog->Salas[4] = 1;
+					prog->Salas[1] = 1;
 					postIt4->x = (LARGURA_TELA / 2) - (postIt4->largura / 2);
 					postIt4->y = ALTURA_TELA - postIt4->altura;
 					//fundo->bitmap = certo;
 					//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				}
 			}
+			 else if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
+				 enigma1->acertou = true;
+				 enigma2->acertou = true;
+				 enigma3->acertou = true;
+				 enigma4->acertou = true;
+				 prog->Salas[1] = 1;
+				 prog->Salas[2] = 1;
+				 prog->Salas[10] = 1;
+				 postIt4->x = (LARGURA_TELA / 2) - (postIt4->largura / 2);
+				 postIt4->y = ALTURA_TELA - postIt4->altura;
+			 }
 			 else {
 				if (verCampo == 1)
 				{
 					digitarCampo(enigma1, arrEnigma1, evento, sair, prog);
-					//digitarCampo(enigma1->enigmaCerto, enigma1->digitado, evento, sair, prog);
 
 				}
 				else if (verCampo == 2)
 				{
-					//digitarCampo(enigma2->enigmaCerto, enigma2->digitado, evento, sair, prog);
 					digitarCampo(enigma2, arrEnigma2, evento, sair, prog);
 
 				}
@@ -373,10 +402,11 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(xis->bitmap, xis->x, xis->y, 0);
 			al_draw_bitmap(contaSeta->bitmap, contaSeta->x, contaSeta->y, 0);
 			al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+			
 			//al_draw_bitmap(quadrado->bitmap, quadrado->x, quadrado->y, 0);
-		if (prog->Salas[4] == 1) {
+		if (prog->Salas[1] == 1) {
 			//al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
-			//al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
+			
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, "0110");
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, "0110");
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, "0100");
@@ -384,26 +414,16 @@ int JogarFase4Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		}
 		else {
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, arrEnigma1);
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, arrEnigma2);
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, arrEnigma3);
-			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
+			al_draw_text(enigma, al_map_rgb(cor[0], 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, arrEnigma1);
+			al_draw_text(enigma, al_map_rgb(cor[1], 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, arrEnigma1);
+			al_draw_text(enigma, al_map_rgb(cor[2], 0, 0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, arrEnigma3);
+			al_draw_text(enigma, al_map_rgb(cor[3], 0, 0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
 		}
 
-		if (prog->Salas[4] && !prog->Inventario[0])//arrumar
+		if (prog->Salas[1] && !prog->Inventario[0])//arrumar
 		{
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}
-
-		/*switch (btnAudio)
-		{
-		case true:
-			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
-			break;
-		case false:
-			al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
-			break;
-		}*/
 		caregaInventario(prog);
 		al_flip_display();
 	}

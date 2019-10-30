@@ -85,6 +85,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
 	
+
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->altura = 20;
@@ -140,6 +141,8 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
 	bola->y = (ALTURA_TELA / 4) - (bola->altura / 2);
 
+
+
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
@@ -152,6 +155,8 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
+	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");
 
 	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
 	
@@ -170,6 +175,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Fila fila;
 	Fila* f = &fila;
 	CriarFila(f);
+	SaidaEsquerda->bitmap = cadeado;
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -217,7 +223,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
-				prog->proximaSala = 1;
+				prog->proximaSala = 2;
 				sair = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
@@ -275,12 +281,17 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		}
 
 
+		if (prog->Salas[1]) {
+			SaidaEsquerda->bitmap = saida;
+		}
+
 		al_draw_bitmap(background, 0, 0, 0);
 		if(prog->Salas[0])
 			al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		
 		
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
+		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
 		if(!drawNull)
@@ -296,6 +307,7 @@ int JogarFase0Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		
 		caregaInventario(prog);
 		al_flip_display();
+
 	}
 
 	al_destroy_bitmap(background);
