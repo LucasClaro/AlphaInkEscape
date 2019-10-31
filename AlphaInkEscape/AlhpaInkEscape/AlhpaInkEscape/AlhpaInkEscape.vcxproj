@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fase10Arco.h" />
+    <ClInclude Include="Fase11Xadrez.h" />
     <ClInclude Include="Fase14PostIts.h" />
     <ClInclude Include="Fase1Binary.h" />
     <ClInclude Include="Fase5Brasil.h" />
