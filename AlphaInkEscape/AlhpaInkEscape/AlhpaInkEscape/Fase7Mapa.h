@@ -247,14 +247,14 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/baixoMapa.png");
 	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
 
 
 	Objeto* campo2;
@@ -301,6 +301,9 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	setacima3->bitmap = btn3;
 	setacima4->bitmap = btn4;
 	setabaixo1->bitmap = btn5;
+	setabaixo2->bitmap = btn6;
+	setabaixo3->bitmap = btn7;
+	setabaixo4->bitmap = btn8;
 
 	int i = 0;
 
@@ -390,6 +393,45 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 					prog->Salas[0] = 1;
 			}
 
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2)) {
+				if (!pressionado && state.buttons & 1)
+				{
+					pressionado = true;
+					setabaixo2->bitmap = btnPressionado6;
+				}
+				if (FilaCheia(f)) {
+					DeQueue(f, vetorResposta);
+				}
+				EmQueue(f, 2);
+				if (VerificaFila(f, vetorResposta))
+					prog->Salas[0] = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3)) {
+				if (!pressionado && state.buttons & 1)
+				{
+					pressionado = true;
+					setabaixo3->bitmap = btnPressionado7;
+				}
+				if (FilaCheia(f)) {
+					DeQueue(f, vetorResposta);
+				}
+				EmQueue(f, 2);
+				if (VerificaFila(f, vetorResposta))
+					prog->Salas[0] = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4)) {
+				if (!pressionado && state.buttons & 1)
+				{
+					pressionado = true;
+					setabaixo4->bitmap = btnPressionado8;
+				}
+				if (FilaCheia(f)) {
+					DeQueue(f, vetorResposta);
+				}
+				EmQueue(f, 2);
+				if (VerificaFila(f, vetorResposta))
+					prog->Salas[0] = 1;
+			}
 
 
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
@@ -417,6 +459,9 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			setacima3->bitmap = btn3;
 			setacima4->bitmap = btn4;
 			setabaixo1->bitmap = btn5;
+			setabaixo2->bitmap = btn6;
+			setabaixo3->bitmap = btn7;
+			setabaixo4->bitmap = btn8;
 
 		}
 
