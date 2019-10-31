@@ -1,23 +1,33 @@
 ﻿  Origem.c
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(335,18): warning C4013: 'digitarCampo' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase4Binary.h(245,6): warning C4101: 'pos': variável local não referenciada
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(46,20): warning C4133: 'função': tipos incompatíveis - de 'int *' para 'Fila *'
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(200,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(210,30): warning C4020: 'DeQueue': muitos parâmetros reais
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(213,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(314,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(324,30): warning C4020: 'DeQueue': muitos parâmetros reais
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(327,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,18): warning C4013: 'InCaatinga' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,34): warning C4013: 'InAmazonia' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,50): warning C4013: 'InPantanal' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(229,62): warning C4013: 'InMata' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(286,8): warning C4033: 'JogarFase3Brasil' deve retornar um valor
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(238,26): warning C4013: 'CalcularTiro' indefinido; assumindo extern retornando int
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(273,8): warning C4033: 'JogarFaseArco' deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase1Binary.h(366,18): warning C4013: 'digitarCampo' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase1Binary.h(245,6): warning C4101: 'pos': variável local não referenciada
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(235,18): warning C4013: 'InCaatinga' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(235,34): warning C4013: 'InAmazonia' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(235,50): warning C4013: 'InPantanal' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(235,62): warning C4013: 'InMata' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(301,8): warning C4033: 'JogarFase5Brasil' deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(46,20): warning C4133: 'função': tipos incompatíveis - de 'int *' para 'Fila *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(206,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(216,30): warning C4020: 'DeQueue': muitos parâmetros reais
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(219,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(337,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(347,30): warning C4020: 'DeQueue': muitos parâmetros reais
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(350,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(360,30): warning C4020: 'DeQueue': muitos parâmetros reais
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(363,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(373,30): warning C4020: 'DeQueue': muitos parâmetros reais
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(376,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(386,30): warning C4020: 'DeQueue': muitos parâmetros reais
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase7Mapa.h(389,23): warning C4133: 'função': tipos incompatíveis - de 'Fila *' para 'int *'
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase9TimeLine.h(364,23): warning C4013: 'VerificarLinha' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase9TimeLine.h(371,17): warning C4013: 'DentroDe' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase10Arco.h(254,26): warning C4013: 'CalcularTiro' indefinido; assumindo extern retornando int
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase10Arco.h(289,8): warning C4033: 'JogarFase10Arco' deve retornar um valor
 C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Funcoes.h(55): warning C4716: 'caregaInventario': deve retornar um valor
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(55): warning C4715: 'VerificaFila': nem todos os caminhos de controle retornam um valor
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase0Conta.h(69): warning C4715: 'DeQueue': nem todos os caminhos de controle retornam um valor
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase3Brasil.h(287): warning C4716: 'JogarFase3Brasil': deve retornar um valor
-C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase2Arco.h(274): warning C4716: 'JogarFaseArco': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase5Brasil.h(302): warning C4716: 'JogarFase5Brasil': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(55): warning C4715: 'VerificaFila': nem todos os caminhos de controle retornam um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase6Conta.h(69): warning C4715: 'DeQueue': nem todos os caminhos de controle retornam um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase9TimeLine.h(494): warning C4716: 'VerificarLinha': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase10Arco.h(290): warning C4716: 'JogarFase10Arco': deve retornar um valor
+C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\AlhpaInkEscape\Fase9TimeLine.h(480): warning C4716: 'JogarFase9TimeLine': deve retornar um valor
   AlhpaInkEscape.vcxproj -> C:\Repositorio\AlphaInkEscape\AlphaInkEscape\AlhpaInkEscape\Debug\AlhpaInkEscape.exe
