@@ -9,9 +9,8 @@
 
 int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
-
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
-	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
+	Objeto* PostIt = NULL, *fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
 	ALLEGRO_BITMAP* Background = NULL, * mural = NULL;
@@ -36,6 +35,13 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = NULL;
+
+	PostIt = (Objeto*)malloc(sizeof(Objeto));
+	PostIt->altura = 183;
+	PostIt->largura = 201;
+	PostIt->x = 730;
+	PostIt->y = 220;
+	PostIt->bitmap = NULL;
 
 	fundoA = (Objeto*)malloc(sizeof(Objeto));
 	fundoA->largura = 220;
@@ -68,6 +74,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
 	SaidaDireita->bitmap = al_load_bitmap("Imgs/Direita.png");
+	PostIt->bitmap = al_load_bitmap("Imgs/postitHomem.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 	mural = al_load_bitmap("Imgs/Separacao.png");
@@ -131,6 +138,11 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					progresso->Itens[1]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[1]->x);
 					progresso->Itens[1]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[1]->y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando) {
+					Arrastando = 3;
+					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
+					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
+				}
 				else
 				{
 					Arrastando = 0;
@@ -158,30 +170,13 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						progresso->Itens[1]->y = evento.mouse.y - progresso->Itens[1]->cliqueY;
 					}
 					break;
-				/*case 3:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, N)) {
-						N->x = evento.mouse.x - N->cliqueX;
-						N->y = evento.mouse.y - N->cliqueY;
+				case 3:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, PostIt)) {
+						PostIt->x = evento.mouse.x - PostIt->cliqueX;
+						PostIt->y = evento.mouse.y - PostIt->cliqueY;
 					}
 					break;
-				case 4:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, Se)) {
-						Se->x = evento.mouse.x - Se->cliqueX;
-						Se->y = evento.mouse.y - Se->cliqueY;
-					}
-					break;
-				case 5:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, Na)) {
-						Na->x = evento.mouse.x - Na->cliqueX;
-						Na->y = evento.mouse.y - Na->cliqueY;
-					}
-					break;
-				case 6:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, C)) {
-						C->x = evento.mouse.x - C->cliqueX;
-						C->y = evento.mouse.y - C->cliqueY;
-					}
-					break;*/
+				
 				default: Arrastando = 0;
 					break;
 				}
@@ -205,6 +200,8 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
 
+		al_draw_bitmap(PostIt->bitmap, PostIt->x, PostIt->y, 0);
+
 		if(progresso->inventClick[0])
 			al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
 
@@ -219,6 +216,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	al_destroy_bitmap(SaidaCima->bitmap);
 	al_destroy_bitmap(SaidaEsquerda->bitmap);
 	al_destroy_bitmap(SaidaDireita->bitmap);
+	al_destroy_bitmap(PostIt->bitmap);
 
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(mural);
@@ -227,6 +225,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	free(SaidaCima);
 	free(SaidaEsquerda);
 	free(SaidaDireita);
+	free(PostIt);
 	free(fundoA);
 	free(fundoB);
 	free(fundoC);
