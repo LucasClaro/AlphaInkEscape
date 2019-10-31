@@ -98,7 +98,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
-					progresso->proximaSala = 2;
+					progresso->proximaSala = 10;
 					gameOver = 1;
 				}
 				//else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]

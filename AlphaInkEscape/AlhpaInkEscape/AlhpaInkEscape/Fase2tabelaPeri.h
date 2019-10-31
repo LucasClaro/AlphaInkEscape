@@ -284,7 +284,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
-		if(!progresso->Salas[1])
+		if(!progresso->Salas[2])
 		{
 			al_draw_bitmap(Ba->bitmap, Ba->x, Ba->y, 0);
 			al_draw_bitmap(Co->bitmap, Co->x, Co->y, 0);

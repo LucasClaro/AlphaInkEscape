@@ -38,9 +38,6 @@
     <ClInclude Include="Fase14PostIts.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Fase0Conta.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Fase1Binary.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
