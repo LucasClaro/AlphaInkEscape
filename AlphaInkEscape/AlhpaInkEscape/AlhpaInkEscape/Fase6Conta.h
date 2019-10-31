@@ -152,8 +152,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
 
 	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
-	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
-	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
+	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/DicaEsquerda.png");
+	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/DicaDireita.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
 	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
 	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");

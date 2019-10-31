@@ -29,10 +29,19 @@
     <ClInclude Include="FaseController.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Fase1Binary.h">
+    <ClInclude Include="Fase2tabelaPeri.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Fase2tabelaPeri.h">
+    <ClInclude Include="Fase7Mapa.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase14PostIts.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase0Conta.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase1Binary.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Fase5Brasil.h">
@@ -41,16 +50,10 @@
     <ClInclude Include="Fase6Conta.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Fase10Arco.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Fase7Mapa.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Fase9TimeLine.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Fase14PostIts.h">
+    <ClInclude Include="Fase10Arco.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
