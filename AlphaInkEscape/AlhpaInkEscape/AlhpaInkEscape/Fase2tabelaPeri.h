@@ -7,15 +7,15 @@
 #include "Struct.h"
 #include "Funcoes.h"
 
-//Posições corretas
+//Posiï¿½ï¿½es corretas
 int
-posNa[] = { 200,204 },
-posBa[] = {248, 369},
-posCo[] = {589, 259},
-posC[] = {834, 149},
-posN[] = {881, 149},
-posSe[] = {929, 260},
-tamFundo[] = { 60,65 };
+posNa[] = { 196,200 },
+posBa[] = {245, 366},
+posCo[] = {585, 255},
+posC[] = {828, 145},
+posN[] = {876, 145},
+posSe[] = {925, 255},
+tamFundo[] = { 64,71 };
 
 Objeto* SaidaBaixo = NULL, * SaidaEsquerda = NULL, * Ba = NULL, * Co = NULL, * N = NULL, * Se = NULL, * Na = NULL, * C = NULL;
 Objeto* fundoBa = NULL, * fundoCo = NULL, * fundoN = NULL, * fundoSe = NULL, * fundoNa = NULL, * fundoC = NULL;
@@ -137,13 +137,6 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	Na->bitmap = al_load_bitmap("Imgs/Na.png");
 	C->bitmap = al_load_bitmap("Imgs/C.png");
 
-	fundoBa->bitmap = al_load_bitmap("Imgs/teste.png");
-	fundoCo->bitmap = al_load_bitmap("Imgs/teste.png");
-	fundoN->bitmap = al_load_bitmap("Imgs/teste.png");
-	fundoSe->bitmap = al_load_bitmap("Imgs/teste.png");
-	fundoNa->bitmap = al_load_bitmap("Imgs/teste.png");
-	fundoC->bitmap = al_load_bitmap("Imgs/teste.png");
-
 	Background = al_load_bitmap("Imgs/fundo.png");
 	Tabela = al_load_bitmap("Imgs/tab2.png");
 
@@ -165,7 +158,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			//se teve eventos e foi um evento de fechar janela, encerra repetiï¿½ï¿½o			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				progresso->Gameover = 1;
 				gameOver = 1;
@@ -291,16 +284,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
-
-		al_draw_bitmap(fundoBa->bitmap, fundoBa->x, fundoBa->y, 0);
-		al_draw_bitmap(fundoCo->bitmap, fundoCo->x, fundoCo->y, 0);
-		al_draw_bitmap(fundoN->bitmap, fundoN->x, fundoN->y, 0);
-		al_draw_bitmap(fundoSe->bitmap, fundoSe->x, fundoSe->y, 0);
-		al_draw_bitmap(fundoNa->bitmap, fundoNa->x, fundoNa->y, 0);
-		al_draw_bitmap(fundoC->bitmap, fundoC->x, fundoC->y, 0);
-
-
-		if(!progresso->Salas[2])
+		if(!progresso->Salas[1])
 		{
 			al_draw_bitmap(Ba->bitmap, Ba->x, Ba->y, 0);
 			al_draw_bitmap(Co->bitmap, Co->x, Co->y, 0);
@@ -311,19 +295,19 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		}
 		else 
 		{
-			al_draw_bitmap(Ba->bitmap, fundoBa->x, fundoBa->y, 0);
-			al_draw_bitmap(Co->bitmap, fundoCo->x, fundoCo->y, 0);
-			al_draw_bitmap(N->bitmap, fundoN->x, fundoN->y, 0);
-			al_draw_bitmap(Se->bitmap, fundoSe->x, fundoSe->y, 0);
-			al_draw_bitmap(Na->bitmap, fundoNa->x, fundoNa->y, 0);
-			al_draw_bitmap(C->bitmap, fundoC->x, fundoC->y, 0);
+			al_draw_bitmap(Ba->bitmap, fundoBa->x+5, fundoBa->y+5, 0);
+			al_draw_bitmap(Co->bitmap, fundoCo->x+5, fundoCo->y+5, 0);
+			al_draw_bitmap(N->bitmap, fundoN->x+5, fundoN->y+5, 0);
+			al_draw_bitmap(Se->bitmap, fundoSe->x+5, fundoSe->y+5, 0);
+			al_draw_bitmap(Na->bitmap, fundoNa->x+5, fundoNa->y+5, 0);
+			al_draw_bitmap(C->bitmap, fundoC->x+5, fundoC->y+5, 0);
 		}
 		
 		caregaInventario(progresso);
 		al_flip_display();
 	}
 
-	//Desalocação das coisas
+	//Desalocaï¿½ï¿½o das coisas
 	al_destroy_bitmap(SaidaBaixo->bitmap);
 	al_destroy_bitmap(SaidaEsquerda->bitmap);
 

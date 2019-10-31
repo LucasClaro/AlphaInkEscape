@@ -282,8 +282,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, postIt4) && !prog->Inventario[0])
 			{
-				prog->Itens[prog->inventCount] = postIt4;
-				prog->Inventario[prog->inventCount] = 1;
+				prog->Itens[0] = postIt4;
+				prog->Inventario[0] = 1;
 				prog->inventCount++;
 			}
 			//else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {

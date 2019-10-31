@@ -104,8 +104,22 @@ int main(void) {
 	progresso.Inventario[0] = 0;
 	progresso.Inventario[1] = 0;
 	progresso.Inventario[2] = 0;
+	progresso.Inventario[3] = 0;
+	progresso.Inventario[4] = 0;
+	progresso.Inventario[5] = 0;
+	progresso.Inventario[6] = 0;
 	
 	progresso.inventCount = 0;
+
+	progresso.inventClick[0] = 0;
+	progresso.inventClick[1] = 0;
+	progresso.inventClick[2] = 0;
+	progresso.inventClick[3] = 0;
+	progresso.inventClick[4] = 0;
+	progresso.inventClick[5] = 0;
+	progresso.inventClick[6] = 0;
+
+	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
 	// Looping central do jogo
