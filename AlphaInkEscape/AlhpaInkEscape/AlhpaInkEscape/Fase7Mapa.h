@@ -231,39 +231,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	item4->x = 910;
 	item4->y = 560;
 
-	//Objeto* setaZ;
-	//setaZ = (Objeto*)malloc(sizeof(Objeto));
-	//setaZ->bitmap = NULL;
-	//setaZ->altura = 100;
-	//setaZ->largura = 100;
-	//setaZ->x = 310;
-	//setaZ->y = 560;   
-
-	//Objeto* setaN;
-	//setaN = (Objeto*)malloc(sizeof(Objeto));
-	//setaN->bitmap = NULL;
-	//setaN->altura = 100;
-	//setaN->largura = 100;
-	//setaN->x = 510;
-	//setaN->y = 560;
-
-
-
-	//Objeto* setaQ;
-	//setaQ = (Objeto*)malloc(sizeof(Objeto));
-	//setaQ->bitmap = NULL;
-	//setaQ->altura = 100;
-	//setaQ->largura = 100;
-	//setaQ->x = 710;
-	//setaQ->y = 560;
-
-	//Objeto* setaT;
-	//setaT = (Objeto*)malloc(sizeof(Objeto));
-	//setaT->bitmap = NULL;
-	//setaT->altura = 100;
-	//setaT->largura = 100;
-	//setaT->x = 910;
-	//setaT->y = 560;
 //=========================================================================================================
 	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/setaZ.png");
 	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/setaT.png");
@@ -366,6 +333,21 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
 
+		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+			if(evento.keyboard.keycode == ALLEGRO_KEY_F1) {
+				j = 0;
+				k = 1;
+				o = 2;
+				g = 3;
+				item->bitmap = itens[j];
+				item2->bitmap = itens[k];
+				item3->bitmap = itens[o];
+				item4->bitmap = itens[g];
+
+				prog->Salas[7] = 1;
+			}
+		}
+
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
@@ -374,7 +356,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
 			}
 
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					j--;
@@ -390,7 +372,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima2)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima2) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					k--;
@@ -404,7 +386,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					o--;
@@ -417,7 +399,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima4)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima4) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					g--;
@@ -430,7 +412,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo1)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo1) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					pressionado = true;
@@ -448,7 +430,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 			}
 
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2) && prog->Salas[7] == 0){
 				if (!pressionado && state.buttons & 1)
 				{
 					pressionado = true;
@@ -461,7 +443,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					o++;
@@ -474,7 +456,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
 					g++;
@@ -554,8 +536,11 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		if (j == 0 && k == 1 && o == 2 && g == 3) {
-			printf("FUNCIONOU");
+			prog->Salas[7] = 1;
+			printf("A");
 		}
+
+
 
 
 		//===========================================DESENHAR========================================================================
