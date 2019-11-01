@@ -6,15 +6,17 @@
 
 #include "Struct.h"
 #include "Funcoes.h"
+// largura 1116
+//altura 577
 
+Objeto Tabuleiro[8][8];
 int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
-
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL;
 	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * mural = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * tab = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -42,7 +44,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
-
+	tab = al_load_bitmap("Imgs/xadrez/tabuleiro.png");
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
 		fprintf(stderr, "Falha ao iniciar imagem\n");
@@ -98,9 +100,13 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				Arrastando = 0;
 			}
 
-			/*ALLEGRO_MOUSE_STATE state;
+			ALLEGRO_MOUSE_STATE state;
 			al_get_mouse_state(&state);
-
+			if (state.buttons & 2)
+			{
+				printf("x: %d; y: %d\n",evento.mouse.x,evento.mouse.y);
+			}
+			/*
 			if (state.buttons & 1 && Arrastando) {
 				switch (Arrastando)
 				{
@@ -123,6 +129,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(tab, 135, 98, 0);
 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
@@ -138,6 +145,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	al_destroy_bitmap(SaidaBaixo->bitmap);
 
 	al_destroy_bitmap(Background);
+	al_destroy_bitmap(tab);
 	//al_destroy_bitmap(item->bitmap);
 
 	free(SaidaCima);
