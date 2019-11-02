@@ -159,6 +159,7 @@
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Fase7Mapa.h" />
     <ClInclude Include="Funcoes.h" />
+    <ClInclude Include="Fase13Sapos.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Fase2tabelaPeri.h" />
   </ItemGroup>

@@ -13,6 +13,7 @@
 #include "Fase6Conta.h"
 #include "Fase9TimeLine.h"
 #include "Fase10Arco.h"
+#include "Fase13Sapos.h"
 #include "Fase14PostIts.h"
 
 #ifndef FaseController_H
@@ -25,17 +26,21 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	{
 	case 0: 
 		return;
-	case 1: JogarFase1Binary(janela, fila_eventos, progresso);
+	case 1: 
+		JogarFase1Binary(janela, fila_eventos, progresso);
 		return;
-	case 2: JogarFase2TabelaPeri(janela, fila_eventos, progresso);
+	case 2:
+		JogarFase2TabelaPeri(janela, fila_eventos, progresso);
 		return;
 	case 3: //
 		return;
 	case 4: //
 		return;
-	case 5: JogarFase5Brasil(janela, fila_eventos, progresso);
+	case 5: 
+		JogarFase5Brasil(janela, fila_eventos, progresso);
 		return;
-	case 6: JogarFase6Conta(janela, fila_eventos, progresso);
+	case 6: 
+		JogarFase6Conta(janela, fila_eventos, progresso);
 		return;
 	case 7: //
 		return;
@@ -47,6 +52,8 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	case 10:
 		JogarFase10Arco(janela, fila_eventos, progresso);
 		return;
+	case 13:
+		JogarFase13Sapos(janela,fila_eventos, progresso);
 	case 14: JogarFase14PostIts(janela, fila_eventos, progresso);
 		return;
 	default: printf("Fase n�o encontrada"); return;
