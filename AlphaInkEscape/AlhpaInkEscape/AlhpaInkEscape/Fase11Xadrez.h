@@ -13,10 +13,12 @@ Objeto Tabuleiro[8][8];
 int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL;
-	Objeto* fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
+	Objeto* peao1 = NULL, * peao2 = NULL, * peao3 = NULL, * bispo = NULL,* torre1 = NULL,* torre2 = NULL,* rei = NULL;
 	int Arrastando = 0;
 
 	ALLEGRO_BITMAP* Background = NULL, * tab = NULL;
+
+	incializaTabuleiro();
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -39,12 +41,70 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = NULL;
 
+	peao1 = (Objeto*)malloc(sizeof(Objeto));
+	peao1->largura = 63;
+	peao1->altura = 63;
+	peao1->x = Tabuleiro[4][4].x;
+	peao1->y = Tabuleiro[4][4].y;
+	peao1->bitmap = NULL;
+
+	peao2 = (Objeto*)malloc(sizeof(Objeto));
+	peao2->largura = 63;
+	peao2->altura = 63;
+	peao2->x = Tabuleiro[5][6].x;
+	peao2->y = Tabuleiro[5][6].y;
+	peao2->bitmap = NULL;
+
+	peao3 = (Objeto*)malloc(sizeof(Objeto));
+	peao3->largura = 63;
+	peao3->altura = 63;
+	peao3->x = Tabuleiro[6][7].x;
+	peao3->y = Tabuleiro[6][7].y;
+	peao3->bitmap = NULL;
+
+	bispo = (Objeto*)malloc(sizeof(Objeto));
+	bispo->largura = 63;
+	bispo->altura = 63;
+	bispo->x = Tabuleiro[2][7].x;
+	bispo->y = Tabuleiro[2][7].y;
+	bispo->bitmap = NULL;
+
+	torre1 = (Objeto*)malloc(sizeof(Objeto));
+	torre1->largura = 63;
+	torre1->altura = 63;
+	torre1->x = Tabuleiro[1][1].x;
+	torre1->y = Tabuleiro[1][1].y;
+	torre1->bitmap = NULL;
+
+	torre2 = (Objeto*)malloc(sizeof(Objeto));
+	torre2->largura = 63;
+	torre2->altura = 63;
+	torre2->x = Tabuleiro[1][6].x;
+	torre2->y = Tabuleiro[1][6].y;
+	torre2->bitmap = NULL;
+
+	rei = (Objeto*)malloc(sizeof(Objeto));
+	rei->largura = 63;
+	rei->altura = 63;
+	rei->x = Tabuleiro[6][6].x;
+	rei->y = Tabuleiro[6][6].y;
+	rei->bitmap = NULL;
+
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
 
+	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
+	peao2->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
+	peao3->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
+	bispo->bitmap = al_load_bitmap("Imgs/xadrez/bispo.png");
+	torre1->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
+	torre2->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
+	rei->bitmap = al_load_bitmap("Imgs/xadrez/rei.png");
+
 	Background = al_load_bitmap("Imgs/fundo.png");
 	tab = al_load_bitmap("Imgs/xadrez/tabuleiro.png");
+
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
 		fprintf(stderr, "Falha ao iniciar imagem\n");
@@ -135,6 +195,14 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
+		al_draw_bitmap(peao1->bitmap, peao1->x, peao1->y, 0);
+		al_draw_bitmap(peao2->bitmap, peao2->x, peao2->y, 0);
+		al_draw_bitmap(peao3->bitmap, peao3->x, peao3->y, 0);
+		al_draw_bitmap(bispo->bitmap, bispo->x, bispo->y, 0);
+		al_draw_bitmap(torre1->bitmap, torre1->x, torre1->y, 0);
+		al_draw_bitmap(torre2->bitmap, torre2->x, torre2->y, 0);
+		al_draw_bitmap(rei->bitmap, rei->x, rei->y, 0);
+
 		caregaInventario(progresso);
 		al_flip_display();
 	}
@@ -144,9 +212,26 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	al_destroy_bitmap(SaidaEsquerda->bitmap);
 	al_destroy_bitmap(SaidaBaixo->bitmap);
 
+	al_destroy_bitmap(peao1->bitmap);
+	al_destroy_bitmap(peao2->bitmap);
+	al_destroy_bitmap(peao3->bitmap);
+	al_destroy_bitmap(bispo->bitmap);
+	al_destroy_bitmap(torre1->bitmap);
+	al_destroy_bitmap(torre2->bitmap);
+	al_destroy_bitmap(rei->bitmap);
+
+
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(tab);
 	//al_destroy_bitmap(item->bitmap);
+
+	free(peao1);
+	free(peao2);
+	free(peao3);
+	free(bispo);
+	free(torre1);
+	free(torre2);
+	free(rei);
 
 	free(SaidaCima);
 	free(SaidaEsquerda);
@@ -155,4 +240,20 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	//free(item);
 
 	return 0;
+}
+
+int incializaTabuleiro()
+{
+	int i,j;
+	for (i = 0; i < 8; i++)
+	{
+		for (j = 0; j < 8; j++)
+		{
+			Tabuleiro[i][j].largura = 63;
+			Tabuleiro[i][j].altura = 63;
+			Tabuleiro[i][j].x = 456 + j * 63;
+			Tabuleiro[i][j].y = 100 + i * 63;
+			Tabuleiro[i][j].bitmap = NULL;
+		}
+	}
 }
