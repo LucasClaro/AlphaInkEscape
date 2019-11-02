@@ -17,7 +17,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	ALLEGRO_BITMAP* peaoazul1 = NULL, * peaoazul2 = NULL, * peaoazul3 = NULL, * bispoazul = NULL, * torreazul1 = NULL, * torreazul2 = NULL, * reiazul = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * tab = NULL,* podeAndar = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * tab = NULL,* podeAndar = NULL,* checkmate = NULL;
 
 	if(!progresso->Salas[11])
 		incializaTabuleiro();
@@ -115,6 +115,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	Background = al_load_bitmap("Imgs/fundo.png");
 	tab = al_load_bitmap("Imgs/xadrez/tabuleiro.png");
 	podeAndar = al_load_bitmap("Imgs/xadrez/podeandar.png");
+	checkmate = al_load_bitmap("Imgs/xadrez/checkmate.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -156,37 +157,37 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					gameOver = 1;
 				}*/
 				
-				/*else*/if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando) {
+				/*else*/if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 1;
 					peao1->cliqueX = MapearDistancia(evento.mouse.x, peao1->x);
 					peao1->cliqueY = MapearDistancia(evento.mouse.y, peao1->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, peao2) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao2) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 2;
 					peao2->cliqueX = MapearDistancia(evento.mouse.x, peao2->x);
 					peao2->cliqueY = MapearDistancia(evento.mouse.y, peao2->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, peao3) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao3) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 3;
 					peao3->cliqueX = MapearDistancia(evento.mouse.x, peao3->x);
 					peao3->cliqueY = MapearDistancia(evento.mouse.y, peao3->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, bispo) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, bispo) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 4;
 					bispo->cliqueX = MapearDistancia(evento.mouse.x, bispo->x);
 					bispo->cliqueY = MapearDistancia(evento.mouse.y, bispo->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, torre1) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre1) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 5;
 					torre1->cliqueX = MapearDistancia(evento.mouse.x, torre1->x);
 					torre1->cliqueY = MapearDistancia(evento.mouse.y, torre1->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, torre2) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre2) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 6;
 					torre2->cliqueX = MapearDistancia(evento.mouse.x, torre2->x);
 					torre2->cliqueY = MapearDistancia(evento.mouse.y, torre2->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, rei) && !Arrastando) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, rei) && !Arrastando && !progresso->Salas[11]) {
 					Arrastando = 7;
 					rei->cliqueX = MapearDistancia(evento.mouse.x, rei->x);
 					rei->cliqueY = MapearDistancia(evento.mouse.y, rei->y);
@@ -310,6 +311,9 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 		desenharAndar(Arrastando, podeAndar);
 
+		if(progresso->Salas[11])
+			al_draw_bitmap(checkmate, Tabuleiro[0][5].x, Tabuleiro[0][5].y, 0);
+
 		al_draw_bitmap(peaoazul1, Tabuleiro[2][0].x, Tabuleiro[2][0].y, 0);
 		al_draw_bitmap(peaoazul2, Tabuleiro[3][2].x, Tabuleiro[3][2].y, 0);
 		al_draw_bitmap(peaoazul3, Tabuleiro[1][7].x, Tabuleiro[1][7].y, 0);
@@ -353,6 +357,9 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(tab);
+	al_destroy_bitmap(podeAndar);
+	al_destroy_bitmap(checkmate);
+
 	//al_destroy_bitmap(item->bitmap);
 
 	free(peao1);
