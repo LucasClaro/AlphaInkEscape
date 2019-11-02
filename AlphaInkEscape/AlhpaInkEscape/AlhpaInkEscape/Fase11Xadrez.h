@@ -14,11 +14,13 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 {
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL;
 	Objeto* peao1 = NULL, * peao2 = NULL, * peao3 = NULL, * bispo = NULL,* torre1 = NULL,* torre2 = NULL,* rei = NULL;
+	ALLEGRO_BITMAP* peaoazul1 = NULL, * peaoazul2 = NULL, * peaoazul3 = NULL, * bispoazul = NULL, * torreazul1 = NULL, * torreazul2 = NULL, * reiazul = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * tab = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * tab = NULL,* podeAndar = NULL;
 
-	incializaTabuleiro();
+	if(!progresso->Salas[11])
+		incializaTabuleiro();
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -102,8 +104,17 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	torre2->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	rei->bitmap = al_load_bitmap("Imgs/xadrez/rei.png");
 
+	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	peaoazul2 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	peaoazul3 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	bispoazul = al_load_bitmap("Imgs/xadrez/bispoazul.png");
+	torreazul1 = al_load_bitmap("Imgs/xadrez/torreazul.png");
+	torreazul2 = al_load_bitmap("Imgs/xadrez/torreazul.png");
+	reiazul = al_load_bitmap("Imgs/xadrez/reiazul.png");
+
 	Background = al_load_bitmap("Imgs/fundo.png");
 	tab = al_load_bitmap("Imgs/xadrez/tabuleiro.png");
+	podeAndar = al_load_bitmap("Imgs/xadrez/podeandar.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -145,47 +156,149 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					gameOver = 1;
 				}*/
 				
-				/*else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
+				/*else*/if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando) {
 					Arrastando = 1;
-					progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
-					progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
+					peao1->cliqueX = MapearDistancia(evento.mouse.x, peao1->x);
+					peao1->cliqueY = MapearDistancia(evento.mouse.y, peao1->y);
 				}
-				
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao2) && !Arrastando) {
+					Arrastando = 2;
+					peao2->cliqueX = MapearDistancia(evento.mouse.x, peao2->x);
+					peao2->cliqueY = MapearDistancia(evento.mouse.y, peao2->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao3) && !Arrastando) {
+					Arrastando = 3;
+					peao3->cliqueX = MapearDistancia(evento.mouse.x, peao3->x);
+					peao3->cliqueY = MapearDistancia(evento.mouse.y, peao3->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, bispo) && !Arrastando) {
+					Arrastando = 4;
+					bispo->cliqueX = MapearDistancia(evento.mouse.x, bispo->x);
+					bispo->cliqueY = MapearDistancia(evento.mouse.y, bispo->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre1) && !Arrastando) {
+					Arrastando = 5;
+					torre1->cliqueX = MapearDistancia(evento.mouse.x, torre1->x);
+					torre1->cliqueY = MapearDistancia(evento.mouse.y, torre1->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre2) && !Arrastando) {
+					Arrastando = 6;
+					torre2->cliqueX = MapearDistancia(evento.mouse.x, torre2->x);
+					torre2->cliqueY = MapearDistancia(evento.mouse.y, torre2->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, rei) && !Arrastando) {
+					Arrastando = 7;
+					rei->cliqueX = MapearDistancia(evento.mouse.x, rei->x);
+					rei->cliqueY = MapearDistancia(evento.mouse.y, rei->y);
+				}
 				else
 				{
 					Arrastando = 0;
-				}*/
+				}
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-				Arrastando = 0;
+				if (IsInsidePos(torre2, Tabuleiro[2][6]))
+				{
+					progresso->Salas[11] = 1;
+					torre2->x = Tabuleiro[2][6].x;
+					torre2->y = Tabuleiro[2][6].y;
+					Arrastando = 0;
+				}
+				else 
+				{
+					switch (Arrastando)
+					{
+						case 1:
+							peao1->x = Tabuleiro[4][4].x;
+							peao1->y = Tabuleiro[4][4].y;
+							break;
+						case 2:
+							peao2->x = Tabuleiro[5][6].x;
+							peao2->y = Tabuleiro[5][6].y;
+							break;
+						case 3:
+							peao3->x = Tabuleiro[6][7].x;
+							peao3->y = Tabuleiro[6][7].y;
+							break;
+						case 4:
+							bispo->x = Tabuleiro[2][7].x;
+							bispo->y = Tabuleiro[2][7].y;
+							break;
+						case 5:
+							torre1->x = Tabuleiro[1][1].x;
+							torre1->y = Tabuleiro[1][1].y;
+							break;
+						case 6:
+							torre2->x = Tabuleiro[1][6].x;
+							torre2->y = Tabuleiro[1][6].y;
+							break;
+						case 7:
+							rei->x = Tabuleiro[6][6].x;
+							rei->y = Tabuleiro[6][6].y;
+							break;
+						default: Arrastando = 0;
+							break;
+					}
+					Arrastando = 0;
+				}
 			}
 
 			ALLEGRO_MOUSE_STATE state;
 			al_get_mouse_state(&state);
-			if (state.buttons & 2)
+			/*if (state.buttons & 2)
 			{
 				printf("x: %d; y: %d\n",evento.mouse.x,evento.mouse.y);
 			}
-			/*
+			*/
 			if (state.buttons & 1 && Arrastando) {
 				switch (Arrastando)
 				{
-				case 1:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, progresso->Itens[0])) {
-						progresso->Itens[0]->x = evento.mouse.x - progresso->Itens[0]->cliqueX;
-						progresso->Itens[0]->y = evento.mouse.y - progresso->Itens[0]->cliqueY;
-					}
-					break;
-				
-				default: Arrastando = 0;
-					break;
+					case 1:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, peao1)) {
+								peao1->x = evento.mouse.x - peao1->cliqueX;
+								peao1->y = evento.mouse.y - peao1->cliqueY;
+							}
+						break;
+					case 2:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, peao2)) {
+								peao2->x = evento.mouse.x - peao2->cliqueX;
+								peao2->y = evento.mouse.y - peao2->cliqueY;
+							}
+						break;
+					case 3:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, peao3)) {
+								peao3->x = evento.mouse.x - peao3->cliqueX;
+								peao3->y = evento.mouse.y - peao3->cliqueY;
+							}
+						break;
+					case 4:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, bispo)) {
+								bispo->x = evento.mouse.x - bispo->cliqueX;
+								bispo->y = evento.mouse.y - bispo->cliqueY;
+							}
+						break;
+					case 5:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, torre1)) {
+								torre1->x = evento.mouse.x - torre1->cliqueX;
+								torre1->y = evento.mouse.y - torre1->cliqueY;
+							}
+						break;
+					case 6:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, torre2)) {
+								torre2->x = evento.mouse.x - torre2->cliqueX;
+								torre2->y = evento.mouse.y - torre2->cliqueY;
+							}
+						break;
+					case 7:
+							if (!VerificarBordas(evento.mouse.x, evento.mouse.y, rei)) {
+								rei->x = evento.mouse.x - rei->cliqueX;
+								rei->y = evento.mouse.y - rei->cliqueY;
+							}
+						break;
+					default: Arrastando = 0;
+						break;
 				}
-			}*/
-			/*else if (state.buttons & 2)
-			{
-				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
-			}*/
-
+			}
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
@@ -194,6 +307,16 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
+
+		desenharAndar(Arrastando, podeAndar);
+
+		al_draw_bitmap(peaoazul1, Tabuleiro[2][0].x, Tabuleiro[2][0].y, 0);
+		al_draw_bitmap(peaoazul2, Tabuleiro[3][2].x, Tabuleiro[3][2].y, 0);
+		al_draw_bitmap(peaoazul3, Tabuleiro[1][7].x, Tabuleiro[1][7].y, 0);
+		al_draw_bitmap(bispoazul, Tabuleiro[6][0].x, Tabuleiro[6][0].y, 0);
+		al_draw_bitmap(torreazul1, Tabuleiro[2][2].x, Tabuleiro[2][2].y, 0);
+		al_draw_bitmap(torreazul2, Tabuleiro[0][4].x, Tabuleiro[0][4].y, 0);
+		al_draw_bitmap(reiazul, Tabuleiro[0][5].x, Tabuleiro[0][5].y, 0);
 
 		al_draw_bitmap(peao1->bitmap, peao1->x, peao1->y, 0);
 		al_draw_bitmap(peao2->bitmap, peao2->x, peao2->y, 0);
@@ -220,6 +343,13 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	al_destroy_bitmap(torre2->bitmap);
 	al_destroy_bitmap(rei->bitmap);
 
+	al_destroy_bitmap(peaoazul1);
+	al_destroy_bitmap(peaoazul2);
+	al_destroy_bitmap(peaoazul3);
+	al_destroy_bitmap(bispoazul);
+	al_destroy_bitmap(torreazul1);
+	al_destroy_bitmap(torreazul2);
+	al_destroy_bitmap(reiazul);
 
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(tab);
@@ -256,4 +386,74 @@ int incializaTabuleiro()
 			Tabuleiro[i][j].bitmap = NULL;
 		}
 	}
+}
+
+int desenharAndar(int Arrastando, ALLEGRO_BITMAP* podeAndar)
+{
+	switch (Arrastando)
+	{
+		case 1:
+				al_draw_bitmap(podeAndar, Tabuleiro[3][4].x, Tabuleiro[3][4].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[2][4].x, Tabuleiro[2][4].y, 0);
+			break;
+		case 2:
+			al_draw_bitmap(podeAndar, Tabuleiro[4][6].x, Tabuleiro[4][6].y, 0);
+			al_draw_bitmap(podeAndar, Tabuleiro[3][6].x, Tabuleiro[3][6].y, 0);
+			break;
+		case 3:
+				al_draw_bitmap(podeAndar, Tabuleiro[5][7].x, Tabuleiro[5][7].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[4][7].x, Tabuleiro[4][7].y, 0);
+			break;
+		case 4:
+				al_draw_bitmap(podeAndar, Tabuleiro[7][2].x, Tabuleiro[7][2].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[6][3].x, Tabuleiro[6][3].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[5][4].x, Tabuleiro[5][4].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[4][5].x, Tabuleiro[4][5].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[3][6].x, Tabuleiro[3][6].y, 0);
+			break;
+		case 5:
+				al_draw_bitmap(podeAndar, Tabuleiro[1][0].x, Tabuleiro[1][0].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][2].x, Tabuleiro[1][2].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][3].x, Tabuleiro[1][3].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][4].x, Tabuleiro[1][4].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][5].x, Tabuleiro[1][5].y, 0);
+
+				al_draw_bitmap(podeAndar, Tabuleiro[0][1].x, Tabuleiro[0][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[2][1].x, Tabuleiro[2][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[3][1].x, Tabuleiro[3][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[4][1].x, Tabuleiro[4][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[5][1].x, Tabuleiro[5][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[6][1].x, Tabuleiro[6][1].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[7][1].x, Tabuleiro[7][1].y, 0);
+			break;
+		case 6:
+				al_draw_bitmap(podeAndar, Tabuleiro[1][2].x, Tabuleiro[1][2].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][3].x, Tabuleiro[1][3].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][4].x, Tabuleiro[1][4].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[1][5].x, Tabuleiro[1][5].y, 0);
+
+				al_draw_bitmap(podeAndar, Tabuleiro[0][6].x, Tabuleiro[0][6].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[2][6].x, Tabuleiro[2][6].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[3][6].x, Tabuleiro[3][6].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[4][6].x, Tabuleiro[4][6].y, 0);
+			break;
+		case 7:
+				al_draw_bitmap(podeAndar, Tabuleiro[7][5].x, Tabuleiro[7][5].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[7][6].x, Tabuleiro[7][6].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[7][7].x, Tabuleiro[7][7].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[6][5].x, Tabuleiro[6][5].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[5][5].x, Tabuleiro[5][5].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[5][7].x, Tabuleiro[5][7].y, 0);
+			break;
+		default: Arrastando = 0;
+			break;
+	}
+}
+
+int IsInsidePos(Objeto* menor, Objeto maior) {
+	int margem = 10;
+	if (menor->x >= maior.x-margem && menor->x + menor->largura <= maior.x + maior.largura + margem && menor->y >= maior.y-margem && menor->y + menor->altura <= maior.y + maior.altura + margem) {
+		return 1;
+	}
+	return 0;
 }
