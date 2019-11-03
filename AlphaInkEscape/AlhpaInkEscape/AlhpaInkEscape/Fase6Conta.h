@@ -84,6 +84,14 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
+
+	Objeto* SaidaDireita;
+	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	SaidaDireita->altura = 20;
+	SaidaDireita->largura = 20;
+	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
+	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
+	SaidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 	
 
 	Objeto* SaidaCima;
@@ -231,6 +239,11 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				prog->proximaSala = 5;
 				sair = 1;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
+			{
+				prog->proximaSala = 7;
+				sair = 1;
+			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 			{
 				prog->proximaSala = 10;
@@ -246,9 +259,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 
 		}
-
-
-
 
 		if (arrastando && state.buttons & 1)
 		{
@@ -293,6 +303,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
+		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
 
 		if(!drawNull)
 			al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);

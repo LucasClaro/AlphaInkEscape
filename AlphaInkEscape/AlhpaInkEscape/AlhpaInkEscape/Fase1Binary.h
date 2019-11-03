@@ -19,6 +19,9 @@ typedef struct EnigmaStr
 } enigmaStr;
 
 Objeto* postIt4 = NULL;
+bool sobreposto = false;
+ALLEGRO_BITMAP* fundo = NULL;
+
 
 int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
@@ -72,13 +75,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	campo2->x = (LARGURA_TELA / 2) - campo2->largura + 71;
 	campo2->y = (ALTURA_TELA / 2) - (campo2->altura / 2);
 
-	//Objeto* campo2;
-	//campo2 = (Objeto*)malloc(sizeof(Objeto));
-	//campo2->bitmap = al_load_bitmap("Imgs/campo2.png");
-	//campo2->altura = 70;
-	//campo2->largura = 400;
-	//campo2->x = (LARGURA_TELA / 2);
-	//campo2->y = (ALTURA_TELA / 2) - (campo2->altura / 2);
 
 	Objeto* campo3;
 	campo3 = (Objeto*)malloc(sizeof(Objeto));
@@ -113,18 +109,12 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	campo4->x = (LARGURA_TELA / 2);
 	campo4->y = (ALTURA_TELA / 3 * 2.2) - (campo4->altura / 2);
 
-	Objeto* fundo;
-	fundo = (Objeto*)malloc(sizeof(Objeto));
-	fundo->bitmap = al_load_bitmap("Imgs/fundo.png");;
-	fundo->altura = 720;
-	fundo->largura = 1280;
-	fundo->y = 0;
-	fundo->x = 0;
+	
 	
 
-	//ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
-	//ALLEGRO_BITMAP* certo = al_load_bitmap("ArquivosAux/imagens/acerto.png");
-	//ALLEGRO_BITMAP* errado = al_load_bitmap("ArquivosAux/imagens/errou.png");
+	ALLEGRO_BITMAP * fundoOfc = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
+
 
 	Objeto* setaDireita;
 	setaDireita = (Objeto*)malloc(sizeof(Objeto));
@@ -150,60 +140,10 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	contaSeta->x = (LARGURA_TELA / 2) - (contaSeta->largura / 2) + 20;
 	contaSeta->y = (ALTURA_TELA / 3 * 1.3 + 20) - contaSeta->altura;
 	contaSeta->bitmap = al_load_bitmap("Imgs/slide3.png");
-
 	
-
-	//Objeto* apagar;
-	//apagar = (Objeto*)malloc(sizeof(Objeto));
-	//apagar->bitmap = al_load_bitmap("Imgs/apagar.png");
-	//apagar->largura = 50;
-	//apagar->altura = 50;
-	//apagar->x = (LARGURA_TELA / 2) + (campo->largura / 2);
-	//apagar->y = (ALTURA_TELA / 2) - (apagar->altura / 2);
-
-
-	/*Objeto* audio;
-	audio = (Objeto*)malloc(sizeof(Objeto));
-	audio->bitmap = NULL; 
-	audio->altura = 50;
-	audio->largura = 50;
-	audio->x = 550;
-	audio->y = 535;
-
-	ALLEGRO_BITMAP * comAudio = al_load_bitmap("Imgs/comaudio.png");
-	ALLEGRO_BITMAP * semAudio = al_load_bitmap("Imgs/semaudio.png");
-
-	audio->bitmap = comAudio;*/
-
-	//ALLEGRO_BITMAP* logo = NULL;
-
-	//ALLEGRO_SAMPLE* musicaon = NULL;
-	//ALLEGRO_SAMPLE* musicaoff = NULL;
-
-	//ALLEGRO_SAMPLE* sampleVoltar = NULL;
-	//ALLEGRO_AUDIO_STREAM* musica = NULL;
-	//ALLEGRO_SAMPLE* musicaFundo = NULL;
-	//ALLEGRO_SAMPLE* erro = NULL;
-	//ALLEGRO_SAMPLE* botaosample = NULL;
 
 	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 	digitado = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
-
-
-
-	//logo = al_load_bitmap("ArquivosAux/imagens/logo.png");
-
-	//musicaoff = al_load_sample("ArquivosAux/sounds/desligada.ogg");
-	//musicaon = al_load_sample("ArquivosAux/sounds/ligada.ogg");
-	//musica = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
-	//musica = al_load_audio_stream("ArquivosAux/sounds/musicafundo.ogg", 4, 1024);
-	//al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
-	//al_set_audio_stream_playmode(musica, ALLEGRO_PLAYMODE_LOOP);
-
-	//musicaFundo = al_load_sample("ArquivosAux/sounds/musicafundo.ogg");
-	//botaosample = al_load_sample("ArquivosAux/sounds/click.ogg");
-	//sampleVoltar = al_load_sample("ArquivosAux/sounds/arrow_hit.ogg");
-
 
 	al_set_window_title(janela, "Ink Escape - Pagina Inicial");
 	bool btnAudio = true;
@@ -244,8 +184,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	int pos;
 	int verCampo = 0;
-
-
+	
 
 	int cor[4];
 	while (!sair)
@@ -258,23 +197,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 
-			/*if (IsInside(evento.mouse.x, evento.mouse.y, audio)) {
-				btnAudio = !btnAudio;
-				if (!btnAudio)
-				{
-					audio->bitmap = semAudio;
-					al_set_audio_stream_gain(musica, 0.0);
-					al_play_sample(musicaoff, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-
-				}
-				else
-				{
-					audio->bitmap = comAudio;
-					al_set_audio_stream_gain(musica, 1.0);
-					al_draw_bitmap(audio->bitmap, audio->x, audio->y, 0);
-				}
-
-			}*/
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 2;
 				//return;
@@ -286,11 +208,14 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				prog->Inventario[0] = 1;
 				prog->inventCount++;
 			}
-			//else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
-			//	prog->proximaSala = 3;
-			//	//return;
-			//	sair = true;
-			//}
+			else if (prog->Itens[3])
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[3]->largura && evento.mouse.y >= ((1 * ALTURA_TELA / 10) + prog->Itens[1]->altura * 0.5) && evento.mouse.y <= ((3 * ALTURA_TELA / 10) + prog->Itens[3]->altura * 0.5)) {
+					prog->inventClick[3] = 1;
+					sobreposto = true;
+				}
+				
+			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
 			{
 				verCampo = 1;
@@ -345,8 +270,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					prog->Salas[1] = 1;
 					postIt4->x = (LARGURA_TELA / 2) - (postIt4->largura / 2);
 					postIt4->y = ALTURA_TELA - postIt4->altura;
-					//fundo->bitmap = certo;
-					//al_play_sample(acerto, 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				}
 			}
 			 else if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -388,12 +311,10 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			prog->Gameover = true;
 		}
 
-	
-
-			al_draw_bitmap(fundo->bitmap, fundo->x, fundo->y, 0);
-			//al_draw_bitmap(apagar->bitmap, apagar->x, apagar->y, 0);
+		if (!sobreposto)
+		{
+			al_draw_bitmap(fundoOfc, 0, 0, 0);
 			al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
-			//al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
 			al_draw_bitmap(campo3->bitmap, campo3->x, campo3->y, 0);
 			al_draw_bitmap(campo4->bitmap, campo4->x, campo4->y, 0);
 			al_draw_bitmap(igual->bitmap, igual->x, igual->y, 0);
@@ -401,11 +322,14 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(conta2->bitmap, conta2->x, conta2->y, 0);
 			al_draw_bitmap(xis->bitmap, xis->x, xis->y, 0);
 			al_draw_bitmap(contaSeta->bitmap, contaSeta->x, contaSeta->y, 0);
-			al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
-			
-			//al_draw_bitmap(quadrado->bitmap, quadrado->x, quadrado->y, 0);
-		if (prog->Salas[1] == 1) {
-			//al_draw_text(enigma, al_map_rgb(0,0,0), 170, (ALTURA_TELA / 3) + 100, ALLEGRO_ALIGN_LEFT, enigma2->enigmaText);
+		}
+		else{
+			al_draw_bitmap(fundoAsc, 0, 0, 0);
+		}
+
+		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+
+		if (prog->Salas[1] == 1 && !sobreposto) {
 			
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, "0110");
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, "0110");
@@ -429,14 +353,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	}
 
 
-	/*al_destroy_bitmap(certo);
-	al_destroy_bitmap(errado);
-	al_destroy_bitmap(background);*/
-	//al_destroy_audio_stream(musica);
-	//al_destroy_sample(musicaFundo);
-	//free(apagar);
-	//free(audio);
-	//al_destroy_bitmap(setaBaixo->bitmap);
+
 	al_destroy_bitmap(setaDireita->bitmap);
 	al_destroy_bitmap(conta1->bitmap);
 	al_destroy_bitmap(conta2->bitmap);
@@ -464,13 +381,9 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(enigma2);
 	free(enigma3);
 	free(enigma4);
-	free(fundo);
 	free(conta1);
 	free(conta2);
-	//free(setaBaixo);
 	free(setaDireita);
-
-	//system("pause");
 
 	return 0;
 }
