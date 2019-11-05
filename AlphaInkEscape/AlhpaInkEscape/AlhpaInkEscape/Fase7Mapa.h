@@ -624,7 +624,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	free(bola);
 	free(conta);
 
-
+	//a
 	free(item);
 	free(item2);
 	free(item3);
