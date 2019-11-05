@@ -9,11 +9,6 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
-//typedef struct TipoSapo {
-//	Objeto* objeto;
-//	int esquerda;
-//}Sapo;
-
 Objeto* D1, * D2, * D3, * E4, * E5, * E6;
 Objeto* saidaDireita, * saidaCima;
 Objeto* Reset;
@@ -21,14 +16,14 @@ Objeto* Reset;
 int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	
 	Reset = (Objeto*)malloc(sizeof(Objeto));
-	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");;
+	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 	Reset->x = LARGURA_TELA/2 - 50 + 100;
 	Reset->y = 500;
 	Reset->largura = 100;
 	Reset->altura = 100;
 
 	D1 = (Objeto*)malloc(sizeof(Objeto));
-	D1->bitmap = al_load_bitmap("Imgs/Sapos/D.png");;
+	D1->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
 	D1->x = 120;
 	D1->y = 300;
 	D1->largura = 150;
@@ -37,7 +32,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Direita1.esquerda = 0;*/
 
 	D2 = (Objeto*)malloc(sizeof(Objeto));
-	D2->bitmap = al_load_bitmap("Imgs/Sapos/D.png");;
+	D2->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
 	D2->x = D1->x + D1->largura + 10;
 	D2->y = 300;
 	D2->largura = 150;
@@ -46,7 +41,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Direita2.esquerda = 0;*/
 
 	D3 = (Objeto*)malloc(sizeof(Objeto));
-	D3->bitmap = al_load_bitmap("Imgs/Sapos/D.png");;
+	D3->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
 	D3->x = D2->x + D2->largura + 10;
 	D3->y = 300;
 	D3->largura = 150;
@@ -55,7 +50,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Direita3.esquerda = 0;*/
 
 	E4 = (Objeto*)malloc(sizeof(Objeto));
-	E4->bitmap = al_load_bitmap("Imgs/Sapos/E.png");;
+	E4->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E4->x = D3->x + D3->largura * 2 + 20;
 	E4->y = 300;
 	E4->largura = 150;
@@ -64,7 +59,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Esquerda1.esquerda = 1;*/
 
 	E5 = (Objeto*)malloc(sizeof(Objeto));
-	E5->bitmap = al_load_bitmap("Imgs/Sapos/E.png");;
+	E5->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E5->x = E4->x + E4->largura + 10;
 	E5->y = 300;
 	E5->largura = 150;
@@ -73,7 +68,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Esquerda2.esquerda = 1;*/
 
 	E6 = (Objeto*)malloc(sizeof(Objeto));
-	E6->bitmap = al_load_bitmap("Imgs/Sapos/E.png");;
+	E6->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E6->x = E5->x + E5->largura + 10;
 	E6->y = 300;
 	E6->largura = 150;

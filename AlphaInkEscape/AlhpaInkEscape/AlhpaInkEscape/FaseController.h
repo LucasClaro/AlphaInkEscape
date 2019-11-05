@@ -15,6 +15,7 @@
 #include "Fase10Arco.h"
 #include "Fase13Sapos.h"
 #include "Fase14PostIts.h"
+#include "Fase15Classico.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -54,7 +55,11 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 13:
 		JogarFase13Sapos(janela,fila_eventos, progresso);
-	case 14: JogarFase14PostIts(janela, fila_eventos, progresso);
+	case 14: 
+		JogarFase14PostIts(janela, fila_eventos, progresso);
+		return;
+	case 15:
+		JogarFase15Classico(janela, fila_eventos, progresso);
 		return;
 	default: printf("Fase n�o encontrada"); return;
 		break;
