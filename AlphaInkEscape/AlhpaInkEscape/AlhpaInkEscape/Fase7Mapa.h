@@ -611,7 +611,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	free(conta);
 
 
-	system("pause");
+
 
 	return 0;
 }
