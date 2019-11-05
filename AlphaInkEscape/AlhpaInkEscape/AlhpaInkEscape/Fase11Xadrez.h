@@ -10,10 +10,11 @@
 //altura 577
 
 Objeto Tabuleiro[8][8];
+Objeto* peao1 = NULL, * peao2 = NULL, * peao3 = NULL, * bispo = NULL, * torre1 = NULL, * torre2 = NULL, * rei = NULL;
+int  errado = 0;
 int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
-	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL;
-	Objeto* peao1 = NULL, * peao2 = NULL, * peao3 = NULL, * bispo = NULL,* torre1 = NULL,* torre2 = NULL,* rei = NULL;
+	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL,* Reset;
 	ALLEGRO_BITMAP* peaoazul1 = NULL, * peaoazul2 = NULL, * peaoazul3 = NULL, * bispoazul = NULL, * torreazul1 = NULL, * torreazul2 = NULL, * reiazul = NULL;
 	int Arrastando = 0;
 
@@ -42,6 +43,13 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = NULL;
+
+	Reset = (Objeto*)malloc(sizeof(Objeto));
+	Reset->largura = 100;
+	Reset->altura = 100;
+	Reset->x = 250;
+	Reset->y = 500;
+	Reset->bitmap = NULL;
 
 	peao1 = (Objeto*)malloc(sizeof(Objeto));
 	peao1->largura = 63;
@@ -95,6 +103,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
+	Reset->bitmap = al_load_bitmap("Imgs/xadrez/reset.png");
 
 	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
 	peao2->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
@@ -157,40 +166,44 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					gameOver = 1;
 				}*/
 				
-				/*else*/if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando && !progresso->Salas[11]) {
+				/*else*/if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 1;
 					peao1->cliqueX = MapearDistancia(evento.mouse.x, peao1->x);
 					peao1->cliqueY = MapearDistancia(evento.mouse.y, peao1->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, peao2) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao2) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 2;
 					peao2->cliqueX = MapearDistancia(evento.mouse.x, peao2->x);
 					peao2->cliqueY = MapearDistancia(evento.mouse.y, peao2->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, peao3) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, peao3) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 3;
 					peao3->cliqueX = MapearDistancia(evento.mouse.x, peao3->x);
 					peao3->cliqueY = MapearDistancia(evento.mouse.y, peao3->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, bispo) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, bispo) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 4;
 					bispo->cliqueX = MapearDistancia(evento.mouse.x, bispo->x);
 					bispo->cliqueY = MapearDistancia(evento.mouse.y, bispo->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, torre1) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre1) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 5;
 					torre1->cliqueX = MapearDistancia(evento.mouse.x, torre1->x);
 					torre1->cliqueY = MapearDistancia(evento.mouse.y, torre1->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, torre2) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, torre2) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 6;
 					torre2->cliqueX = MapearDistancia(evento.mouse.x, torre2->x);
 					torre2->cliqueY = MapearDistancia(evento.mouse.y, torre2->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, rei) && !Arrastando && !progresso->Salas[11]) {
+				else if (IsInside(evento.mouse.x, evento.mouse.y, rei) && !Arrastando && !progresso->Salas[11] && !errado) {
 					Arrastando = 7;
 					rei->cliqueX = MapearDistancia(evento.mouse.x, rei->x);
 					rei->cliqueY = MapearDistancia(evento.mouse.y, rei->y);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, Reset) && errado)
+				{
+					reseta();
 				}
 				else
 				{
@@ -210,32 +223,299 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					switch (Arrastando)
 					{
 						case 1:
-							peao1->x = Tabuleiro[4][4].x;
-							peao1->y = Tabuleiro[4][4].y;
+							if (IsInsidePos(peao1, Tabuleiro[3][4]))
+							{
+								peao1->x = Tabuleiro[3][4].x;
+								peao1->y = Tabuleiro[3][4].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								peao1->x = Tabuleiro[4][4].x;
+								peao1->y = Tabuleiro[4][4].y;
+							}
 							break;
 						case 2:
-							peao2->x = Tabuleiro[5][6].x;
-							peao2->y = Tabuleiro[5][6].y;
+							if (IsInsidePos(peao2, Tabuleiro[4][6]))
+							{
+								peao2->x = Tabuleiro[4][6].x;
+								peao2->y = Tabuleiro[4][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								peao2->x = Tabuleiro[5][6].x;
+								peao2->y = Tabuleiro[5][6].y;
+							}
 							break;
 						case 3:
-							peao3->x = Tabuleiro[6][7].x;
-							peao3->y = Tabuleiro[6][7].y;
+							if (IsInsidePos(peao3, Tabuleiro[5][7]))
+							{
+								peao3->x = Tabuleiro[5][7].x;
+								peao3->y = Tabuleiro[5][7].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(peao3, Tabuleiro[4][7]))
+							{
+								peao3->x = Tabuleiro[4][7].x;
+								peao3->y = Tabuleiro[4][7].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								peao3->x = Tabuleiro[6][7].x;
+								peao3->y = Tabuleiro[6][7].y;
+							}
 							break;
 						case 4:
-							bispo->x = Tabuleiro[2][7].x;
-							bispo->y = Tabuleiro[2][7].y;
+							if (IsInsidePos(bispo, Tabuleiro[3][6]))
+							{
+								bispo->x = Tabuleiro[3][6].x;
+								bispo->y = Tabuleiro[3][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(bispo, Tabuleiro[4][5]))
+							{
+								bispo->x = Tabuleiro[4][5].x;
+								bispo->y = Tabuleiro[4][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(bispo, Tabuleiro[5][4]))
+							{
+								bispo->x = Tabuleiro[5][4].x;
+								bispo->y = Tabuleiro[5][4].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(bispo, Tabuleiro[6][3]))
+							{
+								bispo->x = Tabuleiro[6][3].x;
+								bispo->y = Tabuleiro[6][3].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(bispo, Tabuleiro[7][2]))
+							{
+								bispo->x = Tabuleiro[7][2].x;
+								bispo->y = Tabuleiro[7][2].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								bispo->x = Tabuleiro[2][7].x;
+								bispo->y = Tabuleiro[2][7].y;
+							}
 							break;
 						case 5:
-							torre1->x = Tabuleiro[1][1].x;
-							torre1->y = Tabuleiro[1][1].y;
+							if (IsInsidePos(torre1, Tabuleiro[1][0]))
+							{
+								torre1->x = Tabuleiro[1][0].x;
+								torre1->y = Tabuleiro[1][0].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[1][2]))
+							{
+								torre1->x = Tabuleiro[1][2].x;
+								torre1->y = Tabuleiro[1][2].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[1][3]))
+							{
+								torre1->x = Tabuleiro[1][3].x;
+								torre1->y = Tabuleiro[1][3].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[1][4]))
+							{
+								torre1->x = Tabuleiro[1][4].x;
+								torre1->y = Tabuleiro[1][4].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[1][5]))
+							{
+								torre1->x = Tabuleiro[1][5].x;
+								torre1->y = Tabuleiro[1][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[0][1]))
+							{
+								torre1->x = Tabuleiro[0][1].x;
+								torre1->y = Tabuleiro[0][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[2][1]))
+							{
+								torre1->x = Tabuleiro[2][1].x;
+								torre1->y = Tabuleiro[2][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[3][1]))
+							{
+								torre1->x = Tabuleiro[3][1].x;
+								torre1->y = Tabuleiro[3][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[4][1]))
+							{
+								torre1->x = Tabuleiro[4][1].x;
+								torre1->y = Tabuleiro[4][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[5][1]))
+							{
+								torre1->x = Tabuleiro[5][1].x;
+								torre1->y = Tabuleiro[5][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+
+							else if (IsInsidePos(torre1, Tabuleiro[6][1]))
+							{
+								torre1->x = Tabuleiro[6][1].x;
+								torre1->y = Tabuleiro[6][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre1, Tabuleiro[7][1]))
+							{
+								torre1->x = Tabuleiro[7][1].x;
+								torre1->y = Tabuleiro[7][1].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								torre1->x = Tabuleiro[1][1].x;
+								torre1->y = Tabuleiro[1][1].y;
+							}
 							break;
 						case 6:
-							torre2->x = Tabuleiro[1][6].x;
-							torre2->y = Tabuleiro[1][6].y;
+							if (IsInsidePos(torre2, Tabuleiro[1][2]))
+							{
+								torre2->x = Tabuleiro[1][2].x;
+								torre2->y = Tabuleiro[1][2].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[1][3]))
+							{
+								torre2->x = Tabuleiro[1][3].x;
+								torre2->y = Tabuleiro[1][3].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[1][4]))
+							{
+								torre2->x = Tabuleiro[1][4].x;
+								torre2->y = Tabuleiro[1][4].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[1][5]))
+							{
+								torre2->x = Tabuleiro[1][5].x;
+								torre2->y = Tabuleiro[1][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[0][6]))
+							{
+								torre2->x = Tabuleiro[0][6].x;
+								torre2->y = Tabuleiro[0][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[2][6]))
+							{
+								torre2->x = Tabuleiro[2][6].x;
+								torre2->y = Tabuleiro[2][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[3][6]))
+							{
+								torre2->x = Tabuleiro[3][6].x;
+								torre2->y = Tabuleiro[3][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(torre2, Tabuleiro[4][6]))
+							{
+								torre2->x = Tabuleiro[4][6].x;
+								torre2->y = Tabuleiro[4][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								torre2->x = Tabuleiro[1][6].x;
+								torre2->y = Tabuleiro[1][6].y;
+							}
 							break;
 						case 7:
-							rei->x = Tabuleiro[6][6].x;
-							rei->y = Tabuleiro[6][6].y;
+							if (IsInsidePos(rei, Tabuleiro[7][5]))
+							{
+								rei->x = Tabuleiro[7][5].x;
+								rei->y = Tabuleiro[7][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(rei, Tabuleiro[7][6]))
+							{
+								rei->x = Tabuleiro[7][6].x;
+								rei->y = Tabuleiro[7][6].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(rei, Tabuleiro[7][7]))
+							{
+								rei->x = Tabuleiro[7][7].x;
+								rei->y = Tabuleiro[7][7].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(rei, Tabuleiro[6][5]))
+							{
+								rei->x = Tabuleiro[6][5].x;
+								rei->y = Tabuleiro[6][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(rei, Tabuleiro[5][5]))
+							{
+								rei->x = Tabuleiro[5][5].x;
+								rei->y = Tabuleiro[5][5].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else if (IsInsidePos(rei, Tabuleiro[5][7]))
+							{
+								rei->x = Tabuleiro[5][7].x;
+								rei->y = Tabuleiro[5][7].y;
+								Arrastando = 0;
+								errado = 1;
+							}
+							else
+							{
+								rei->x = Tabuleiro[6][6].x;
+								rei->y = Tabuleiro[6][6].y;
+							}
 							break;
 						default: Arrastando = 0;
 							break;
@@ -330,6 +610,9 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		al_draw_bitmap(torre2->bitmap, torre2->x, torre2->y, 0);
 		al_draw_bitmap(rei->bitmap, rei->x, rei->y, 0);
 
+		if(errado)
+			al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
+
 		caregaInventario(progresso);
 		al_flip_display();
 	}
@@ -401,11 +684,9 @@ int desenharAndar(int Arrastando, ALLEGRO_BITMAP* podeAndar)
 	{
 		case 1:
 				al_draw_bitmap(podeAndar, Tabuleiro[3][4].x, Tabuleiro[3][4].y, 0);
-				al_draw_bitmap(podeAndar, Tabuleiro[2][4].x, Tabuleiro[2][4].y, 0);
 			break;
 		case 2:
-			al_draw_bitmap(podeAndar, Tabuleiro[4][6].x, Tabuleiro[4][6].y, 0);
-			al_draw_bitmap(podeAndar, Tabuleiro[3][6].x, Tabuleiro[3][6].y, 0);
+				al_draw_bitmap(podeAndar, Tabuleiro[4][6].x, Tabuleiro[4][6].y, 0);
 			break;
 		case 3:
 				al_draw_bitmap(podeAndar, Tabuleiro[5][7].x, Tabuleiro[5][7].y, 0);
@@ -463,4 +744,23 @@ int IsInsidePos(Objeto* menor, Objeto maior) {
 		return 1;
 	}
 	return 0;
+}
+
+int reseta()
+{
+	errado = 0;
+	peao1->x = Tabuleiro[4][4].x;
+	peao1->y = Tabuleiro[4][4].y;
+	peao2->x = Tabuleiro[5][6].x;
+	peao2->y = Tabuleiro[5][6].y;
+	peao3->x = Tabuleiro[6][7].x;
+	peao3->y = Tabuleiro[6][7].y;
+	bispo->x = Tabuleiro[2][7].x;
+	bispo->y = Tabuleiro[2][7].y;
+	torre1->x = Tabuleiro[1][1].x;
+	torre1->y = Tabuleiro[1][1].y;
+	torre2->x = Tabuleiro[1][6].x;
+	torre2->y = Tabuleiro[1][6].y;
+	rei->x = Tabuleiro[6][6].x;
+	rei->y = Tabuleiro[6][6].y;
 }
