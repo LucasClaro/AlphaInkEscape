@@ -537,7 +537,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		if (j == 0 && k == 1 && o == 2 && g == 3) {
 			prog->Salas[7] = 1;
-			printf("A");
 		}
 
 
