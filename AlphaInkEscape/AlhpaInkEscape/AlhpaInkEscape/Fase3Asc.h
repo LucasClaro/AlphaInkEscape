@@ -76,6 +76,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	bool arrastando = false;
 	char arrEnigma[10] = "";
 	bool verDigitado = 0;
+	int cor = 0;
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -102,13 +103,10 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			}
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
-			if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER && strncmp(enigma1->enigmaCerto, _strlwr_s(arrEnigma, strlen(arrEnigma) + 1), 7) == 0)
+			if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER && strncmp(enigma1->enigmaCerto, arrEnigma, 7) == 0)
 			{
-				
-				sair = true;
-				prog->Salas[3] = 1;
-				prog->Gameover = true;
-			
+				prog->Salas[3] = 1;			
+				cor = 255;
 			}
 			else if (verDigitado && evento.keyboard.keycode != ALLEGRO_KEY_ENTER) {
 				digitarCampoAsc(enigma1, arrEnigma, evento, sair, prog);
@@ -131,7 +129,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			al_draw_bitmap(postIt5->bitmap, postIt5->x, postIt5->y, 0);
 
 
-		al_draw_text(enigma, al_map_rgb(0,0,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
+		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
 		caregaInventario(prog);
 		al_flip_display();
@@ -175,7 +173,12 @@ int digitarCampoAsc(enigmaStr* enigma, char arrEnigma[], ALLEGRO_EVENT evento, b
 				if ((strlen(arrEnigma)) < 8) {
 					int uni = evento.keyboard.unichar;
 					letra[0] = (char)uni;
-					arrEnigma[strlen(arrEnigma)] = letra[0];
+
+					char* copy1;
+
+					_strlwr_s(copy1 = letra, strlen(letra) + 1);
+
+					arrEnigma[strlen(arrEnigma)] = copy1[0];
 				}
 			}
 			else if ((strlen(arrEnigma)) < 4) {

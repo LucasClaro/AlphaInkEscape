@@ -163,7 +163,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	enigma2->enigmaCerto = "0110";
 	enigma2->acertou = false;
 	enigma2->verCampo = 2;
-	char arrEnigma2[10] = "";
+	char arrEnigma2[10] = "origem";
 
 	enigmaStr* enigma3;
 	enigma3 = (enigmaStr*)malloc(sizeof(enigmaStr));
