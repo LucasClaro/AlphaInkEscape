@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Fase10Arco.h" />
     <ClInclude Include="Fase11Xadrez.h" />
+    <ClInclude Include="Fase15Classico.h" />
     <ClInclude Include="Fase14PostIts.h" />
     <ClInclude Include="Fase1Binary.h" />
     <ClInclude Include="Fase5Brasil.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="FaseController.h" />
     <ClInclude Include="Fase7Mapa.h" />
     <ClInclude Include="Funcoes.h" />
+    <ClInclude Include="Fase13Sapos.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Fase2tabelaPeri.h" />
   </ItemGroup>

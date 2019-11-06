@@ -87,7 +87,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 6;
+	progresso.proximaSala = 13;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
@@ -101,6 +101,7 @@ int main(void) {
 	progresso.Salas[9] = 0;
 	progresso.Salas[10] = 0;
 	progresso.Salas[11] = 0;
+	progresso.Salas[15] = 0;
 
 	progresso.Inventario[0] = 0;
 	progresso.Inventario[1] = 0;
