@@ -483,7 +483,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 			{
-				prog->proximaSala = 2;
+				prog->proximaSala = 11;
 				sair = 1;
 			}
 		}

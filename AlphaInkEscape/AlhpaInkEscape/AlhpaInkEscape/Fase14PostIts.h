@@ -108,16 +108,16 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					progresso->proximaSala = 10;
 					gameOver = 1;
 				}
-				//else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
-				//{
-				//	progresso->proximaSala = 4;
-				//	gameOver = 1;
-				//}
-				/*else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
-					progresso->proximaSala = 2;
+					progresso->proximaSala = 13;
 					gameOver = 1;
-				}*/
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
+				{
+					progresso->proximaSala = 15;
+					gameOver = 1;
+				}
 				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
 				{
 					//i* ALTURA_TELA / 10 
