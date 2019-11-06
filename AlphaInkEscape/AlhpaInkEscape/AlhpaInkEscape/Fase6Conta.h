@@ -11,7 +11,7 @@
 #include "Struct.h"
 #include <string.h>
 
-
+//oi
 
 int FilaCheia(Fila* f) {
 	if (f->total >= f->tamanho) {

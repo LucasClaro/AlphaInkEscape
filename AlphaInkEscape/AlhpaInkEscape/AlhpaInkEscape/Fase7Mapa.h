@@ -236,8 +236,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/setaT.png");
 	ALLEGRO_BITMAP* seta3 = al_load_bitmap("Imgs/setaQ.png");
 	ALLEGRO_BITMAP* seta4 = al_load_bitmap("Imgs/setaN.png");
-	ALLEGRO_BITMAP* itens[] = { seta1, seta2, seta3, seta4 };
-
+	ALLEGRO_BITMAP* itens[] = {seta1, seta2, seta3, seta4};
+	
 
 	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/cimaMapa.png");
 	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
@@ -537,7 +537,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		if (j == 0 && k == 1 && o == 2 && g == 3) {
 			prog->Salas[7] = 1;
-			printf("A");
 		}
 
 
@@ -577,11 +576,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(londres->bitmap, londres->x, londres->y, 0);
 		al_draw_bitmap(toronto->bitmap, toronto->x, toronto->y, 0);
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
-		//al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
-		//al_draw_bitmap(campo2->bitmap, campo2->x, campo2->y, 0);
-		//al_draw_bitmap(campoesquerda->bitmap, campoesquerda->x, campoesquerda->y, 0);
-		//al_draw_bitmap(campodireita->bitmap, campodireita->x, campodireita->y, 0);
-		//al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
 
 		caregaInventario(prog);
@@ -600,6 +594,26 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	al_destroy_bitmap(campoesquerda->bitmap);
 	al_destroy_bitmap(campodireita->bitmap);
 	al_destroy_bitmap(bola->bitmap);
+	al_destroy_bitmap(china->bitmap);
+	al_destroy_bitmap(brasil->bitmap);
+	al_destroy_bitmap(londres->bitmap);
+	al_destroy_bitmap(toronto->bitmap);
+	al_destroy_bitmap(setacima1->bitmap);
+	al_destroy_bitmap(setacima2->bitmap);
+	al_destroy_bitmap(setacima3->bitmap);
+	al_destroy_bitmap(setacima4->bitmap);
+	al_destroy_bitmap(setabaixo1->bitmap);
+	al_destroy_bitmap(setabaixo2->bitmap);
+	al_destroy_bitmap(setabaixo3->bitmap);
+	al_destroy_bitmap(setabaixo4->bitmap);
+	al_destroy_bitmap(caixa1->bitmap);
+	al_destroy_bitmap(caixa2->bitmap);
+	al_destroy_bitmap(caixa3->bitmap);
+	al_destroy_bitmap(caixa4->bitmap);
+	al_destroy_bitmap(item->bitmap);
+	al_destroy_bitmap(item2->bitmap);
+	al_destroy_bitmap(item3->bitmap);
+	al_destroy_bitmap(item4->bitmap);
 
 	free(SaidaBaixo);
 	free(SaidaCima);
@@ -611,6 +625,27 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	free(bola);
 	free(conta);
 
+	//a
+	free(item);
+	free(item2);
+	free(item3);
+	free(item4);
+	free(setabaixo1);
+	free(setabaixo2);
+	free(setabaixo3);
+	free(setabaixo4);
+	free(setacima1);
+	free(setacima2);
+	free(setacima3);
+	free(setacima4);
+	free(caixa1);
+	free(caixa2);
+	free(caixa3);
+	free(caixa4);
+	free(china);
+	free(londres);
+	free(brasil);
+	free(toronto);
 
 	return 0;
 }
