@@ -9,6 +9,7 @@
 #include "Struct.h"
 #include "Fase1Binary.h"
 #include "Fase2tabelaPeri.h"
+#include "Fase3Asc.h"
 #include "Fase5Brasil.h"
 #include "Fase6Conta.h"
 #include "Fase7Mapa.h"
@@ -35,7 +36,7 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	case 2:
 		JogarFase2TabelaPeri(janela, fila_eventos, progresso);
 		return;
-	case 3: //
+	case 3: JogarFase3Asc(janela, fila_eventos, progresso);
 		return;
 	case 4: //
 		return;

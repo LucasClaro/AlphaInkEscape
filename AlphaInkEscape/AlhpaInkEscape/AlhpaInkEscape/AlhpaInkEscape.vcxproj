@@ -156,6 +156,7 @@
     <ClInclude Include="Fase15Classico.h" />
     <ClInclude Include="Fase14PostIts.h" />
     <ClInclude Include="Fase1Binary.h" />
+    <ClInclude Include="Fase3Asc.h" />
     <ClInclude Include="Fase5Brasil.h" />
     <ClInclude Include="Fase6Conta.h" />
     <ClInclude Include="Fase9TimeLine.h" />

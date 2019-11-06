@@ -110,6 +110,8 @@ int main(void) {
 	progresso.Inventario[4] = 0;
 	progresso.Inventario[5] = 0;
 	progresso.Inventario[6] = 0;
+
+	progresso.Itens[3] = NULL;
 	
 	progresso.inventCount = 0;
 
