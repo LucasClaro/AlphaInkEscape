@@ -100,6 +100,7 @@ int main(void) {
 	progresso.Salas[8] = 0;
 	progresso.Salas[9] = 0;
 	progresso.Salas[10] = 0;
+	progresso.Salas[11] = 0;
 
 	progresso.Inventario[0] = 0;
 	progresso.Inventario[1] = 0;
