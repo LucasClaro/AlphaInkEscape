@@ -128,7 +128,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		if(!prog->Inventario[3])
 			al_draw_bitmap(postIt5->bitmap, postIt5->x, postIt5->y, 0);
 
-
+		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
 		caregaInventario(prog);
