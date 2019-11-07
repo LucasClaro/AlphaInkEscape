@@ -13,7 +13,7 @@
 #define PI 3.14159265
 
 Objeto * saidaDireita, * saidaBaixo, * saidaCima;
-Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * btn, * bala;
+Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala;
 Objeto* alvo1, * alvo2, * alvo3;
 
 int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
@@ -53,13 +53,6 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	alvo3->largura = 50;
 	alvo3->altura = 50;
 
-	btn = (Objeto*)malloc(sizeof(Objeto));
-	btn->bitmap = NULL;
-	btn->x = 160;
-	btn->y = ALTURA_TELA - 190;
-	btn->largura = 100;
-	btn->altura = 30;
-
 	barraH = (Objeto*)malloc(sizeof(Objeto));
 	barraH->bitmap = NULL;
 	barraH->x = arco->x;
@@ -76,7 +69,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	marcaH = (Objeto*)malloc(sizeof(Objeto));
 	marcaH->bitmap = NULL;
-	marcaH->x = barraH->x;
+	marcaH->x = barraH->x + barraH->largura - 10;
 	marcaH->y = barraH->y - 10;
 	marcaH->largura = 10;
 	marcaH->altura = 30;
@@ -115,22 +108,22 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	//saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
-	barraH->bitmap = al_load_bitmap("Imgs/barraH.png");
-	barraV->bitmap = al_load_bitmap("Imgs/barraV.png");
+	barraH->bitmap = al_load_bitmap("Imgs/Arco/barraH.png");
+	barraV->bitmap = al_load_bitmap("Imgs/Arco/barraV.png");
 
-	marcaH->bitmap = al_load_bitmap("Imgs/marcaH.png");
-	marcaV->bitmap = al_load_bitmap("Imgs/marcaV.png");
+	marcaH->bitmap = al_load_bitmap("Imgs/Arco/marcaH.png");
+	marcaV->bitmap = al_load_bitmap("Imgs/Arco/marcaV.png");
 
-	btn->bitmap = al_load_bitmap("Imgs/btn.png");
-	arco->bitmap = al_load_bitmap("Imgs/arco.png");
-	bala->bitmap = al_load_bitmap("Imgs/x.png");
-	alvo1->bitmap = al_load_bitmap("Imgs/alvo.png");
-	alvo2->bitmap = al_load_bitmap("Imgs/alvo.png");
-	alvo3->bitmap = al_load_bitmap("Imgs/alvo.png");
+	arco->bitmap = al_load_bitmap("Imgs/Arco/arco.png");
+	bala->bitmap = al_load_bitmap("Imgs/Arco/x.png");
+	alvo1->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
+	alvo2->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
+	alvo3->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 
 	int gameOver = 0;
 	int arrastando = 0;
 	int angulo = 0;
+	int anguloArco = 0;
 	int velocidade = 0;
 	int contador = 0;
 	int acertos[] = { 0, 0, 0 };
@@ -144,7 +137,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			//se teve eventos e foi um evento de fechar janela, encerra repetição	
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
@@ -166,11 +159,6 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				//	prog->proximaSala = 1;////////////////////////////////
 				//	gameOver = 1;
 				//}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, btn)) {
-					angulo = 90 + (barraV->y - marcaV->y);
-					velocidade = (marcaH->x - barraH->x) / 3;
-					contador = 1;
-				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaH))
 				{
 					arrastando = 1;
@@ -205,6 +193,15 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
+				anguloArco = 90 + (barraV->y - marcaV->y);
+				if (arrastando == 1) {					
+					angulo = 90 + (barraV->y - marcaV->y);
+					velocidade = 30 + (barraH->x - marcaH->x) / 3;
+					contador = 1;
+				}
+				marcaH->x = barraH->x + barraH->largura - 10;
+				printf("%d", angulo);
+
 				arrastando = 0;
 			}
 
@@ -263,9 +260,8 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(marcaH->bitmap, marcaH->x, marcaH->y, 0);
 		al_draw_bitmap(marcaV->bitmap, marcaV->x, marcaV->y, 0);
 
-		al_draw_bitmap(btn->bitmap, btn->x, btn->y, 0);
-
-		al_draw_bitmap(arco->bitmap, arco->x, arco->y, 0);
+		al_draw_rotated_bitmap(arco->bitmap, arco->largura/2, arco->altura/2, arco->x + arco->largura / 2, arco->y + arco->altura / 2, 44.7 - anguloArco * PI / 180, 0);
+		//al_draw_bitmap(arco->bitmap,arco->x,arco->y,0);
 
 		if (!acertos[0])
 			al_draw_bitmap(alvo1->bitmap, alvo1->x, alvo1->y, 0);
@@ -296,8 +292,8 @@ int CalcularTiro(int angulo, int velocidade, int cont, int* acertos) {
 		VelVertical *= -1;
 		float VelHorizontal = cos(angulo * PI / 180) * velocidade;
 		int t;
-		int posX = arco->x + arco->largura;
-		int posY = arco->y;
+		int posX = arco->x + arco->largura/2 - 10;
+		int posY = arco->y + arco->altura/2 - 10;
 
 		for (t = 0; t <= cont; t++)
 		{
