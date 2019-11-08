@@ -45,7 +45,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	campo1->largura = 500;
 	campo1->x = 0;
 	campo1->y = ALTURA_TELA - campo1->altura;
-
+	
 	Objeto* campoesquerda;
 	campoesquerda = (Objeto*)malloc(sizeof(Objeto));
 	campoesquerda->bitmap = NULL;
@@ -614,7 +614,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	al_destroy_bitmap(item2->bitmap);
 	al_destroy_bitmap(item3->bitmap);
 	al_destroy_bitmap(item4->bitmap);
-
+	//a
 	free(SaidaBaixo);
 	free(SaidaCima);
 	free(SaidaEsquerda);
