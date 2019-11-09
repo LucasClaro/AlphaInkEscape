@@ -123,7 +123,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	int gameOver = 0;
 	int arrastando = 0;
 	int angulo = 0;
-	int anguloArco = 0;
+	int anguloArco = 45;
 	int velocidade = 0;
 	int contador = 0;
 	int acertos[] = { 0, 0, 0 };
@@ -172,20 +172,27 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					marcaV->cliqueY = MapearDistancia(evento.mouse.y, marcaV->y);
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, barraV))//Deixa o user clicar na barra pra mover a marca
-				{
-					marcaV->y = evento.mouse.y - marcaV->altura / 2;
+				{					
+					marcaV->y = evento.mouse.y - marcaV->altura / 2;					
 					if (evento.mouse.y - marcaV->altura / 2 < barraV->y)
 						marcaV->y = barraV->y;
 					else if (evento.mouse.y - marcaV->altura / 2 > barraV->y + barraV->altura - marcaV->altura)
 						marcaV->y = barraV->y + barraV->altura - marcaV->altura;
+					arrastando = 2;
+					marcaV->cliqueX = MapearDistancia(evento.mouse.x, marcaV->x);
+					marcaV->cliqueY = MapearDistancia(evento.mouse.y, marcaV->y);
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, barraH))//Deixa o user clicar na barra pra mover a marca
-				{
-					marcaH->x = evento.mouse.x - marcaH->largura / 2;
+				{					
+					marcaH->x = evento.mouse.x - marcaH->largura / 2;					
 					if (evento.mouse.x - marcaH->largura / 2 < barraH->x)
 						marcaH->x = barraH->x;
 					else if (evento.mouse.x - marcaH->largura / 2 > barraH->x + barraH->largura - marcaH->largura)
 						marcaH->x = barraH->x + barraH->largura - marcaH->largura;
+					
+					arrastando = 1;
+					marcaH->cliqueX = MapearDistancia(evento.mouse.x, marcaH->x);
+					marcaH->cliqueY = MapearDistancia(evento.mouse.y, marcaH->y);
 				}
 				else {
 					arrastando = 0;
@@ -200,7 +207,6 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					contador = 1;
 				}
 				marcaH->x = barraH->x + barraH->largura - 10;
-				printf("%d", angulo);
 
 				arrastando = 0;
 			}

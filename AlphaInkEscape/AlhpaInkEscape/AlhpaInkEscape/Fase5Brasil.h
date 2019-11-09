@@ -110,7 +110,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
-	mapa->bitmap = al_load_bitmap("Imgs/bioma.png");
+	mapa->bitmap = al_load_bitmap("Imgs/biomas.png");
 
 	notaOnca->bitmap = al_load_bitmap("Imgs/nonca.png");
 	notaTatu->bitmap = al_load_bitmap("Imgs/ntatu.png");

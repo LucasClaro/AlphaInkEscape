@@ -33,7 +33,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	D2 = (Objeto*)malloc(sizeof(Objeto));
 	D2->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
-	D2->x = D1->x + D1->largura + 10;
+	D2->x = D1->x + D1->largura;
 	D2->y = 300;
 	D2->largura = 150;
 	D2->altura = 100;/*
@@ -42,39 +42,31 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	D3 = (Objeto*)malloc(sizeof(Objeto));
 	D3->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
-	D3->x = D2->x + D2->largura + 10;
+	D3->x = D2->x + D2->largura;
 	D3->y = 300;
 	D3->largura = 150;
-	D3->altura = 100;/*
-	Direita3.objeto = D3;
-	Direita3.esquerda = 0;*/
+	D3->altura = 100;
 
 	E4 = (Objeto*)malloc(sizeof(Objeto));
 	E4->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
-	E4->x = D3->x + D3->largura * 2 + 20;
+	E4->x = D3->x + D3->largura * 2;
 	E4->y = 300;
 	E4->largura = 150;
-	E4->altura = 100;	/*
-	Esquerda1.objeto = E1;
-	Esquerda1.esquerda = 1;*/
+	E4->altura = 100;
 
 	E5 = (Objeto*)malloc(sizeof(Objeto));
 	E5->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
-	E5->x = E4->x + E4->largura + 10;
+	E5->x = E4->x + E4->largura;
 	E5->y = 300;
 	E5->largura = 150;
-	E5->altura = 100;/*
-	Esquerda2.objeto = E2;
-	Esquerda2.esquerda = 1;*/
+	E5->altura = 100;
 
 	E6 = (Objeto*)malloc(sizeof(Objeto));
 	E6->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
-	E6->x = E5->x + E5->largura + 10;
+	E6->x = E5->x + E5->largura;
 	E6->y = 300;
 	E6->largura = 150;
-	E6->altura = 100;/*
-	Esquerda3.objeto = E3;
-	Esquerda3.esquerda = 1;*/
+	E6->altura = 100;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
