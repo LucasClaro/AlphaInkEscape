@@ -83,7 +83,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
+	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/esquerda.png");
 
 	Objeto* SaidaDireita;
 	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
@@ -104,7 +104,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	Objeto* campo1;
 	campo1 = (Objeto*)malloc(sizeof(Objeto));
-	campo1->bitmap = al_load_bitmap("Imgs/slide4.png");
+	campo1->bitmap = al_load_bitmap("Imgs/Conta/slide4.png");
 	campo1->altura = 250;
 	campo1->largura = 500;
 	campo1->x = 0;
@@ -118,8 +118,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	campoesquerda->x = 175;
 	campoesquerda->y = 350;
 
-	ALLEGRO_BITMAP* btn = al_load_bitmap("Imgs/botao.png");
-	ALLEGRO_BITMAP* btnPressionado = al_load_bitmap("Imgs/botaopressed.png");
+	ALLEGRO_BITMAP* btn = al_load_bitmap("Imgs/Conta/botao.png");
+	ALLEGRO_BITMAP* btnPressionado = al_load_bitmap("Imgs/Conta/botaopressed.png");
 
 	Objeto* campodireita;
 	campodireita = (Objeto*)malloc(sizeof(Objeto));
@@ -129,13 +129,13 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	campodireita->x = 1100;
 	campodireita->y = 350;
 
-	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/botao.png");
-	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/botaopressed.png");
+	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/Conta/botao.png");
+	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/Conta/botaopressed.png");
 
 
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
-	campo2->bitmap = al_load_bitmap("Imgs/slide4.png");
+	campo2->bitmap = al_load_bitmap("Imgs/Conta/slide4.png");
 	campo2->altura = 250;
 	campo2->largura = 500;
 	campo2->x = LARGURA_TELA - campo2->largura;
@@ -143,7 +143,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	
 	Objeto* bola;
 	bola = (Objeto*)malloc(sizeof(Objeto));
-	bola->bitmap = al_load_bitmap("Imgs/monca.png");
+	bola->bitmap = al_load_bitmap("Imgs/Conta/cursor.png");
 	bola->altura = 50;
 	bola->largura = 50;
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
@@ -160,8 +160,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
 
 	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
-	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/DicaEsquerda.png");
-	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/DicaDireita.png");
+	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/Conta/DicaEsquerda.png");
+	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/Conta/DicaDireita.png");
 	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
 	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
 	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");

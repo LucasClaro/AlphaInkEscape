@@ -44,7 +44,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* conta1;
 	conta1 = (Objeto*)malloc(sizeof(Objeto));
-	conta1->bitmap = al_load_bitmap("Imgs/slide1.png");
+	conta1->bitmap = al_load_bitmap("Imgs/Binary/slide1.png");
 	conta1->altura = 250;
 	conta1->largura = 500;
 	conta1->x = (LARGURA_TELA / 2) - conta1->largura;
@@ -52,7 +52,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* campo1;
 	campo1 = (Objeto*)malloc(sizeof(Objeto));
-	campo1->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo1->bitmap = al_load_bitmap("Imgs/Binary/slide6.png");
 	campo1->altura = 250;
 	campo1->largura = 500;
 	campo1->x = (LARGURA_TELA / 2);
@@ -60,7 +60,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* conta2;
 	conta2 = (Objeto*)malloc(sizeof(Objeto));
-	conta2->bitmap = al_load_bitmap("Imgs/slide2.png");
+	conta2->bitmap = al_load_bitmap("Imgs/Binary/slide2.png");
 	conta2->altura = 250;
 	conta2->largura = 500;
 	conta2->x = (LARGURA_TELA / 2) - conta2->largura;
@@ -69,7 +69,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
-	campo2->bitmap = al_load_bitmap("Imgs/slide4.png");
+	campo2->bitmap = al_load_bitmap("Imgs/Binary/slide4.png");
 	campo2->altura = 250;
 	campo2->largura = 500;
 	campo2->x = (LARGURA_TELA / 2) - campo2->largura + 71;
@@ -78,7 +78,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* campo3;
 	campo3 = (Objeto*)malloc(sizeof(Objeto));
-	campo3->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo3->bitmap = al_load_bitmap("Imgs/Binary/slide6.png");
 	campo3->altura = 250;
 	campo3->largura = 500;
 	campo3->x = (LARGURA_TELA / 2);
@@ -86,7 +86,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	
 	Objeto* xis;
 	xis = (Objeto*)malloc(sizeof(Objeto));
-	xis->bitmap = al_load_bitmap("Imgs/xis.png");
+	xis->bitmap = al_load_bitmap("Imgs/Binary/xis.png");
 	xis->altura = 250;
 	xis->largura = 500;
 	xis->x = (LARGURA_TELA / 2);
@@ -95,7 +95,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* igual;
 	igual = (Objeto*)malloc(sizeof(Objeto));
-	igual->bitmap = al_load_bitmap("Imgs/igual.png");
+	igual->bitmap = al_load_bitmap("Imgs/Binary/igual.png");
 	igual->altura = 250;
 	igual->largura = 500;
 	igual->x = (LARGURA_TELA / 2);
@@ -103,7 +103,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* campo4;
 	campo4 = (Objeto*)malloc(sizeof(Objeto));
-	campo4->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo4->bitmap = al_load_bitmap("Imgs/Binary/slide6.png");
 	campo4->altura = 250;
 	campo4->largura = 500;
 	campo4->x = (LARGURA_TELA / 2);
@@ -139,7 +139,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	contaSeta->largura = 500;
 	contaSeta->x = (LARGURA_TELA / 2) - (contaSeta->largura / 2) + 20;
 	contaSeta->y = (ALTURA_TELA / 3 * 1.3 + 20) - contaSeta->altura;
-	contaSeta->bitmap = al_load_bitmap("Imgs/slide3.png");
+	contaSeta->bitmap = al_load_bitmap("Imgs/Binary/slide3.png");
 	
 
 	enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
@@ -364,6 +364,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	al_destroy_bitmap(xis->bitmap);
 	al_destroy_bitmap(igual->bitmap);
 	al_destroy_bitmap(contaSeta->bitmap);
+
 
 	al_destroy_display(display);
 	
