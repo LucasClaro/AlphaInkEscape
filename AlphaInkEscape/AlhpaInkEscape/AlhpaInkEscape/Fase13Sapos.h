@@ -17,56 +17,52 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
-	Reset->x = LARGURA_TELA/2 - 50 + 100;
+	Reset->x = LARGURA_TELA/2 - 50 + 70;
 	Reset->y = 500;
 	Reset->largura = 100;
 	Reset->altura = 100;
 
 	D1 = (Objeto*)malloc(sizeof(Objeto));
 	D1->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
-	D1->x = 120;
+	D1->x = 110;
 	D1->y = 300;
-	D1->largura = 150;
-	D1->altura = 100;/*
-	Direita1.objeto = D1;
-	Direita1.esquerda = 0;*/
+	D1->largura = 125;
+	D1->altura = 83;
 
 	D2 = (Objeto*)malloc(sizeof(Objeto));
 	D2->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
 	D2->x = D1->x + D1->largura;
 	D2->y = 300;
-	D2->largura = 150;
-	D2->altura = 100;/*
-	Direita2.objeto = D2;
-	Direita2.esquerda = 0;*/
+	D2->largura = 125;
+	D2->altura = 83;
 
 	D3 = (Objeto*)malloc(sizeof(Objeto));
 	D3->bitmap = al_load_bitmap("Imgs/Sapos/D.png");
 	D3->x = D2->x + D2->largura;
 	D3->y = 300;
-	D3->largura = 150;
-	D3->altura = 100;
+	D3->largura = 152;
+	D3->altura = 83;
 
 	E4 = (Objeto*)malloc(sizeof(Objeto));
 	E4->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E4->x = D3->x + D3->largura * 2;
 	E4->y = 300;
-	E4->largura = 150;
-	E4->altura = 100;
+	E4->largura = 125;
+	E4->altura = 83;
 
 	E5 = (Objeto*)malloc(sizeof(Objeto));
 	E5->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E5->x = E4->x + E4->largura;
 	E5->y = 300;
-	E5->largura = 150;
-	E5->altura = 100;
+	E5->largura = 125;
+	E5->altura = 83;
 
 	E6 = (Objeto*)malloc(sizeof(Objeto));
 	E6->bitmap = al_load_bitmap("Imgs/Sapos/E.png");
 	E6->x = E5->x + E5->largura;
 	E6->y = 300;
-	E6->largura = 150;
-	E6->altura = 100;
+	E6->largura = 125;
+	E6->altura = 83;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -167,12 +163,12 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			}
 		}
 
-		D1->x = 120 + 170 * IndexOf(1, casas);
-		D2->x = 120 + 170 * IndexOf(2, casas);
-		D3->x = 120 + 170 * IndexOf(3, casas);
-		E4->x = 120 + 170 * IndexOf(4, casas);
-		E5->x = 120 + 170 * IndexOf(5, casas);
-		E6->x = 120 + 170 * IndexOf(6 , casas);
+		D1->x = 250 + 130 * IndexOf(1, casas);
+		D2->x = 250 + 130 * IndexOf(2, casas);
+		D3->x = 250 + 130 * IndexOf(3, casas);
+		E4->x = 250 + 130 * IndexOf(4, casas);
+		E5->x = 250 + 130 * IndexOf(5, casas);
+		E6->x = 250 + 130 * IndexOf(6, casas);
 
 		al_draw_bitmap(Background, 0, 0, 0);
 

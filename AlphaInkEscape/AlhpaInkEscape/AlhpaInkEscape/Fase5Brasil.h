@@ -20,9 +20,9 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
 	notaOnca->x = 120;
-	notaOnca->y = 100;
+	notaOnca->y = 105;
 	notaOnca->largura = 230;
-	notaOnca->altura = 200;
+	notaOnca->altura = 260;
 
 	mapa = (Objeto*)malloc(sizeof(Objeto));
 	mapa->bitmap = NULL;
@@ -34,49 +34,49 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaTatu = (Objeto*)malloc(sizeof(Objeto));
 	notaTatu->bitmap = NULL;
 	notaTatu->x = 120;
-	notaTatu->y = ALTURA_TELA - 220;
+	notaTatu->y = ALTURA_TELA - 315;
 	notaTatu->largura = 230;
-	notaTatu->altura = 200;
+	notaTatu->altura = 260;
 
 	notaJacare = (Objeto*)malloc(sizeof(Objeto));
 	notaJacare->bitmap = NULL;
 	notaJacare->x = LARGURA_TELA - 240;
-	notaJacare->y = 100;
+	notaJacare->y = 105;
 	notaJacare->largura = 230;
-	notaJacare->altura = 200;
+	notaJacare->altura = 260;
 
 	notaMico = (Objeto*)malloc(sizeof(Objeto));
 	notaMico->bitmap = NULL;
 	notaMico->x = LARGURA_TELA - 240;
-	notaMico->y = ALTURA_TELA - 220;
-	notaMico->largura = 230;
-	notaMico->altura = 200;
+	notaMico->y = ALTURA_TELA - 320;
+	notaMico->largura = 240;
+	notaMico->altura = 260;
 
 	marcaOnca = (Objeto*)malloc(sizeof(Objeto));
 	marcaOnca->bitmap = NULL;
-	marcaOnca->x = notaOnca->x + notaOnca->largura - 55;
-	marcaOnca->y = notaOnca->y + notaOnca->altura - 55;
+	marcaOnca->x = 435;
+	marcaOnca->y = 406;
 	marcaOnca->largura = 50;
 	marcaOnca->altura = 50;
 
 	marcaTatu = (Objeto*)malloc(sizeof(Objeto));
 	marcaTatu->bitmap = NULL;
-	marcaTatu->x = notaTatu->x + notaTatu->largura - 55;
-	marcaTatu->y = notaTatu->y + notaTatu->altura - 55;
+	marcaTatu->x = 476;
+	marcaTatu->y = 471;
 	marcaTatu->largura = 50;
 	marcaTatu->altura = 50;
 
 	marcaJacare = (Objeto*)malloc(sizeof(Objeto));
 	marcaJacare->bitmap = NULL;
-	marcaJacare->x = notaJacare->x + notaJacare->largura - 55;
-	marcaJacare->y = notaJacare->y + notaJacare->altura - 55;
+	marcaJacare->x = 435;
+	marcaJacare->y = 536;
 	marcaJacare->largura = 50;
 	marcaJacare->altura = 50;
 
 	marcaMico = (Objeto*)malloc(sizeof(Objeto));
 	marcaMico->bitmap = NULL;
-	marcaMico->x = notaMico->x + notaMico->largura - 55;
-	marcaMico->y = notaMico->y + notaMico->altura - 55;
+	marcaMico->x = 476;
+	marcaMico->y = 601;
 	marcaMico->largura = 50;
 	marcaMico->altura = 50;
 
@@ -110,20 +110,21 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
-	mapa->bitmap = al_load_bitmap("Imgs/biomas.png");
+	mapa->bitmap = al_load_bitmap("Imgs/Brasil/biomas.png");
 
-	notaOnca->bitmap = al_load_bitmap("Imgs/nonca.png");
-	notaTatu->bitmap = al_load_bitmap("Imgs/ntatu.png");
-	notaJacare->bitmap = al_load_bitmap("Imgs/njacare.png");
-	notaMico->bitmap = al_load_bitmap("Imgs/nmico.png");
+	notaOnca->bitmap = al_load_bitmap("Imgs/Brasil/nonca.png");
+	notaTatu->bitmap = al_load_bitmap("Imgs/Brasil/ntatu.png");
+	notaJacare->bitmap = al_load_bitmap("Imgs/Brasil/njacare.png");
+	notaMico->bitmap = al_load_bitmap("Imgs/Brasil/nmico.png");
 
-	marcaOnca->bitmap = al_load_bitmap("Imgs/monca.png");
-	marcaTatu->bitmap = al_load_bitmap("Imgs/mtatu.png");
-	marcaJacare->bitmap = al_load_bitmap("Imgs/mjacare.png");
-	marcaMico->bitmap = al_load_bitmap("Imgs/mmico.png");
+	marcaOnca->bitmap = al_load_bitmap("Imgs/Brasil/monca.png");
+	marcaTatu->bitmap = al_load_bitmap("Imgs/Brasil/mtatu.png");
+	marcaJacare->bitmap = al_load_bitmap("Imgs/Brasil/mjacare.png");
+	marcaMico->bitmap = al_load_bitmap("Imgs/Brasil/mmico.png");
 	postIt3->bitmap = al_load_bitmap("Imgs/postitHomem.png");
 	
 	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
+
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 
@@ -194,6 +195,13 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
 				arrastando = 0;
+
+				if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
+				{
+					prog->Salas[5] = 1;
+					postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
+					postIt3->y = ALTURA_TELA - postIt3->altura;
+				}
 			}
 
 			ALLEGRO_MOUSE_STATE state;
@@ -230,14 +238,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				default:
 					break;
 				}
-			}
-
-			if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
-			{
-				prog->Salas[5] = 1;
-				postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
-				postIt3->y = ALTURA_TELA - postIt3->altura;
-			}
+			}			
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
