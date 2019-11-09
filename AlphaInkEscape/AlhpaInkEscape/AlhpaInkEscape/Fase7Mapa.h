@@ -12,7 +12,7 @@
 #include <string.h>
 
 
-
+//a
 int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -45,7 +45,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	campo1->largura = 500;
 	campo1->x = 0;
 	campo1->y = ALTURA_TELA - campo1->altura;
-	
+
 	Objeto* campoesquerda;
 	campoesquerda = (Objeto*)malloc(sizeof(Objeto));
 	campoesquerda->bitmap = NULL;
@@ -236,8 +236,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/setaT.png");
 	ALLEGRO_BITMAP* seta3 = al_load_bitmap("Imgs/setaQ.png");
 	ALLEGRO_BITMAP* seta4 = al_load_bitmap("Imgs/setaN.png");
-	ALLEGRO_BITMAP* itens[] = {seta1, seta2, seta3, seta4};
-	
+	ALLEGRO_BITMAP* itens[] = { seta1, seta2, seta3, seta4 };
+
 
 	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/cimaMapa.png");
 	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
@@ -469,8 +469,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
-
-
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
 				prog->proximaSala = 3;
@@ -485,6 +483,10 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			{
 				prog->proximaSala = 11;
 				sair = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+			{
+				aberto = !aberto;
 			}
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
@@ -545,7 +547,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		//===========================================DESENHAR========================================================================
 		al_draw_bitmap(background, 0, 0, 0);
 		/*if (prog->Salas[0])*/
-			al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
+		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 
 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
@@ -577,7 +579,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(toronto->bitmap, toronto->x, toronto->y, 0);
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
 
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}
@@ -614,7 +616,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	al_destroy_bitmap(item2->bitmap);
 	al_destroy_bitmap(item3->bitmap);
 	al_destroy_bitmap(item4->bitmap);
-	//a
+
+
 	free(SaidaBaixo);
 	free(SaidaCima);
 	free(SaidaEsquerda);
@@ -625,7 +628,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	free(bola);
 	free(conta);
 
-	//a
 	free(item);
 	free(item2);
 	free(item3);
