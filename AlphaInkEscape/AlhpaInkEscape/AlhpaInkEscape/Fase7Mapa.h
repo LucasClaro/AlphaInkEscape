@@ -12,7 +12,7 @@
 #include <string.h>
 
 
-
+//a
 int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
