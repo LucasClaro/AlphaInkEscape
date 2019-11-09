@@ -74,7 +74,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
 	SaidaDireita->bitmap = al_load_bitmap("Imgs/Direita.png");
-	PostIt->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+	PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 	mural = al_load_bitmap("Imgs/Separacao.png");
@@ -128,7 +128,16 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					//i* ALTURA_TELA / 10 
 					progresso->inventClick[1] = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
+				else if (progresso->Itens[2] != NULL)
+				{
+					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
+					{
+						//i* ALTURA_TELA / 10 
+						progresso->inventClick[2] = 1;
+					}
+				}
+
+				if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
 					Arrastando = 1;
 					progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
 					progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
@@ -142,6 +151,14 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					Arrastando = 3;
 					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
 					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
+				}
+				else if (progresso->Itens[2] != NULL)
+				{
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[2]) && !Arrastando) {
+						Arrastando = 4;
+						progresso->Itens[2]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[2]->x);
+						progresso->Itens[2]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[2]->y);
+					}
 				}
 				else
 				{
@@ -176,7 +193,12 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						PostIt->y = evento.mouse.y - PostIt->cliqueY;
 					}
 					break;
-				
+				case 4:
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, progresso->Itens[2])) {
+						progresso->Itens[2]->x = evento.mouse.x - progresso->Itens[2]->cliqueX;
+						progresso->Itens[2]->y = evento.mouse.y - progresso->Itens[2]->cliqueY;
+					}
+					break;
 				default: Arrastando = 0;
 					break;
 				}
@@ -186,7 +208,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
 			}*/
 
-			if (IsInsideImagem(progresso->Itens[0], fundoA) && IsInsideImagem(progresso->Itens[1], fundoB))
+			if (IsInsideImagem(progresso->Itens[0], fundoA) && IsInsideImagem(progresso->Itens[1], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
 			{
 				printf("OK");
 			}
@@ -208,6 +230,9 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		if (progresso->inventClick[1])
 			al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
 
+		if (progresso->inventClick[2])
+			al_draw_bitmap(progresso->Itens[2]->bitmap, progresso->Itens[2]->x, progresso->Itens[2]->y, 0);
+
 		caregaInventario(progresso);
 		al_flip_display();
 	}
@@ -225,7 +250,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	free(SaidaCima);
 	free(SaidaEsquerda);
 	free(SaidaDireita);
-	free(PostIt);
+	//free(PostIt);
 	free(fundoA);
 	free(fundoB);
 	free(fundoC);

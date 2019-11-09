@@ -121,7 +121,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->bitmap = al_load_bitmap("Imgs/Brasil/mtatu.png");
 	marcaJacare->bitmap = al_load_bitmap("Imgs/Brasil/mjacare.png");
 	marcaMico->bitmap = al_load_bitmap("Imgs/Brasil/mmico.png");
-	postIt3->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+	postIt3->bitmap = al_load_bitmap("Imgs/PostIts/postMonet.png");
 	
 	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
 
@@ -265,7 +265,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(marcaMico->bitmap, marcaMico->x, marcaMico->y, 0);
 		}
 
-		if (prog->Salas[5] && !prog->Inventario[1])//arrumar
+		if (prog->Salas[5] && !prog->Inventario[1])
 		{
 			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
 		}

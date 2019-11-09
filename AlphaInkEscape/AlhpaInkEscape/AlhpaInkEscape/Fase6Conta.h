@@ -143,7 +143,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	
 	Objeto* bola;
 	bola = (Objeto*)malloc(sizeof(Objeto));
-	bola->bitmap = al_load_bitmap("Imgs/monca.png");
+	bola->bitmap = al_load_bitmap("Imgs/C.png");
 	bola->altura = 50;
 	bola->largura = 50;
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);

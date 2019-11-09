@@ -40,7 +40,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	postIt4->y = -500;
 	postIt4->bitmap = NULL;
 	
-	postIt4->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+	postIt4->bitmap = al_load_bitmap("Imgs/PostIts/postVan.png");
 
 	Objeto* conta1;
 	conta1 = (Objeto*)malloc(sizeof(Objeto));
@@ -344,7 +344,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_text(enigma, al_map_rgb(cor[3], 0, 0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
 		}
 
-		if (prog->Salas[1] && !prog->Inventario[0])//arrumar
+		if (prog->Salas[1] && !prog->Inventario[0])
 		{
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}

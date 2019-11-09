@@ -12,9 +12,24 @@
 Objeto* D1, * D2, * D3, * E4, * E5, * E6;
 Objeto* saidaDireita, * saidaCima;
 Objeto* Reset;
+Objeto* PostIt2;
 
-int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
-	
+int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) 
+{
+	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	saidaDireita->bitmap = NULL;
+	saidaDireita->x = LARGURA_TELA - 20;
+	saidaDireita->y = ALTURA_TELA / 2 - 10;
+	saidaDireita->largura = 20;
+	saidaDireita->altura = 20;
+
+	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	saidaCima->bitmap = NULL;
+	saidaCima->x = LARGURA_TELA / 2 - 10;
+	saidaCima->y = 0;
+	saidaCima->largura = 20;
+	saidaCima->altura = 20;
+
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 	Reset->x = LARGURA_TELA/2 - 50 + 70;
@@ -64,11 +79,21 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	E6->largura = 125;
 	E6->altura = 83;
 
+	PostIt2 = (Objeto*)malloc(sizeof(Objeto));
+	PostIt2->altura = 183;
+	PostIt2->largura = 201;
+	PostIt2->x = -500;
+	PostIt2->y = -500;
+	PostIt2->bitmap = NULL;
+
+	PostIt2->bitmap = al_load_bitmap("Imgs/PostIts/postDali.png");
+	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
+	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
 	int gameOver = 0;
 	int i;
-	int casas[7] = { 1,2,3,0,4,5,6 };
+	int casas[7] = { 1,2,3,0,4,5,6 }, correto[7] = { 4,5,6,0,1,2,3 };
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -84,7 +109,17 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {	
-				if (IsInside(evento.mouse.x, evento.mouse.y, Reset)) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
+				{
+					prog->proximaSala = 9;
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
+				{
+					prog->proximaSala = 14;
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, Reset) && !prog->Salas[13]) {
 					for (i = 0; i < 7; i++) {
 						casas[i] = i + 1;
 						if (i == 3)
@@ -159,7 +194,19 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 						casas[i] = 0;
 					}
 				}
-				for (i = 0; i < 7; i++) { printf("%d ", casas[i]); }printf("\n");
+				else if (IsInside(evento.mouse.x, evento.mouse.y, PostIt2) && !prog->Inventario[2])
+				{
+					prog->Itens[2] = PostIt2;
+					prog->Inventario[2] = 1;
+					prog->inventCount++;
+				}
+				//for (i = 0; i < 7; i++) { printf("%d ", casas[i]); }printf("\n");
+			}
+			if (confere(casas, correto, 7))
+			{
+				prog->Salas[13] = 1;
+				PostIt2->x = (LARGURA_TELA / 2) - (PostIt2->largura / 2);
+				PostIt2->y = ALTURA_TELA - PostIt2->altura;
 			}
 		}
 
@@ -172,6 +219,9 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		al_draw_bitmap(Background, 0, 0, 0);
 
+		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
+
 		al_draw_bitmap(D1->bitmap, D1->x, D1->y, 0);
 		al_draw_bitmap(D2->bitmap, D2->x, D2->y, 0);
 		al_draw_bitmap(D3->bitmap, D3->x, D3->y, 0);
@@ -182,11 +232,22 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
 
+		if (prog->Salas[13] && !prog->Inventario[2])
+		{
+			al_draw_bitmap(PostIt2->bitmap, PostIt2->x, PostIt2->y, 0);
+		}
+
 		caregaInventario(prog);
 		al_flip_display();
 	}
 
 	//Destroys	
+	al_destroy_bitmap(saidaDireita->bitmap);
+	al_destroy_bitmap(saidaCima->bitmap);
+
+
+	free(saidaDireita);
+	free(saidaCima);
 }
 
 int IndexOf(int x, int v[]) {
@@ -197,3 +258,15 @@ int IndexOf(int x, int v[]) {
 	}
 }
 
+int confere(int *v, int *c, int tam)
+{
+	int i = 0;
+	while (v[i] == c[i] && i < tam)
+	{
+		i++;
+	}
+	if (i == tam)
+		return 1;
+
+	return 0;
+}

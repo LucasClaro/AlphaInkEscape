@@ -101,6 +101,7 @@ int main(void) {
 	progresso.Salas[9] = 0;
 	progresso.Salas[10] = 0;
 	progresso.Salas[11] = 0;
+	progresso.Salas[13] = 0;
 	progresso.Salas[15] = 0;
 
 	progresso.Inventario[0] = 0;
@@ -111,6 +112,7 @@ int main(void) {
 	progresso.Inventario[5] = 0;
 	progresso.Inventario[6] = 0;
 
+	progresso.Itens[2] = NULL;
 	progresso.Itens[3] = NULL;
 	
 	progresso.inventCount = 0;
