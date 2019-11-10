@@ -103,14 +103,14 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
 	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
 	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
-	Reset->bitmap = al_load_bitmap("Imgs/xadrez/reset.png");
+	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 
 	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
 	peao2->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
 	peao3->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
 	bispo->bitmap = al_load_bitmap("Imgs/xadrez/bispo.png");
-	torre1->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	torre2->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
+	torre1->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	rei->bitmap = al_load_bitmap("Imgs/xadrez/rei.png");
 
 	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
