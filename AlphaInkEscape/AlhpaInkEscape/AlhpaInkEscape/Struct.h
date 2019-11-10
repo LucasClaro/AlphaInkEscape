@@ -6,6 +6,8 @@
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
 
+#include <allegro5/allegro_font.h>
+
 #ifndef Struct_H
 #define Struct_H
 
@@ -37,6 +39,10 @@ typedef struct prog
 	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
 	int inventCount;//contador de itens no  inventario
 	int inventClick[TAMANHO_INVENTARIO];//saber qual item ja foi usado no inventario
+	Objeto* miniMapa;
+	Objeto* btnMiniMapa;
+	Objeto* xMiniMapa;
+	ALLEGRO_FONT* fonte;
 } Progresso;
 
 typedef struct fila {

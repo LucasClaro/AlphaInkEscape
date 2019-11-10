@@ -9,6 +9,7 @@
 #include "Funcoes.h"
 #include "Struct.h"
 #include "FaseController.h"
+Objeto* miniMapa = NULL;
 
 int main(void) {
 	ALLEGRO_DISPLAY* janela = NULL;
@@ -76,7 +77,7 @@ int main(void) {
 
 		return -1;
 	}
-
+	
 	// Registra eventos da janela em fila_eventos
 	al_register_event_source(fila_eventos, al_get_display_event_source(janela));
 	// Registra eventos da janela em fila_eventos
@@ -123,6 +124,28 @@ int main(void) {
 	progresso.inventClick[5] = 0;
 	progresso.inventClick[6] = 0;
 
+	progresso.miniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.miniMapa->bitmap = al_load_bitmap("Imgs/MiniMapa/mapa.png");
+	progresso.miniMapa->altura = 448;
+	progresso.miniMapa->largura = 968;
+	progresso.miniMapa->x = (LARGURA_TELA / 2) - (progresso.miniMapa->largura / 2);
+	progresso.miniMapa->y = (ALTURA_TELA / 2) - (progresso.miniMapa->altura / 2);
+
+	progresso.btnMiniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.btnMiniMapa->bitmap = al_load_bitmap("Imgs/botao.png");
+	progresso.btnMiniMapa->altura = 83;
+	progresso.btnMiniMapa->largura = 83;
+	progresso.btnMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.btnMiniMapa->largura / 2);
+	progresso.btnMiniMapa->y = progresso.btnMiniMapa->altura / 4;
+
+	progresso.xMiniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.xMiniMapa->bitmap = al_load_bitmap("Imgs/xis.png");
+	progresso.xMiniMapa->altura = 83;
+	progresso.xMiniMapa->largura = 83;
+	progresso.xMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.xMiniMapa->largura / 2);
+	progresso.xMiniMapa->y = progresso.xMiniMapa->altura / 4;
+
+	progresso.fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;

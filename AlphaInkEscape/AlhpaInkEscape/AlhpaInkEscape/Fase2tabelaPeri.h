@@ -204,6 +204,10 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 					C->cliqueX = MapearDistancia(evento.mouse.x, C->x);
 					C->cliqueY = MapearDistancia(evento.mouse.y, C->y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else
 				{
 					Arrastando = 0;
@@ -302,7 +306,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 			al_draw_bitmap(Na->bitmap, fundoNa->x+5, fundoNa->y+5, 0);
 			al_draw_bitmap(C->bitmap, fundoC->x+5, fundoC->y+5, 0);
 		}
-		
+
+		abrirMapa(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

@@ -159,6 +159,10 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 						casas[i] = 0;
 					}
 				}
+				else if(IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				for (i = 0; i < 7; i++) { printf("%d ", casas[i]); }printf("\n");
 			}
 		}
@@ -181,7 +185,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(E6->bitmap, E6->x, E6->y, 0);
 
 		al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

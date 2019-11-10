@@ -21,14 +21,13 @@ typedef struct EnigmaStr
 Objeto* postIt4 = NULL;
 bool sobreposto = false;
 ALLEGRO_BITMAP* fundo = NULL;
-
+ALLEGRO_FONT* enigma = NULL;
 
 int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
 	bool sair = false;
 	//ponteiros
 	ALLEGRO_DISPLAY* display = NULL;
-	ALLEGRO_FONT* enigma = NULL;
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
 
@@ -249,6 +248,10 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				cor[2] = 0;
 				cor[3] = 255;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+			{
+				aberto = !aberto;
+			}
 			else {
 				cor[0] = 0;
 				cor[1] = 0;
@@ -348,6 +351,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		{
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

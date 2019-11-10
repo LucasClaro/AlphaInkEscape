@@ -101,6 +101,10 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo)) {
 				verDigitado = 1;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+			{
+				aberto = !aberto;
+			}
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER && strncmp(enigma1->enigmaCerto, arrEnigma, 7) == 0)
@@ -127,10 +131,11 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 		if(!prog->Inventario[3])
 			al_draw_bitmap(postIt5->bitmap, postIt5->x, postIt5->y, 0);
-
-		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
+
+
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

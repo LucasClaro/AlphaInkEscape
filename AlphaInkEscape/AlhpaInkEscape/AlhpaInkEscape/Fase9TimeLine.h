@@ -354,6 +354,10 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					eventos[5 + 6 * linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[5 + 6 * linhaInGame].x);
 					eventos[5 + 6 * linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[5 + 6 * linhaInGame].y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else {
 					arrastando = 0;
 				}
@@ -473,7 +477,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				al_draw_bitmap(eventos[i].bitmap, eventos[i].x, eventos[i].y, 0);
 			}
 		}
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

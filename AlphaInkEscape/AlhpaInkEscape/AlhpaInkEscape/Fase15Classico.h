@@ -253,6 +253,10 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto4;
 						aux = Foto4->y;
 					}
+					else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+					{
+						aberto = !aberto;
+					}
 				}				
 				else {
 					arrastando = 0;
@@ -415,7 +419,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_draw_bitmap(Foto2->bitmap, Foto2->x, Foto2->y, 0);
 		al_draw_bitmap(Foto3->bitmap, Foto3->x, Foto3->y, 0);
 		al_draw_bitmap(Foto4->bitmap, Foto4->x, Foto4->y, 0);
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

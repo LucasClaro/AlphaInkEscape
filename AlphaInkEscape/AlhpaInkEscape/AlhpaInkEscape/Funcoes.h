@@ -11,6 +11,10 @@
 #ifndef Funcoes_H
 #define Funcoes_H
 ALLEGRO_BITMAP * usado = NULL;
+bool aberto = false;
+
+
+
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -53,6 +57,40 @@ int caregaInventario(Progresso *prog)
 			if (prog->inventClick[i])
 				al_draw_bitmap(usado, 25, ((i * ALTURA_TELA / 10) + 25), 0);
 		}		
+	}
+}
+
+int abrirMapa(Progresso* prog) {
+	al_draw_bitmap(prog->btnMiniMapa->bitmap, prog->btnMiniMapa->x, prog->btnMiniMapa->y, 0);
+	int x = 0;
+	int y = 0;
+
+
+	if (aberto) {
+		switch (prog->proximaSala) {
+			case 1:
+				break;
+			case 2:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 4;
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
+			case 7:
+				break;
+			case 8:
+				break;
+		}
+		al_draw_bitmap(prog->miniMapa->bitmap, prog->miniMapa->x, prog->miniMapa->y, 0);
+		al_draw_text(prog->fonte, al_map_rgb(0,0,0), x,y,0, "X" );
 	}
 }
 

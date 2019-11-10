@@ -204,6 +204,10 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				{
 					reseta();
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else
 				{
 					Arrastando = 0;
@@ -611,7 +615,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 		if(errado)
 			al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
-
+		abrirMapa(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

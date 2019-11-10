@@ -67,7 +67,7 @@ int DeQueue(Fila* f) {
 		return x;
 	}
 }
-//a
+
 int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -129,6 +129,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	campodireita->x = 1100;
 	campodireita->y = 350;
 
+	
 	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/botao.png");
 	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/botaopressed.png");
 
@@ -143,7 +144,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	
 	Objeto* bola;
 	bola = (Objeto*)malloc(sizeof(Objeto));
-	bola->bitmap = al_load_bitmap("Imgs/monca.png");
+	bola->bitmap = al_load_bitmap("Imgs/posi.png");
 	bola->altura = 50;
 	bola->largura = 50;
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
@@ -199,7 +200,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
 					bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
 			}
-			
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campoesquerda)) {
 				if (!pressionado && state.buttons & 1)
 				{
@@ -227,8 +227,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				if (VerificaFila(f, vetorResposta))
 					prog->Salas[6] = 1;
 			}
-
-
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
 				prog->proximaSala = 2;
@@ -248,6 +246,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			{
 				prog->proximaSala = 10;
 				sair = 1;
+			}
+			else if(IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+			{
+				aberto = !aberto;
 			}
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
@@ -316,6 +318,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
 		
+		
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 

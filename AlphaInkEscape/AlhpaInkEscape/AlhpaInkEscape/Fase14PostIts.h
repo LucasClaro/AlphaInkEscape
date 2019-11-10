@@ -143,6 +143,10 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
 					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else
 				{
 					Arrastando = 0;
@@ -208,6 +212,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		if (progresso->inventClick[1])
 			al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
 
+		abrirMapa(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

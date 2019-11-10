@@ -188,6 +188,10 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					prog->Inventario[1] = 1;
 					prog->inventCount++;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else {
 					arrastando = 0;
 				}
@@ -269,7 +273,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		{
 			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
 		}
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

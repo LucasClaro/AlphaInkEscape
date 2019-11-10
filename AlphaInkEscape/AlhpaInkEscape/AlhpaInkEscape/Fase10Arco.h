@@ -194,6 +194,10 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					marcaH->cliqueX = MapearDistancia(evento.mouse.x, marcaH->x);
 					marcaH->cliqueY = MapearDistancia(evento.mouse.y, marcaH->y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
 				else {
 					arrastando = 0;
 				}
@@ -275,7 +279,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			al_draw_bitmap(alvo2->bitmap, alvo2->x, alvo2->y, 0);
 		if (!acertos[2])
 			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
-
+		abrirMapa(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}
