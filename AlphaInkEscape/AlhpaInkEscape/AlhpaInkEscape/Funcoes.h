@@ -69,24 +69,52 @@ int abrirMapa(Progresso* prog) {
 	if (aberto) {
 		switch (prog->proximaSala) {
 			case 1:
+				x = LARGURA_TELA / 4 + 110;
+				y = ALTURA_TELA / 4;
 				break;
 			case 2:
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 4;
 				break;
 			case 3:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
 				break;
 			case 4:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
 				break;
 			case 5:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
 				break;
 			case 6:
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 2;
 				break;
 			case 7:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
 				break;
 			case 8:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
+			case 9:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
+			case 10:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
+			case 11:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
+			case 12:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
 				break;
 		}
 		al_draw_bitmap(prog->miniMapa->bitmap, prog->miniMapa->x, prog->miniMapa->y, 0);
