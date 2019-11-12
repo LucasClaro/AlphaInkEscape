@@ -18,7 +18,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	ALLEGRO_BITMAP* peaoazul1 = NULL, * peaoazul2 = NULL, * peaoazul3 = NULL, * bispoazul = NULL, * torreazul1 = NULL, * torreazul2 = NULL, * reiazul = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * tab = NULL,* podeAndar = NULL,* checkmate = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * tab = NULL,* podeAndar = NULL,* checkmate = NULL, * texto = NULL;
 
 	if(!progresso->Salas[11])
 		incializaTabuleiro();
@@ -125,6 +125,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	tab = al_load_bitmap("Imgs/xadrez/tabuleiro.png");
 	podeAndar = al_load_bitmap("Imgs/xadrez/podeandar.png");
 	checkmate = al_load_bitmap("Imgs/xadrez/checkmate.png");
+	texto = al_load_bitmap("Imgs/xadrez/texto.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -583,6 +584,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 		al_draw_bitmap(Background, 0, 0, 0);
 		al_draw_bitmap(tab, 135, 98, 0);
+		al_draw_bitmap(texto, 110 + (LARGURA_TELA/2) - (688/2) , 20, 0);
 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
@@ -641,6 +643,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	al_destroy_bitmap(tab);
 	al_destroy_bitmap(podeAndar);
 	al_destroy_bitmap(checkmate);
+	al_destroy_bitmap(texto);
 
 	//al_destroy_bitmap(item->bitmap);
 
