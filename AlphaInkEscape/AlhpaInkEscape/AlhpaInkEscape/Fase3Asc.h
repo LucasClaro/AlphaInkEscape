@@ -59,7 +59,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 	Objeto* campo;
 	campo = (Objeto*)malloc(sizeof(Objeto));
-	campo->bitmap = al_load_bitmap("Imgs/slide6.png");
+	campo->bitmap = al_load_bitmap("Imgs/Binary/slide6.png");
 	campo->altura = 250;
 	campo->largura = 500;
 	campo->x = (LARGURA_TELA / 2) - (campo->largura / 2) + 110;

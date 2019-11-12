@@ -612,10 +612,10 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	al_destroy_bitmap(caixa2->bitmap);
 	al_destroy_bitmap(caixa3->bitmap);
 	al_destroy_bitmap(caixa4->bitmap);
-	al_destroy_bitmap(item->bitmap);
-	al_destroy_bitmap(item2->bitmap);
-	al_destroy_bitmap(item3->bitmap);
-	al_destroy_bitmap(item4->bitmap);
+	//al_destroy_bitmap(item->bitmap);
+	//al_destroy_bitmap(item2->bitmap);
+	//al_destroy_bitmap(item3->bitmap);
+	//al_destroy_bitmap(item4->bitmap);
 
 
 	free(SaidaBaixo);

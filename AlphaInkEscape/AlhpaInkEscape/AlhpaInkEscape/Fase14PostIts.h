@@ -119,19 +119,19 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					progresso->proximaSala = 15;
 					gameOver = 1;
 				}
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >=0 && evento.mouse.y <= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
 				{
 					//i* ALTURA_TELA / 10 
 					progresso->inventClick[0] = 1;
 				}
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && evento.mouse.y <= ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
+				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && evento.mouse.y <= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
 				{
 					//i* ALTURA_TELA / 10 
 					progresso->inventClick[1] = 1;
 				}
 				else if (progresso->Itens[2] != NULL)
 				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
+					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= 95 + ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
 					{
 						//i* ALTURA_TELA / 10 
 						progresso->inventClick[2] = 1;

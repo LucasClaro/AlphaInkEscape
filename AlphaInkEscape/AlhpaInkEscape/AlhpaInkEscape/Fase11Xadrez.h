@@ -113,9 +113,9 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	torre1->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	rei->bitmap = al_load_bitmap("Imgs/xadrez/rei.png");
 
-	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
-	peaoazul2 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
-	peaoazul3 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul6.png");
+	peaoazul2 = al_load_bitmap("Imgs/xadrez/peaoazul6.png");
+	peaoazul3 = al_load_bitmap("Imgs/xadrez/peaoazul6.png");
 	bispoazul = al_load_bitmap("Imgs/xadrez/bispoazul.png");
 	torreazul1 = al_load_bitmap("Imgs/xadrez/torreazul.png");
 	torreazul2 = al_load_bitmap("Imgs/xadrez/torreazul.png");
