@@ -247,24 +247,24 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	eventos[3].bitmap = al_load_bitmap("Imgs/Timeline/4.png");
 	eventos[4].bitmap = al_load_bitmap("Imgs/Timeline/5.png");
 	eventos[5].bitmap = al_load_bitmap("Imgs/Timeline/6.png");
-	eventos[6].bitmap = al_load_bitmap("Imgs/Timeline/1.png");
-	eventos[7].bitmap = al_load_bitmap("Imgs/Timeline/2.png");
-	eventos[8].bitmap = al_load_bitmap("Imgs/Timeline/3.png");
-	eventos[9].bitmap = al_load_bitmap("Imgs/Timeline/4.png");
-	eventos[10].bitmap = al_load_bitmap("Imgs/Timeline/5.png");
-	eventos[11].bitmap = al_load_bitmap("Imgs/Timeline/6.png");
-	eventos[12].bitmap = al_load_bitmap("Imgs/Timeline/1.png");
-	eventos[13].bitmap = al_load_bitmap("Imgs/Timeline/2.png");
-	eventos[14].bitmap = al_load_bitmap("Imgs/Timeline/3.png");
-	eventos[15].bitmap = al_load_bitmap("Imgs/Timeline/4.png");
-	eventos[16].bitmap = al_load_bitmap("Imgs/Timeline/5.png");
-	eventos[17].bitmap = al_load_bitmap("Imgs/Timeline/6.png");
-	eventos[18].bitmap = al_load_bitmap("Imgs/Timeline/1.png");
-	eventos[19].bitmap = al_load_bitmap("Imgs/Timeline/2.png");
-	eventos[20].bitmap = al_load_bitmap("Imgs/Timeline/3.png");
-	eventos[21].bitmap = al_load_bitmap("Imgs/Timeline/4.png");
-	eventos[22].bitmap = al_load_bitmap("Imgs/Timeline/5.png");
-	eventos[23].bitmap = al_load_bitmap("Imgs/Timeline/6.png");
+	eventos[6].bitmap = al_load_bitmap("Imgs/Timeline/7.png");
+	eventos[7].bitmap = al_load_bitmap("Imgs/Timeline/8.png");
+	eventos[8].bitmap = al_load_bitmap("Imgs/Timeline/9.png");
+	eventos[9].bitmap = al_load_bitmap("Imgs/Timeline/10.png");
+	eventos[10].bitmap = al_load_bitmap("Imgs/Timeline/11.png");
+	eventos[11].bitmap = al_load_bitmap("Imgs/Timeline/12.png");
+	eventos[12].bitmap = al_load_bitmap("Imgs/Timeline/13.png");
+	eventos[13].bitmap = al_load_bitmap("Imgs/Timeline/14.png");
+	eventos[14].bitmap = al_load_bitmap("Imgs/Timeline/15.png");
+	eventos[15].bitmap = al_load_bitmap("Imgs/Timeline/16.png");
+	eventos[16].bitmap = al_load_bitmap("Imgs/Timeline/17.png");
+	eventos[17].bitmap = al_load_bitmap("Imgs/Timeline/18.png");
+	eventos[18].bitmap = al_load_bitmap("Imgs/Timeline/19.png");
+	eventos[19].bitmap = al_load_bitmap("Imgs/Timeline/20.png");
+	eventos[20].bitmap = al_load_bitmap("Imgs/Timeline/21.png");
+	eventos[21].bitmap = al_load_bitmap("Imgs/Timeline/22.png");
+	eventos[22].bitmap = al_load_bitmap("Imgs/Timeline/23.png");
+	eventos[23].bitmap = al_load_bitmap("Imgs/Timeline/24.png");
 
 	notas[0].bitmap = al_load_bitmap("Imgs/Timeline/n1.png");
 	notas[1].bitmap = al_load_bitmap("Imgs/Timeline/n2.png");
@@ -423,8 +423,6 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 
 		al_draw_bitmap(Background, 0, 0, 0);
-
-		printf("%d", prog->Salas[9]);
 
 		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		if (prog->Salas[9])
