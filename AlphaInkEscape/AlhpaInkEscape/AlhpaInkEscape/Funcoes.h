@@ -58,7 +58,7 @@ int caregaInventario(Progresso *prog)
 
 int loadFotoInvent()
 {
-	usado = al_load_bitmap("Imgs/apagar.png");
+	usado = al_load_bitmap("Imgs/jausada.png");
 }
 
 #endif

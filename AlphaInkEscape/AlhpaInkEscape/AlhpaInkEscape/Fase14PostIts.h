@@ -77,7 +77,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
 
 	Background = al_load_bitmap("Imgs/fundo.png");
-	mural = al_load_bitmap("Imgs/Separacao.png");
+	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -208,9 +208,9 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
 			}*/
 
-			if (IsInsideImagem(progresso->Itens[0], fundoA) && IsInsideImagem(progresso->Itens[1], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
+			if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
 			{
-				printf("OK");
+				progresso->Salas[14] = 1;
 			}
 
 		}
@@ -222,16 +222,33 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
 
-		al_draw_bitmap(PostIt->bitmap, PostIt->x, PostIt->y, 0);
+		if (!progresso->Salas[14])
+		{
+			al_draw_bitmap(PostIt->bitmap, PostIt->x, PostIt->y, 0);
 
-		if(progresso->inventClick[0])
-			al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
+			if (progresso->inventClick[0])
+				al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
 
-		if (progresso->inventClick[1])
-			al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
+			if (progresso->inventClick[1])
+				al_draw_bitmap(progresso->Itens[1]->bitmap, progresso->Itens[1]->x, progresso->Itens[1]->y, 0);
 
-		if (progresso->inventClick[2])
-			al_draw_bitmap(progresso->Itens[2]->bitmap, progresso->Itens[2]->x, progresso->Itens[2]->y, 0);
+			if (progresso->inventClick[2])
+				al_draw_bitmap(progresso->Itens[2]->bitmap, progresso->Itens[2]->x, progresso->Itens[2]->y, 0);
+		}
+		else
+		{
+			al_draw_bitmap(PostIt->bitmap, fundoD->x + 5, fundoD->y + 5, 0);
+
+			if (progresso->inventClick[0])
+				al_draw_bitmap(progresso->Itens[0]->bitmap, fundoB->x  + 5, fundoB->y + 5, 0);
+
+			if (progresso->inventClick[1])
+				al_draw_bitmap(progresso->Itens[1]->bitmap, fundoA->x + 5, fundoA->y + 5, 0);
+
+			if (progresso->inventClick[2])
+				al_draw_bitmap(progresso->Itens[2]->bitmap, fundoC->x + 5, fundoC->y + 5, 0);
+		}
+		
 
 		caregaInventario(progresso);
 		al_flip_display();
