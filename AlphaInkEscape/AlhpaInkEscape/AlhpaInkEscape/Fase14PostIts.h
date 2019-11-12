@@ -13,7 +13,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	Objeto* PostIt = NULL, *fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * mural = NULL;
+	ALLEGRO_BITMAP* Background = NULL, * mural = NULL, *posicionado = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -78,6 +78,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 	Background = al_load_bitmap("Imgs/fundo.png");
 	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
+	posicionado = al_load_bitmap("Imgs/PostIts/posicionado.png");
 
 	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
 	{
@@ -207,12 +208,56 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			{
 				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
 			}*/
-
-			if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
+			if (progresso->Itens[2] != NULL)
 			{
-				progresso->Salas[14] = 1;
+				if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
+				{
+					progresso->Salas[14] = 1;
+				}
 			}
 
+			if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(PostIt, fundoA))  
+				fundoA->bitmap = posicionado;
+			else
+				fundoA->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(PostIt, fundoB))
+				fundoB->bitmap = posicionado;
+			else
+				fundoB->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(PostIt, fundoC))
+				fundoC->bitmap = posicionado;
+			else
+				fundoC->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(PostIt, fundoD))// ||  IsInsideImagem(progresso->Itens[2], fundoA)
+				fundoD->bitmap = posicionado;
+			else
+				fundoD->bitmap = NULL;
+
+			if (progresso->Itens[2] != NULL)
+			{
+				if(IsInsideImagem(progresso->Itens[2], fundoA))
+					fundoA->bitmap = posicionado;
+				else
+					fundoA->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[2], fundoB))
+					fundoB->bitmap = posicionado;
+				else
+					fundoB->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[2], fundoC))
+					fundoC->bitmap = posicionado;
+				else
+					fundoC->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[2], fundoD))
+					fundoD->bitmap = posicionado;
+				else
+					fundoD->bitmap = NULL;
+			}
 		}
 
 		al_draw_bitmap(Background, 0, 0, 0);
@@ -221,6 +266,18 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
+
+		if (fundoA->bitmap != NULL)
+			al_draw_bitmap(fundoA->bitmap, fundoA->x+5, fundoA->y+5, 0);
+
+		if (fundoB->bitmap != NULL)
+			al_draw_bitmap(fundoB->bitmap, fundoB->x + 5, fundoB->y + 5, 0);
+
+		if (fundoC->bitmap != NULL)
+			al_draw_bitmap(fundoC->bitmap, fundoC->x + 5, fundoC->y + 5, 0);
+
+		if (fundoD->bitmap != NULL)
+			al_draw_bitmap(fundoD->bitmap, fundoD->x + 5, fundoD->y + 5, 0);
 
 		if (!progresso->Salas[14])
 		{
@@ -260,8 +317,14 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	al_destroy_bitmap(SaidaDireita->bitmap);
 	al_destroy_bitmap(PostIt->bitmap);
 
+	/*al_destroy_bitmap(fundoA->bitmap);
+	al_destroy_bitmap(fundoB->bitmap);
+	al_destroy_bitmap(fundoC->bitmap);
+	al_destroy_bitmap(fundoD->bitmap);*/
+
 	al_destroy_bitmap(Background);
 	al_destroy_bitmap(mural);
+	al_destroy_bitmap(posicionado);
 	//al_destroy_bitmap(item->bitmap);
 
 	free(SaidaCima);
