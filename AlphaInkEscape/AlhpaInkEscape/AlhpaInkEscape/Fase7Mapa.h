@@ -20,7 +20,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaBaixo->largura = 20;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2) - 100;
 	SaidaBaixo->y = ALTURA_TELA - (SaidaBaixo->altura * 2);
-	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixoV.png");
+	SaidaBaixo->bitmap = al_load_bitmap("Imgs/MapaFase7/baixoV.png");
 
 	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
@@ -54,8 +54,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	campoesquerda->x = 110;
 	campoesquerda->y = 350;
 
-	ALLEGRO_BITMAP* btn = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
+	ALLEGRO_BITMAP* btnPressionado = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
 	Objeto* campodireita;
 	campodireita = (Objeto*)malloc(sizeof(Objeto));
@@ -68,7 +68,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	//======================================IMAGENS=======================================================================
 	Objeto* brasil;
 	brasil = (Objeto*)malloc(sizeof(Objeto));
-	brasil->bitmap = al_load_bitmap("Imgs/Brasil.png");
+	brasil->bitmap = al_load_bitmap("Imgs/MapaFase7/Brasil.png");
 	brasil->altura = 250;
 	brasil->largura = 500;
 	brasil->x = 250;
@@ -76,7 +76,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 	Objeto* toronto;
 	toronto = (Objeto*)malloc(sizeof(Objeto));
-	toronto->bitmap = al_load_bitmap("Imgs/toronto.png");
+	toronto->bitmap = al_load_bitmap("Imgs/MapaFase7/toronto.png");
 	toronto->altura = 250;
 	toronto->largura = 500;
 	toronto->x = 750;
@@ -84,7 +84,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 	Objeto* londres;
 	londres = (Objeto*)malloc(sizeof(Objeto));
-	londres->bitmap = al_load_bitmap("Imgs/londres.png");
+	londres->bitmap = al_load_bitmap("Imgs/MapaFase7/londres.png");
 	londres->altura = 250;
 	londres->largura = 500;
 	londres->x = 750;
@@ -92,7 +92,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 	Objeto* china;
 	china = (Objeto*)malloc(sizeof(Objeto));
-	china->bitmap = al_load_bitmap("Imgs/china.png");
+	china->bitmap = al_load_bitmap("Imgs/MapaFase7/china.png");
 	china->altura = 250;
 	china->largura = 500;
 	china->x = 250;
@@ -232,35 +232,35 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	item4->y = 560;
 
 	//=========================================================================================================
-	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/setaZ.png");
-	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/setaT.png");
-	ALLEGRO_BITMAP* seta3 = al_load_bitmap("Imgs/setaQ.png");
-	ALLEGRO_BITMAP* seta4 = al_load_bitmap("Imgs/setaN.png");
+	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/MapaFase7/setaZ.png");
+	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/MapaFase7/setaT.png");
+	ALLEGRO_BITMAP* seta3 = al_load_bitmap("Imgs/MapaFase7/setaQ.png");
+	ALLEGRO_BITMAP* seta4 = al_load_bitmap("Imgs/MapaFase7/setaN.png");
 	ALLEGRO_BITMAP* itens[] = { seta1, seta2, seta3, seta4 };
 
 
-	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
+	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn3 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado3 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn3 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
+	ALLEGRO_BITMAP* btnPressionado3 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn4 = al_load_bitmap("Imgs/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado4 = al_load_bitmap("Imgs/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* btn4 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
+	ALLEGRO_BITMAP* btnPressionado4 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
 	//------------------------------------------------------------------------------------------------------------------------
 
-	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/baixoMapa.png");
-	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
+	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/baixoMapa.png");
-	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
+	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/baixoMapa.png");
-	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
+	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/baixoMapa.png");
-	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/baixoMapaPressionado.png");
+	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
 
 	Objeto* campo2;
