@@ -80,12 +80,8 @@ int abrirMapa(Progresso* prog) {
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 2;
 				break;
-			case 4:
-				x = LARGURA_TELA / 2 - 60;
-				y = ALTURA_TELA / 2;
-				break;
 			case 5:
-				x = LARGURA_TELA / 2 - 60;
+				x = LARGURA_TELA / 4 + 110;
 				y = ALTURA_TELA / 2;
 				break;
 			case 6:
@@ -96,12 +92,8 @@ int abrirMapa(Progresso* prog) {
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 2;
 				break;
-			case 8:
-				x = LARGURA_TELA / 2 - 60;
-				y = ALTURA_TELA / 2;
-				break;
 			case 9:
-				x = LARGURA_TELA / 2 - 60;
+				x = LARGURA_TELA / 4 + 110;
 				y = ALTURA_TELA / 2;
 				break;
 			case 10:
@@ -112,9 +104,18 @@ int abrirMapa(Progresso* prog) {
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 2;
 				break;
-			case 12:
+			case 13:
+				x = LARGURA_TELA / 4 + 110;
+				y = ALTURA_TELA / 4 * 2;
+				break;
+			case 14:
 				x = LARGURA_TELA / 2 - 60;
 				y = ALTURA_TELA / 2;
+				break;
+			case 15:
+				x = LARGURA_TELA / 2 - 60;
+				y = ALTURA_TELA / 2;
+				break;
 				break;
 		}
 		al_draw_bitmap(prog->miniMapa->bitmap, prog->miniMapa->x, prog->miniMapa->y, 0);

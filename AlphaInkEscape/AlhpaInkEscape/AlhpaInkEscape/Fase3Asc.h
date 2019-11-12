@@ -112,7 +112,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				prog->Salas[3] = 1;			
 				cor = 255;
 			}
-			else if (verDigitado && evento.keyboard.keycode != ALLEGRO_KEY_ENTER) {
+			else if (verDigitado && evento.keyboard.keycode != ALLEGRO_KEY_ENTER && !prog->Salas[3]) {
 				digitarCampoAsc(enigma1, arrEnigma, evento, sair, prog);
 			}
 		}
