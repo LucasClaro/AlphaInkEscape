@@ -126,6 +126,8 @@ int main(void) {
 	progresso.inventClick[5] = 0;
 	progresso.inventClick[6] = 0;
 
+	progresso.linhaInGame = 0;
+
 	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;

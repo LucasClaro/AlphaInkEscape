@@ -61,15 +61,15 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	marcaTatu = (Objeto*)malloc(sizeof(Objeto));
 	marcaTatu->bitmap = NULL;
-	marcaTatu->x = 476;
-	marcaTatu->y = 471;
+	marcaTatu->x = 435;
+	marcaTatu->y = 536;
 	marcaTatu->largura = 50;
 	marcaTatu->altura = 50;
 
 	marcaJacare = (Objeto*)malloc(sizeof(Objeto));
 	marcaJacare->bitmap = NULL;
-	marcaJacare->x = 435;
-	marcaJacare->y = 536;
+	marcaJacare->x = 476;
+	marcaJacare->y = 471;
 	marcaJacare->largura = 50;
 	marcaJacare->altura = 50;
 
