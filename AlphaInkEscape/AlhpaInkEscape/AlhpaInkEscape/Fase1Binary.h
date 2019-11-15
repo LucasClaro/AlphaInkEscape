@@ -207,6 +207,9 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 				
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
+			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
 			{
 				verCampo = 1;
@@ -339,6 +342,9 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		{
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}
+
+		som(prog);
+
 		caregaInventario(prog);
 		al_flip_display();
 	}

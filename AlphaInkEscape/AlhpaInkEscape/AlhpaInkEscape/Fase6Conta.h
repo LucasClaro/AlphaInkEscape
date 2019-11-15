@@ -148,8 +148,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
 	bola->y = (ALTURA_TELA / 4) - (bola->altura / 2);
 
-
-
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
@@ -225,6 +223,9 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					printf("Acertou!");
 					prog->Salas[6] = 1;
 				}
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
 			}
 
 
@@ -322,7 +323,15 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
 		
+
+
+
+
+		som(prog);
+
+			   		 	  	  	   	
 		caregaInventario(prog);
+
 		al_flip_display();
 
 	}

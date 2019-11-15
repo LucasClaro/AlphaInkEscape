@@ -9,6 +9,7 @@
 #include "Funcoes.h"
 #include "Struct.h"
 #include "FaseController.h"
+#include <allegro5/allegro_audio.h>
 
 int main(void) {
 	ALLEGRO_DISPLAY* janela = NULL;
@@ -135,6 +136,22 @@ int main(void) {
 	progresso.cenario->setaDireita = al_load_bitmap("Imgs/direita.png");
 	progresso.cenario->cadeado = al_load_bitmap("Imgs/cadeado.png");
 	progresso.cenario->background = al_load_bitmap("Imgs/fundo.png");
+	progresso.cenario->semSom = al_load_bitmap("Imgs/semaudio.png");
+	progresso.cenario->comSom = al_load_bitmap("Imgs/comaudio.png");
+
+
+	progresso.cenario->btnSom = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->btnSom->altura = 50;
+	progresso.cenario->btnSom->largura = 50;
+	progresso.cenario->btnSom->x = 500;
+	progresso.cenario->btnSom->y = 500;
+	progresso.cenario->btnSom->bitmap = progresso.cenario->comSom;
+	progresso.cenario->musica = al_load_audio_stream("sounds/musica.ogg", 4, 1024);
+
+
+	al_attach_audio_stream_to_mixer(progresso.cenario->musica, al_get_default_mixer());
+	al_set_audio_stream_playmode(progresso.cenario->musica, ALLEGRO_PLAYMODE_LOOP);
+	
 
 	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
