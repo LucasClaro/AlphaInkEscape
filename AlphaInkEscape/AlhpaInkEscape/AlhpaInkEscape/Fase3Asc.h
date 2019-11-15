@@ -40,13 +40,13 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	enigma1->acertou = false;
 	enigma1->verCampo = 1;
 
-	Objeto* setaDireita;
-	setaDireita = (Objeto*)malloc(sizeof(Objeto));
-	setaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-	setaDireita->altura = 20;
-	setaDireita->largura = 20;
-	setaDireita->x = 1200;
-	setaDireita->y = (ALTURA_TELA / 2);
+	Objeto* setaEsquerda;
+	setaEsquerda = (Objeto*)malloc(sizeof(Objeto));
+	setaEsquerda->bitmap = prog->cenario->setaEsquerda;
+	setaEsquerda->altura = 20;
+	setaEsquerda->largura = 20;
+	setaEsquerda->x = 110;
+	setaEsquerda->y = (ALTURA_TELA / 2) - (setaEsquerda->altura / 2);
 
 	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -54,7 +54,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	setaBaixo->largura = 20;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
-	setaBaixo->bitmap = al_load_bitmap("Imgs/direita.png");
+	setaBaixo->bitmap = prog->cenario->setaBaixo;
 
 
 	Objeto* campo;
@@ -87,9 +87,16 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 
-			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+			if (IsInside(evento.mouse.x, evento.mouse.y, setaEsquerda)) {
 				prog->proximaSala = 2;
 				//return;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				sair = true;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+				prog->proximaSala = 7;
+				//return;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, postIt5))
@@ -122,7 +129,8 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 
 		al_draw_bitmap(background, 0, 0, 0);
-		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+		al_draw_bitmap(setaEsquerda->bitmap, setaEsquerda->x, setaEsquerda->y, 0);
+		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 		if(!prog->Inventario[3])
@@ -136,14 +144,12 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	}
 
 
-	al_destroy_bitmap(setaDireita->bitmap);
-
 	al_destroy_display(display);
 
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);
 
-	free(setaDireita);
+	free(setaEsquerda);
 
 
 	return 0;

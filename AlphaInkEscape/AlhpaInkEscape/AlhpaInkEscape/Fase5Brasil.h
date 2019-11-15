@@ -12,7 +12,7 @@
 
 Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
 Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
-Objeto* saidaDireita, * saidaBaixo;// * saidaCima;
+
 Objeto* postIt3 = NULL;
 
 int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
@@ -80,8 +80,9 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaMico->largura = 50;
 	marcaMico->altura = 50;
 
+	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	saidaDireita->bitmap = NULL;
+	saidaDireita->bitmap = prog->cenario->setaDireita;
 	saidaDireita->x = LARGURA_TELA - 20;
 	saidaDireita->y = ALTURA_TELA/2 - 10;
 	saidaDireita->largura = 20;
@@ -101,14 +102,15 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaCima->largura = 20;
 	saidaCima->altura = 20;*/
 
+	Objeto* saidaBaixo;
 	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	saidaBaixo->bitmap = NULL;
+	saidaBaixo->bitmap = prog->cenario->setaBaixo;
 	saidaBaixo->x = LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
 	saidaBaixo->largura = 20;
 	saidaBaixo->altura = 20;
 
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
+	Background = prog->cenario->background;
 
 	mapa->bitmap = al_load_bitmap("Imgs/Brasil/biomas.png");
 
@@ -123,9 +125,6 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaMico->bitmap = al_load_bitmap("Imgs/Brasil/mmico.png");
 	postIt3->bitmap = al_load_bitmap("Imgs/PostIts/postMonet.png");
 	
-	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-
-
 	Background = al_load_bitmap("Imgs/fundo.png");
 
 	int gameOver = 0;
@@ -150,11 +149,13 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
 					prog->proximaSala = 6;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
 				{
 					prog->proximaSala = 6;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 
 				}
@@ -274,7 +275,6 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_flip_display();
 	}
 
-	al_destroy_bitmap(Background);
 	al_destroy_bitmap(mapa->bitmap);
 	free(mapa);
 
@@ -295,9 +295,8 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(marcaMico);
 	free(marcaOnca);
 	free(marcaTatu);
-	al_destroy_bitmap(saidaDireita->bitmap);
 
-	free(saidaDireita);
+	
 
 	return;
 }

@@ -11,6 +11,8 @@
 #ifndef Funcoes_H
 #define Funcoes_H
 ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL;
+bool tocando = true;
+
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -56,6 +58,25 @@ int caregaInventario(Progresso *prog)
 		}		
 	}
 }
+
+void som(Progresso *prog) {
+
+	al_draw_bitmap(prog->cenario->btnSom->bitmap, prog->cenario->btnSom->x, prog->cenario->btnSom->y,0);
+	
+	
+
+
+	if (tocando) {
+		prog->cenario->btnSom->bitmap = prog->cenario->comSom;
+		al_set_audio_stream_gain(prog->cenario->musica, 1.0);
+	}
+	else {
+		prog->cenario->btnSom->bitmap = prog->cenario->semSom;
+		al_set_audio_stream_gain(prog->cenario->musica, 0.0);
+	} 
+}
+
+
 
 int loadFotoInvent()
 {

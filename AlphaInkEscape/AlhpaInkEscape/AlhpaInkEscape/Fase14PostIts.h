@@ -20,21 +20,21 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaCima->altura = 20;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 0;
-	SaidaCima->bitmap = NULL;
+	SaidaCima->bitmap = progresso->cenario->setaCima;
 
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->altura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaCima->altura / 2);
-	SaidaEsquerda->bitmap = NULL;
+	SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 
 	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	SaidaDireita->largura = 20;
 	SaidaDireita->altura = 20;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
-	SaidaDireita->bitmap = NULL;
+	SaidaDireita->bitmap = progresso->cenario->cadeado;
 
 	PostIt = (Objeto*)malloc(sizeof(Objeto));
 	PostIt->altura = 183;
@@ -71,12 +71,10 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	fundoD->y = 485;
 	fundoD->bitmap = NULL;
 
-	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
-	SaidaDireita->bitmap = al_load_bitmap("Imgs/Direita.png");
+	
 	PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
 
-	Background = al_load_bitmap("Imgs/fundo.png");
+	Background = progresso->cenario->background;
 	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
 	posicionado = al_load_bitmap("Imgs/PostIts/posicionado.png");
 
@@ -107,16 +105,19 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 10;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 13;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita) && progresso->Salas[14])
 				{
 					progresso->proximaSala = 15;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
@@ -213,6 +214,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
 				{
 					progresso->Salas[14] = 1;
+					SaidaDireita->bitmap = progresso->cenario->setaDireita;
 				}
 			}
 
@@ -312,17 +314,12 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	}
 
 	//Desalocação das coisas
-	al_destroy_bitmap(SaidaCima->bitmap);
-	al_destroy_bitmap(SaidaEsquerda->bitmap);
-	al_destroy_bitmap(SaidaDireita->bitmap);
 	al_destroy_bitmap(PostIt->bitmap);
 
 	/*al_destroy_bitmap(fundoA->bitmap);
 	al_destroy_bitmap(fundoB->bitmap);
 	al_destroy_bitmap(fundoC->bitmap);
 	al_destroy_bitmap(fundoD->bitmap);*/
-
-	al_destroy_bitmap(Background);
 	al_destroy_bitmap(mural);
 	al_destroy_bitmap(posicionado);
 	//al_destroy_bitmap(item->bitmap);

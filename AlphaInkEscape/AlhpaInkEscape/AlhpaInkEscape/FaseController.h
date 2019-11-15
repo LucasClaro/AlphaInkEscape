@@ -19,6 +19,7 @@
 #include "Fase13Sapos.h"
 #include "Fase14PostIts.h"
 #include "Fase15Classico.h"
+#include "menu.h"
 
 #ifndef FaseController_H
 #define FaseController_H
@@ -28,9 +29,10 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 {
 	switch (progresso->proximaSala)
 	{
-	case 0: 
+	case 0:
+		JogarMenu(janela, fila_eventos, progresso);
 		return;
-	case 1: 
+	case 1:
 		JogarFase1Binary(janela, fila_eventos, progresso);
 		return;
 	case 2:
@@ -40,10 +42,10 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		return;
 	case 4: //
 		return;
-	case 5: 
+	case 5:
 		JogarFase5Brasil(janela, fila_eventos, progresso);
 		return;
-	case 6: 
+	case 6:
 		JogarFase6Conta(janela, fila_eventos, progresso);
 		return;
 	case 7: JogarFase7Mapa(janela, fila_eventos, progresso);
@@ -60,14 +62,15 @@ void selecionaFase(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		JogarFase11xadrez(janela, fila_eventos, progresso);
 		return;
 	case 13:
-		JogarFase13Sapos(janela,fila_eventos, progresso);
+		JogarFase13Sapos(janela, fila_eventos, progresso);
 		return;
-	case 14: 
+	case 14:
 		JogarFase14PostIts(janela, fila_eventos, progresso);
 		return;
 	case 15:
 		JogarFase15Classico(janela, fila_eventos, progresso);
 		return;
+
 	default: printf("Fase n�o encontrada");
 		break;
 	}

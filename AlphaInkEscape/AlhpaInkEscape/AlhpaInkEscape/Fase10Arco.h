@@ -12,7 +12,7 @@
 
 #define PI 3.14159265
 
-Objeto * saidaDireita, * saidaBaixo, * saidaCima;
+
 Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala;
 Objeto* alvo1, * alvo2, * alvo3;
 
@@ -81,32 +81,31 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	marcaV->largura = 30;
 	marcaV->altura = 10;
 
-	/*saidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	saidaDireita->bitmap = NULL;
-	saidaDireita->x = LARGURA_TELA - 20;
-	saidaDireita->y = ALTURA_TELA / 2 - 10;
-	saidaDireita->largura = 20;
-	saidaDireita->altura = 20;*/
+	Objeto* saidaEsquerda;
+	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
+	saidaEsquerda->bitmap = prog->cenario->cadeado;
+	saidaEsquerda->x = 110;
+	saidaEsquerda->y = ALTURA_TELA / 2 - 10;
+	saidaEsquerda->largura = 20;
+	saidaEsquerda->altura = 20;
 
+	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
-	saidaCima->bitmap = NULL;
+	saidaCima->bitmap = prog->cenario->setaCima;
 	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
 	saidaCima->largura = 20;
 	saidaCima->altura = 20;
 
+	Objeto* saidaBaixo;
 	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	saidaBaixo->bitmap = NULL;
+	saidaBaixo->bitmap = prog->cenario->cadeado;
 	saidaBaixo->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
 	saidaBaixo->largura = 20;
 	saidaBaixo->altura = 20;
 
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
-
-	saidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
-	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
-	//saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
+	ALLEGRO_BITMAP* Background = prog->cenario->background;
 
 	barraH->bitmap = al_load_bitmap("Imgs/Arco/barraH.png");
 	barraV->bitmap = al_load_bitmap("Imgs/Arco/barraV.png");
@@ -146,19 +145,22 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
 				{
 					prog->proximaSala = 14;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[10])
 				{
 					prog->proximaSala = 6;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 
 				}
-				//else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
-				//{
-				//	prog->proximaSala = 1;////////////////////////////////
-				//	gameOver = 1;
-				//}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda) && prog->Salas[10])
+				{
+					prog->proximaSala = 9;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaH))
 				{
 					arrastando = 1;
@@ -256,9 +258,18 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 		contador = CalcularTiro(angulo, velocidade, contador, acertos);
 
+		if (acertos[0] && acertos[1] && acertos[2])
+		{
+			prog->Salas[10] = 1;
+		}
+		if (prog->Salas[10]){
+			saidaBaixo->bitmap = prog->cenario->setaBaixo;
+			saidaEsquerda->bitmap = prog->cenario->setaEsquerda;
+		}
+
 		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
-		//al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		al_draw_bitmap(saidaEsquerda->bitmap, saidaEsquerda->x, saidaEsquerda->y, 0);
 
 		al_draw_bitmap(barraH->bitmap, barraH->x, barraH->y, 0);
 		al_draw_bitmap(barraV->bitmap, barraV->x, barraV->y, 0);
@@ -279,13 +290,9 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		caregaInventario(prog);
 		al_flip_display();
 	}
-	al_destroy_bitmap(Background);
 
-	//al_destroy_bitmap(saidaBaixo->bitmap);
-	al_destroy_bitmap(saidaCima->bitmap);
 	//al_destroy_bitmap(saidaDireita->bitmap);
 	//free(saidaBaixo);
-	free(saidaCima);
 	//free(saidaDireita);
 
 	return;
@@ -314,7 +321,6 @@ int CalcularTiro(int angulo, int velocidade, int cont, int* acertos) {
 				acertos[1] = 1;
 			if (IsInside(posX, posY, alvo3) && !acertos[2])
 				acertos[2] = 1;
-
 
 			al_draw_bitmap(bala->bitmap, posX, posY, 0);
 		}
