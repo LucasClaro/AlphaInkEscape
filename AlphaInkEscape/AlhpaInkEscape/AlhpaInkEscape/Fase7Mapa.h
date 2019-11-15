@@ -249,7 +249,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	ALLEGRO_BITMAP* btnPressionado4 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
 	//------------------------------------------------------------------------------------------------------------------------
-
+	//a
 	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
 	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
