@@ -307,6 +307,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				//if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima)) {
 					prog->proximaSala = 5;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6 * prog->linhaInGame]) && !prog->Salas[9])

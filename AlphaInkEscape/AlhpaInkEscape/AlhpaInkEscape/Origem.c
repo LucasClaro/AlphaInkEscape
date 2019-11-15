@@ -128,7 +128,7 @@ int main(void) {
 
 	progresso.linhaInGame = 0;
 	progresso.cenario = (Cenario*)malloc(sizeof(Cenario));
-	progresso.cenario->somSeta = NULL;
+	progresso.cenario->somSeta = al_load_sample("sounds/pagina.ogg");
 	progresso.cenario->setaBaixo = al_load_bitmap("Imgs/baixo.png");
 	progresso.cenario->setaCima = al_load_bitmap("Imgs/cima.png");
 	progresso.cenario->setaEsquerda = al_load_bitmap("Imgs/esquerda.png");

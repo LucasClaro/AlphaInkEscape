@@ -231,21 +231,25 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima) && prog->Salas[6])
 			{
 				prog->proximaSala = 2;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda) && prog->Salas[6])
 			{
 				prog->proximaSala = 5;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita) && prog->Salas[6])
 			{
 				prog->proximaSala = 7;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[6])
 			{
 				prog->proximaSala = 10;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
 		}

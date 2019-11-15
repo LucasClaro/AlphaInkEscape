@@ -105,16 +105,19 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 10;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 13;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita) && progresso->Salas[14])
 				{
 					progresso->proximaSala = 15;
+					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])

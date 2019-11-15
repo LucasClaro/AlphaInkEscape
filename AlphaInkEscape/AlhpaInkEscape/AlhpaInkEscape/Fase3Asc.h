@@ -90,11 +90,13 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaEsquerda)) {
 				prog->proximaSala = 2;
 				//return;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
 				prog->proximaSala = 7;
 				//return;
+				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, postIt5))
