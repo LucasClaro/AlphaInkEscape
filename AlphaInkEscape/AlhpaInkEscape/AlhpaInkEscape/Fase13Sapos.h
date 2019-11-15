@@ -10,25 +10,18 @@
 #include "Struct.h"
 
 Objeto* D1, * D2, * D3, * E4, * E5, * E6;
-Objeto* saidaDireita, * saidaCima;
 Objeto* Reset;
 Objeto* PostIt2;
 
 int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) 
 {
+	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	saidaDireita->bitmap = NULL;
+	saidaDireita->bitmap = prog->cenario->setaDireita;
 	saidaDireita->x = LARGURA_TELA - 20;
 	saidaDireita->y = ALTURA_TELA / 2 - 10;
 	saidaDireita->largura = 20;
 	saidaDireita->altura = 20;
-
-	saidaCima = (Objeto*)malloc(sizeof(Objeto));
-	saidaCima->bitmap = NULL;
-	saidaCima->x = LARGURA_TELA / 2 - 10;
-	saidaCima->y = 0;
-	saidaCima->largura = 20;
-	saidaCima->altura = 20;
 
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
@@ -87,9 +80,8 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	PostIt2->bitmap = NULL;
 
 	PostIt2->bitmap = al_load_bitmap("Imgs/PostIts/postDali.png");
-	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
+	
+	ALLEGRO_BITMAP* Background = prog->cenario->background;
 
 	int gameOver = 0;
 	int i;
@@ -109,12 +101,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {	
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
-				{
-					prog->proximaSala = 9;
-					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
 					prog->proximaSala = 14;
 					gameOver = 1;
@@ -220,7 +207,6 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(Background, 0, 0, 0);
 
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
-		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 
 		al_draw_bitmap(D1->bitmap, D1->x, D1->y, 0);
 		al_draw_bitmap(D2->bitmap, D2->x, D2->y, 0);
@@ -242,12 +228,9 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	}
 
 	//Destroys	
-	al_destroy_bitmap(saidaDireita->bitmap);
-	al_destroy_bitmap(saidaCima->bitmap);
 
 
 	free(saidaDireita);
-	free(saidaCima);
 }
 
 int IndexOf(int x, int v[]) {

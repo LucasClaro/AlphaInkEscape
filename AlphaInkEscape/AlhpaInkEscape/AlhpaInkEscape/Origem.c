@@ -87,7 +87,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 11;
+	progresso.proximaSala = 6;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
@@ -127,6 +127,14 @@ int main(void) {
 	progresso.inventClick[6] = 0;
 
 	progresso.linhaInGame = 0;
+	progresso.cenario = (Cenario*)malloc(sizeof(Cenario));
+	progresso.cenario->somSeta = NULL;
+	progresso.cenario->setaBaixo = al_load_bitmap("Imgs/baixo.png");
+	progresso.cenario->setaCima = al_load_bitmap("Imgs/cima.png");
+	progresso.cenario->setaEsquerda = al_load_bitmap("Imgs/esquerda.png");
+	progresso.cenario->setaDireita = al_load_bitmap("Imgs/direita.png");
+	progresso.cenario->cadeado = al_load_bitmap("Imgs/cadeado.png");
+	progresso.cenario->background = al_load_bitmap("Imgs/fundo.png");
 
 	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa

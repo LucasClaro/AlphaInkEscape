@@ -19,8 +19,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->largura = 20;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2) - 100;
-	SaidaBaixo->y = ALTURA_TELA - (SaidaBaixo->altura * 2);
-	SaidaBaixo->bitmap = al_load_bitmap("Imgs/MapaFase7/baixoV.png");
+	SaidaBaixo->y = ALTURA_TELA - (SaidaBaixo->altura / 2);
+	SaidaBaixo->bitmap = prog->cenario->cadeado;
 
 	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
@@ -28,7 +28,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/campo.png");
+	SaidaEsquerda->bitmap = prog->cenario->setaEsquerda;
 
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
@@ -36,7 +36,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaCima->largura = 20;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
-	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
+	SaidaCima->bitmap = prog->cenario->setaCima;
 
 	Objeto* campo1;
 	campo1 = (Objeto*)malloc(sizeof(Objeto));
@@ -290,7 +290,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
-	ALLEGRO_BITMAP* background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* background = prog->cenario->background;
 
 
 	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
@@ -479,7 +479,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				prog->proximaSala = 6;
 				sair = 1;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
+			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[7])
 			{
 				prog->proximaSala = 11;
 				sair = 1;
@@ -538,6 +538,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		if (j == 0 && k == 1 && o == 2 && g == 3) {
+			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 			prog->Salas[7] = 1;
 		}
 
@@ -584,10 +585,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_flip_display();
 	}
 
-	al_destroy_bitmap(background);
-	al_destroy_bitmap(SaidaCima->bitmap);
-	al_destroy_bitmap(SaidaEsquerda->bitmap);
-	al_destroy_bitmap(SaidaBaixo->bitmap);
 	//al_destroy_bitmap(padrao);
 	al_destroy_bitmap(conta1);
 	al_destroy_bitmap(conta2);

@@ -22,6 +22,13 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 
+	Objeto* saidaEsquerda;
+	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
+	saidaEsquerda->bitmap = prog->cenario->setaCima;
+	saidaEsquerda->largura = 20;
+	saidaEsquerda->altura = 20;
+	saidaEsquerda->x = 110;
+	saidaEsquerda->y = (ALTURA_TELA/2)-(saidaEsquerda->altura / 2);
 
 	A1 = (Objeto*)malloc(sizeof(Objeto));
 	A1->bitmap = al_load_bitmap("Imgs/Classico/Dante.png");
@@ -253,6 +260,11 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto4;
 						aux = Foto4->y;
 					}
+					else if(IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda))
+					{
+						prog->proximaSala = 14;
+						gameOver = 1;
+					}
 				}				
 				else {
 					arrastando = 0;
@@ -400,6 +412,8 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_draw_bitmap(A2->bitmap, A2->x, A2->y, 0);
 		al_draw_bitmap(A3->bitmap, A3->x, A3->y, 0);
 		al_draw_bitmap(A4->bitmap, A4->x, A4->y, 0);
+
+		al_draw_bitmap(saidaEsquerda->bitmap, saidaEsquerda->x, saidaEsquerda->y, 0);
 
 		al_draw_bitmap(Pais1->bitmap, Pais1->x, Pais1->y, 0);
 		al_draw_bitmap(Pais2->bitmap, Pais2->x, Pais2->y, 0);

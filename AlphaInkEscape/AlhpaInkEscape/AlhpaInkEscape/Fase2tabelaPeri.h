@@ -17,27 +17,29 @@ posN[] = {876, 145},
 posSe[] = {925, 255},
 tamFundo[] = { 64,71 };
 
-Objeto* SaidaBaixo = NULL, * SaidaEsquerda = NULL, * Ba = NULL, * Co = NULL, * N = NULL, * Se = NULL, * Na = NULL, * C = NULL;
+Objeto* Ba = NULL, * Co = NULL, * N = NULL, * Se = NULL, * Na = NULL, * C = NULL;
 Objeto* fundoBa = NULL, * fundoCo = NULL, * fundoN = NULL, * fundoSe = NULL, * fundoNa = NULL, * fundoC = NULL;
 int Arrastando = 0;
 
 ALLEGRO_BITMAP* Background = NULL, * Tabela = NULL;
 
-int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos, Progresso * progresso)
+int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eventos, Progresso* progresso)
 {
+	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->largura = 20;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura - 10;
-	SaidaBaixo->bitmap = NULL;
+	SaidaBaixo->bitmap = progresso->cenario->setaBaixo;
 
+	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	SaidaEsquerda->altura = 20;
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA/2) - (SaidaBaixo->altura/2);
-	SaidaEsquerda->bitmap = NULL;
+	SaidaEsquerda->bitmap = progresso->cenario->cadeado;
 
 	Ba = (Objeto*)malloc(sizeof(Objeto));
 	Ba->altura = 61;
@@ -124,11 +126,6 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	fundoC->y = posC[1];
 	fundoC->bitmap = NULL;
 	///////////////////
-	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
-	ALLEGRO_BITMAP* cadeado = al_load_bitmap("Imgs/cadeado.png");
-
-	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
-	SaidaEsquerda->bitmap = cadeado;
 
 	Ba->bitmap = al_load_bitmap("Imgs/Ba.png");
 	Co->bitmap = al_load_bitmap("Imgs/Co.png");
@@ -137,7 +134,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	Na->bitmap = al_load_bitmap("Imgs/Na.png");
 	C->bitmap = al_load_bitmap("Imgs/C.png");
 
-	Background = al_load_bitmap("Imgs/fundo.png");
+	Background = progresso->cenario->background;
 	Tabela = al_load_bitmap("Imgs/tab2.png");
 
 	if (!SaidaBaixo->bitmap || !SaidaEsquerda->bitmap || !Background || ! Tabela || !Ba->bitmap || !Co->bitmap || !N->bitmap || !Se->bitmap || !Na->bitmap || !C->bitmap)
@@ -279,7 +276,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 
 		if (progresso->Salas[2])
 		{
-			SaidaEsquerda->bitmap = saida;
+			SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 		}
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
@@ -308,10 +305,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	}
 
 	//Desaloca��o das coisas
-	al_destroy_bitmap(SaidaBaixo->bitmap);
-	al_destroy_bitmap(SaidaEsquerda->bitmap);
 
-	al_destroy_bitmap(Background);
 	al_destroy_bitmap(Tabela);
 
 	al_destroy_bitmap(Ba->bitmap);
@@ -330,7 +324,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 
 	//al_destroy_bitmap(item->bitmap);
 
-	free(SaidaBaixo);
+	
+	;
 	free(SaidaEsquerda);
 	free(Ba);
 	free(Co);

@@ -12,21 +12,15 @@
 
 Objeto* linha1, * linha2, * linha3, * linha4;
 Objeto* eventos, * notas, * datas;
-Objeto* saidaDireita, * saidaBaixo, * saidaCima;
+
 
 int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	int p1 = LARGURA_TELA / 2 - 450, p2 = p1 + 175, p3 = p2 + 175, p4 = p3 + 175, p5 = p4 + 175, p6 = p5 + 175;
 	int i, j;
 
-	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	saidaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-	saidaDireita->x = LARGURA_TELA - 20;
-	saidaDireita->y = ALTURA_TELA / 2 - 10;
-	saidaDireita->largura = 20;
-	saidaDireita->altura = 20;
-
+	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
-	saidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
+	saidaCima->bitmap = prog->cenario->setaCima;
 	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
 	saidaCima->largura = 20;
@@ -235,7 +229,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		notas[i].altura = 300;
 	}
 
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* Background = prog->cenario->background;
 
 	linha1->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
 	linha2->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
@@ -310,12 +304,9 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
+				//if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima)) {
 					prog->proximaSala = 5;////////////////////////////////
-					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita)) {
-					prog->proximaSala = 10;
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6 * prog->linhaInGame]) && !prog->Salas[9])
@@ -425,9 +416,9 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		al_draw_bitmap(Background, 0, 0, 0);
 
 		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
-		if (prog->Salas[5])
+		/*if (prog->Salas[5])*/
 			al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
-		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		
 
 
 		al_draw_bitmap(linha1->bitmap, linha1->x, linha1->y, 0);
@@ -502,6 +493,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		caregaInventario(prog);
 		al_flip_display();
 	}
+	return 0;
 }
 
 int DentroDe(ALLEGRO_EVENT evento) {

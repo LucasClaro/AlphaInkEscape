@@ -28,21 +28,21 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaCima->altura = 20;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 0;
-	SaidaCima->bitmap = NULL;
+	SaidaCima->bitmap = progresso->cenario->setaCima;
 
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	SaidaEsquerda->largura = 20;
 	SaidaEsquerda->altura = 20;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaCima->altura / 2);
-	SaidaEsquerda->bitmap = NULL;
+	SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->largura = 20;
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
-	SaidaBaixo->bitmap = NULL;
+	SaidaBaixo->bitmap = progresso->cenario->setaBaixo;
 
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->largura = 100;
@@ -100,9 +100,6 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	rei->y = Tabuleiro[6][6].y;
 	rei->bitmap = NULL;
 
-	SaidaCima->bitmap = al_load_bitmap("Imgs/cima.png");
-	SaidaEsquerda->bitmap = al_load_bitmap("Imgs/Esquerda.png");
-	SaidaBaixo->bitmap = al_load_bitmap("Imgs/baixo.png");
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 
 	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao3.png");
@@ -121,7 +118,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	torreazul2 = al_load_bitmap("Imgs/xadrez/torreazul.png");
 	reiazul = al_load_bitmap("Imgs/xadrez/reiazul.png");
 
-	Background = al_load_bitmap("Imgs/fundo.png");
+	Background = progresso->cenario->background;
 	tab = al_load_bitmap("Imgs/xadrez/tabuleiro3.png");
 	podeAndar = al_load_bitmap("Imgs/xadrez/podeandar.png");
 	checkmate = al_load_bitmap("Imgs/xadrez/checkmate.png");
@@ -619,9 +616,6 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	}
 
 	//Desalocação das coisas
-	al_destroy_bitmap(SaidaCima->bitmap);
-	al_destroy_bitmap(SaidaEsquerda->bitmap);
-	al_destroy_bitmap(SaidaBaixo->bitmap);
 
 	al_destroy_bitmap(peao1->bitmap);
 	al_destroy_bitmap(peao2->bitmap);
@@ -639,7 +633,6 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	al_destroy_bitmap(torreazul2);
 	al_destroy_bitmap(reiazul);
 
-	al_destroy_bitmap(Background);
 	al_destroy_bitmap(tab);
 	al_destroy_bitmap(podeAndar);
 	al_destroy_bitmap(checkmate);

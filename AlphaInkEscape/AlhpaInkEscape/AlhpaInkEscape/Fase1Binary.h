@@ -20,7 +20,6 @@ typedef struct EnigmaStr
 
 Objeto* postIt4 = NULL;
 bool sobreposto = false;
-ALLEGRO_BITMAP* fundo = NULL;
 
 
 int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
@@ -112,17 +111,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	
 	
 
-	ALLEGRO_BITMAP * fundoOfc = al_load_bitmap("Imgs/fundo.png");
+	ALLEGRO_BITMAP* fundoOfc = prog->cenario->background;
 	ALLEGRO_BITMAP* fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
-
-
-	Objeto* setaDireita;
-	setaDireita = (Objeto*)malloc(sizeof(Objeto));
-	setaDireita->bitmap = al_load_bitmap("Imgs/direita.png");
-	setaDireita->altura = 20;
-	setaDireita->largura = 20;
-	setaDireita->x = 1200;
-	setaDireita->y = (ALTURA_TELA / 2);
 
 	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -130,7 +120,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaBaixo->largura = 20;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
-	setaBaixo->bitmap = al_load_bitmap("Imgs/direita.png");;
+	setaBaixo->bitmap = prog->cenario->setaBaixo;
 	
 	
 	Objeto* contaSeta;
@@ -197,8 +187,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 
-			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
-				prog->proximaSala = 2;
+			if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+				prog->proximaSala = 5;
 				//return;
 				sair = true;
 			}
@@ -327,7 +317,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(fundoAsc, 0, 0, 0);
 		}
 
-		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
+		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 
 		if (prog->Salas[1] == 1 && !sobreposto) {
 			
@@ -354,7 +344,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 
 
-	al_destroy_bitmap(setaDireita->bitmap);
 	al_destroy_bitmap(conta1->bitmap);
 	al_destroy_bitmap(conta2->bitmap);
 	al_destroy_bitmap(campo1->bitmap);
@@ -384,7 +373,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(enigma4);
 	free(conta1);
 	free(conta2);
-	free(setaDireita);
+	free(setaBaixo);
 
 	return 0;
 }

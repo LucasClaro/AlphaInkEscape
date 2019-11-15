@@ -6,6 +6,8 @@
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
 
+#include <allegro5/allegro_audio.h>
+
 #ifndef Struct_H
 #define Struct_H
 
@@ -27,6 +29,16 @@ typedef struct Obj
 	int cliqueY;
 } Objeto;
 
+typedef struct scene {
+	ALLEGRO_BITMAP* setaCima;
+	ALLEGRO_BITMAP* setaBaixo;
+	ALLEGRO_BITMAP* setaEsquerda;
+	ALLEGRO_BITMAP* setaDireita;
+	ALLEGRO_BITMAP* cadeado;
+	ALLEGRO_SAMPLE* somSeta;
+	ALLEGRO_BITMAP* background;
+} Cenario;
+
 // Struct de progresso
 typedef struct prog
 {
@@ -38,11 +50,13 @@ typedef struct prog
 	int inventCount;//contador de itens no  inventario
 	int inventClick[TAMANHO_INVENTARIO];//saber qual item ja foi usado no inventario
 	int linhaInGame;
+	Cenario* cenario;
 } Progresso;
 
 typedef struct fila {
 	int vetor[11];
 	int tamanho, inicio, fim, total;
 }Fila;
+
 
 #endif
