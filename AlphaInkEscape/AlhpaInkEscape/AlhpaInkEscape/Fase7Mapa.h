@@ -250,16 +250,16 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 	//------------------------------------------------------------------------------------------------------------------------
 
-	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
 	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
 	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
 	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
 	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
 
 
