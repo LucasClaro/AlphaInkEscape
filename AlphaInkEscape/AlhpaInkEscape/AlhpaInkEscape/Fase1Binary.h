@@ -261,7 +261,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			 if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
 			{
-				 if (strncmp(enigma1->enigmaCerto, arrEnigma1, 5) == 0 && strncmp(enigma2->enigmaCerto, arrEnigma2, 5) == 0 && strncmp(enigma3->enigmaCerto, arrEnigma3, 5) == 0 && strncmp(enigma4->enigmaCerto, arrEnigma4, 9) == 0) {
+				 if (strncmp(enigma1->enigmaCerto, arrEnigma1, 5) == 0 && strncmp(enigma3->enigmaCerto, arrEnigma3, 5) == 0 && strncmp(enigma4->enigmaCerto, arrEnigma4, 9) == 0) {
 
 					enigma1->acertou = true;
 					enigma2->acertou = true;
