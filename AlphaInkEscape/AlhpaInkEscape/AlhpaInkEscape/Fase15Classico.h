@@ -18,7 +18,7 @@ Objeto* SendoArrastado, * UltimoArrastado;
 
 int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	int x0 = 140;
-	int y0 = 50;
+	int y0 = 75;
 
 	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
 

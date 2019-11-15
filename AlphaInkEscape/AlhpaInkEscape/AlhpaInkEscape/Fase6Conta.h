@@ -104,10 +104,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Objeto* campo1;
 	campo1 = (Objeto*)malloc(sizeof(Objeto));
 	campo1->bitmap = al_load_bitmap("Imgs/Conta/slide4.png");
-	campo1->altura = 250;
-	campo1->largura = 500;
-	campo1->x = 0;
-	campo1->y = ALTURA_TELA - campo1->altura;
+	campo1->altura = 150;
+	campo1->largura = 300;
+	campo1->x = 120;
+	campo1->y = ALTURA_TELA - campo1->altura - 5;
 
 	Objeto* campoesquerda;
 	campoesquerda = (Objeto*)malloc(sizeof(Objeto));
@@ -135,10 +135,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
 	campo2->bitmap = al_load_bitmap("Imgs/Conta/slide4.png");
-	campo2->altura = 250;
-	campo2->largura = 500;
-	campo2->x = LARGURA_TELA - campo2->largura;
-	campo2->y = ALTURA_TELA - campo2->altura;	
+	campo2->altura = 150;
+	campo2->largura = 300;
+	campo2->x = LARGURA_TELA - campo2->largura - 5;
+	campo2->y = ALTURA_TELA - campo2->altura - 5;	
 	
 	Objeto* bola;
 	bola = (Objeto*)malloc(sizeof(Objeto));
@@ -153,10 +153,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	Objeto* conta;
 	conta = (Objeto*)malloc(sizeof(Objeto));
 	conta->bitmap = NULL;
-	conta->altura =  500;
-	conta->largura = 250;
-	conta->x = (LARGURA_TELA / 2) - (conta->largura);
-	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
+	conta->altura =  325;
+	conta->largura = 650;
+	conta->x = (LARGURA_TELA / 2) - (conta->largura / 2) +115;
+	conta->y = (ALTURA_TELA / 2) - (conta->altura);
 
 	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/Conta/DicaEsquerda.png");

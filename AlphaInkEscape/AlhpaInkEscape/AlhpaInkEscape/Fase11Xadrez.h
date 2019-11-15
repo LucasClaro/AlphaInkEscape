@@ -102,17 +102,17 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 
-	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao3.png");
-	peao2->bitmap = al_load_bitmap("Imgs/xadrez/peao3.png");
-	peao3->bitmap = al_load_bitmap("Imgs/xadrez/peao3.png");
+	peao1->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
+	peao2->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
+	peao3->bitmap = al_load_bitmap("Imgs/xadrez/peao.png");
 	bispo->bitmap = al_load_bitmap("Imgs/xadrez/bispo.png");
 	torre2->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	torre1->bitmap = al_load_bitmap("Imgs/xadrez/torre.png");
 	rei->bitmap = al_load_bitmap("Imgs/xadrez/rei.png");
 
-	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul8.png");
-	peaoazul2 = al_load_bitmap("Imgs/xadrez/peaoazul8.png");
-	peaoazul3 = al_load_bitmap("Imgs/xadrez/peaoazul8.png");
+	peaoazul1 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	peaoazul2 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
+	peaoazul3 = al_load_bitmap("Imgs/xadrez/peaoazul.png");
 	bispoazul = al_load_bitmap("Imgs/xadrez/bispoazul.png");
 	torreazul1 = al_load_bitmap("Imgs/xadrez/torreazul.png");
 	torreazul2 = al_load_bitmap("Imgs/xadrez/torreazul.png");
