@@ -191,13 +191,12 @@ int main(void) {
 	{
 		selecionaFase(janela, fila_eventos, prog);
 	}
+	al_destroy_event_queue(fila_eventos);
 	al_shutdown_image_addon();
 	al_shutdown_font_addon();
 	al_shutdown_native_dialog_addon();
-	al_shutdown_ttf_addon();
 	al_uninstall_audio();
 	al_uninstall_keyboard();
 	al_stop_samples();
-	al_destroy_event_queue(fila_eventos);
 	al_destroy_display(janela);
 }

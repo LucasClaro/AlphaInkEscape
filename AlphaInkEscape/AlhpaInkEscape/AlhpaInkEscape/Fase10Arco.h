@@ -140,13 +140,13 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo) && prog->Salas[10])
 				{
 					prog->proximaSala = 14;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[10])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
 					prog->proximaSala = 6;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);

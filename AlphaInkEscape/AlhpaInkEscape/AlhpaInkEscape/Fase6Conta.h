@@ -41,13 +41,21 @@ void EmQueue(Fila* f, int x) {
 	}
 }
 
-int VerificaFila(int *fila, int *resp) {
+int VerificaFila(Fila* fila, int *resp) {
+	
 	if (FilaCheia(fila)) {
-		int i;
-		for (i = 0; i < 10; i++) {
-			printf("%d, %d\n",fila[i],resp[i]);
-			if (fila[i] != resp[i])
+		int i = fila->inicio;	
+		int j = 0;
+
+		while(i != fila->fim - 1) {
+			if (i == fila->tamanho) {
+				i = 0;
+			}
+			//printf("%d, %d\n",fila->vetor[i],resp[i]);
+			if (fila->vetor[i] != resp[j])
 				return 0;
+			i++;
+			j++;
 		}
 		return 1;
 	}	
@@ -56,7 +64,7 @@ int VerificaFila(int *fila, int *resp) {
 int DeQueue(Fila* f) {
 	int x;
 	if (!FilaVazia(f)) {
-		x = f->vetor[f->inicio];
+ 		x = f->vetor[f->inicio];
 		f->inicio++;
 		f->total--;
 		if (f->fim >= f->tamanho)
@@ -66,7 +74,7 @@ int DeQueue(Fila* f) {
 		return x;
 	}
 }
-
+int i = 0;
 int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
