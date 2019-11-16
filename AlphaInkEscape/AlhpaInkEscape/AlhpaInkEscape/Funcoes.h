@@ -10,7 +10,7 @@
 
 #ifndef Funcoes_H
 #define Funcoes_H
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL,* ordemBrasil = NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL,* ordemBrasil = NULL,* ordemObras = NULL;
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -62,6 +62,15 @@ int loadFotosGlobais()
 	usado = al_load_bitmap("Imgs/jausada.png");
 	textoitens = al_load_bitmap("Imgs/textoitens.png");
 	ordemBrasil = al_load_bitmap("Imgs/Clicavel/ordemBrasil.png");
+	ordemObras = al_load_bitmap("Imgs/Clicavel/ordemObras.png");
+}
+
+int destroyFotosGlobais()
+{
+	al_destroy_bitmap(usado);
+	al_destroy_bitmap(textoitens);
+	al_destroy_bitmap(ordemBrasil);
+	al_destroy_bitmap(ordemObras);
 }
 
 int abreOrdem(Progresso* prog)
@@ -70,10 +79,10 @@ int abreOrdem(Progresso* prog)
 	{
 		al_draw_bitmap(ordemBrasil, 0, 0, 0);
 	}
-	/*else if (prog->inventClick[5])
+	else if (prog->inventClick[5])
 	{
-
-	}*/
+		al_draw_bitmap(ordemObras, 0, 0, 0);
+	}
 }
 
 #endif

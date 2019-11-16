@@ -11,7 +11,7 @@
 #include "Struct.h"
 #include <string.h>
 
-
+Objeto* miniaturaObras = NULL;
 //a
 int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
@@ -64,6 +64,16 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	campodireita->largura = 500;
 	campodireita->x = 1100;
 	campodireita->y = 350;
+
+	if (miniaturaObras == NULL)
+	{
+		miniaturaObras = (Objeto*)malloc(sizeof(Objeto));
+		miniaturaObras->largura = 149;
+		miniaturaObras->altura = 219;
+		miniaturaObras->x = 700;
+		miniaturaObras->y = 100;
+		miniaturaObras->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaObras.png");
+	}
 
 	//======================================IMAGENS=======================================================================
 	Objeto* brasil;
@@ -332,6 +342,10 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
+		if (state.buttons & 2)
+		{
+			printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
+		}
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -349,6 +363,13 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+
+			if (prog->inventClick[4] || prog->inventClick[5])
+			{
+				prog->inventClick[4] = 0;
+				prog->inventClick[5] = 0;
+			}
+
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
 
@@ -484,10 +505,28 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				prog->proximaSala = 11;
 				sair = 1;
 			}
-			/*else if (IsInside(evento.mouse.x, evento.mouse.y, prog->btnMiniMapa))
+			else if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaObras) && !prog->Itens[5])
 			{
-				aberto = !aberto;
-			}*/
+				prog->Itens[5] = miniaturaObras;
+				prog->Inventario[5] = 1;
+			}
+			
+			if (prog->Itens[4] != NULL)
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 435)
+				{
+					//printf("certo");
+					prog->inventClick[4] = 1;
+				}
+			}
+			if (prog->Itens[5] != NULL)
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 219/2)
+				{
+					//printf("certo");
+					prog->inventClick[5] = 1;
+				}
+			}
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
@@ -579,8 +618,11 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(toronto->bitmap, toronto->x, toronto->y, 0);
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
 
+		if(!prog->Inventario[5])
+			al_draw_bitmap(miniaturaObras->bitmap, miniaturaObras->x, miniaturaObras->y, 0);
 		//abrirMapa(prog);
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

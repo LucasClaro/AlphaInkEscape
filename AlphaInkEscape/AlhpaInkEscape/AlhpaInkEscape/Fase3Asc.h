@@ -96,10 +96,10 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
-			if (prog->inventClick[4]) // ||prog->inventClick[5]
+			if (prog->inventClick[4] || prog->inventClick[5])
 			{
 				prog->inventClick[4] = 0;
-				//prog->inventClick[5] = 0;
+				prog->inventClick[5] = 0;
 			}
 
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
@@ -121,12 +121,22 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				prog->Itens[4] = miniatura;
 				prog->Inventario[4] = 1;
 			}
-			else if (prog->Itens[4] != NULL)
+			
+			if (prog->Itens[4] != NULL)
 			{
 				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 95 + ((4 * ALTURA_TELA / 10) + prog->Itens[4]->altura * 0.5))
 				{
 					//printf("certo");
 					prog->inventClick[4] = 1;
+				}
+			}
+
+			if (prog->Itens[5] != NULL)
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 219 / 2)
+				{
+					//printf("certo");
+					prog->inventClick[5] = 1;
 				}
 			}
 			/*

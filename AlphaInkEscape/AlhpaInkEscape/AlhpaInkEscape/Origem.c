@@ -87,7 +87,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 3;
+	progresso.proximaSala = 7;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
@@ -145,4 +145,5 @@ int main(void) {
 
 	al_destroy_event_queue(fila_eventos);
 	al_destroy_display(janela);
+	destroyFotosGlobais();
 }
