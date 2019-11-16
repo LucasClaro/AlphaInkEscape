@@ -44,43 +44,43 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	Ba = (Objeto*)malloc(sizeof(Objeto));
 	Ba->altura = 61;
 	Ba->largura = 54;
-	Ba->x = 110;
-	Ba->y = ALTURA_TELA - Ba->altura;
+	Ba->x = 730;
+	Ba->y = 510;
 	Ba->bitmap = NULL;
 
 	Co = (Objeto*)malloc(sizeof(Objeto));
 	Co->altura = 61;
 	Co->largura = 54;
-	Co->x = 165;
-	Co->y = ALTURA_TELA - Co->altura;
+	Co->x = Ba->x + Ba->largura + 5;
+	Co->y = Ba->y;
 	Co->bitmap = NULL;
 
 	N = (Objeto*)malloc(sizeof(Objeto));
 	N->altura = 61;
 	N->largura = 54;
-	N->x = 220;
-	N->y = ALTURA_TELA - N->altura;
+	N->x = Co->x + Co->largura + 5;
+	N->y = Ba->y;
 	N->bitmap = NULL;
 
 	Se = (Objeto*)malloc(sizeof(Objeto));
 	Se->altura = 61;
 	Se->largura = 54;
-	Se->x = LARGURA_TELA - Se->largura;
-	Se->y = 100;
+	Se->x = 770;
+	Se->y = Ba->y + Ba->altura + 5;
 	Se->bitmap = NULL;
 
 	Na = (Objeto*)malloc(sizeof(Objeto));
 	Na->altura = 61;
 	Na->largura = 54;
-	Na->x = LARGURA_TELA - Na->largura;
-	Na->y = 162;
+	Na->x = Se->x + Se->largura + 5;
+	Na->y = Se->y;
 	Na->bitmap = NULL;
 
 	C = (Objeto*)malloc(sizeof(Objeto));
 	C->altura = 61;
 	C->largura = 54;
-	C->x = LARGURA_TELA - C->largura;
-	C->y = 224;
+	C->x = Na->x + Na->largura + 5;
+	C->y = Se->y;
 	C->bitmap = NULL;
 
 	//////////////////
@@ -161,6 +161,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				printf("(%d,%d)\n", evento.mouse.x, evento.mouse.y);
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
 					progresso->proximaSala = 6;
