@@ -12,7 +12,7 @@
 #include "ctype.h"
 #include <string.h>
 
-Objeto* postIt5 = NULL;
+Objeto* postIt5 = NULL, * miniatura = NULL;
 
 int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
@@ -73,6 +73,16 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	tabela->x = 150;
 	tabela->y = (ALTURA_TELA / 2) - (tabela->altura / 2);
 
+	if (miniatura == NULL)
+	{
+		miniatura = (Objeto*)malloc(sizeof(Objeto));
+		miniatura->largura = 137;
+		miniatura->altura = 100;
+		miniatura->x = 700;
+		miniatura->y = 100;
+		miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/minia.png");
+	}
+
 	bool arrastando = false;
 	char arrEnigma[10] = "";
 	bool verDigitado = 0;
@@ -86,6 +96,11 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
+			if (prog->inventClick[4]) // ||prog->inventClick[5]
+			{
+				prog->inventClick[4] = 0;
+				//prog->inventClick[5] = 0;
+			}
 
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 2;
@@ -101,6 +116,26 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo)) {
 				verDigitado = 1;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, miniatura) && !prog->Itens[4] && prog->Salas[3])
+			{
+				prog->Itens[4] = miniatura;
+				prog->Inventario[4] = 1;
+			}
+			else if (prog->Itens[4] != NULL)
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 95 + ((4 * ALTURA_TELA / 10) + prog->Itens[4]->altura * 0.5))
+				{
+					//printf("certo");
+					prog->inventClick[4] = 1;
+				}
+			}
+			/*
+			ALLEGRO_MOUSE_STATE state;
+			al_get_mouse_state(&state);
+			if (state.buttons & 2)
+			{
+				printf("x: %d; y: %d\n",evento.mouse.x,evento.mouse.y);
+			}*/
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER && strncmp(enigma1->enigmaCerto, arrEnigma, 7) == 0)
@@ -131,7 +166,12 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
+
+		if (prog->Salas[3] && !prog->Inventario[4])
+			al_draw_bitmap(miniatura->bitmap, miniatura->x, miniatura->y, 0);
+
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 
