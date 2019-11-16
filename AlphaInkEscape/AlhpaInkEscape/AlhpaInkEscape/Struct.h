@@ -5,7 +5,7 @@
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
-
+#include <allegro5/allegro_font.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
@@ -37,12 +37,16 @@ typedef struct scene {
 	ALLEGRO_BITMAP* setaEsquerda;
 	ALLEGRO_BITMAP* setaDireita;
 	ALLEGRO_BITMAP* cadeado;
-	ALLEGRO_SAMPLE* somSeta;
 	ALLEGRO_BITMAP* background;
 	ALLEGRO_BITMAP* comSom;
 	ALLEGRO_BITMAP* semSom;
-	Objeto* btnSom;
+	ALLEGRO_SAMPLE* somSeta;
 	ALLEGRO_AUDIO_STREAM* musica;
+	Objeto* btnSom;
+	Objeto* miniMapa;
+	Objeto* btnMiniMapa;
+	Objeto* xMiniMapa;
+	ALLEGRO_FONT* fonte;
 } Cenario;
 
 // Struct de progresso

@@ -194,7 +194,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
 					bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
 			}
-			
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campoesquerda)) {
 				if (!pressionado && state.buttons & 1)
 				{
@@ -227,8 +226,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
-
-
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima) && prog->Salas[6])
 			{
 				prog->proximaSala = 2;
@@ -252,6 +249,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				prog->proximaSala = 10;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+			{
+				aberto = !aberto;
 			}
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
@@ -322,18 +323,10 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(campodireita->bitmap, campodireita->x, campodireita->y, 0);
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
-		
-
-
-
-
-		som(prog);
-
-			   		 	  	  	   	
+		abrirMapa(prog);
+		som(prog);	  	   	
 		caregaInventario(prog);
-
 		al_flip_display();
-
 	}
 
 

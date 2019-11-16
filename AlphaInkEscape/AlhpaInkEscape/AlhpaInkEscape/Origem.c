@@ -27,7 +27,7 @@ int main(void) {
 	al_init_image_addon();
 
 	al_init_font_addon();
-
+	
 	al_init_ttf_addon();
 
 	al_install_audio();
@@ -88,8 +88,11 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
+	//sala de inicio
 	progresso.proximaSala = 2;
+	//gameover
 	progresso.Gameover = 0;
+	//prog de todas as salas
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
 	progresso.Salas[2] = 0;
@@ -106,6 +109,7 @@ int main(void) {
 	progresso.Salas[14] = 0;
 	progresso.Salas[15] = 0;
 
+	//posisçoes do inventario
 	progresso.Inventario[0] = 0;
 	progresso.Inventario[1] = 0;
 	progresso.Inventario[2] = 0;
@@ -113,12 +117,15 @@ int main(void) {
 	progresso.Inventario[4] = 0;
 	progresso.Inventario[5] = 0;
 	progresso.Inventario[6] = 0;
-
+	
+	//itens
 	progresso.Itens[2] = NULL;
 	progresso.Itens[3] = NULL;
 	
+	//quantidade de itens no inventario
 	progresso.inventCount = 0;
 
+	//manipulção das posiçoes do inventario
 	progresso.inventClick[0] = 0;
 	progresso.inventClick[1] = 0;
 	progresso.inventClick[2] = 0;
@@ -128,6 +135,8 @@ int main(void) {
 	progresso.inventClick[6] = 0;
 
 	progresso.linhaInGame = 0;
+
+	//populando objetos que serão usados como cenario
 	progresso.cenario = (Cenario*)malloc(sizeof(Cenario));
 	progresso.cenario->somSeta = al_load_sample("sounds/pagina.ogg");
 	progresso.cenario->setaBaixo = al_load_bitmap("Imgs/baixo.png");
@@ -139,19 +148,39 @@ int main(void) {
 	progresso.cenario->semSom = al_load_bitmap("Imgs/semaudio.png");
 	progresso.cenario->comSom = al_load_bitmap("Imgs/comaudio.png");
 
-
+	//som cenario
 	progresso.cenario->btnSom = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->btnSom->altura = 50;
 	progresso.cenario->btnSom->largura = 50;
-	progresso.cenario->btnSom->x = 500;
-	progresso.cenario->btnSom->y = 500;
+	progresso.cenario->btnSom->x = LARGURA_TELA - progresso.cenario->btnSom->largura - 5;
+	progresso.cenario->btnSom->y = ALTURA_TELA / 4 - progresso.cenario->btnSom->altura * 2 - 25;
 	progresso.cenario->btnSom->bitmap = progresso.cenario->comSom;
 	progresso.cenario->musica = al_load_audio_stream("sounds/musica.ogg", 4, 1024);
-
-
 	al_attach_audio_stream_to_mixer(progresso.cenario->musica, al_get_default_mixer());
 	al_set_audio_stream_playmode(progresso.cenario->musica, ALLEGRO_PLAYMODE_LOOP);
 	
+	//miniMapa cenario
+	progresso.cenario->miniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->miniMapa->bitmap = al_load_bitmap("Imgs/Minimapa/mapa.png");
+	progresso.cenario->miniMapa->altura = 448;
+	progresso.cenario->miniMapa->largura = 968;
+	progresso.cenario->miniMapa->x = (LARGURA_TELA / 2) - (progresso.cenario->miniMapa->largura / 2);
+	progresso.cenario->miniMapa->y = (ALTURA_TELA / 2) - (progresso.cenario->miniMapa->altura / 2);
+
+	progresso.cenario->btnMiniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->btnMiniMapa->bitmap = al_load_bitmap("Imgs/Minimapa/bloc.png");
+	progresso.cenario->btnMiniMapa->altura = 83;
+	progresso.cenario->btnMiniMapa->largura = 83;
+	progresso.cenario->btnMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.cenario->btnMiniMapa->largura / 2);
+	progresso.cenario->btnMiniMapa->y = progresso.cenario->btnMiniMapa->altura / 4;
+
+	progresso.cenario->xMiniMapa = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->xMiniMapa->bitmap = al_load_bitmap("Imgs/xis.png");
+	progresso.cenario->xMiniMapa->altura = 83;
+	progresso.cenario->xMiniMapa->largura = 83;
+	progresso.cenario->xMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.cenario->xMiniMapa->largura / 2);
+	progresso.cenario->xMiniMapa->y = progresso.cenario->xMiniMapa->altura / 4;
+	progresso.cenario->fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 
 	loadFotoInvent();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa

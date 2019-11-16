@@ -12,6 +12,7 @@
 #define Funcoes_H
 ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL;
 bool tocando = true;
+bool aberto = false;
 
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
@@ -62,10 +63,6 @@ int caregaInventario(Progresso *prog)
 void som(Progresso *prog) {
 
 	al_draw_bitmap(prog->cenario->btnSom->bitmap, prog->cenario->btnSom->x, prog->cenario->btnSom->y,0);
-	
-	
-
-
 	if (tocando) {
 		prog->cenario->btnSom->bitmap = prog->cenario->comSom;
 		al_set_audio_stream_gain(prog->cenario->musica, 1.0);
@@ -74,6 +71,68 @@ void som(Progresso *prog) {
 		prog->cenario->btnSom->bitmap = prog->cenario->semSom;
 		al_set_audio_stream_gain(prog->cenario->musica, 0.0);
 	} 
+}
+
+void abrirMapa(Progresso* prog) {
+	al_draw_bitmap(prog->cenario->btnMiniMapa->bitmap, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
+	int x = 0;
+	int y = 0;
+
+	if (aberto) {
+		switch (prog->proximaSala) {
+		case 1:
+			x = LARGURA_TELA / 4 + 110;
+			y = ALTURA_TELA / 4;
+			break;
+		case 2:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 4;
+			break;
+		case 3:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 5:
+			x = LARGURA_TELA / 4 + 110;
+			y = ALTURA_TELA / 2;
+			break;
+		case 6:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 7:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 9:
+			x = LARGURA_TELA / 4 + 110;
+			y = ALTURA_TELA / 2;
+			break;
+		case 10:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 11:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 13:
+			x = LARGURA_TELA / 4 + 110;
+			y = ALTURA_TELA / 4 * 2;
+			break;
+		case 14:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+		case 15:
+			x = LARGURA_TELA / 2 - 60;
+			y = ALTURA_TELA / 2;
+			break;
+			break;
+		}
+		al_draw_bitmap(prog->cenario->miniMapa->bitmap, prog->cenario->miniMapa->x, prog->cenario->miniMapa->y, 0);
+		al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
+	}
 }
 
 
