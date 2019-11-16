@@ -105,8 +105,6 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	saidaBaixo->largura = 20;
 	saidaBaixo->altura = 20;
 
-	ALLEGRO_BITMAP* Background = prog->cenario->background;
-
 	barraH->bitmap = al_load_bitmap("Imgs/Arco/barraH.png");
 	barraV->bitmap = al_load_bitmap("Imgs/Arco/barraV.png");
 
@@ -254,7 +252,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			}
 		}
 
-		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
 		contador = CalcularTiro(angulo, velocidade, contador, acertos);
 

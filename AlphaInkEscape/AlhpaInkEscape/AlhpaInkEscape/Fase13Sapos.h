@@ -81,8 +81,6 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	PostIt2->bitmap = al_load_bitmap("Imgs/PostIts/postDali.png");
 	
-	ALLEGRO_BITMAP* Background = prog->cenario->background;
-
 	int gameOver = 0;
 	int i;
 	int casas[7] = { 1,2,3,0,4,5,6 }, correto[7] = { 4,5,6,0,1,2,3 };
@@ -205,7 +203,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		E5->x = 250 + 130 * IndexOf(5, casas);
 		E6->x = 250 + 130 * IndexOf(6, casas);
 
-		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
 		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 

@@ -66,7 +66,7 @@ int DeQueue(Fila* f) {
 		return x;
 	}
 }
-//a
+
 int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -130,8 +130,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/Conta/botao.png");
 	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/Conta/botaopressed.png");
-
-
+	
 	Objeto* campo2;
 	campo2 = (Objeto*)malloc(sizeof(Objeto));
 	campo2->bitmap = al_load_bitmap("Imgs/Conta/slide4.png");
@@ -156,10 +155,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	conta->x = (LARGURA_TELA / 2) - (conta->largura / 2) +115;
 	conta->y = (ALTURA_TELA / 2) - (conta->altura);
 
-	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/Conta/DicaEsquerda.png");
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/Conta/DicaDireita.png");
-	ALLEGRO_BITMAP* background = prog->cenario->background;
 	ALLEGRO_BITMAP* saida = al_load_bitmap("Imgs/Esquerda.png");
 
 	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
@@ -303,7 +300,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 		}
 
-		al_draw_bitmap(background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 		if(prog->Salas[0])
 			al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		
@@ -330,7 +327,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	}
 
 
-	/*al_destroy_bitmap(padrao);*/
+	
 	al_destroy_bitmap(conta1);
 	al_destroy_bitmap(conta2);
 	al_destroy_bitmap(campo1->bitmap);
@@ -348,9 +345,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	free(campodireita);
 	free(bola);
 	free(conta);
-
-
-	//system("pause");
 
 	return 0;
 }

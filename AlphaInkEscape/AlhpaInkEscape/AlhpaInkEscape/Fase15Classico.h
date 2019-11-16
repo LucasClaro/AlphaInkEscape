@@ -20,8 +20,6 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	int x0 = 140;
 	int y0 = 75;
 
-	ALLEGRO_BITMAP* Background = al_load_bitmap("Imgs/fundo.png");
-
 	Objeto* saidaEsquerda;
 	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	saidaEsquerda->bitmap = prog->cenario->setaCima;
@@ -407,7 +405,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			prog->Salas[15] = 1;
 		}
 
-		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
 		al_draw_bitmap(A1->bitmap, A1->x, A1->y, 0);
 		al_draw_bitmap(A2->bitmap, A2->x, A2->y, 0);

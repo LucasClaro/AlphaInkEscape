@@ -229,8 +229,6 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		notas[i].altura = 300;
 	}
 
-	ALLEGRO_BITMAP* Background = prog->cenario->background;
-
 	linha1->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
 	linha2->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
 	linha3->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
@@ -414,14 +412,10 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		}
 
 
-		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
-		//al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
-		/*if (prog->Salas[5])*/
-			al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
+		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		
-
-
 		al_draw_bitmap(linha1->bitmap, linha1->x, linha1->y, 0);
 		if (prog->linhaInGame >= 1)
 			al_draw_bitmap(linha2->bitmap, linha2->x, linha2->y, 0);

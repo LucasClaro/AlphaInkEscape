@@ -287,10 +287,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	conta->x = (LARGURA_TELA / 2) - (conta->largura);
 	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
 
-	//ALLEGRO_BITMAP* padrao = al_load_bitmap("");
 	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
 	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
-	ALLEGRO_BITMAP* background = prog->cenario->background;
 
 
 	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
@@ -549,7 +547,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 
 		//===========================================DESENHAR========================================================================
-		al_draw_bitmap(background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 		/*if (prog->Salas[0])*/
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 

@@ -26,7 +26,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	//variaveis
 	bool sair = false;
 	//ponteiros
-	ALLEGRO_DISPLAY* display = NULL;
 	ALLEGRO_FONT* enigma = NULL;
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
@@ -108,10 +107,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	campo4->x = (LARGURA_TELA / 2);
 	campo4->y = (ALTURA_TELA / 3 * 2.2) - (campo4->altura / 2);
 
-	
-	
-
-	ALLEGRO_BITMAP* fundoOfc = prog->cenario->background;
 	ALLEGRO_BITMAP* fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
 
 	Objeto* setaBaixo;
@@ -145,15 +140,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	enigma1->acertou = false;
 	enigma1->verCampo = 1;
 	char arrEnigma1[10] = "";
-
-
-	enigmaStr* enigma2;
-	enigma2 = (enigmaStr*)malloc(sizeof(enigmaStr));
-	enigma2->fonte = enigma;
-	enigma2->enigmaCerto = "0110";
-	enigma2->acertou = false;
-	enigma2->verCampo = 2;
-	char arrEnigma2[10] = "origem";
 
 	enigmaStr* enigma3;
 	enigma3 = (enigmaStr*)malloc(sizeof(enigmaStr));
@@ -258,7 +244,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				 if (strncmp(enigma1->enigmaCerto, arrEnigma1, 5) == 0 && strncmp(enigma3->enigmaCerto, arrEnigma3, 5) == 0 && strncmp(enigma4->enigmaCerto, arrEnigma4, 9) == 0) {
 
 					enigma1->acertou = true;
-					enigma2->acertou = true;
 					enigma3->acertou = true;
 					enigma4->acertou = true;
 					prog->Salas[1] = 1;
@@ -268,7 +253,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			}
 			 else if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
 				 enigma1->acertou = true;
-				 enigma2->acertou = true;
 				 enigma3->acertou = true;
 				 enigma4->acertou = true;
 				 prog->Salas[1] = 1;
@@ -281,11 +265,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				if (verCampo == 1)
 				{
 					digitarCampo(enigma1, arrEnigma1, evento, sair, prog);
-
-				}
-				else if (verCampo == 2)
-				{
-					digitarCampo(enigma2, arrEnigma2, evento, sair, prog);
 
 				}
 				else if(verCampo == 3)
@@ -307,7 +286,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		if (!sobreposto)
 		{
-			al_draw_bitmap(fundoOfc, 0, 0, 0);
+			al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 			al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
 			al_draw_bitmap(campo3->bitmap, campo3->x, campo3->y, 0);
 			al_draw_bitmap(campo4->bitmap, campo4->x, campo4->y, 0);
@@ -350,7 +329,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	}
 
 
-
+	//destroy
 	al_destroy_bitmap(conta1->bitmap);
 	al_destroy_bitmap(conta2->bitmap);
 	al_destroy_bitmap(campo1->bitmap);
@@ -360,13 +339,13 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	al_destroy_bitmap(xis->bitmap);
 	al_destroy_bitmap(igual->bitmap);
 	al_destroy_bitmap(contaSeta->bitmap);
-
-
-	al_destroy_display(display);
-	
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);
+	al_destroy_bitmap(fundoAsc);
 	
+	//free
+	free(conta1);
+	free(conta2);
 	free(campo1);
 	free(campo2);
 	free(campo3);
@@ -375,11 +354,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(igual);
 	free(contaSeta);
 	free(enigma1);
-	free(enigma2);
 	free(enigma3);
 	free(enigma4);
-	free(conta1);
-	free(conta2);
 	free(setaBaixo);
 
 	return 0;

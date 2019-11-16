@@ -307,10 +307,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		al_flip_display();
 	}
 
-	//Desaloca��o das coisas
-
+	//Destroy
 	al_destroy_bitmap(Tabela);
-
 	al_destroy_bitmap(Ba->bitmap);
 	al_destroy_bitmap(Co->bitmap);
 	al_destroy_bitmap(N->bitmap);
@@ -325,11 +323,9 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	al_destroy_bitmap(fundoNa->bitmap);
 	al_destroy_bitmap(fundoC->bitmap);
 
-	//al_destroy_bitmap(item->bitmap);
-
-	
-	;
+	//free
 	free(SaidaEsquerda);
+	free(SaidaBaixo);
 	free(Ba);
 	free(Co);
 	free(N);
@@ -343,8 +339,6 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	free(fundoSe);
 	free(fundoNa);
 	free(fundoC);
-
-	//free(item);
 
 	return 0;
 }

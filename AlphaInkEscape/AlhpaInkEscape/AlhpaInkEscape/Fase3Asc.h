@@ -22,7 +22,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	ALLEGRO_FONT* enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
-	ALLEGRO_BITMAP * background = al_load_bitmap("Imgs/fundo.png");
+	
 
 	postIt5 = (Objeto*)malloc(sizeof(Objeto));
 	postIt5->altura = 183;
@@ -128,7 +128,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 
 
-		al_draw_bitmap(background, 0, 0, 0);
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 		al_draw_bitmap(setaEsquerda->bitmap, setaEsquerda->x, setaEsquerda->y, 0);
 		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);

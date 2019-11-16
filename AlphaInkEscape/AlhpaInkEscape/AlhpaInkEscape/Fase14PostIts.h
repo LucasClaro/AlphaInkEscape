@@ -13,7 +13,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	Objeto* PostIt = NULL, *fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
-	ALLEGRO_BITMAP* Background = NULL, * mural = NULL, *posicionado = NULL;
+	ALLEGRO_BITMAP* mural = NULL, *posicionado = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->largura = 20;
@@ -74,7 +74,6 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	
 	PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
 
-	Background = progresso->cenario->background;
 	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
 	posicionado = al_load_bitmap("Imgs/PostIts/posicionado.png");
 
@@ -262,7 +261,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			}
 		}
 
-		al_draw_bitmap(Background, 0, 0, 0);
+		al_draw_bitmap(progresso->cenario->background, 0, 0, 0);
 		al_draw_bitmap(mural, (LARGURA_TELA/2) - 400, 0, 0);
 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
