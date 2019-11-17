@@ -164,6 +164,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(progresso);
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
 					progresso->proximaSala = 6;
@@ -208,6 +209,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 				{
 					Arrastando = 0;
 				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				Arrastando = 0;
@@ -304,6 +307,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 		}
 		
 		caregaInventario(progresso);
+		abreOrdem(progresso);
 		al_flip_display();
 	}
 

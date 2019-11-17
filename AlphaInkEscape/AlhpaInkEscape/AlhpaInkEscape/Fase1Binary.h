@@ -196,7 +196,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
-
+			limpaClick(prog);
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 2;
 				//return;
@@ -256,7 +256,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				cor[3] = 0;
 			}
 
-
+			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			 if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
@@ -349,6 +349,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
 		}
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

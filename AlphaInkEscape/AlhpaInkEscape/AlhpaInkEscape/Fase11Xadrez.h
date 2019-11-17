@@ -151,6 +151,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(progresso);
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 7;
@@ -209,6 +210,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				{
 					Arrastando = 0;
 				}
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				if (IsInsidePos(torre2, Tabuleiro[2][6]))

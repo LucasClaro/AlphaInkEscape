@@ -10,7 +10,7 @@
 
 #ifndef Funcoes_H
 #define Funcoes_H
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL,* ordemBrasil = NULL,* ordemObras = NULL,* ordemElem = NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL;
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -64,6 +64,7 @@ int loadFotosGlobais()
 	ordemBrasil = al_load_bitmap("Imgs/Clicavel/ordemAni.png");
 	ordemObras = al_load_bitmap("Imgs/Clicavel/ordemObras.png");
 	ordemElem = al_load_bitmap("Imgs/Clicavel/ordemElem.png");
+	ordemPaises = al_load_bitmap("Imgs/Clicavel/ordemPaises.png");
 }
 
 int destroyFotosGlobais()
@@ -73,6 +74,7 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(ordemBrasil);
 	al_destroy_bitmap(ordemObras);
 	al_destroy_bitmap(ordemElem);
+	al_destroy_bitmap(ordemPaises);
 }
 
 int abreOrdem(Progresso* prog)
@@ -88,6 +90,57 @@ int abreOrdem(Progresso* prog)
 	else if (prog->inventClick[6])
 	{
 		al_draw_bitmap(ordemElem, 0, 0, 0);
+	}
+	else if (prog->inventClick[7])
+	{
+		al_draw_bitmap(ordemPaises, 0, 0, 0);
+	}
+}
+
+int checaClickOrdem(int x, int y,Progresso* prog)
+{
+	if (prog->Itens[4] != NULL)
+	{
+		if (x >= 0 && x <= prog->Itens[4]->largura * 0.5 && y >= 385 && y <= 435)
+		{
+			//printf("certo");
+			prog->inventClick[4] = 1;
+		}
+	}
+	if (prog->Itens[5] != NULL)
+	{
+		if (x >= 0 && x <= prog->Itens[5]->largura * 0.5 && y >= 458 && y <= 458 + 136 / 2)
+		{
+			//printf("certo");
+			prog->inventClick[5] = 1;
+		}
+	}
+	if (prog->Itens[6] != NULL)
+	{
+		if (x >= 0 && x <= prog->Itens[6]->largura * 0.5 && y >= 528 && y <= 528 + 100 / 2)
+		{
+			//printf("certo");
+			prog->inventClick[6] = 1;
+		}
+	}
+	if (prog->Itens[7] != NULL)
+	{
+		if (x >= 0 && x <= prog->Itens[7]->largura * 0.5 && y >= 600 && y <= 600 + 136 / 2)
+		{
+			//printf("certo");
+			prog->inventClick[7] = 1;
+		}
+	}
+}
+
+int limpaClick(Progresso* prog)
+{
+	if (prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6] || prog->inventClick[7])
+	{
+		prog->inventClick[4] = 0;
+		prog->inventClick[5] = 0;
+		prog->inventClick[6] = 0;
+		prog->inventClick[7] = 0;
 	}
 }
 

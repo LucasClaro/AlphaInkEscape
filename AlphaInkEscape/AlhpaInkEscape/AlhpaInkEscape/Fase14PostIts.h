@@ -107,6 +107,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(progresso);
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 10;
@@ -168,6 +169,8 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				{
 					Arrastando = 0;
 				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				Arrastando = 0;
@@ -311,6 +314,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		
 
 		caregaInventario(progresso);
+		abreOrdem(progresso);
 		al_flip_display();
 	}
 

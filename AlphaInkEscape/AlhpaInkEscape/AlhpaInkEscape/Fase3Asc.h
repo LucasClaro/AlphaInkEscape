@@ -76,8 +76,8 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	if (miniatura == NULL)
 	{
 		miniatura = (Objeto*)malloc(sizeof(Objeto));
-		miniatura->largura = 137;
-		miniatura->altura = 100;
+		miniatura->largura = 140;
+		miniatura->altura = 200;
 		miniatura->x = 700;
 		miniatura->y = 100;
 		miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaAni.png");
@@ -96,6 +96,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
+			limpaClick(prog);
 			if (prog->inventClick[4] || prog->inventClick[5])
 			{
 				prog->inventClick[4] = 0;
@@ -121,8 +122,8 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				prog->Itens[4] = miniatura;
 				prog->Inventario[4] = 1;
 			}
-			
-			if (prog->Itens[4] != NULL)
+			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
+			/*if (prog->Itens[4] != NULL)
 			{
 				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 95 + ((4 * ALTURA_TELA / 10) + prog->Itens[4]->altura * 0.5))
 				{
@@ -138,7 +139,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 					//printf("certo");
 					prog->inventClick[5] = 1;
 				}
-			}
+			}*/
 			/*
 			ALLEGRO_MOUSE_STATE state;
 			al_get_mouse_state(&state);

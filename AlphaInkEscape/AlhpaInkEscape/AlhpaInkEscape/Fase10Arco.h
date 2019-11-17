@@ -143,6 +143,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(prog);
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo))
 				{
 					prog->proximaSala = 14;////////////////////////////////
@@ -197,6 +198,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				else {
 					arrastando = 0;
 				}
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
@@ -277,6 +279,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
 
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 	al_destroy_bitmap(Background);

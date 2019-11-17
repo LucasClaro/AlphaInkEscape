@@ -87,7 +87,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 9;
+	progresso.proximaSala = 6;
 	progresso.Gameover = 0;
 	progresso.Salas[0] = 0;
 	progresso.Salas[1] = 0;
@@ -112,6 +112,7 @@ int main(void) {
 	progresso.Inventario[4] = 0;
 	progresso.Inventario[5] = 0;
 	progresso.Inventario[6] = 0;
+	progresso.Inventario[7] = 0;
 
 	progresso.Itens[0] = NULL;
 	progresso.Itens[1] = NULL;
@@ -120,6 +121,7 @@ int main(void) {
 	progresso.Itens[4] = NULL;
 	progresso.Itens[5] = NULL;
 	progresso.Itens[6] = NULL;
+	progresso.Itens[7] = NULL;
 	
 	progresso.inventCount = 0;
 
@@ -130,6 +132,7 @@ int main(void) {
 	progresso.inventClick[4] = 0;
 	progresso.inventClick[5] = 0;
 	progresso.inventClick[6] = 0;
+	progresso.inventClick[7] = 0;
 
 	progresso.linhaInGame = 0;
 

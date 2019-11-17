@@ -16,6 +16,8 @@ Objeto* Pais1, * Pais2, * Pais3, * Pais4;
 
 Objeto* SendoArrastado, * UltimoArrastado;
 
+Objeto* miniaturaPaises = NULL;
+
 int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	int x0 = 140;
 	int y0 = 75;
@@ -135,6 +137,16 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	Foto2->largura = 250;
 	Foto2->altura = 150;
 
+	if (miniaturaPaises == NULL)
+	{
+		miniaturaPaises = (Objeto*)malloc(sizeof(Objeto));
+		miniaturaPaises->largura = 95;
+		miniaturaPaises->altura = 136;
+		miniaturaPaises->x = 700;
+		miniaturaPaises->y = 100;
+		miniaturaPaises->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaPaises.png");
+	}
+
 	UltimoArrastado = A1;
 
 	int gameOver = 0;
@@ -149,12 +161,18 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
+				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
+					prog->Salas[15] = 1;
+				}
+			}
 			//se teve eventos e foi um evento de fechar janela, encerra repeti��o			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(prog);
 				if (!prog->Salas[15]) {
 					if (IsInside(evento.mouse.x, evento.mouse.y, Livro1))
 					{
@@ -258,6 +276,21 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 					arrastando = 0;
 					SendoArrastado = NULL;
 				}
+				if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaPaises) && !prog->Itens[7] != NULL)
+				{
+					prog->Itens[7] = miniaturaPaises;
+					prog->Inventario[7] = 1;
+				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
+				/*if (prog->Itens[7] != NULL)
+				{
+					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[7]->largura * 0.5 && evento.mouse.y >= 600 && evento.mouse.y <= 600 + 136 / 2)
+					{
+						//printf("certo");
+						prog->inventClick[7] = 1;
+					}
+				}*/
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
@@ -320,6 +353,11 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			ALLEGRO_MOUSE_STATE state;
 
 			al_get_mouse_state(&state);
+
+			if (state.buttons & 2)
+			{
+				printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
+			}
 			if (state.buttons & 1 && arrastando)
 			{
 				switch (arrastando)
@@ -416,7 +454,11 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_draw_bitmap(Foto3->bitmap, Foto3->x, Foto3->y, 0);
 		al_draw_bitmap(Foto4->bitmap, Foto4->x, Foto4->y, 0);
 
+		if(prog->Salas[15] && !prog->Inventario[7])
+			al_draw_bitmap(miniaturaPaises->bitmap, miniaturaPaises->x, miniaturaPaises->y, 0);
+
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 }

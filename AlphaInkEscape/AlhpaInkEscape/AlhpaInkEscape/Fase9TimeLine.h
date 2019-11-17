@@ -321,12 +321,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6])
-				{
-					prog->inventClick[4] = 0;
-					prog->inventClick[5] = 0;
-					prog->inventClick[6] = 0;
-				}
+				limpaClick(prog);
 
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
 					prog->proximaSala = 5;////////////////////////////////
@@ -380,7 +375,8 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				else {
 					arrastando = 0;
 				}
-
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
+				/*
 				if (prog->Itens[4] != NULL)
 				{
 					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 435)
@@ -405,7 +401,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						prog->inventClick[6] = 1;
 					}
 				}
-
+				*/
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
