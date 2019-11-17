@@ -107,6 +107,9 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
+					tocando = !tocando;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 13;
@@ -307,7 +310,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				al_draw_bitmap(progresso->Itens[2]->bitmap, fundoC->x + 5, fundoC->y + 5, 0);
 		}
 		
-
+		som(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

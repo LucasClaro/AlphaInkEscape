@@ -178,6 +178,9 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Livro2;
 						aux = Livro2->y;
 					}
+					else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+						tocando = !tocando;
+					}
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Livro3))
 					{
 						arrastando = 3;
@@ -429,6 +432,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_draw_bitmap(Foto3->bitmap, Foto3->x, Foto3->y, 0);
 		al_draw_bitmap(Foto4->bitmap, Foto4->x, Foto4->y, 0);
 
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

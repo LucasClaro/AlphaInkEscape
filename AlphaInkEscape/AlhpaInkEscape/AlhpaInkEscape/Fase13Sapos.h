@@ -114,6 +114,9 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 							casas[i] = i;
 					}
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, D1)) {
 					i = IndexOf(1,casas);
 					if (i < 4 && casas[i + 1] == 0) {
@@ -222,6 +225,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(PostIt2->bitmap, PostIt2->x, PostIt2->y, 0);
 		}
 
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

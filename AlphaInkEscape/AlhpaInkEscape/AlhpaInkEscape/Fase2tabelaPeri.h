@@ -174,6 +174,10 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
+					tocando = !tocando;
+				}
+				
 				else if (IsInside(evento.mouse.x, evento.mouse.y, Ba) && !Arrastando) {
 					Arrastando = 1;
 					Ba->cliqueX = MapearDistancia(evento.mouse.x, Ba->x);
@@ -302,7 +306,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 			al_draw_bitmap(Na->bitmap, fundoNa->x+5, fundoNa->y+5, 0);
 			al_draw_bitmap(C->bitmap, fundoC->x+5, fundoC->y+5, 0);
 		}
-		
+		som(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

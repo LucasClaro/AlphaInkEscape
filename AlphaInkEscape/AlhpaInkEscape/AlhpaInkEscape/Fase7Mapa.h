@@ -384,6 +384,9 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				}
 
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
+			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3) && prog->Salas[7] == 0) {
 				if (!pressionado && state.buttons & 1)
 				{
@@ -582,6 +585,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
 
 		//abrirMapa(prog);
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

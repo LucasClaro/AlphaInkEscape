@@ -155,6 +155,9 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
+					tocando = !tocando;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
 					progresso->proximaSala = 15;
@@ -609,6 +612,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		if(errado)
 			al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
 
+		som(progresso);
 		caregaInventario(progresso);
 		al_flip_display();
 	}

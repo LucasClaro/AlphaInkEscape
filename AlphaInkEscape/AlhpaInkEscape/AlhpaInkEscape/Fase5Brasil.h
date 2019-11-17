@@ -135,6 +135,9 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
 				{
 					arrastando = 1;
@@ -245,7 +248,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		{
 			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
 		}
-
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

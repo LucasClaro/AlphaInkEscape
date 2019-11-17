@@ -99,6 +99,9 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
+			}
 			else if(IsInside(evento.mouse.x, evento.mouse.y, postIt5))
 			{
 				prog->Itens[3] = postIt5;
@@ -139,6 +142,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
 		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}

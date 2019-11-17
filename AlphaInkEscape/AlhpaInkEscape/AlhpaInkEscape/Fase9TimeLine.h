@@ -320,6 +320,9 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					eventos[1 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[1 + 6 * prog->linhaInGame].x);
 					eventos[1 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[1 + 6 * prog->linhaInGame].y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[2 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 3;
@@ -484,7 +487,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				al_draw_bitmap(eventos[i].bitmap, datas[i].x+25, datas[i].y+25, 0);
 			}
 		}
-
+		som(prog);
 		caregaInventario(prog);
 		al_flip_display();
 	}
