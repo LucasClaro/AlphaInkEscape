@@ -68,8 +68,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	if (miniaturaObras == NULL)
 	{
 		miniaturaObras = (Objeto*)malloc(sizeof(Objeto));
-		miniaturaObras->largura = 149;
-		miniaturaObras->altura = 219;
+		miniaturaObras->largura = 95;
+		miniaturaObras->altura = 136;
 		miniaturaObras->x = 700;
 		miniaturaObras->y = 100;
 		miniaturaObras->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaObras.png");
@@ -342,10 +342,10 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
-		if (state.buttons & 2)
+		/*if (state.buttons & 2)
 		{
 			printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
-		}
+		}*/
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -364,10 +364,11 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 
-			if (prog->inventClick[4] || prog->inventClick[5])
+			if (prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6])
 			{
 				prog->inventClick[4] = 0;
 				prog->inventClick[5] = 0;
+				prog->inventClick[6] = 0;
 			}
 
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
@@ -521,10 +522,18 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			}
 			if (prog->Itens[5] != NULL)
 			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 219/2)
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 136/2)
 				{
 					//printf("certo");
 					prog->inventClick[5] = 1;
+				}
+			}
+			if (prog->Itens[6] != NULL)
+			{
+				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[6]->largura * 0.5 && evento.mouse.y >= 528 && evento.mouse.y <= 528 + 200 / 2)
+				{
+					//printf("certo");
+					prog->inventClick[6] = 1;
 				}
 			}
 		}

@@ -80,7 +80,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		miniatura->altura = 100;
 		miniatura->x = 700;
 		miniatura->y = 100;
-		miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/minia.png");
+		miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaAni.png");
 	}
 
 	bool arrastando = false;
