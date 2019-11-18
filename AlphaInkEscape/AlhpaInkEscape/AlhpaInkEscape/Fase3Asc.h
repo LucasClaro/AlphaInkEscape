@@ -67,7 +67,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 	Objeto* tabela;
 	tabela = (Objeto*)malloc(sizeof(Objeto));
-	tabela->bitmap = al_load_bitmap("Imgs/Asc/tabela.png");
+	tabela->bitmap = al_load_bitmap("Imgs/Asc/tabelaOriginal.jpeg");
 	tabela->altura = 212;
 	tabela->largura = 200;
 	tabela->x = 150;

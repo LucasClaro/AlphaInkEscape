@@ -47,13 +47,14 @@ int VerificaFila(Fila* fila, int *resp) {
 		int i = fila->inicio;	
 		int j = 0;
 
-		while(i != fila->fim - 1) {
+		while(j != 9) {
 			if (i == fila->tamanho) {
 				i = 0;
 			}
 			//printf("%d, %d\n",fila->vetor[i],resp[i]);
 			if (fila->vetor[i] != resp[j])
 				return 0;
+			
 			i++;
 			j++;
 		}
@@ -224,7 +225,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				}
 				EmQueue(f, 2);
 				if (VerificaFila(f, vetorResposta)) {
-					printf("Acertou!");
+					//printf("Acertou!");
 					prog->Salas[6] = 1;
 				}
 			}
