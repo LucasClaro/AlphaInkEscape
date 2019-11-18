@@ -131,7 +131,7 @@ void abrirMapa(Progresso* prog) {
 			break;
 		}
 		al_draw_bitmap(prog->cenario->miniMapa->bitmap, prog->cenario->miniMapa->x, prog->cenario->miniMapa->y, 0);
-		al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
+		//al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
 	}
 }
 

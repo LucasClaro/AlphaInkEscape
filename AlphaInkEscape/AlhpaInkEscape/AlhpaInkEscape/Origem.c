@@ -162,17 +162,17 @@ int main(void) {
 	//miniMapa cenario
 	progresso.cenario->miniMapa = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->miniMapa->bitmap = al_load_bitmap("Imgs/Minimapa/mapa.png");
-	progresso.cenario->miniMapa->altura = 448;
-	progresso.cenario->miniMapa->largura = 968;
+	progresso.cenario->miniMapa->altura = 453;
+	progresso.cenario->miniMapa->largura = 626;
 	progresso.cenario->miniMapa->x = (LARGURA_TELA / 2) - (progresso.cenario->miniMapa->largura / 2);
 	progresso.cenario->miniMapa->y = (ALTURA_TELA / 2) - (progresso.cenario->miniMapa->altura / 2);
 
 	progresso.cenario->btnMiniMapa = (Objeto*)malloc(sizeof(Objeto));
-	progresso.cenario->btnMiniMapa->bitmap = al_load_bitmap("Imgs/Minimapa/bloc.png");
-	progresso.cenario->btnMiniMapa->altura = 83;
-	progresso.cenario->btnMiniMapa->largura = 83;
-	progresso.cenario->btnMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.cenario->btnMiniMapa->largura / 2);
-	progresso.cenario->btnMiniMapa->y = progresso.cenario->btnMiniMapa->altura / 4;
+	progresso.cenario->btnMiniMapa->bitmap = al_load_bitmap("Imgs/Minimapa/mapaicon.png");
+	progresso.cenario->btnMiniMapa->altura = 50;
+	progresso.cenario->btnMiniMapa->largura = 50;
+	progresso.cenario->btnMiniMapa->x = progresso.cenario->btnSom->x - progresso.cenario->btnMiniMapa->largura - 10;
+	progresso.cenario->btnMiniMapa->y = progresso.cenario->btnSom->y;
 
 	progresso.cenario->xMiniMapa = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->xMiniMapa->bitmap = al_load_bitmap("Imgs/xis.png");
