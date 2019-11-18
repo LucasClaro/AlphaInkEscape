@@ -30,7 +30,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->largura = 20;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
-	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura - 10;
+	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = progresso->cenario->setaBaixo;
 
 	Objeto* SaidaEsquerda;
