@@ -13,7 +13,8 @@
 
 Objeto* miniaturaObras = NULL;
 //a
-int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {	
+
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
@@ -36,34 +37,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaCima->largura = 20;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
-	SaidaCima->bitmap = prog->cenario->setaCima;
-
-	Objeto* campo1;
-	campo1 = (Objeto*)malloc(sizeof(Objeto));
-	campo1->bitmap = al_load_bitmap("Imgs/slide4.png");
-	campo1->altura = 250;
-	campo1->largura = 500;
-	campo1->x = 0;
-	campo1->y = ALTURA_TELA - campo1->altura;
-
-	Objeto* campoesquerda;
-	campoesquerda = (Objeto*)malloc(sizeof(Objeto));
-	campoesquerda->bitmap = NULL;
-	campoesquerda->altura = 250;
-	campoesquerda->largura = 500;
-	campoesquerda->x = 110;
-	campoesquerda->y = 350;
-
-	ALLEGRO_BITMAP* btn = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
-
-	Objeto* campodireita;
-	campodireita = (Objeto*)malloc(sizeof(Objeto));
-	campodireita->bitmap = NULL;
-	campodireita->altura = 250;
-	campodireita->largura = 500;
-	campodireita->x = 1100;
-	campodireita->y = 350;
+	SaidaCima->bitmap = prog->cenario->setaCima;	
 
 	if (miniaturaObras == NULL)
 	{
@@ -76,37 +50,37 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	}
 
 	//======================================IMAGENS=======================================================================
+	Objeto* tabela;
+	tabela = (Objeto*)malloc(sizeof(Objeto));
+	tabela->bitmap = al_load_bitmap("Imgs/MapaFase7/tabela.png");
+	tabela->altura = 200;
+	tabela->largura = 310;
+	tabela->x = 250;
+	tabela->y = 50;
+
 	Objeto* brasil;
 	brasil = (Objeto*)malloc(sizeof(Objeto));
-	brasil->bitmap = al_load_bitmap("Imgs/MapaFase7/Brasil.png");
-	brasil->altura = 250;
-	brasil->largura = 500;
-	brasil->x = 250;
+	brasil->bitmap = al_load_bitmap("Imgs/MapaFase7/brasil.png");
+	brasil->altura = 200;
+	brasil->largura = 310;
+	brasil->x = 750;
 	brasil->y = 50;
 
-	Objeto* toronto;
-	toronto = (Objeto*)malloc(sizeof(Objeto));
-	toronto->bitmap = al_load_bitmap("Imgs/MapaFase7/toronto.png");
-	toronto->altura = 250;
-	toronto->largura = 500;
-	toronto->x = 750;
-	toronto->y = 50;
+	Objeto* mundo;
+	mundo = (Objeto*)malloc(sizeof(Objeto));
+	mundo->bitmap = al_load_bitmap("Imgs/MapaFase7/mundo.png");
+	mundo->altura = 200;
+	mundo->largura = 310;
+	mundo->x = 750;
+	mundo->y = 300;
 
-	Objeto* londres;
-	londres = (Objeto*)malloc(sizeof(Objeto));
-	londres->bitmap = al_load_bitmap("Imgs/MapaFase7/londres.png");
-	londres->altura = 250;
-	londres->largura = 500;
-	londres->x = 750;
-	londres->y = 300;
-
-	Objeto* china;
-	china = (Objeto*)malloc(sizeof(Objeto));
-	china->bitmap = al_load_bitmap("Imgs/MapaFase7/china.png");
-	china->altura = 250;
-	china->largura = 500;
-	china->x = 250;
-	china->y = 300;
+	Objeto* europa;
+	europa = (Objeto*)malloc(sizeof(Objeto));
+	europa->bitmap = al_load_bitmap("Imgs/MapaFase7/europa.png");
+	europa->altura = 200;
+	europa->largura = 310;
+	europa->x = 250;
+	europa->y = 300;
 
 	//==============================================CAMPOS===================================================
 
@@ -209,13 +183,13 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	setabaixo4->y = 655;
 
 	//---------------------------------------------------SETAS-------------------------------------------------------
-	Objeto* item;
-	item = (Objeto*)malloc(sizeof(Objeto));
-	item->bitmap = NULL;
-	item->altura = 100;
-	item->largura = 100;
-	item->x = 310;
-	item->y = 560;
+	Objeto* item1;
+	item1 = (Objeto*)malloc(sizeof(Objeto));
+	item1->bitmap = NULL;
+	item1->altura = 100;
+	item1->largura = 100;
+	item1->x = 310;
+	item1->y = 560;
 
 	Objeto* item2;
 	item2 = (Objeto*)malloc(sizeof(Objeto));
@@ -241,6 +215,38 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	item4->x = 910;
 	item4->y = 560;
 
+	Objeto* exemplo1;
+	exemplo1 = (Objeto*)malloc(sizeof(Objeto));
+	exemplo1->bitmap = NULL;
+	exemplo1->altura = 40;
+	exemplo1->largura = 40;
+	exemplo1->x = tabela->x + tabela->largura / 2 - 40;
+	exemplo1->y = tabela->y + tabela->altura / 2 - 40;
+
+	Objeto* exemplo2;
+	exemplo2 = (Objeto*)malloc(sizeof(Objeto));
+	exemplo2->bitmap = NULL;
+	exemplo2->altura = 100;
+	exemplo2->largura = 100;
+	exemplo2->x = brasil->x + brasil->largura / 2 - 40;
+	exemplo2->y = brasil->y + brasil->altura / 2 - 40;
+
+	Objeto* exemplo3;
+	exemplo3 = (Objeto*)malloc(sizeof(Objeto));
+	exemplo3->bitmap = NULL;
+	exemplo3->altura = 100;
+	exemplo3->largura = 100;
+	exemplo3->x = europa->x + europa->largura / 2 - 40;
+	exemplo3->y = europa->y + europa->altura / 2 - 40;
+
+	Objeto* exemplo4;
+	exemplo4 = (Objeto*)malloc(sizeof(Objeto));
+	exemplo4->bitmap = NULL;
+	exemplo4->altura = 100;
+	exemplo4->largura = 100;
+	exemplo4->x = mundo->x + mundo->largura / 2 - 40;
+	exemplo4->y = mundo->y + mundo->altura / 2 - 40;
+
 	//=========================================================================================================
 	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/MapaFase7/setaZ.png");
 	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/MapaFase7/setaT.png");
@@ -248,91 +254,43 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	ALLEGRO_BITMAP* seta4 = al_load_bitmap("Imgs/MapaFase7/setaN.png");
 	ALLEGRO_BITMAP* itens[] = { seta1, seta2, seta3, seta4 };
 
+	ALLEGRO_BITMAP* btnB = al_load_bitmap("Imgs/MapaFase7/baixoMapa.png");
+	ALLEGRO_BITMAP* btnC = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
+	ALLEGRO_BITMAP* btnPressionadoB = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
+	ALLEGRO_BITMAP* btnPressionadoC = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
 
-	ALLEGRO_BITMAP* btn2 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado2 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
+	ALLEGRO_BITMAP* exemploZ = al_load_bitmap("Imgs/MapaFase7/exemploZ.png");
+	ALLEGRO_BITMAP* exemploT = al_load_bitmap("Imgs/MapaFase7/exemploT.png");
+	ALLEGRO_BITMAP* exemploQ = al_load_bitmap("Imgs/MapaFase7/exemploQ.png");
+	ALLEGRO_BITMAP* exemploN = al_load_bitmap("Imgs/MapaFase7/exemploN.png");
+	ALLEGRO_BITMAP* exemplos[] = { exemploZ, exemploT, exemploQ, exemploN };
 
-	ALLEGRO_BITMAP* btn3 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado3 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
+	setacima1->bitmap = btnC;
+	setacima2->bitmap = btnC;
+	setacima3->bitmap = btnC;
+	setacima4->bitmap = btnC;
+	setabaixo1->bitmap = btnB;
+	setabaixo2->bitmap = btnB;
+	setabaixo3->bitmap = btnB;
+	setabaixo4->bitmap = btnB;
 
-	ALLEGRO_BITMAP* btn4 = al_load_bitmap("Imgs/MapaFase7/cimaMapa.png");
-	ALLEGRO_BITMAP* btnPressionado4 = al_load_bitmap("Imgs/MapaFase7/cimaMapaPressionado.png");
-
-	//------------------------------------------------------------------------------------------------------------------------
-	//a
-	ALLEGRO_BITMAP* btn5 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
-	ALLEGRO_BITMAP* btnPressionado5 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
-
-	ALLEGRO_BITMAP* btn6 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
-	ALLEGRO_BITMAP* btnPressionado6 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
-
-	ALLEGRO_BITMAP* btn7 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
-	ALLEGRO_BITMAP* btnPressionado7 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
-
-	ALLEGRO_BITMAP* btn8 = al_load_bitmap("Imgs/MapaFase7/baixoMapa1.png");
-	ALLEGRO_BITMAP* btnPressionado8 = al_load_bitmap("Imgs/MapaFase7/baixoMapaPressionado.png");
-
-
-	Objeto* campo2;
-	campo2 = (Objeto*)malloc(sizeof(Objeto));
-	campo2->bitmap = al_load_bitmap("Imgs/slide4.png");
-	campo2->altura = 250;
-	campo2->largura = 500;
-	campo2->x = LARGURA_TELA - campo2->largura;
-	campo2->y = ALTURA_TELA - campo2->altura;
-
-	Objeto* bola;
-	bola = (Objeto*)malloc(sizeof(Objeto));
-	bola->bitmap = al_load_bitmap("Imgs/monca.png");
-	bola->altura = 50;
-	bola->largura = 50;
-	bola->x = (LARGURA_TELA / 2) - (bola->largura / 2);
-	bola->y = (ALTURA_TELA / 4) - (bola->altura / 2);
-
-	Objeto* conta;
-	conta = (Objeto*)malloc(sizeof(Objeto));
-	conta->bitmap = NULL;
-	conta->altura = 500;
-	conta->largura = 250;
-	conta->x = (LARGURA_TELA / 2) - (conta->largura);
-	conta->y = (ALTURA_TELA / 2) - (conta->altura / 2);
-
-	ALLEGRO_BITMAP* conta1 = al_load_bitmap("Imgs/esquerda.png");
-	ALLEGRO_BITMAP* conta2 = al_load_bitmap("Imgs/direita.png");
-
-
-	int vetorResposta[10] = { 1,1,2,1,1,2,2,1,2,2 }; //"EEDEEDDEDD";
-
-
-	bool digitado = false;
-	bool sair = false;
-	bool drawNull = true;
-	bool arrastando = false;
-	bool pressionado = false;
-
-	setacima1->bitmap = btn;
-	setacima2->bitmap = btn2;
-	setacima3->bitmap = btn3;
-	setacima4->bitmap = btn4;
-	setabaixo1->bitmap = btn5;
-	setabaixo2->bitmap = btn6;
-	setabaixo3->bitmap = btn7;
-	setabaixo4->bitmap = btn8;
-
-	int i = 0;
 	int j = 2;
 	int k = 2;
 	int o = 2;
 	int g = 2;
 
-
-
-
-	item->bitmap = itens[j];
+	item1->bitmap = itens[j];
 	item2->bitmap = itens[k];
 	item3->bitmap = itens[o];
 	item4->bitmap = itens[g];
 
+	exemplo1->bitmap = exemplos[j];
+	exemplo2->bitmap = exemplos[k];
+	exemplo3->bitmap = exemplos[o];
+	exemplo4->bitmap = exemplos[g];
+
+
+	bool sair = false;
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -340,10 +298,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
-		/*if (state.buttons & 2)
-		{
-			printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
-		}*/
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -351,7 +305,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				k = 1;
 				o = 2;
 				g = 3;
-				item->bitmap = itens[j];
+				item1->bitmap = itens[j];
 				item2->bitmap = itens[k];
 				item3->bitmap = itens[o];
 				item4->bitmap = itens[g];
@@ -364,128 +318,65 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 			limpaClick(prog);
 
-			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
-				arrastando = true;
-
-				bola->cliqueX = MapearDistancia(evento.mouse.x, bola->x);
-				bola->cliqueY = MapearDistancia(evento.mouse.y, bola->y);
-			}
-
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					j--;
-					if (j == -1) {
-						j = 3;
-					}
-					item->bitmap = itens[j];
-
-
-					pressionado = false;
-					setacima1->bitmap = btnPressionado;
-				}
-
-
-			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima2) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					k--;
-					if (k == -1) {
-						k = 3;
-					}
-					item2->bitmap = itens[k];
-
-					pressionado = true;
-					setacima2->bitmap = btnPressionado2;
-				}
-
-			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+			if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					o--;
-					if (o == -1) {
-						o = 3;
-					}
-					item3->bitmap = itens[o];
-					pressionado = true;
-					setacima3->bitmap = btnPressionado3;
-				}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1) && !prog->Salas[7]) {
 
+				j--;
+				if (j == -1)
+					j = 3;
+
+				setacima1->bitmap = btnPressionadoC;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima4) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					g--;
-					if (g == -1) {
-						g = 3;
-					}
-					item4->bitmap = itens[g];
-					pressionado = true;
-					setacima4->bitmap = btnPressionado4;
-				}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima2) && !prog->Salas[7]) {
+				k--;
+				if (k == -1)
+					k = 3;
 
+				setacima2->bitmap = btnPressionadoC;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo1) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					pressionado = true;
-					setabaixo1->bitmap = btnPressionado5;
-					j++;
-					if (j == 4) {
-						j = 0;
-					}
-					item->bitmap = itens[j];
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3) && !prog->Salas[7]) {
+				o--;
+				if (o == -1)
+					o = 3;
 
-					//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-										//SE J = 0 && K==1 && O==3 && G == 4
-										//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-				}
-
+				setacima3->bitmap = btnPressionadoC;
 			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima4) && !prog->Salas[7]) {
+				g--;
+				if (g == -1)
+					g = 3;
 
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					pressionado = true;
-					setabaixo2->bitmap = btnPressionado6;
-					k++;
-					if (k == 4) {
-						k = 0;
-					}
-					item2->bitmap = itens[k];
-				}
-
+				setacima4->bitmap = btnPressionadoC;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
-					o++;
-					if (o == 4) {
-						o = 0;
-					}
-					item3->bitmap = itens[o];
-					pressionado = true;
-					setabaixo3->bitmap = btnPressionado7;
-				}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo1) && !prog->Salas[7]) {					
+				j++;
+				if (j == 4)
+					j = 0;
 
+				setabaixo1->bitmap = btnPressionadoB;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4) && prog->Salas[7] == 0) {
-				if (!pressionado && state.buttons & 1)
-				{
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2) && !prog->Salas[7]) {
+				k++;
+				if (k == 4)
+					k = 0;
+
+				setabaixo2->bitmap = btnPressionadoB;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3) && !prog->Salas[7]) {
+				o++;
+				if (o == 4)
+					o = 0;
+
+				setabaixo3->bitmap = btnPressionadoB;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4) && !prog->Salas[7]) {
 					g++;
-					if (g == 4) {
+					if (g == 4)
 						g = 0;
-					}
-					item4->bitmap = itens[g];
-					pressionado = true;
-					setabaixo4->bitmap = btnPressionado8;
-				}
 
+					setabaixo4->bitmap = btnPressionadoB;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
@@ -511,74 +402,30 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				prog->Inventario[5] = 1;
 			}
 
+			item1->bitmap = itens[j];
+			item2->bitmap = itens[k];
+			item3->bitmap = itens[o];
+			item4->bitmap = itens[g];
+
+			exemplo1->bitmap = exemplos[j];
+			exemplo2->bitmap = exemplos[k];
+			exemplo3->bitmap = exemplos[o];
+			exemplo4->bitmap = exemplos[g];
+
+
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
-			/*
-			if (prog->Itens[4] != NULL)
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 435)
-				{
-					//printf("certo");
-					prog->inventClick[4] = 1;
-				}
-			}
-			if (prog->Itens[5] != NULL)
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 136/2)
-				{
-					//printf("certo");
-					prog->inventClick[5] = 1;
-				}
-			}
-			if (prog->Itens[6] != NULL)
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[6]->largura * 0.5 && evento.mouse.y >= 528 && evento.mouse.y <= 528 + 200 / 2)
-				{
-					//printf("certo");
-					prog->inventClick[6] = 1;
-				}
-			}*/
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
-			arrastando = false;
-			pressionado = false;
-			setacima1->bitmap = btn;
-			setacima2->bitmap = btn2;
-			setacima3->bitmap = btn3;
-			setacima4->bitmap = btn4;
-			setabaixo1->bitmap = btn5;
-			setabaixo2->bitmap = btn6;
-			setabaixo3->bitmap = btn7;
-			setabaixo4->bitmap = btn8;
+			setacima1->bitmap = btnC;
+			setacima2->bitmap = btnC;
+			setacima3->bitmap = btnC;
+			setacima4->bitmap = btnC;
+			setabaixo1->bitmap = btnB;
+			setabaixo2->bitmap = btnB;
+			setabaixo3->bitmap = btnB;
+			setabaixo4->bitmap = btnB;
 
-		}
-
-
-
-
-		if (arrastando && state.buttons & 1)
-		{
-			if (!VerificarBordas(evento.mouse.x, evento.mouse.y, bola))
-			{
-				bola->x = evento.mouse.x - bola->cliqueX;
-				bola->y = evento.mouse.y - bola->cliqueY;
-			}
-
-			if (IsInsideImagem(bola, campo1))
-			{
-				conta->bitmap = conta1;
-				drawNull = false;
-			}
-			else if (IsInsideImagem(bola, campo2))
-			{
-				conta->bitmap = conta2;
-				drawNull = false;
-			}
-			else
-			{
-				drawNull = true;
-
-			}
 		}
 
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -591,43 +438,42 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			prog->Salas[7] = 1;
 		}
 
-
-
-
 		//===========================================DESENHAR========================================================================
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
-		/*if (prog->Salas[0])*/
+
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
-
-
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
-
-
-		//if (!drawNull)
-		//	al_draw_bitmap(conta->bitmap, conta->x, conta->y, 0);
-
 
 		al_draw_bitmap(item4->bitmap, item4->x, item4->y, 0);
 		al_draw_bitmap(item3->bitmap, item3->x, item3->y, 0);
 		al_draw_bitmap(item2->bitmap, item2->x, item2->y, 0);
-		al_draw_bitmap(item->bitmap, item->x, item->y, 0);
+		al_draw_bitmap(item1->bitmap, item1->x, item1->y, 0);
+
 		al_draw_bitmap(setabaixo4->bitmap, setabaixo4->x, setabaixo4->y, 0);
 		al_draw_bitmap(setabaixo3->bitmap, setabaixo3->x, setabaixo3->y, 0);
 		al_draw_bitmap(setabaixo2->bitmap, setabaixo2->x, setabaixo2->y, 0);
 		al_draw_bitmap(setabaixo1->bitmap, setabaixo1->x, setabaixo1->y, 0);
+
 		al_draw_bitmap(setacima4->bitmap, setacima4->x, setacima4->y, 0);
 		al_draw_bitmap(setacima3->bitmap, setacima3->x, setacima3->y, 0);
 		al_draw_bitmap(setacima2->bitmap, setacima2->x, setacima2->y, 0);
 		al_draw_bitmap(setacima1->bitmap, setacima1->x, setacima1->y, 0);
+
 		al_draw_bitmap(caixa4->bitmap, caixa4->x, caixa4->y, 0);
 		al_draw_bitmap(caixa3->bitmap, caixa3->x, caixa3->y, 0);
 		al_draw_bitmap(caixa2->bitmap, caixa2->x, caixa2->y, 0);
 		al_draw_bitmap(caixa1->bitmap, caixa1->x, caixa1->y, 0);
-		al_draw_bitmap(china->bitmap, china->x, china->y, 0);
-		al_draw_bitmap(londres->bitmap, londres->x, londres->y, 0);
-		al_draw_bitmap(toronto->bitmap, toronto->x, toronto->y, 0);
+
+		al_draw_bitmap(europa->bitmap, europa->x, europa->y, 0);
+		al_draw_bitmap(mundo->bitmap, mundo->x, mundo->y, 0);
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
+		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
+
+		al_draw_scaled_bitmap(exemplo1->bitmap, 0, 0, exemplo1->largura, exemplo1->altura, exemplo1->x, exemplo1->y, exemplo1->largura * 2, exemplo1->altura * 2, 0);
+		al_draw_bitmap(exemplo2->bitmap, exemplo2->x, exemplo2->y, 0);
+		al_draw_bitmap(exemplo3->bitmap, exemplo3->x, exemplo3->y, 0);
+		al_draw_bitmap(exemplo4->bitmap, exemplo4->x, exemplo4->y, 0);
 
 		if(!prog->Inventario[5])
 			al_draw_bitmap(miniaturaObras->bitmap, miniaturaObras->x, miniaturaObras->y, 0);
@@ -639,25 +485,14 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	}
 
 	//al_destroy_bitmap(padrao);
-	al_destroy_bitmap(conta1);
-	al_destroy_bitmap(conta2);
-	al_destroy_bitmap(campo1->bitmap);
-	al_destroy_bitmap(campo2->bitmap);
-	al_destroy_bitmap(campoesquerda->bitmap);
-	al_destroy_bitmap(campodireita->bitmap);
-	al_destroy_bitmap(bola->bitmap);
-	al_destroy_bitmap(china->bitmap);
+	al_destroy_bitmap(europa->bitmap);
+	al_destroy_bitmap(tabela->bitmap);
+	al_destroy_bitmap(mundo->bitmap);
 	al_destroy_bitmap(brasil->bitmap);
-	al_destroy_bitmap(londres->bitmap);
-	al_destroy_bitmap(toronto->bitmap);
-	al_destroy_bitmap(setacima1->bitmap);
-	al_destroy_bitmap(setacima2->bitmap);
-	al_destroy_bitmap(setacima3->bitmap);
-	al_destroy_bitmap(setacima4->bitmap);
-	al_destroy_bitmap(setabaixo1->bitmap);
-	al_destroy_bitmap(setabaixo2->bitmap);
-	al_destroy_bitmap(setabaixo3->bitmap);
-	al_destroy_bitmap(setabaixo4->bitmap);
+	al_destroy_bitmap(btnB);
+	al_destroy_bitmap(btnC);
+	al_destroy_bitmap(btnPressionadoB);
+	al_destroy_bitmap(btnPressionadoC);
 	al_destroy_bitmap(caixa1->bitmap);
 	al_destroy_bitmap(caixa2->bitmap);
 	al_destroy_bitmap(caixa3->bitmap);
@@ -671,33 +506,19 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	free(SaidaBaixo);
 	free(SaidaCima);
 	free(SaidaEsquerda);
-	free(campo1);
-	free(campo2);
-	free(campoesquerda);
-	free(campodireita);
-	free(bola);
-	free(conta);
 
-	free(item);
+	free(item1);
 	free(item2);
 	free(item3);
 	free(item4);
-	free(setabaixo1);
-	free(setabaixo2);
-	free(setabaixo3);
-	free(setabaixo4);
-	free(setacima1);
-	free(setacima2);
-	free(setacima3);
-	free(setacima4);
 	free(caixa1);
 	free(caixa2);
 	free(caixa3);
 	free(caixa4);
-	free(china);
-	free(londres);
+	free(europa);
+	free(mundo);
+	free(tabela);
 	free(brasil);
-	free(toronto);
 
 	return 0;
 }

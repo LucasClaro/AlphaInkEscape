@@ -151,6 +151,7 @@
     <ClCompile Include="Origem.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EndGame.h" />
     <ClInclude Include="Fase10Arco.h" />
     <ClInclude Include="Fase11Xadrez.h" />
     <ClInclude Include="Fase15Classico.h" />
