@@ -172,9 +172,14 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
-
+			limpaClick(prog);
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
 				prog->proximaSala = 5;
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				sair = true;
+			}
+			if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+				prog->proximaSala = 2;
 				//return;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
@@ -237,7 +242,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				cor[3] = 0;
 			}
 
-
+			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			 if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER)
@@ -326,6 +331,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		som(prog);
 
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

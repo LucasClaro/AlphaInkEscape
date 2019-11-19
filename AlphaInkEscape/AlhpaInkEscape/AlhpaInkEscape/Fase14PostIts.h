@@ -6,11 +6,11 @@
 
 #include "Struct.h"
 #include "Funcoes.h"
-
+Objeto* PostIt = NULL;
 int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
-	Objeto* PostIt = NULL, *fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
+	Objeto *fundoA = NULL, * fundoB = NULL, * fundoC = NULL, * fundoD = NULL;
 	int Arrastando = 0;
 
 	ALLEGRO_BITMAP* mural = NULL, *posicionado = NULL;
@@ -36,13 +36,16 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = progresso->cenario->cadeado;
 
-	PostIt = (Objeto*)malloc(sizeof(Objeto));
-	PostIt->altura = 183;
-	PostIt->largura = 201;
-	PostIt->x = 730;
-	PostIt->y = 220;
-	PostIt->bitmap = NULL;
-
+	if (PostIt == NULL)
+	{
+		PostIt = (Objeto*)malloc(sizeof(Objeto));
+		PostIt->altura = 183;
+		PostIt->largura = 201;
+		PostIt->x = 730;
+		PostIt->y = 220;
+		PostIt->bitmap = NULL;
+	}
+	
 	fundoA = (Objeto*)malloc(sizeof(Objeto));
 	fundoA->largura = 220;
 	fundoA->altura = 230;
@@ -101,6 +104,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(progresso);
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 10;
@@ -168,6 +172,8 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				{
 					Arrastando = 0;
 				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				Arrastando = 0;
@@ -312,6 +318,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		
 		som(progresso);
 		caregaInventario(progresso);
+		abreOrdem(progresso);
 		al_flip_display();
 	}
 

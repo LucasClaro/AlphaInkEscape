@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeï¿½alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeï¿½alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -12,7 +12,8 @@
 
 Objeto* linha1, * linha2, * linha3, * linha4;
 Objeto* eventos, * notas, * datas;
-
+Objeto* saidaDireita, * saidaBaixo, * saidaCima;
+Objeto* miniaturaElem = NULL;
 
 int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	int p1 = LARGURA_TELA / 2 - 450, p2 = p1 + 175, p3 = p2 + 175, p4 = p3 + 175, p5 = p4 + 175, p6 = p5 + 175;
@@ -202,10 +203,20 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	datas[23].largura = 100;
 	datas[23].altura = 100;
 
+	if (miniaturaElem == NULL)
+	{
+		miniaturaElem = (Objeto*)malloc(sizeof(Objeto));
+		miniaturaElem->largura = 137;
+		miniaturaElem->altura = 100;
+		miniaturaElem->x = 700;
+		miniaturaElem->y = 100;
+		miniaturaElem->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaElem.png");
+	}
+
 	int mx = 0;
 	int my = 0;
 	int count = 1;
-	for (i = 0; i < 6; i++) {//Percorre do 1º ao 6º elemento de uma linha do tempo
+	for (i = 0; i < 6; i++) {//Percorre do 1ï¿½ ao 6ï¿½ elemento de uma linha do tempo
 		for (j = 0; j < 4; j++) {//Percorre as 4 linhas do tempo
 			eventos[i + 6 * j].bitmap = NULL;
 			eventos[i + 6 * j].x = linha1->x + 100 * mx;//Divide os 6 elementos da linha do tempo em 3 colunas
@@ -296,14 +307,14 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			//se teve eventos e foi um evento de fechar janela, encerra repetiï¿½ï¿½o			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				//if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[9]) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima)) {
+				limpaClick(prog);
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[5]) {
 					prog->proximaSala = 5;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
@@ -347,9 +358,41 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					eventos[5 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[5 + 6 * prog->linhaInGame].x);
 					eventos[5 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[5 + 6 * prog->linhaInGame].y);
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaElem) && !prog->Itens[6])
+				{
+					prog->Itens[6] = miniaturaElem;
+					prog->Inventario[6] = 1;
+				}
 				else {
 					arrastando = 0;
 				}
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
+				/*
+				if (prog->Itens[4] != NULL)
+				{
+					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 435)
+					{
+						//printf("certo");
+						prog->inventClick[4] = 1;
+					}
+				}
+				if (prog->Itens[5] != NULL)
+				{
+					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 136 / 2)
+					{
+						//printf("certo");
+						prog->inventClick[5] = 1;
+					}
+				}
+				if (prog->Itens[6] != NULL)
+				{
+					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[6]->largura * 0.5 && evento.mouse.y >= 528 && evento.mouse.y <= 528 + 200 / 2)
+					{
+						//printf("certo");
+						prog->inventClick[6] = 1;
+					}
+				}
+				*/
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
@@ -365,9 +408,20 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					Dentro = DentroDe(evento);
 			}
 
+			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
+				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
+					prog->Salas[9] = 1;
+				}
+			}
+
 			ALLEGRO_MOUSE_STATE state;
 
 			al_get_mouse_state(&state);
+			if (state.buttons & 2)
+			{
+				printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
+			}
+
 			if (state.buttons & 1 && arrastando)
 			{
 				switch (arrastando)
@@ -488,7 +542,12 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			}
 		}
 		som(prog);
+
+		if (prog->Salas[9] && !prog->Inventario[6])
+			al_draw_bitmap(miniaturaElem->bitmap, miniaturaElem->x, miniaturaElem->y, 0);
+
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 	return 0;

@@ -194,6 +194,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_get_mouse_state(&state);
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+			limpaClick(prog);
 			if (IsInside(evento.mouse.x, evento.mouse.y, bola) && !arrastando) {
 				arrastando = true;
 			
@@ -260,6 +261,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			{
 				aberto = !aberto;
 			}
+			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
@@ -332,6 +334,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		abrirMapa(prog);
 		som(prog);	  	   	
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

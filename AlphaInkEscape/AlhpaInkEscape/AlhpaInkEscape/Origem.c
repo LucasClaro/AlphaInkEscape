@@ -88,9 +88,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	//sala de inicio
-	progresso.proximaSala = 15;
-	//gameover
+	progresso.proximaSala = 6;
 	progresso.Gameover = 0;
 	//prog de todas as salas
 	progresso.Salas[0] = 0;
@@ -117,10 +115,16 @@ int main(void) {
 	progresso.Inventario[4] = 0;
 	progresso.Inventario[5] = 0;
 	progresso.Inventario[6] = 0;
-	
-	//itens
+	progresso.Inventario[7] = 0;
+
+	progresso.Itens[0] = NULL;
+	progresso.Itens[1] = NULL;
 	progresso.Itens[2] = NULL;
 	progresso.Itens[3] = NULL;
+	progresso.Itens[4] = NULL;
+	progresso.Itens[5] = NULL;
+	progresso.Itens[6] = NULL;
+	progresso.Itens[7] = NULL;
 	
 	//quantidade de itens no inventario
 	progresso.inventCount = 0;
@@ -133,6 +137,7 @@ int main(void) {
 	progresso.inventClick[4] = 0;
 	progresso.inventClick[5] = 0;
 	progresso.inventClick[6] = 0;
+	progresso.inventClick[7] = 0;
 
 	progresso.linhaInGame = 0;
 
@@ -182,7 +187,7 @@ int main(void) {
 	progresso.cenario->xMiniMapa->y = progresso.cenario->xMiniMapa->altura / 4;
 	progresso.cenario->fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 
-	loadFotoInvent();
+	loadFotosGlobais();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
 	// Looping central do jogo
@@ -199,4 +204,5 @@ int main(void) {
 	al_uninstall_keyboard();
 	al_stop_samples();
 	al_destroy_display(janela);
+	destroyFotosGlobais();
 }
