@@ -13,7 +13,7 @@
 bool tocando = true;
 bool aberto = false;
 
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL;
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -77,7 +77,6 @@ void abrirMapa(Progresso* prog) {
 	al_draw_bitmap(prog->cenario->btnMiniMapa->bitmap, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
 	int x = 0;
 	int y = 0;
-	ALLEGRO_BITMAP* semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 	if (aberto) {
 		//mapa
 		al_draw_bitmap(prog->cenario->miniMapa->bitmap, prog->cenario->miniMapa->x, prog->cenario->miniMapa->y, 0);
@@ -98,36 +97,36 @@ void abrirMapa(Progresso* prog) {
 
 		//linha 1
 		if(!prog->Salas[2])
-			al_draw_bitmap(semAcesso, 378, 178, 0);
+			al_draw_bitmap(semAcesso, 355, 185, 0);
 		if (!prog->Salas[6]) {
-			al_draw_bitmap(semAcesso, 548, 181, 0);
-			al_draw_bitmap(semAcesso, 762, 177, 0);
+			al_draw_bitmap(semAcesso, 550, 185, 0);
+			al_draw_bitmap(semAcesso, 744, 185, 0);
 		}
 
 		//linha 2
 		if (!prog->Salas[6]) {
-			al_draw_bitmap(semAcesso, 372, 292, 0);
-			al_draw_bitmap(semAcesso, 760, 291, 0);
+			al_draw_bitmap(semAcesso, 355, 285, 0);
+			al_draw_bitmap(semAcesso, 744, 285, 0);
 		}
 
 
 		//linha 3
 		if(!prog->Salas[10])
-			al_draw_bitmap(semAcesso, 369, 380, 0);
+			al_draw_bitmap(semAcesso, 355, 375, 0);
 		if (!prog->Salas[6]) {
-			al_draw_bitmap(semAcesso, 549, 380, 0);
+			al_draw_bitmap(semAcesso, 550, 375, 0);
 		}
 		if(!prog->Salas[7])
-			al_draw_bitmap(semAcesso, 762, 380, 0);
+			al_draw_bitmap(semAcesso, 744, 375, 0);
 		
 		
 		//linha4
 		if (!prog->Salas[10]) {
-			al_draw_bitmap(semAcesso, 367, 470, 0);			
-			al_draw_bitmap(semAcesso, 549, 471, 0);
+			al_draw_bitmap(semAcesso, 355, 470, 0);			
+			al_draw_bitmap(semAcesso, 550, 470, 0);
 		}			
 		if(!prog->Salas[14])
-			al_draw_bitmap(semAcesso, 760, 471, 0);
+			al_draw_bitmap(semAcesso, 744, 470, 0);
 		
 		
 		//x
@@ -144,6 +143,7 @@ int loadFotosGlobais()
 	ordemElem = al_load_bitmap("Imgs/Clicavel/ordemElem.png");
 	ordemPaises = al_load_bitmap("Imgs/Clicavel/ordemPaises.png");
 	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc3.png");
+	semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 }
 
 int destroyFotosGlobais()
@@ -155,6 +155,7 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(ordemElem);
 	al_destroy_bitmap(ordemPaises);
 	al_destroy_bitmap(fundoAsc);
+	al_destroy_bitmap(semAcesso);
 }
 
 int abreOrdem(Progresso* prog)

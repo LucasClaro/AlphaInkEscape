@@ -30,7 +30,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		sobreBi->largura = 201;
 		sobreBi->x = 110;
 		sobreBi->y = 0;
-		sobreBi->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+		sobreBi->bitmap = al_load_bitmap("Imgs/ASc/miniaturaBin.png");
 	}
 
 	enigmaStr* enigma1;
