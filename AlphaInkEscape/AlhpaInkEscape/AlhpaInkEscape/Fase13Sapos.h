@@ -99,7 +99,13 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {	
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
+				limpaClick(prog);
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
+				{
+					prog->proximaSala = 9;
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
 					prog->proximaSala = 14;
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
@@ -189,6 +195,8 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					prog->Inventario[2] = 1;
 					prog->inventCount++;
 				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 				//for (i = 0; i < 7; i++) { printf("%d ", casas[i]); }printf("\n");
 			}
 			if (confere(casas, correto, 7))
@@ -227,6 +235,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		som(prog);
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

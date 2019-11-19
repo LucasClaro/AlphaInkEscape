@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-// Inclui o arquivo de cabeçalho da biblioteca Allegro 5
+// Inclui o arquivo de cabeï¿½alho da biblioteca Allegro 5
 #include <allegro5/allegro.h>
-// Inclui o cabeçalho do add-on para uso de imagens
+// Inclui o cabeï¿½alho do add-on para uso de imagens
 #include <allegro5/allegro_image.h>
 // Inclui a coisa do mouse
 #include <allegro5/allegro_native_dialog.h>
@@ -150,12 +150,13 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição	
+			//se teve eventos e foi um evento de fechar janela, encerra repetiï¿½ï¿½o	
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				limpaClick(prog);
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo) && prog->Salas[10])
 				{
 					prog->proximaSala = 14;////////////////////////////////
@@ -216,6 +217,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				else {
 					arrastando = 0;
 				}
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
@@ -312,6 +314,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 		som(prog);
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 

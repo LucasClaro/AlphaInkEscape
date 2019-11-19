@@ -142,14 +142,19 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repetição			
+			//se teve eventos e foi um evento de fechar janela, encerra repetiï¿½ï¿½o			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				progresso->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-
-				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
+				limpaClick(progresso);
+				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
+				{
+					progresso->proximaSala = 7;
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 10;
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
@@ -207,6 +212,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				{
 					Arrastando = 0;
 				}
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				if (IsInsidePos(torre2, Tabuleiro[2][6]))
@@ -617,7 +623,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		al_flip_display();
 	}
 
-	//Desalocação das coisas
+	//Desalocaï¿½ï¿½o das coisas
 
 	al_destroy_bitmap(peao1->bitmap);
 	al_destroy_bitmap(peao2->bitmap);

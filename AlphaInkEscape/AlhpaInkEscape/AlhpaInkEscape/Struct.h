@@ -16,7 +16,7 @@
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
 // Tamanho do Inventário
-#define TAMANHO_INVENTARIO 7
+#define TAMANHO_INVENTARIO 8
 
 // Struct para imagens
 typedef struct Obj

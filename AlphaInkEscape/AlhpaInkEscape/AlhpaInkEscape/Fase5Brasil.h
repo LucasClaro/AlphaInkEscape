@@ -127,7 +127,8 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				//printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				limpaClick(prog);
 				
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
@@ -171,6 +172,8 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				else {
 					arrastando = 0;
 				}
+
+				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
