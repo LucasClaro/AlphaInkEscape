@@ -23,6 +23,14 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaDireita->largura = 20;
 	saidaDireita->altura = 20;
 
+	Objeto* saidaCima;
+	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	saidaCima->bitmap = prog->cenario->setaCima;
+	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
+	saidaCima->y = 0;
+	saidaCima->largura = 20;
+	saidaCima->altura = 20;
+
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
 	Reset->x = LARGURA_TELA/2 - 50 + 70;
@@ -241,7 +249,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	//Destroys	
 
-
+	free(saidaCima);
 	free(saidaDireita);
 }
 

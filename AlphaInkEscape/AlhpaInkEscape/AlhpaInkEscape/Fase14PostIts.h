@@ -80,7 +80,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
 	posicionado = al_load_bitmap("Imgs/PostIts/posicionado.png");
 
-	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
+	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap )
 	{
 		fprintf(stderr, "Falha ao iniciar imagem\n");
 		al_destroy_display(janela);
@@ -126,40 +126,49 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
+				
+				if (progresso->Itens[0] != NULL)
 				{
-					//i* ALTURA_TELA / 10 
-					progresso->inventClick[0] = 1;
+					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
+					{
+						//i* ALTURA_TELA / 10 
+						progresso->inventClick[0] = 1;
+					}
 				}
-				else if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && evento.mouse.y <= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
+				if (progresso->Itens[1] != NULL)
 				{
-					//i* ALTURA_TELA / 10 
-					progresso->inventClick[1] = 1;
+					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
+					{
+						//i* ALTURA_TELA / 10 
+						progresso->inventClick[1] = 1;
+					}
 				}
-				else if (progresso->Itens[2] != NULL)
+				if (progresso->Itens[2] != NULL)
 				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= 95 + ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
+					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && evento.mouse.y <= 95 + ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
 					{
 						//i* ALTURA_TELA / 10 
 						progresso->inventClick[2] = 1;
 					}
 				}
 
-				if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
-					Arrastando = 1;
-					progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
-					progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
+				if (progresso->Itens[0] != NULL)
+				{
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
+						Arrastando = 1;
+						progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
+						progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
+					}
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[1]) && !Arrastando) {
-					Arrastando = 2;
-					progresso->Itens[1]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[1]->x);
-					progresso->Itens[1]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[1]->y);
+				if (progresso->Itens[1] != NULL)
+				{
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[1]) && !Arrastando) {
+						Arrastando = 2;
+						progresso->Itens[1]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[1]->x);
+						progresso->Itens[1]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[1]->y);
+					}
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando) {
-					Arrastando = 3;
-					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
-					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
-				}
+				
 				else if (progresso->Itens[2] != NULL)
 				{
 					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[2]) && !Arrastando) {
@@ -168,10 +177,13 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						progresso->Itens[2]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[2]->y);
 					}
 				}
-				else
-				{
-					Arrastando = 0;
+
+				if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando) {
+					Arrastando = 3;
+					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
+					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
 				}
+				
 
 				checaClickOrdem(evento.mouse.x, evento.mouse.y, progresso);
 			}
@@ -217,7 +229,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			{
 				printf("x: %d - y: %d\n",evento.mouse.x,evento.mouse.y);
 			}*/
-			if (progresso->Itens[2] != NULL)
+			if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
 			{
 				if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
 				{
@@ -226,25 +238,70 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				}
 			}
 
-			if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(PostIt, fundoA))  
+			if (IsInsideImagem(PostIt, fundoA))
 				fundoA->bitmap = posicionado;
 			else
 				fundoA->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(PostIt, fundoB))
+			if (IsInsideImagem(PostIt, fundoB))
 				fundoB->bitmap = posicionado;
 			else
 				fundoB->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(PostIt, fundoC))
+			if (IsInsideImagem(PostIt, fundoC))
 				fundoC->bitmap = posicionado;
 			else
 				fundoC->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(PostIt, fundoD))// ||  IsInsideImagem(progresso->Itens[2], fundoA)
+			if (IsInsideImagem(PostIt, fundoD))
 				fundoD->bitmap = posicionado;
 			else
 				fundoD->bitmap = NULL;
+
+			if (progresso->Itens[0] != NULL)
+			{
+				if (IsInsideImagem(progresso->Itens[0], fundoA))
+					fundoA->bitmap = posicionado;
+				else
+					fundoA->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoB))
+					fundoB->bitmap = posicionado;
+				else
+					fundoB->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoC))
+					fundoC->bitmap = posicionado;
+				else
+					fundoC->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoD))
+					fundoD->bitmap = posicionado;
+				else
+					fundoD->bitmap = NULL;
+			}
+			if (progresso->Itens[1] != NULL)
+			{
+				if (IsInsideImagem(progresso->Itens[1], fundoA))
+					fundoA->bitmap = posicionado;
+				else
+					fundoA->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[1], fundoB))
+					fundoB->bitmap = posicionado;
+				else
+					fundoB->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[1], fundoC))
+					fundoC->bitmap = posicionado;
+				else
+					fundoC->bitmap = NULL;
+
+				if (IsInsideImagem(progresso->Itens[1], fundoD))
+					fundoD->bitmap = posicionado;
+				else
+					fundoD->bitmap = NULL;
+			}
 
 			if (progresso->Itens[2] != NULL)
 			{
