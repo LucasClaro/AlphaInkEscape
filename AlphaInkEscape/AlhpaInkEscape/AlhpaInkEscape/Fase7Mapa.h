@@ -220,7 +220,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	exemplo1->bitmap = NULL;
 	exemplo1->altura = 40;
 	exemplo1->largura = 40;
-	exemplo1->x = tabela->x + tabela->largura / 2 - 40;
+	exemplo1->x = tabela->x + tabela->largura / 2 - 120;
 	exemplo1->y = tabela->y + tabela->altura / 2 - 40;
 
 	Objeto* exemplo2;
@@ -236,7 +236,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	exemplo3->bitmap = NULL;
 	exemplo3->altura = 100;
 	exemplo3->largura = 100;
-	exemplo3->x = europa->x + europa->largura / 2 - 40;
+	exemplo3->x = europa->x + europa->largura / 2 - 120;
 	exemplo3->y = europa->y + europa->altura / 2 - 40;
 
 	Objeto* exemplo4;
@@ -244,8 +244,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	exemplo4->bitmap = NULL;
 	exemplo4->altura = 100;
 	exemplo4->largura = 100;
-	exemplo4->x = mundo->x + mundo->largura / 2 - 40;
-	exemplo4->y = mundo->y + mundo->altura / 2 - 40;
+	exemplo4->x = mundo->x + mundo->largura / 2 - 90;
+	exemplo4->y = mundo->y + mundo->altura / 2 - 50;
 
 	//=========================================================================================================
 	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/MapaFase7/setaZ.png");
@@ -470,7 +470,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 
-		al_draw_scaled_bitmap(exemplo1->bitmap, 0, 0, exemplo1->largura, exemplo1->altura, exemplo1->x, exemplo1->y, exemplo1->largura * 2, exemplo1->altura * 2, 0);
+		//al_draw_scaled_bitmap(exemplo1->bitmap, 0, 0, exemplo1->largura, exemplo1->altura, exemplo1->x, exemplo1->y, exemplo1->largura * 2, exemplo1->altura * 2, 0);
+		al_draw_bitmap(exemplo1->bitmap, exemplo1->x, exemplo1->y, 0);
 		al_draw_bitmap(exemplo2->bitmap, exemplo2->x, exemplo2->y, 0);
 		al_draw_bitmap(exemplo3->bitmap, exemplo3->x, exemplo3->y, 0);
 		al_draw_bitmap(exemplo4->bitmap, exemplo4->x, exemplo4->y, 0);

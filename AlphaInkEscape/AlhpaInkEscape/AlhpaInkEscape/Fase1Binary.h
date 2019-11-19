@@ -116,6 +116,14 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
 	setaBaixo->bitmap = prog->cenario->setaBaixo;
+
+	Objeto* setaDireita;
+	setaDireita = (Objeto*)malloc(sizeof(Objeto));
+	setaDireita->altura = 20;
+	setaDireita->largura = 20;
+	setaDireita->x = LARGURA_TELA - 20;
+	setaDireita->y = ALTURA_TELA/2 - setaDireita->altura/2;
+	setaDireita->bitmap = prog->cenario->setaDireita;
 	
 	
 	Objeto* contaSeta;
@@ -178,12 +186,11 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
-			/*if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 2;
-				//return;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
-			}*/
+			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, postIt4) && !prog->Inventario[0])
 			{
 				prog->Itens[0] = postIt4;
@@ -296,6 +303,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		//}
 
 		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
+		al_draw_bitmap(setaDireita->bitmap, setaDireita->x, setaDireita->y, 0);
 
 		if (prog->Salas[1] == 1) {// && !sobreposto
 			
@@ -352,6 +360,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	free(enigma3);
 	free(enigma4);
 	free(setaBaixo);
+	free(setaDireita);
 
 	return 0;
 }

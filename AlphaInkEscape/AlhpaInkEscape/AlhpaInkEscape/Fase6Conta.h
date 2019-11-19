@@ -331,7 +331,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(campodireita->bitmap, campodireita->x, campodireita->y, 0);
 		al_draw_bitmap(bola->bitmap, bola->x, bola->y, 0);
 
-		//abrirMapa(prog);
+		abrirMapa(prog);
 		som(prog);	  	   	
 		caregaInventario(prog);
 		abreOrdem(prog);
