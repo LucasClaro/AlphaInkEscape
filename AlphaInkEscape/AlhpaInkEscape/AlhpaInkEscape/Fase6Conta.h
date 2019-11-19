@@ -95,8 +95,8 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	Objeto* SaidaDireita;
 	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	SaidaDireita->altura = 20;
-	SaidaDireita->largura = 20;
+	SaidaDireita->altura = 50;
+	SaidaDireita->largura = 50;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = prog->cenario->cadeado;
