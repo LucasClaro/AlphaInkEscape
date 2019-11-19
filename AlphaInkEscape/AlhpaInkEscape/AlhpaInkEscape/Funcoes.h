@@ -77,61 +77,61 @@ void abrirMapa(Progresso* prog) {
 	al_draw_bitmap(prog->cenario->btnMiniMapa->bitmap, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
 	int x = 0;
 	int y = 0;
-
+	ALLEGRO_BITMAP* semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 	if (aberto) {
-		switch (prog->proximaSala) {
-		case 1:
-			x = LARGURA_TELA / 4 + 110;
-			y = ALTURA_TELA / 4;
-			break;
-		case 2:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 4;
-			break;
-		case 3:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 5:
-			x = LARGURA_TELA / 4 + 110;
-			y = ALTURA_TELA / 2;
-			break;
-		case 6:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 7:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 9:
-			x = LARGURA_TELA / 4 + 110;
-			y = ALTURA_TELA / 2;
-			break;
-		case 10:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 11:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 13:
-			x = LARGURA_TELA / 4 + 110;
-			y = ALTURA_TELA / 4 * 2;
-			break;
-		case 14:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-		case 15:
-			x = LARGURA_TELA / 2 - 60;
-			y = ALTURA_TELA / 2;
-			break;
-			break;
-		}
+		//mapa
 		al_draw_bitmap(prog->cenario->miniMapa->bitmap, prog->cenario->miniMapa->x, prog->cenario->miniMapa->y, 0);
-		//al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
+			//(548, 181)
+			//(762, 177)
+
+			//(760, 292)
+			//(550, 291)
+			//(372, 292)
+
+			//(369, 380)
+			//(549, 380)
+			//(762, 380)
+
+			//(367, 470)
+			//(549, 471)
+			//(760, 471)
+
+		//linha 1
+		if(!prog->Salas[2])
+			al_draw_bitmap(semAcesso, 378, 178, 0);
+		if (!prog->Salas[6]) {
+			al_draw_bitmap(semAcesso, 548, 181, 0);
+			al_draw_bitmap(semAcesso, 762, 177, 0);
+		}
+
+		//linha 2
+		if (!prog->Salas[6]) {
+			al_draw_bitmap(semAcesso, 372, 292, 0);
+			al_draw_bitmap(semAcesso, 760, 291, 0);
+		}
+
+
+		//linha 3
+		if(!prog->Salas[10])
+			al_draw_bitmap(semAcesso, 369, 380, 0);
+		if (!prog->Salas[6]) {
+			al_draw_bitmap(semAcesso, 549, 380, 0);
+		}
+		if(!prog->Salas[7])
+			al_draw_bitmap(semAcesso, 762, 380, 0);
+		
+		
+		//linha4
+		if (!prog->Salas[10]) {
+			al_draw_bitmap(semAcesso, 367, 470, 0);			
+			al_draw_bitmap(semAcesso, 549, 471, 0);
+		}			
+		if(!prog->Salas[14])
+			al_draw_bitmap(semAcesso, 760, 471, 0);
+		
+		
+		//x
+		al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
 	}
 }
 

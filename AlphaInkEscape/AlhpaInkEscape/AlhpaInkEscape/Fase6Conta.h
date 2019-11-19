@@ -260,6 +260,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			{
 				aberto = !aberto;
 			}
+			printf("(%d, %d)\n", evento.mouse.x, evento.mouse.y);
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{

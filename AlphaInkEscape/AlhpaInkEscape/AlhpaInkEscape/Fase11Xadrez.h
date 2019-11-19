@@ -124,7 +124,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	checkmate = al_load_bitmap("Imgs/xadrez/checkmate.png");
 	texto = al_load_bitmap("Imgs/xadrez/texto.png");
 
-	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap || !Background)
+	if (!SaidaCima->bitmap || !SaidaEsquerda->bitmap)
 	{
 		fprintf(stderr, "Falha ao iniciar imagem\n");
 		al_destroy_display(janela);

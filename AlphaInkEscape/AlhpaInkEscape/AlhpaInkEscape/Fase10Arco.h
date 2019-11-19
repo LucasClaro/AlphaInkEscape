@@ -14,7 +14,7 @@
 
 
 Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala;
-Objeto* alvo1, * alvo2, * alvo3;
+Objeto* alvo1, * alvo2, * alvo3, * alvo4, * alvo5;
 
 int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
@@ -34,24 +34,38 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	alvo1 = (Objeto*)malloc(sizeof(Objeto));
 	alvo1->bitmap = NULL;
-	alvo1->x = 600;
-	alvo1->y = 200;
+	alvo1->x = 550;
+	alvo1->y = 100;
 	alvo1->largura = 50;
 	alvo1->altura = 50;
 
 	alvo2 = (Objeto*)malloc(sizeof(Objeto));
 	alvo2->bitmap = NULL;
-	alvo2->x = 600;
-	alvo2->y = 400;
+	alvo2->x = 650;
+	alvo2->y = 300;
 	alvo2->largura = 50;
 	alvo2->altura = 50;
 
 	alvo3 = (Objeto*)malloc(sizeof(Objeto));
 	alvo3->bitmap = NULL;
 	alvo3->x = 600;
-	alvo3->y = 600;
+	alvo3->y = 500;
 	alvo3->largura = 50;
 	alvo3->altura = 50;
+
+	alvo4 = (Objeto*)malloc(sizeof(Objeto));
+	alvo4->bitmap = NULL;
+	alvo4->x = 900;
+	alvo4->y = 450;
+	alvo4->largura = 50;
+	alvo4->altura = 50;
+
+	alvo5 = (Objeto*)malloc(sizeof(Objeto));
+	alvo5->bitmap = NULL;
+	alvo5->x = 950;
+	alvo5->y = 150;
+	alvo5->largura = 50;
+	alvo5->altura = 50;
 
 	barraH = (Objeto*)malloc(sizeof(Objeto));
 	barraH->bitmap = NULL;
@@ -116,6 +130,8 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	alvo1->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 	alvo2->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 	alvo3->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
+	alvo4->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
+	alvo5->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 
 	int gameOver = 0;
 	int arrastando = 0;
@@ -123,7 +139,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	int anguloArco = 45;
 	int velocidade = 0;
 	int contador = 0;
-	int acertos[] = { 0, 0, 0 };
+	int acertos[] = { 0, 0, 0, 0, 0 };
 
 	while (!gameOver)
 	{
@@ -287,6 +303,12 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			al_draw_bitmap(alvo2->bitmap, alvo2->x, alvo2->y, 0);
 		if (!acertos[2])
 			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
+		if (!acertos[2])
+			al_draw_bitmap(alvo3->bitmap, alvo3->x, alvo3->y, 0);
+		if (!acertos[3])
+			al_draw_bitmap(alvo4->bitmap, alvo4->x, alvo4->y, 0);
+		if (!acertos[4])
+			al_draw_bitmap(alvo5->bitmap, alvo5->x, alvo5->y, 0);
 
 		som(prog);
 		caregaInventario(prog);
@@ -323,6 +345,10 @@ int CalcularTiro(int angulo, int velocidade, int cont, int* acertos) {
 				acertos[1] = 1;
 			if (IsInside(posX, posY, alvo3) && !acertos[2])
 				acertos[2] = 1;
+			if (IsInside(posX, posY, alvo4) && !acertos[3])
+				acertos[3] = 1;
+			if (IsInside(posX, posY, alvo5) && !acertos[4])
+				acertos[4] = 1;
 
 			al_draw_bitmap(bala->bitmap, posX, posY, 0);
 		}
