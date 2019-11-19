@@ -142,7 +142,7 @@ int loadFotosGlobais()
 	ordemObras = al_load_bitmap("Imgs/Clicavel/ordemObras.png");
 	ordemElem = al_load_bitmap("Imgs/Clicavel/ordemElem.png");
 	ordemPaises = al_load_bitmap("Imgs/Clicavel/ordemPaises.png");
-	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc3.png");
+	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc4.png");
 	semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 }
 

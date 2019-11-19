@@ -169,7 +169,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					}
 				}
 				
-				else if (progresso->Itens[2] != NULL)
+				if (progresso->Itens[2] != NULL)
 				{
 					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[2]) && !Arrastando) {
 						Arrastando = 4;
@@ -237,93 +237,99 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					SaidaDireita->bitmap = progresso->cenario->setaDireita;
 				}
 			}
-
+			/*
 			if (IsInsideImagem(PostIt, fundoA))
 				fundoA->bitmap = posicionado;
-			else
-				fundoA->bitmap = NULL;
-
-			if (IsInsideImagem(PostIt, fundoB))
+			else if (IsInsideImagem(PostIt, fundoB))
 				fundoB->bitmap = posicionado;
-			else
-				fundoB->bitmap = NULL;
-
-			if (IsInsideImagem(PostIt, fundoC))
+			else if (IsInsideImagem(PostIt, fundoC))
 				fundoC->bitmap = posicionado;
-			else
-				fundoC->bitmap = NULL;
-
-			if (IsInsideImagem(PostIt, fundoD))
+			else if (IsInsideImagem(PostIt, fundoD))
 				fundoD->bitmap = posicionado;
 			else
+			{
+				fundoA->bitmap = NULL;
+				fundoB->bitmap = NULL;
+				fundoC->bitmap = NULL;
 				fundoD->bitmap = NULL;
-
+			}
 			if (progresso->Itens[0] != NULL)
 			{
 				if (IsInsideImagem(progresso->Itens[0], fundoA))
 					fundoA->bitmap = posicionado;
-				else
-					fundoA->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoB))
+				else if (IsInsideImagem(progresso->Itens[0], fundoB))
 					fundoB->bitmap = posicionado;
-				else
-					fundoB->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoC))
+				else if (IsInsideImagem(progresso->Itens[0], fundoC))
 					fundoC->bitmap = posicionado;
-				else
-					fundoC->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoD))
+				else if (IsInsideImagem(progresso->Itens[0], fundoD))
 					fundoD->bitmap = posicionado;
 				else
+				{
+					fundoA->bitmap = NULL;
+					fundoB->bitmap = NULL;
+					fundoC->bitmap = NULL;
 					fundoD->bitmap = NULL;
+				}
 			}
 			if (progresso->Itens[1] != NULL)
 			{
 				if (IsInsideImagem(progresso->Itens[1], fundoA))
 					fundoA->bitmap = posicionado;
-				else
-					fundoA->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[1], fundoB))
+				else if (IsInsideImagem(progresso->Itens[1], fundoB))
 					fundoB->bitmap = posicionado;
-				else
-					fundoB->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[1], fundoC))
+				else if (IsInsideImagem(progresso->Itens[1], fundoC))
 					fundoC->bitmap = posicionado;
-				else
-					fundoC->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[1], fundoD))
+				else if (IsInsideImagem(progresso->Itens[1], fundoD))
 					fundoD->bitmap = posicionado;
 				else
+				{
+					fundoA->bitmap = NULL;
+					fundoB->bitmap = NULL;
+					fundoC->bitmap = NULL;
 					fundoD->bitmap = NULL;
+				}
 			}
 
 			if (progresso->Itens[2] != NULL)
 			{
-				if(IsInsideImagem(progresso->Itens[2], fundoA))
+				if (IsInsideImagem(progresso->Itens[2], fundoA))
 					fundoA->bitmap = posicionado;
-				else
-					fundoA->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[2], fundoB))
+				else if (IsInsideImagem(progresso->Itens[2], fundoB))
 					fundoB->bitmap = posicionado;
-				else
-					fundoB->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[2], fundoC))
+				else if (IsInsideImagem(progresso->Itens[2], fundoC))
 					fundoC->bitmap = posicionado;
-				else
-					fundoC->bitmap = NULL;
-
-				if (IsInsideImagem(progresso->Itens[2], fundoD))
+				else if (IsInsideImagem(progresso->Itens[2], fundoD))
 					fundoD->bitmap = posicionado;
 				else
+				{
+					fundoA->bitmap = NULL;
+					fundoB->bitmap = NULL;
+					fundoC->bitmap = NULL;
 					fundoD->bitmap = NULL;
+				}
+			}
+			*/
+			if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
+			{
+				if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(progresso->Itens[2], fundoA) || IsInsideImagem(PostIt, fundoA))
+					fundoA = posicionado;
+				else
+					fundoA = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(progresso->Itens[2], fundoB) || IsInsideImagem(PostIt, fundoB))
+					fundoB = posicionado;
+				else
+					fundoB = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(progresso->Itens[2], fundoC) || IsInsideImagem(PostIt, fundoC))
+					fundoC = posicionado;
+				else
+					fundoC = NULL;
+
+				if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(progresso->Itens[2], fundoD) || IsInsideImagem(PostIt, fundoD))
+					fundoD = posicionado;
+				else
+					fundoD = NULL;
 			}
 		}
 
