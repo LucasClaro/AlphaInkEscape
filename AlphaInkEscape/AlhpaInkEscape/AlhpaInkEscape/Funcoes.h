@@ -10,7 +10,6 @@
 
 #ifndef Funcoes_H
 #define Funcoes_H
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL;
 bool tocando = true;
 bool aberto = false;
 
