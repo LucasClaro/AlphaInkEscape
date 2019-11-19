@@ -253,6 +253,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		}
 		som(prog);
 		caregaInventario(prog);
+		abreOrdem(prog);
 		al_flip_display();
 	}
 
