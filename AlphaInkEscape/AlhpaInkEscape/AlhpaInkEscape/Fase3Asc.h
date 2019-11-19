@@ -12,7 +12,7 @@
 #include "ctype.h"
 #include <string.h>
 
-Objeto* postIt5 = NULL, * miniatura = NULL;
+Objeto* sobreBi = NULL, * miniatura = NULL;
 
 int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
@@ -23,15 +23,15 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
 	
-
-	postIt5 = (Objeto*)malloc(sizeof(Objeto));
-	postIt5->altura = 183;
-	postIt5->largura = 201;
-	postIt5->x = 110;
-	postIt5->y = 0;
-	postIt5->bitmap = NULL;
-
-	postIt5->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+	if (sobreBi == NULL)
+	{
+		sobreBi = (Objeto*)malloc(sizeof(Objeto));
+		sobreBi->altura = 183;
+		sobreBi->largura = 201;
+		sobreBi->x = 110;
+		sobreBi->y = 0;
+		sobreBi->bitmap = al_load_bitmap("Imgs/postitHomem.png");
+	}
 
 	enigmaStr* enigma1;
 	enigma1 = (enigmaStr*)malloc(sizeof(enigmaStr));
@@ -118,9 +118,9 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
-			else if(IsInside(evento.mouse.x, evento.mouse.y, postIt5))
+			else if(IsInside(evento.mouse.x, evento.mouse.y, sobreBi))
 			{
-				prog->Itens[3] = postIt5;
+				prog->Itens[3] = sobreBi;
 				prog->Inventario[3] = 1;
 				prog->inventCount++;
 			}
@@ -133,30 +133,14 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				prog->Inventario[4] = 1;
 			}
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
-			/*if (prog->Itens[4] != NULL)
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 95 + ((4 * ALTURA_TELA / 10) + prog->Itens[4]->altura * 0.5))
-				{
-					//printf("certo");
-					prog->inventClick[4] = 1;
-				}
-			}
-
-			if (prog->Itens[5] != NULL)
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 219 / 2)
-				{
-					//printf("certo");
-					prog->inventClick[5] = 1;
-				}
-			}*/
-			/*
+			
+			
 			ALLEGRO_MOUSE_STATE state;
 			al_get_mouse_state(&state);
 			if (state.buttons & 2)
 			{
 				printf("x: %d; y: %d\n",evento.mouse.x,evento.mouse.y);
-			}*/
+			}
 		}
 		if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 			if (evento.keyboard.keycode == ALLEGRO_KEY_ENTER && strncmp(enigma1->enigmaCerto, arrEnigma, 7) == 0)
@@ -183,11 +167,11 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 		if(!prog->Inventario[3])
-			al_draw_bitmap(postIt5->bitmap, postIt5->x, postIt5->y, 0);
+			al_draw_bitmap(sobreBi->bitmap, sobreBi->x, sobreBi->y, 0);
 
 		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
-		al_draw_text(enigma, al_map_rgb(0, 0, 0), postIt5->x + postIt5->largura + 10, postIt5->altura /2, 0, "BINARIO");
+		al_draw_text(enigma, al_map_rgb(0, 0, 0), sobreBi->x + sobreBi->largura + 10, sobreBi->altura /2, 0, "BINARIO");
 		som(prog);
 
 		if (prog->Salas[3] && !prog->Inventario[4])

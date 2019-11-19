@@ -19,7 +19,7 @@ typedef struct EnigmaStr
 } enigmaStr;
 
 Objeto* postIt4 = NULL;
-bool sobreposto = false;
+//bool sobreposto = false;
 
 
 int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
@@ -107,7 +107,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	campo4->x = (LARGURA_TELA / 2);
 	campo4->y = (ALTURA_TELA / 3 * 2.2) - (campo4->altura / 2);
 
-	ALLEGRO_BITMAP* fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
+	//ALLEGRO_BITMAP* fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
 
 	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
@@ -189,14 +189,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				prog->Itens[0] = postIt4;
 				prog->Inventario[0] = 1;
 				prog->inventCount++;
-			}
-			else if (prog->Itens[3])
-			{
-				if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[3]->largura && evento.mouse.y >= ((1 * ALTURA_TELA / 10) + prog->Itens[1]->altura * 0.5) && evento.mouse.y <= ((3 * ALTURA_TELA / 10) + prog->Itens[3]->altura * 0.5)) {
-					prog->inventClick[3] = 1;
-					sobreposto = true;
-				}
-				
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
@@ -290,8 +282,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			prog->Gameover = true;
 		}
 
-		if (!sobreposto)
-		{
+		/*if (!sobreposto)
+		{*/
 			al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 			al_draw_bitmap(campo1->bitmap, campo1->x, campo1->y, 0);
 			al_draw_bitmap(campo3->bitmap, campo3->x, campo3->y, 0);
@@ -301,14 +293,11 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(conta2->bitmap, conta2->x, conta2->y, 0);
 			al_draw_bitmap(xis->bitmap, xis->x, xis->y, 0);
 			al_draw_bitmap(contaSeta->bitmap, contaSeta->x, contaSeta->y, 0);
-		}
-		else{
-			al_draw_bitmap(fundoAsc, 0, 0, 0);
-		}
+		//}
 
 		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
 
-		if (prog->Salas[1] == 1 && !sobreposto) {
+		if (prog->Salas[1] == 1) {// && !sobreposto
 			
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo1->x + 95, (ALTURA_TELA / 4) - 20, 0, "0110");
 			al_draw_text(enigma, al_map_rgb(0, 0, 0), campo2->x + campo2->x - 25, (ALTURA_TELA / 3) + 100, 0, "0110");
@@ -348,7 +337,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	al_destroy_bitmap(contaSeta->bitmap);
 	al_destroy_font(enigma);
 	al_destroy_font(digitado);
-	al_destroy_bitmap(fundoAsc);
 	
 	//free
 	free(conta1);

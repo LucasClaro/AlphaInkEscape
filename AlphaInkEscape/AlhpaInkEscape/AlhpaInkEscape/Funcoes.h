@@ -13,7 +13,7 @@
 bool tocando = true;
 bool aberto = false;
 
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL;
 // Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
@@ -143,6 +143,7 @@ int loadFotosGlobais()
 	ordemObras = al_load_bitmap("Imgs/Clicavel/ordemObras.png");
 	ordemElem = al_load_bitmap("Imgs/Clicavel/ordemElem.png");
 	ordemPaises = al_load_bitmap("Imgs/Clicavel/ordemPaises.png");
+	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc2.png");
 }
 
 int destroyFotosGlobais()
@@ -153,11 +154,16 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(ordemObras);
 	al_destroy_bitmap(ordemElem);
 	al_destroy_bitmap(ordemPaises);
+	al_destroy_bitmap(fundoAsc);
 }
 
 int abreOrdem(Progresso* prog)
 {
-	if (prog->inventClick[4])
+	if (prog->inventClick[3])
+	{
+		al_draw_bitmap(fundoAsc, 0, 0, 0);
+	}
+	else if (prog->inventClick[4])
 	{
 		al_draw_bitmap(ordemBrasil, 0, 0, 0);
 	}
@@ -177,6 +183,12 @@ int abreOrdem(Progresso* prog)
 
 int checaClickOrdem(int x, int y,Progresso* prog)
 {
+	if (prog->Itens[3])
+	{
+		if (x >= 0 && x <= prog->Itens[3]->largura * 0.5 && y >= 310 && y <= 395) {
+			prog->inventClick[3] = 1;
+		}
+	}
 	if (prog->Itens[4] != NULL)
 	{
 		if (x >= 0 && x <= prog->Itens[4]->largura * 0.5 && y >= 385 && y <= 435)
@@ -213,8 +225,9 @@ int checaClickOrdem(int x, int y,Progresso* prog)
 
 int limpaClick(Progresso* prog)
 {
-	if (prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6] || prog->inventClick[7])
+	if (prog->inventClick[3] || prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6] || prog->inventClick[7])
 	{
+		prog->inventClick[3] = 0;
 		prog->inventClick[4] = 0;
 		prog->inventClick[5] = 0;
 		prog->inventClick[6] = 0;
