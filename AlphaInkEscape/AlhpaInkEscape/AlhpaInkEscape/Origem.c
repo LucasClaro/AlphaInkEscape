@@ -103,9 +103,11 @@ int main(void) {
 	progresso.Salas[9] = 0;
 	progresso.Salas[10] = 0;
 	progresso.Salas[11] = 0;
+	progresso.Salas[12] = 0;
 	progresso.Salas[13] = 0;
 	progresso.Salas[14] = 0;
 	progresso.Salas[15] = 0;
+	progresso.Salas[16] = 0;
 
 	//posisçoes do inventario
 	progresso.Inventario[0] = 0;
@@ -153,12 +155,20 @@ int main(void) {
 	progresso.cenario->semSom = al_load_bitmap("Imgs/semaudio.png");
 	progresso.cenario->comSom = al_load_bitmap("Imgs/comaudio.png");
 
+	//Saida cenario
+	progresso.cenario->saida = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->saida->bitmap = al_load_bitmap("Imgs/exit.png");
+	progresso.cenario->saida->altura = 50;
+	progresso.cenario->saida->largura = 50;
+	progresso.cenario->saida->x = LARGURA_TELA - progresso.cenario->saida->largura - 5;
+	progresso.cenario->saida->y = ALTURA_TELA / 4 - progresso.cenario->saida->altura * 2 - 30;
+
 	//som cenario
 	progresso.cenario->btnSom = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->btnSom->altura = 50;
 	progresso.cenario->btnSom->largura = 50;
-	progresso.cenario->btnSom->x = LARGURA_TELA - progresso.cenario->btnSom->largura - 5;
-	progresso.cenario->btnSom->y = ALTURA_TELA / 4 - progresso.cenario->btnSom->altura * 2 - 25;
+	progresso.cenario->btnSom->x = progresso.cenario->saida->x - progresso.cenario->saida->largura - 10;
+	progresso.cenario->btnSom->y = progresso.cenario->saida->y;
 	progresso.cenario->btnSom->bitmap = progresso.cenario->comSom;
 	progresso.cenario->musica = al_load_audio_stream("sounds/musica.ogg", 4, 1024);
 	al_attach_audio_stream_to_mixer(progresso.cenario->musica, al_get_default_mixer());
@@ -185,17 +195,19 @@ int main(void) {
 	progresso.cenario->xMiniMapa->largura = 83;
 	progresso.cenario->xMiniMapa->x = 110 + (LARGURA_TELA / 4 * 3) - (progresso.cenario->xMiniMapa->largura / 2);
 	progresso.cenario->xMiniMapa->y = progresso.cenario->xMiniMapa->altura / 4;
-	progresso.cenario->fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
+	progresso.cenario->fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);	
 
 	loadFotosGlobais();
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
+	
 	// Looping central do jogo
-
 	while (!prog->Gameover)
 	{
 		selecionaFase(janela, fila_eventos, prog);
 	}
+
+
 	al_destroy_event_queue(fila_eventos);
 	al_shutdown_image_addon();
 	al_shutdown_font_addon();

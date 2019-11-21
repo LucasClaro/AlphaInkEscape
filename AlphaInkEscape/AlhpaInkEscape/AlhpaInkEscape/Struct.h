@@ -46,6 +46,7 @@ typedef struct scene {
 	Objeto* miniMapa;
 	Objeto* btnMiniMapa;
 	Objeto* xMiniMapa;
+	Objeto* saida;
 	ALLEGRO_FONT* fonte;
 } Cenario;
 

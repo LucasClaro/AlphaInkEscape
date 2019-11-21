@@ -10,11 +10,16 @@
 
 #ifndef Funcoes_H
 #define Funcoes_H
+
+//Controle da música
 bool tocando = true;
+//Controle do minimapa
 bool aberto = false;
 
+//Imagens inventário
 ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL;
-// Vereifica se as coordenadas (X,Y) est�o dentro de uma imagem
+
+// Vereifica se as coordenadas (X,Y) estão dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
 	if (x >= objeto->x && x <= (objeto->x + objeto->largura) && y >= objeto->y && y <= (objeto->y + objeto->altura)) {
 		return 1;
@@ -22,7 +27,7 @@ int IsInside(int x, int y, Objeto *objeto) {
 	return 0;
 }
 
-// Mapeia a dist�ncia entre o lugar do clique e o canto da imagem
+// Mapeia a distância entre o lugar do clique e o canto da imagem
 int MapearDistancia(int ponto, int c) {
 	return ponto - c;
 }
@@ -43,6 +48,7 @@ int IsInsideImagem(Objeto *menor, Objeto *maior) {
 	return 0;
 }
 
+//Desenha os itens do inventário na tela
 int caregaInventario(Progresso *prog)
 {
 	int i;
@@ -60,6 +66,7 @@ int caregaInventario(Progresso *prog)
 	}
 }
 
+//Desenha o marcador de som e muta o jogo
 void som(Progresso *prog) {
 
 	al_draw_bitmap(prog->cenario->btnSom->bitmap, prog->cenario->btnSom->x, prog->cenario->btnSom->y,0);
@@ -73,12 +80,33 @@ void som(Progresso *prog) {
 	} 
 }
 
+//Controla o minimapa
 void abrirMapa(Progresso* prog) {
+	//Desenha o ícone e o X caso ele esteja aberto
 	al_draw_bitmap(prog->cenario->btnMiniMapa->bitmap, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
 	if(aberto)
 		al_draw_bitmap(usado, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
+
 	int x = 0;
 	int y = 0;
+
+	/*if (prog->proximaSala < 4)
+		y = 185;
+	else if (prog->proximaSala < 8)
+		y = 285;
+	else if (prog->proximaSala < 12)
+		y = 375;
+	else if (prog->proximaSala < 16)
+		y = 470;
+
+	if (prog->proximaSala == 1 || prog->proximaSala == 5 || prog->proximaSala == 9 || prog->proximaSala == 13)
+		x = 185;
+	else if (prog->proximaSala == 2 || prog->proximaSala == 6 || prog->proximaSala == 10 || prog->proximaSala == 14)
+		x = 285;
+	else if (prog->proximaSala == 3 || prog->proximaSala == 7 || prog->proximaSala == 11 || prog->proximaSala == 15)
+		x = 375;*/
+
+	//Desenha o mapa
 	if (aberto) {
 		//mapa
 		al_draw_bitmap(prog->cenario->miniMapa->bitmap, prog->cenario->miniMapa->x, prog->cenario->miniMapa->y, 0);
@@ -136,6 +164,37 @@ void abrirMapa(Progresso* prog) {
 	}
 }
 
+//Salva o jogo
+FILE* tm;
+void salvar(Progresso *prog) {
+	int i;
+	printf("Salvo");
+
+	fopen_s(&tm, "save.txt", "w");
+
+	for (i = 0; i < 17; i++)
+		fprintf_s(tm,"%d", prog->Salas[i]);
+	//fprintf_s(tm, "\n");
+
+	for (i = 0; i < 8; i++)
+		fprintf_s(tm, "%d", prog->Inventario[i]);
+	//fprintf_s(tm, "\n");
+
+	fprintf_s(tm, "%d", prog->inventCount);
+
+	for (i = 0; i < 8; i++)
+		fprintf_s(tm, "%d", prog->inventClick[i]);
+	//fprintf_s(tm, "\n");
+
+	fprintf_s(tm, "%d", prog->linhaInGame);
+
+	fprintf_s(tm, "%d", prog->proximaSala);
+	
+	fclose(tm);
+	prog->proximaSala = 0;
+}
+
+//Carrega as fotos do inventário
 int loadFotosGlobais()
 {
 	usado = al_load_bitmap("Imgs/jausada.png");
@@ -148,6 +207,7 @@ int loadFotosGlobais()
 	semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 }
 
+//Destroi as fotos do inventário/
 int destroyFotosGlobais()
 {
 	al_destroy_bitmap(usado);
@@ -160,6 +220,7 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(semAcesso);
 }
 
+//Exibe os itens que podem ser abertos
 int abreOrdem(Progresso* prog)
 {
 	if (prog->inventClick[3])
@@ -184,6 +245,7 @@ int abreOrdem(Progresso* prog)
 	}
 }
 
+//Vê qual item do inventário foi clicado
 int checaClickOrdem(int x, int y,Progresso* prog)
 {
 	if (prog->Itens[3])
@@ -226,6 +288,7 @@ int checaClickOrdem(int x, int y,Progresso* prog)
 	}
 }
 
+//Zera as vars de controle do inventário
 int limpaClick(Progresso* prog)
 {
 	if (prog->inventClick[3] || prog->inventClick[4] || prog->inventClick[5] || prog->inventClick[6] || prog->inventClick[7])

@@ -292,7 +292,6 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 		al_draw_bitmap(barraH->bitmap, barraH->x, barraH->y, 0);
 		al_draw_bitmap(barraV->bitmap, barraV->x, barraV->y, 0);
-
 		al_draw_bitmap(marcaH->bitmap, marcaH->x, marcaH->y, 0);
 		al_draw_bitmap(marcaV->bitmap, marcaV->x, marcaV->y, 0);
 

@@ -11,19 +11,43 @@
 #include "Struct.h"
 #include <string.h>
 
-Objeto* title, * jogar, * sair, * linha;
+//Cria os obj
+Objeto* title, * jogar, * sair, * linha, * novo, * cont;
 ALLEGRO_BITMAP* hist1, * hist2, * hist3, * hist4;
 ALLEGRO_BITMAP* Background;
 
-
+//Função main do menu
 int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
+	//vars de controle para ler arquivo
+	int podeContinuar = 0;
+	int teste = 0;
+	int tamanho;
+	FILE* file;
+	int i;
+
+	//abre o arquivo
+	fopen_s(&file, "save.txt", "r");
+	
+	//percorre o arquivo procurando chars
+	fseek(file, 0, SEEK_END);
+	tamanho = ftell(file);
+
+	//se o arquivo n estiver vazio é possível continuar um save
+	if (tamanho > 0) {
+		podeContinuar = 1;
+	}
+	//fecha o arquivo
+	fclose(file);
+	
+	//Imagens que ocupam a tela toda
 	Background = al_load_bitmap("Imgs/fundo.png");
 	hist1 = al_load_bitmap("Imgs/menu/hist1.png");
 	hist2 = al_load_bitmap("Imgs/menu/hist2.png");
 	hist3 = al_load_bitmap("Imgs/menu/hist3.png");
 	hist4 = al_load_bitmap("Imgs/menu/hist4.png");
 
+	//Objs
 	title = (Objeto*)malloc(sizeof(Objeto));
 	title->altura = 200;
 	title->largura = 600;
@@ -31,39 +55,55 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 	title->y = 50;
 	title->bitmap = al_load_bitmap("Imgs/menu/title.png");
 
-	jogar = (Objeto*)malloc(sizeof(Objeto));
-	jogar->altura = 150;
-	jogar->largura = 300;
-	jogar->x = (LARGURA_TELA / 2) - (jogar->largura / 2);
-	jogar->y = 300;
-	jogar->bitmap = al_load_bitmap("Imgs/menu/jogar.png");
+	novo = (Objeto*)malloc(sizeof(Objeto));
+	novo->altura = 150;
+	novo->largura = 600;
+	novo->x = (LARGURA_TELA / 2) - (title->largura / 2);
+	novo->y = 300;
+	novo->bitmap = al_load_bitmap("Imgs/menu/new.png");
+
+	cont = (Objeto*)malloc(sizeof(Objeto));
+	cont->altura = 150;
+	cont->largura = 600;
+	cont->x = (LARGURA_TELA / 2) - (title->largura / 2);
+	cont->y = novo->y + 130;
+	//muda a cor do btn caso ele n esteja habilitado
+	if(podeContinuar)
+		cont->bitmap = al_load_bitmap("Imgs/menu/cont.png");
+	else
+		cont->bitmap = al_load_bitmap("Imgs/menu/ncont.png");
 
 	sair = (Objeto*)malloc(sizeof(Objeto));
 	sair->altura = 150;
 	sair->largura = 300;
 	sair->x = (LARGURA_TELA / 2) - (sair->largura / 2);
-	sair->y = jogar->y + 170;
+	sair->y = cont->y + 130;
 	sair->bitmap = al_load_bitmap("Imgs/menu/sair.png");
 
 	linha = (Objeto*)malloc(sizeof(Objeto));
 	linha->altura = 150;
 	linha->largura = 300;
 	linha->x = (LARGURA_TELA / 2) - (linha->largura / 2);
-	linha->y = jogar->y + 170;
+	linha->y = novo->y + 130;
 	linha->bitmap = al_load_bitmap("Imgs/menu/linha.png");
 
+	//Vars de controle
 	int gameOver = 0;
 	int Dentro = 0;
 	int Hist = 0;
 
-
+	//Prieiro Desenho pra teal n surgir preta
 	al_draw_bitmap(Background, 0, 0, 0);
 	al_draw_bitmap(title->bitmap, title->x, title->y, 0);
-	al_draw_bitmap(jogar->bitmap, jogar->x, jogar->y, 0);
+	al_draw_bitmap(novo->bitmap, novo->x, novo->y, 0);
+	al_draw_bitmap(cont->bitmap, cont->x, cont->y, 0);
+	//al_draw_bitmap(jogar->bitmap, jogar->x, jogar->y, 0);
 	al_draw_bitmap(sair->bitmap, sair->x, sair->y, 0);
 
+	//loop do game
 	while (!gameOver)
 	{
+		//loop eventos
 		while (!al_is_event_queue_empty(fila_eventos))
 		{
 			ALLEGRO_EVENT evento;
@@ -72,31 +112,84 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 			ALLEGRO_MOUSE_STATE state;
 			al_get_mouse_state(&state);
 
+			//X do Windows
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				gameOver = 1;
 				prog->Gameover = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				//Mute do som
 				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 				}
+				//passando a história
 				else if (Hist > 0) {
 					Hist++;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, jogar) && Hist == 0)
+				//Novo Jogo
+				else if(IsInside(evento.mouse.x, evento.mouse.y, novo) && Hist == 0)
 				{
 					Hist++;
-				}				
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, cont) && Hist == 0 && podeContinuar) {
+					//preenche o progresso 
+					fopen_s(&file, "save.txt", "r");
+
+					/*fscanf_s(file, "%d", &teste);
+					while (!feof(file))
+					{
+						printf("%d ", teste);
+						fscanf_s(file, "%d", &teste);
+					}*/
+					
+					/*for (i = 0; i < 18; i++) {
+						teste = fgetc(file);
+						printf("%d ", file);
+						prog->Salas[i] = file;
+						printf("%d\n", prog->Salas[i]);
+					}*/
+						
+					/*for (i = 0; i < 8; i++) {
+						teste = fgetc(file);
+						prog->Inventario[i] = file - 48;
+					}						
+
+					teste = fgetc(file);
+					prog->inventCount = file - 48;
+
+					for (i = 0; i < 8; i++) {
+						teste = fgetc(file);
+						prog->inventClick[i] = file - 48;
+					}
+
+					teste = fgetc(file);
+					prog->linhaInGame = file - 48;
+
+					teste = fgetc(file);
+					prog->proximaSala = file - 48;*/
+					
+					fclose(file);
+
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}
+				//Sair			
 				else if (IsInside(evento.mouse.x, evento.mouse.y, sair) && Hist == 0) {
 					gameOver = 1;
 					prog->Gameover = 1;
-				}
+				}	
 			}
+			//Controla a linha de seleção
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_AXES) {
-				if (IsInside(evento.mouse.x, evento.mouse.y, jogar))
+				if (IsInside(evento.mouse.x, evento.mouse.y, novo))
 				{
 					Dentro = 1;
-					linha->y = jogar->y;
+					linha->y = novo->y;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, cont) && podeContinuar)
+				{
+					Dentro = 1;
+					linha->y = cont->y;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, sair)) {
 					Dentro = 1;
@@ -108,6 +201,7 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 				}
 			}
 
+			//Inicia o jogo depois da história
 			if (Hist > 4) {
 				prog->proximaSala = 6;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
@@ -115,12 +209,14 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 			}
 		}		
 
-			   		 
+		//Desenhos
 		al_draw_bitmap(Background, 0, 0, 0);
 		
 		if (Hist <= 0) {
 			al_draw_bitmap(title->bitmap, title->x, title->y, 0);
-			al_draw_bitmap(jogar->bitmap, jogar->x, jogar->y, 0);
+			//al_draw_bitmap(jogar->bitmap, jogar->x, jogar->y, 0);
+			al_draw_bitmap(novo->bitmap, novo->x, novo->y, 0);
+			al_draw_bitmap(cont->bitmap, cont->x, cont->y, 0);
 			al_draw_bitmap(sair->bitmap, sair->x, sair->y, 0);
 			if (Dentro)
 				al_draw_bitmap(linha->bitmap, linha->x, linha->y, 0);
@@ -141,7 +237,9 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 	}
 
 	al_destroy_bitmap(Background);
-	al_destroy_bitmap(jogar->bitmap);
+	//al_destroy_bitmap(jogar->bitmap);
+	al_destroy_bitmap(novo->bitmap);
+	al_destroy_bitmap(cont->bitmap);
 	al_destroy_bitmap(sair->bitmap);
 	al_destroy_bitmap(linha->bitmap);
 	al_destroy_bitmap(title->bitmap);
