@@ -277,7 +277,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 		contador = CalcularTiro(angulo, velocidade, contador, acertos);
 
-		if (acertos[0] && acertos[1] && acertos[2])
+		if (acertos[0] && acertos[1] && acertos[2] && acertos[4] && acertos[5])
 		{
 			prog->Salas[10] = 1;
 		}

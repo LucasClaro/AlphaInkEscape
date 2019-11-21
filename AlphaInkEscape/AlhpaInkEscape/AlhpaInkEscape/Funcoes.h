@@ -168,27 +168,38 @@ void abrirMapa(Progresso* prog) {
 FILE* tm;
 void salvar(Progresso *prog) {
 	int i;
-	printf("Salvo");
+
+	//Mostra p progresso antes de salvar
+	/*for (i = 0; i < 17; i++) {
+		printf("%d", prog->Salas[i]);
+	}
+	printf("\n");
+	for (i = 0; i < 8; i++) {
+		printf("%d", prog->Inventario[i]);
+	}
+	printf("\n%d", prog->inventCount);
+	for (i = 0; i < 8; i++) {
+		printf("%d", prog->inventClick[i]);
+	}
+	printf("\n%d", prog->linhaInGame);
+	printf("\n%d", prog->proximaSala);*/
 
 	fopen_s(&tm, "save.txt", "w");
 
 	for (i = 0; i < 17; i++)
-		fprintf_s(tm,"%d", prog->Salas[i]);
-	//fprintf_s(tm, "\n");
+		fprintf_s(tm,"%d ", prog->Salas[i]);
 
 	for (i = 0; i < 8; i++)
-		fprintf_s(tm, "%d", prog->Inventario[i]);
-	//fprintf_s(tm, "\n");
+		fprintf_s(tm, "%d ", prog->Inventario[i]);
 
-	fprintf_s(tm, "%d", prog->inventCount);
+	fprintf_s(tm, "%d ", prog->inventCount);
 
 	for (i = 0; i < 8; i++)
-		fprintf_s(tm, "%d", prog->inventClick[i]);
-	//fprintf_s(tm, "\n");
+		fprintf_s(tm, "%d ", prog->inventClick[i]);
 
-	fprintf_s(tm, "%d", prog->linhaInGame);
+	fprintf_s(tm, "%d ", prog->linhaInGame);
 
-	fprintf_s(tm, "%d", prog->proximaSala);
+	fprintf_s(tm, "%d ", prog->proximaSala);
 	
 	fclose(tm);
 	prog->proximaSala = 0;

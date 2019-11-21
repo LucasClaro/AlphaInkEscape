@@ -21,7 +21,7 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 
 	//vars de controle para ler arquivo
 	int podeContinuar = 0;
-	int teste = 0;
+	int leitor = 0;
 	int tamanho;
 	FILE* file;
 	int i;
@@ -134,39 +134,45 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 				else if (IsInside(evento.mouse.x, evento.mouse.y, cont) && Hist == 0 && podeContinuar) {
 					//preenche o progresso 
 					fopen_s(&file, "save.txt", "r");
+					i = 1;
 
-					/*fscanf_s(file, "%d", &teste);
+					fscanf_s(file, "%d", &leitor);
+					prog->Salas[0] = leitor;
 					while (!feof(file))
 					{
-						printf("%d ", teste);
-						fscanf_s(file, "%d", &teste);
-					}*/
-					
-					/*for (i = 0; i < 18; i++) {
-						teste = fgetc(file);
-						printf("%d ", file);
-						prog->Salas[i] = file;
-						printf("%d\n", prog->Salas[i]);
-					}*/
-						
-					/*for (i = 0; i < 8; i++) {
-						teste = fgetc(file);
-						prog->Inventario[i] = file - 48;
-					}						
+						fscanf_s(file, "%d", &leitor);
 
-					teste = fgetc(file);
-					prog->inventCount = file - 48;
+						if (i < 17)
+							prog->Salas[i] = leitor;
+						else if (i < 25)
+							prog->Inventario[i - 17] = leitor;
+						else if (i < 26)
+							prog->inventCount = leitor;
+						else if (i < 34)
+							prog->inventClick[i - 26] = leitor;
+						else if (i < 35)
+							prog->linhaInGame = leitor;
+						else if (i < 36)
+							prog->proximaSala = leitor;
 
-					for (i = 0; i < 8; i++) {
-						teste = fgetc(file);
-						prog->inventClick[i] = file - 48;
+						i++;
 					}
 
-					teste = fgetc(file);
-					prog->linhaInGame = file - 48;
-
-					teste = fgetc(file);
-					prog->proximaSala = file - 48;*/
+					//Validador
+					/*printf("\n");
+					for (i = 0; i < 17; i++) {
+						printf("%d", prog->Salas[i]);
+					}
+					printf("\n");
+					for (i = 0; i < 8; i++) {
+						printf("%d", prog->Inventario[i]);
+					}
+					printf("\n%d", prog->inventCount);
+					for (i = 0; i < 8; i++) {
+						printf("%d", prog->inventClick[i]);
+					}
+					printf("\n%d", prog->linhaInGame);
+					printf("\n%d", prog->proximaSala);*/
 					
 					fclose(file);
 
