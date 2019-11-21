@@ -75,6 +75,8 @@ void som(Progresso *prog) {
 
 void abrirMapa(Progresso* prog) {
 	al_draw_bitmap(prog->cenario->btnMiniMapa->bitmap, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
+	if(aberto)
+		al_draw_bitmap(usado, prog->cenario->btnMiniMapa->x, prog->cenario->btnMiniMapa->y, 0);
 	int x = 0;
 	int y = 0;
 	if (aberto) {

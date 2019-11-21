@@ -55,6 +55,13 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 	int gameOver = 0;
 	int Dentro = 0;
 	int Hist = 0;
+
+
+	al_draw_bitmap(Background, 0, 0, 0);
+	al_draw_bitmap(title->bitmap, title->x, title->y, 0);
+	al_draw_bitmap(jogar->bitmap, jogar->x, jogar->y, 0);
+	al_draw_bitmap(sair->bitmap, sair->x, sair->y, 0);
+
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -70,13 +77,16 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 				prog->Gameover = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				if (Hist > 0) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
+				}
+				else if (Hist > 0) {
 					Hist++;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, jogar) && Hist == 0)
 				{
 					Hist++;
-				}
+				}				
 				else if (IsInside(evento.mouse.x, evento.mouse.y, sair) && Hist == 0) {
 					gameOver = 1;
 					prog->Gameover = 1;
@@ -123,6 +133,8 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 			al_draw_bitmap(hist3, 0, 0, 0);
 		if (Hist == 4)
 			al_draw_bitmap(hist4, 0, 0, 0);
+
+		som(prog);
 
 
 		al_flip_display();

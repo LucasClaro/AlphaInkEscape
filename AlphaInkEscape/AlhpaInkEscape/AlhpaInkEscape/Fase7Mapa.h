@@ -470,7 +470,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(brasil->bitmap, brasil->x, brasil->y, 0);
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 
-		//al_draw_scaled_bitmap(exemplo1->bitmap, 0, 0, exemplo1->largura, exemplo1->altura, exemplo1->x, exemplo1->y, exemplo1->largura * 2, exemplo1->altura * 2, 0);
 		al_draw_bitmap(exemplo1->bitmap, exemplo1->x, exemplo1->y, 0);
 		al_draw_bitmap(exemplo2->bitmap, exemplo2->x, exemplo2->y, 0);
 		al_draw_bitmap(exemplo3->bitmap, exemplo3->x, exemplo3->y, 0);

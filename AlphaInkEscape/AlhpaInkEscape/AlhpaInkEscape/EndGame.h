@@ -53,7 +53,7 @@ int JogarFim(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progres
 			al_draw_bitmap(fala1, 0, 0, 0);
 		if (Hist == 2)
 			al_draw_bitmap(fala2, 0, 0, 0);
-		if (Hist == 3)
+		if (Hist >= 3)
 			al_draw_bitmap(creditos, 0, 0, 0);
 
 
