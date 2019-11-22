@@ -397,6 +397,10 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				{
 					prog->Inventario[6] = 1;
 				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima)) {
+					prog->proximaSala = 5;
+					gameOver = true;
+				}
 				//Zera o arrastar
 				else {
 					arrastando = 0;

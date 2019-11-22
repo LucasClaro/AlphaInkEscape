@@ -229,7 +229,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				Arrastando = 0;
 			}
-			else if(evento.type == ALLEGRO_EVENT_KEY_DOWN)
+			else if(evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_F1)
 			{
 				progresso->Salas[2] = 1;
 			}

@@ -143,7 +143,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	int velocidade = 0;
 	int contador = 0;//Usado para "animar" o tiro
 	int acertos[] = { 0, 0, 0, 0, 0 };
-	int tentativas = 0;
+	int tentativas = 10;
 
 	//loop do game
 	while (!gameOver)
@@ -257,11 +257,20 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				//Muda o valor do angulo do desenho
 				anguloArco = 90 + (barraV->y - marcaV->y);
 
+				int i = 0;
 				//Caso o mouse estivesse movendo o marcador de angulo, muda o angulo do cálculo a velocidade e o contador da animação
 				if (arrastando == 1) {					
-					angulo = 90 + (barraV->y - marcaV->y);
-					velocidade = 30 + (barraH->x - marcaH->x) / 3;
-					contador = 1;
+					tentativas--;
+					if (tentativas > 0) {
+						angulo = 90 + (barraV->y - marcaV->y);
+						velocidade = 30 + (barraH->x - marcaH->x) / 3;
+						contador = 1;
+					}
+					else {
+						tentativas = 10;
+						for(i = 0; i < 5; i++)
+							acertos[i] = 0;
+					}
 				}
 
 				//Volta o marcador de velocidade para o início

@@ -520,4 +520,38 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 
 		al_flip_display();
 	}
+	//destroy
+	al_destroy_bitmap(saidaEsquerda->bitmap);
+	al_destroy_bitmap(A1->bitmap);
+	al_destroy_bitmap(A2->bitmap);
+	al_destroy_bitmap(A3->bitmap);
+	al_destroy_bitmap(A4->bitmap);
+	al_destroy_bitmap(Livro1->bitmap);
+	al_destroy_bitmap(Livro2->bitmap);
+	al_destroy_bitmap(Livro3->bitmap);
+	al_destroy_bitmap(Livro4->bitmap);
+	al_destroy_bitmap(Pais1->bitmap);
+	al_destroy_bitmap(Pais2->bitmap);
+	al_destroy_bitmap(Pais3->bitmap);
+	al_destroy_bitmap(Pais4->bitmap);
+	al_destroy_bitmap(Foto1->bitmap);
+	al_destroy_bitmap(Foto2->bitmap);
+
+	//free
+	free(saidaEsquerda);
+	free(A1);
+	free(A2);
+	free(A3);
+	free(A4);
+	free(Livro1);
+	free(Livro2);
+	free(Livro3);
+	free(Livro4);
+	free(Pais1);
+	free(Pais2);
+	free(Pais3);
+	free(Pais4);
+	free(Foto1);
+	free(Foto2);
+
 }

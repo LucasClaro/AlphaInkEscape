@@ -129,6 +129,34 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 				//Novo Jogo
 				else if(IsInside(evento.mouse.x, evento.mouse.y, novo) && Hist == 0)
 				{
+					fopen_s(&file, "save.txt", "w");
+
+					for (i = 0; i < 17; i++) {
+						prog->Salas[i] = 0;
+						fprintf_s(file, "0 ");
+					}						
+
+					for (i = 0; i < 8; i++) {
+						prog->Inventario[i - 17] = 0;
+						fprintf_s(file, "0 ", prog->Inventario[i]);
+					}						
+
+					prog->inventCount = 0;
+					fprintf_s(file, "0 ");
+
+					for (i = 0; i < 8; i++) {
+						prog->inventClick[i - 26] = 0;
+						fprintf_s(file, "0 ");
+					}						
+
+					prog->linhaInGame = 0;
+					fprintf_s(file, "0 ");
+
+					prog->proximaSala = 6;
+					fprintf_s(file, "6 ");
+
+					fclose(file);
+
 					Hist++;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, cont) && Hist == 0 && podeContinuar) {

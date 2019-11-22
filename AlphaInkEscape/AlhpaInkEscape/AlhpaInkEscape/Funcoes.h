@@ -259,13 +259,13 @@ int abreOrdem(Progresso* prog)
 //Vê qual item do inventário foi clicado
 int checaClickOrdem(int x, int y,Progresso* prog)
 {
-	if (prog->Itens[3])
+	if (prog->Inventario[3] != 0)
 	{
 		if (x >= 0 && x <= prog->Itens[3]->largura * 0.5 && y >= 310 && y <= 395) {
 			prog->inventClick[3] = 1;
 		}
 	}
-	if (prog->Itens[4] != NULL)
+	if (prog->Inventario[4])
 	{
 		if (x >= 0 && x <= prog->Itens[4]->largura * 0.5 && y >= 385 && y <= 435)
 		{
@@ -273,15 +273,16 @@ int checaClickOrdem(int x, int y,Progresso* prog)
 			prog->inventClick[4] = 1;
 		}
 	}
-	if (prog->Itens[5] != NULL)
+	if (prog->Inventario[5])
 	{
 		if (x >= 0 && x <= prog->Itens[5]->largura * 0.5 && y >= 458 && y <= 458 + 136 / 2)
 		{
 			//printf("certo");
+
 			prog->inventClick[5] = 1;
 		}
 	}
-	if (prog->Itens[6] != NULL)
+	if (prog->Inventario[6])
 	{
 		if (x >= 0 && x <= prog->Itens[6]->largura * 0.5 && y >= 528 && y <= 528 + 100 / 2)
 		{
@@ -289,7 +290,7 @@ int checaClickOrdem(int x, int y,Progresso* prog)
 			prog->inventClick[6] = 1;
 		}
 	}
-	if (prog->Itens[7] != NULL)
+	if (prog->Inventario[7])
 	{
 		if (x >= 0 && x <= prog->Itens[7]->largura * 0.5 && y >= 600 && y <= 600 + 136 / 2)
 		{
