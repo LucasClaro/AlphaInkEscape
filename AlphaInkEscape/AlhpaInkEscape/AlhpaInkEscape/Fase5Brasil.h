@@ -10,13 +10,14 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
+//Cria Objs
 Objeto* mapa, * notaOnca, * notaTatu, * notaJacare, * notaMico;
 Objeto* marcaOnca, * marcaTatu, * marcaJacare, * marcaMico;
 
-Objeto* postIt3 = NULL;
-
+//Função Main da fase
 int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
+	//Preenche Objs
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
 	notaOnca->x = 120;
@@ -86,14 +87,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	saidaDireita->largura = 20;
 	saidaDireita->altura = 20;
 	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;
-	saidaDireita->y = (ALTURA_TELA/2) - (saidaDireita->altura / 2);
-
-	postIt3 = (Objeto*)malloc(sizeof(Objeto));
-	postIt3->altura = 183;
-	postIt3->largura = 201;
-	postIt3->x = -500;
-	postIt3->y = -500;
-	postIt3->bitmap = NULL;
+	saidaDireita->y = (ALTURA_TELA/2) - (saidaDireita->altura / 2);	
 
 	mapa->bitmap = al_load_bitmap("Imgs/Brasil/biomas.png");
 
@@ -106,12 +100,13 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	marcaTatu->bitmap = al_load_bitmap("Imgs/Brasil/mtatu.png");
 	marcaJacare->bitmap = al_load_bitmap("Imgs/Brasil/mjacare.png");
 	marcaMico->bitmap = al_load_bitmap("Imgs/Brasil/mmico.png");
-	postIt3->bitmap = al_load_bitmap("Imgs/PostIts/postMonet.png");
 	
 	Background = al_load_bitmap("Imgs/fundo.png");
 
+	//Vars de controle
 	int gameOver = 0;
 	int arrastando = 0;
+	//loop do game
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -121,72 +116,83 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repeti��o			
+			//X do Windows	
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-				//printf("(%d,%d)", evento.mouse.x, evento.mouse.y);
+				//Função do Inventário
 				limpaClick(prog);
 				
+				//Saída Direita
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
 					prog->proximaSala = 6;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				//Mute
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 					tocando = !tocando;
 				}
+				//Marcador da Onça
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
 				{
 					arrastando = 1;
 					marcaOnca->cliqueX = MapearDistancia(evento.mouse.x, marcaOnca->x);
 					marcaOnca->cliqueY = MapearDistancia(evento.mouse.y, marcaOnca->y);
 				}
+				//Marcador do Tatu
 				else if(IsInside(evento.mouse.x, evento.mouse.y, marcaTatu) && !prog->Salas[5])
 				{
 					arrastando = 2;
 					marcaTatu->cliqueX = MapearDistancia(evento.mouse.x, marcaTatu->x);
 					marcaTatu->cliqueY = MapearDistancia(evento.mouse.y, marcaTatu->y);
 				}
+				//Marcador do Jacaré
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaJacare) && !prog->Salas[5])
 				{
 					arrastando = 3;
 					marcaJacare->cliqueX = MapearDistancia(evento.mouse.x, marcaJacare->x);
 					marcaJacare->cliqueY = MapearDistancia(evento.mouse.y, marcaJacare->y);
 				}
+				//Marcador do Mico
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaMico) && !prog->Salas[5])
 				{
 					arrastando = 4;
 					marcaMico->cliqueX = MapearDistancia(evento.mouse.x, marcaMico->x);
 					marcaMico->cliqueY = MapearDistancia(evento.mouse.y, marcaMico->y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, postIt3) && !prog->Inventario[1])
+				//Postit
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt3) && !prog->Inventario[1])
 				{
-					prog->Itens[1] = postIt3;
 					prog->Inventario[1] = 1;
 					prog->inventCount++;
 				}
+				//Zera o arrastar
 				else {
 					arrastando = 0;
 				}
 
+				//Função do Inventário
 				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
+				//Zera o arrastar
 				arrastando = 0;
 
+				//Verifica a condição de vitória
 				if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
 				{
 					prog->Salas[5] = 1;
-					postIt3->x = (LARGURA_TELA / 2) - (postIt3->largura / 2);
-					postIt3->y = ALTURA_TELA - postIt3->altura;
+					prog->cenario->postIt3->x = (LARGURA_TELA / 2) - (prog->cenario->postIt3->largura / 2);
+					prog->cenario->postIt3->y = ALTURA_TELA - prog->cenario->postIt3->altura;
 				}
 			}
 
+			//Faz as coisas serem arrastadas
 			ALLEGRO_MOUSE_STATE state;
 
 			al_get_mouse_state(&state);
@@ -224,6 +230,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			}			
 		}
 
+		//Desenhos
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 		al_draw_bitmap(mapa->bitmap,mapa->x,mapa->y,0);
 
@@ -249,11 +256,15 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		if (prog->Salas[5] && !prog->Inventario[1])
 		{
-			al_draw_bitmap(postIt3->bitmap, postIt3->x, postIt3->y, 0);
+			al_draw_bitmap(prog->cenario->postIt3->bitmap, prog->cenario->postIt3->x, prog->cenario->postIt3->y, 0);
 		}
+
+
+		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+
 		al_flip_display();
 	}
 
@@ -283,6 +294,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	return;
 }
 
+//Testes da posição de cada marcador
 int InCaatinga() {
 	if (marcaTatu->x+10 >= 887 && marcaTatu->x+10 <= 953 && marcaTatu->y+10 >= 146 && marcaTatu->y+10 <= 348 || marcaTatu->x + 10 >= 946 && marcaTatu->x + 10 <= 1003 && marcaTatu->y + 10 >= 165 && marcaTatu->y + 10 <= 334)
 	{

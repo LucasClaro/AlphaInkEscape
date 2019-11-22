@@ -10,15 +10,20 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
+//Cria Objs
 Objeto* linha1, * linha2, * linha3, * linha4;
 Objeto* eventos, * notas, * datas;
 Objeto* saidaDireita, * saidaBaixo, * saidaCima;
-Objeto* miniaturaElem = NULL;
 
+//Função Main da fase
 int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+	//posição default das marcas de data
 	int p1 = LARGURA_TELA / 2 - 450, p2 = p1 + 175, p3 = p2 + 175, p4 = p3 + 175, p5 = p4 + 175, p6 = p5 + 175;
+
+	//contadores de evento
 	int i, j;
 
+	//Preenche os Objs
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = prog->cenario->setaCima;
@@ -59,6 +64,8 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	notas = (Objeto*)malloc(sizeof(Objeto) * 24);
 	datas = (Objeto*)malloc(sizeof(Objeto) * 24);
 
+	//Cria os marcadores de data mudando levemente o X deles para melhorar a escala
+	//Eles estão fora de ordem para ter um desafio na hora de preencher
 	datas[0].bitmap = al_load_bitmap("Imgs/Timeline/data.png");
 	datas[0].x = p3 + 200;
 	datas[0].y = linha1->y;
@@ -203,35 +210,37 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	datas[23].largura = 100;
 	datas[23].altura = 100;
 
-	if (miniaturaElem == NULL)
-	{
-		miniaturaElem = (Objeto*)malloc(sizeof(Objeto));
-		miniaturaElem->largura = 137;
-		miniaturaElem->altura = 100;
-		miniaturaElem->x = 700;
-		miniaturaElem->y = 100;
-		miniaturaElem->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaElem.png");
-	}
-
+	//Vars para percorrer todos os elementos (1,2,3...) de cada uma das linhas
 	int mx = 0;
 	int my = 0;
+
+	//Contador de execuções
 	int count = 1;
-	for (i = 0; i < 6; i++) {//Percorre do 1� ao 6� elemento de uma linha do tempo
+
+	for (i = 0; i < 6; i++) {//Percorre do 1º ao 6º elemento de uma linha do tempo
 		for (j = 0; j < 4; j++) {//Percorre as 4 linhas do tempo
 			eventos[i + 6 * j].bitmap = NULL;
 			eventos[i + 6 * j].x = linha1->x + 100 * mx;//Divide os 6 elementos da linha do tempo em 3 colunas
 			eventos[i + 6 * j].y = 100 + 120 * my;//Divide os 6 elementos da linha do tempo em 2 linhas
 			eventos[i + 6 * j].largura = 50;
 			eventos[i + 6 * j].altura = 50;
+			
+			//Move o X a cada 4 execuções
 			if (count % 4 == 0)
 				mx++;
+			//move o Y depois de 12 execuções e volta o X para o início
 			if (count % 12 == 0) {
 				my++;
 				mx = 0;
 			}
 			count++;
+
+			//lembrar que a ordem dos elementos aqui é:
+			//0, 6, 12, 18, 1, 7, 13, 19, 2, 8, 14, 20, 3, 9, 15, 21, 4, 10, 16, 22, 5, 11, 17, 23,
 		}
 	}
+
+	//Percorre as 42 anotações
 	for (i = 0; i < 24; i++) {
 		notas[i].bitmap = NULL;
 		notas[i].x = 550;
@@ -240,11 +249,14 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		notas[i].altura = 300;
 	}
 
+	//Carrega as imagens das linhas
 	linha1->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
 	linha2->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
 	linha3->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
-	linha4->bitmap = al_load_bitmap("Imgs/Timeline/line.png");
+	linha4->bitmap = al_load_bitmap("Imgs/Timeline/lineAlt.png");
 
+	//Carrega a imagem dos eventos
+	//Na mesma ordem que as datas
 	eventos[0].bitmap = al_load_bitmap("Imgs/Timeline/3.png");
 	eventos[1].bitmap = al_load_bitmap("Imgs/Timeline/5.png");
 	eventos[2].bitmap = al_load_bitmap("Imgs/Timeline/4.png");
@@ -270,6 +282,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	eventos[22].bitmap = al_load_bitmap("Imgs/Timeline/19.png");
 	eventos[23].bitmap = al_load_bitmap("Imgs/Timeline/22.png");
 
+	//Carrega as anotações novamente na ordem das datas
 	notas[0].bitmap = al_load_bitmap("Imgs/Timeline/n3.png");
 	notas[1].bitmap = al_load_bitmap("Imgs/Timeline/n5.png");
 	notas[2].bitmap = al_load_bitmap("Imgs/Timeline/n4.png");
@@ -295,6 +308,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	notas[22].bitmap = al_load_bitmap("Imgs/Timeline/n19.png");
 	notas[23].bitmap = al_load_bitmap("Imgs/Timeline/n22.png");
 
+	//Vars de controle
 	int gameOver = 0;
 	int arrastando = 0;
 	int Dentro = -1;
@@ -307,120 +321,115 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repeti��o			
+			//X do Windows	
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				//Função do inventário
 				limpaClick(prog);
+
+				//Saída Cima
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[5]) {
 					prog->proximaSala = 5;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				//Mute
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
+				//Primeiro Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 1;
 					eventos[0 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[0 + 6 * prog->linhaInGame].x);
 					eventos[0 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[0 + 6 * prog->linhaInGame].y);
 				}
+				//Segundo Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[1 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 2;
 					eventos[1 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[1 + 6 * prog->linhaInGame].x);
 					eventos[1 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[1 + 6 * prog->linhaInGame].y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
-					tocando = !tocando;
-				}
+				//Terceiro Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[2 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 3;
 					eventos[2 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[2 + 6 * prog->linhaInGame].x);
 					eventos[2 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[2 + 6 * prog->linhaInGame].y);
 				}
+				//Quarto Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[3 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 4;
 					eventos[3 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[3 + 6 * prog->linhaInGame].x);
 					eventos[3 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[3 + 6 * prog->linhaInGame].y);
 				}
+				//Quinto Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[4 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 5;
 					eventos[4 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[4 + 6 * prog->linhaInGame].x);
 					eventos[4 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[4 + 6 * prog->linhaInGame].y);
 				}
+				//Sexto Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[5 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
 					arrastando = 6;
 					eventos[5 + 6 * prog->linhaInGame].cliqueX = MapearDistancia(evento.mouse.x, eventos[5 + 6 * prog->linhaInGame].x);
 					eventos[5 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[5 + 6 * prog->linhaInGame].y);
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaElem) && !prog->Itens[6])
+				//item do iventário
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Itens[6])
 				{
-					prog->Itens[6] = miniaturaElem;
 					prog->Inventario[6] = 1;
 				}
+				//Zera o arrastar
 				else {
 					arrastando = 0;
 				}
+				
+				//Função do inventário
 				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
-				/*
-				if (prog->Itens[4] != NULL)
-				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[4]->largura * 0.5 && evento.mouse.y >= 385 && evento.mouse.y <= 435)
-					{
-						//printf("certo");
-						prog->inventClick[4] = 1;
-					}
-				}
-				if (prog->Itens[5] != NULL)
-				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[5]->largura * 0.5 && evento.mouse.y >= 458 && evento.mouse.y <= 458 + 136 / 2)
-					{
-						//printf("certo");
-						prog->inventClick[5] = 1;
-					}
-				}
-				if (prog->Itens[6] != NULL)
-				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[6]->largura * 0.5 && evento.mouse.y >= 528 && evento.mouse.y <= 528 + 200 / 2)
-					{
-						//printf("certo");
-						prog->inventClick[6] = 1;
-					}
-				}
-				*/
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
+				//Zera o arrastar
 				arrastando = 0;
+
+				//Verifica se a linha corrente foi completa
 				if (VerificarLinha(prog->linhaInGame))
 					prog->linhaInGame++;
+				//Verifica se as 4 linhas foram completas
 				if (prog->linhaInGame >= 4) {
 					prog->Salas[9] = 1;
 				}
 			}
+
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_AXES) {////////////////
+				//Vê dentro de qual Obj o mouse está para desenhar a anotação
 				if (DentroDe(evento) >= 0)
 					Dentro = DentroDe(evento);
 			}
 
+			//Konami Code
 			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
 					prog->Salas[9] = 1;
 				}
 			}
 
+			//Arrasta os elementos da linha corrente
 			ALLEGRO_MOUSE_STATE state;
-
 			al_get_mouse_state(&state);
-			if (state.buttons & 2)
+
+			/*if (state.buttons & 2)//Printa a posição do mouse
 			{
 				printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
-			}
+			}*/
 
 			if (state.buttons & 1 && arrastando)
 			{
@@ -468,7 +477,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			}
 		}
 
-
+		//Desenhos
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
@@ -481,15 +490,20 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		if (prog->linhaInGame >= 3)
 			al_draw_bitmap(linha4->bitmap, linha4->x, linha4->y, 0);
 
+		//Desenha a anotação do último elemento "sobrevoado"/"hoverizado"
+		//Garantindo que seja um elemento da linha corrente
 		if (Dentro >= 0 && Dentro < (1+ prog->linhaInGame)*6) {
 			al_draw_bitmap(notas[Dentro].bitmap, notas[Dentro].x, notas[Dentro].y, 0);
 		}
 
+		//Desenha os elementos da linha corrente e fixa os elementos das linhas passadas
 		if (prog->linhaInGame == 0) {
 			for (i = 0; i < 6; i++) {
 				al_draw_bitmap(datas[i].bitmap, datas[i].x, datas[i].y, 0);
-				al_draw_bitmap(eventos[i].bitmap, eventos[i].x, eventos[i].y, 0);
 			}
+			for (i = 0; i < 6; i++) {
+				al_draw_bitmap(eventos[i].bitmap, eventos[i].x, eventos[i].y, 0);
+			}		
 		}	
 		if (prog->linhaInGame == 1) {
 			for (i = 0; i < 6; i++) {
@@ -541,18 +555,23 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				al_draw_bitmap(eventos[i].bitmap, datas[i].x+25, datas[i].y+25, 0);
 			}
 		}
-		som(prog);
 
 		if (prog->Salas[9] && !prog->Inventario[6])
-			al_draw_bitmap(miniaturaElem->bitmap, miniaturaElem->x, miniaturaElem->y, 0);
+			al_draw_bitmap(prog->cenario->miniaturaElem->bitmap, prog->cenario->miniaturaElem->x, prog->cenario->miniaturaElem->y, 0);
 
+		//Funções padrões
+		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+
 		al_flip_display();
 	}
 	return 0;
 }
 
+//Retorna o primeiro cara "sobrevoado"/"hoverizado"
+//Uso uma função pois ela sempre retorna o primeiro
+//No loop principal era sempre o último
 int DentroDe(ALLEGRO_EVENT evento) {
 	int i;
 	for (i = 0; i < 24; i++)
@@ -563,6 +582,8 @@ int DentroDe(ALLEGRO_EVENT evento) {
 	return -1;
 }
 
+//Verifica se a linha corrente está correta
+//Não sei como essa função funciona sem return
 int VerificarLinha(int linha) {
 	if (IsInsideImagem(&eventos[0 + 6 * linha], &datas[0 + 6 * linha]) && IsInsideImagem(&eventos[1 + 6 * linha], &datas[1 + 6 * linha]) && IsInsideImagem(&eventos[2 + 6 * linha], &datas[2 + 6 * linha]) && IsInsideImagem(&eventos[3 + 6 * linha], &datas[3 + 6 * linha]) && IsInsideImagem(&eventos[4 + 6 * linha], &datas[4 + 6 * linha]) && IsInsideImagem(&eventos[5 + 6 * linha], &datas[5 + 6 * linha]));
 }

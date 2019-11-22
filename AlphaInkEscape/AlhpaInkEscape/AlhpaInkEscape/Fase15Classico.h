@@ -9,19 +9,24 @@
 #include "Funcoes.h"
 #include "Struct.h"
 
+
+//Cria os Objs
 Objeto* A1, * A2, * A3, * A4;
 Objeto* Foto1, * Foto2, * Foto3, * Foto4;
 Objeto* Livro1, * Livro2, * Livro3, * Livro4;
 Objeto* Pais1, * Pais2, * Pais3, * Pais4;
 
-Objeto* SendoArrastado, * UltimoArrastado;
+//guarda as infos do obj sendo arrastado para trocar de posição com Obj do destino
+Objeto* SendoArrastado;
 
-Objeto* miniaturaPaises = NULL;
-
+//Função Main da fase
 int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
+	
+	//X e Y dos primeiro elemento
 	int x0 = 140;
 	int y0 = 75;
 
+	//Preenche os Objs
 	Objeto* saidaEsquerda;
 	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	saidaEsquerda->bitmap = prog->cenario->setaEsquerda;
@@ -30,6 +35,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	saidaEsquerda->x = 110;
 	saidaEsquerda->y = (ALTURA_TELA/2)-(saidaEsquerda->altura / 2);
 
+	//Autores-----------
 	A1 = (Objeto*)malloc(sizeof(Objeto));
 	A1->bitmap = al_load_bitmap("Imgs/Classico/Dante.png");
 	A1->x = x0;
@@ -58,6 +64,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	A4->largura = 250;
 	A4->altura = 150;
 
+	//Obras-----------
 	Livro2 = (Objeto*)malloc(sizeof(Objeto));
 	Livro2->bitmap = al_load_bitmap("Imgs/Classico/Quixote.png");
 	Livro2->x = 260 + x0;
@@ -86,6 +93,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	Livro1->largura = 250;
 	Livro1->altura = 150;
 
+	//Países-----------
 	Pais4 = (Objeto*)malloc(sizeof(Objeto));
 	Pais4->bitmap = al_load_bitmap("Imgs/Classico/Portugal.png");
 	Pais4->x = 260*2 + x0;
@@ -114,6 +122,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	Pais3->largura = 250;
 	Pais3->altura = 150;
 
+	//Imagens Autores-----------
 	Foto3 = (Objeto*)malloc(sizeof(Objeto));
 	Foto3->bitmap = al_load_bitmap("Imgs/Classico/ShakespeareI.png");
 	Foto3->x = 260 * 3 + x0;
@@ -142,21 +151,12 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	Foto2->largura = 250;
 	Foto2->altura = 150;
 
-	if (miniaturaPaises == NULL)
-	{
-		miniaturaPaises = (Objeto*)malloc(sizeof(Objeto));
-		miniaturaPaises->largura = 95;
-		miniaturaPaises->altura = 136;
-		miniaturaPaises->x = 700;
-		miniaturaPaises->y = 100;
-		miniaturaPaises->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaPaises.png");
-	}
-
-	UltimoArrastado = A1;
-
+	//Vars de controle
 	int gameOver = 0;
 	int arrastando = 0;
 	int aux = 0;
+
+	//Loop da fase
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -166,28 +166,41 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			//Konami Code
 			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
 					prog->Salas[15] = 1;
 				}
 			}
-			//se teve eventos e foi um evento de fechar janela, encerra repeti��o			
+			//X do Windows		
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				//Função do Inventário
 				limpaClick(prog);
+
+				//Mute
+				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
+
+				//Bloqueia todos os arrastes caso a fase esteja completa
 				if (!prog->Salas[15]) {
+					//livro1
 					if (IsInside(evento.mouse.x, evento.mouse.y, Livro1))
 					{
-						arrastando = 1;
+						arrastando = 1;//Define quem está sendo arrastado
+						//Configura o mouse para o arraste
 						Livro1->cliqueX = MapearDistancia(evento.mouse.x, Livro1->x);
 						Livro1->cliqueY = MapearDistancia(evento.mouse.y, Livro1->y);
-						SendoArrastado = Livro1;
-						//UltimoArrastado
-						aux = Livro1->y;
+						
+						SendoArrastado = Livro1;//Guarda as infos de quem está sendo arrastado
+						aux = Livro1->y;//Guarda o y de quem está sendo arrastado
 					}
+					//livro2
+
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Livro2))
 					{
 						arrastando = 2;
@@ -196,9 +209,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Livro2;
 						aux = Livro2->y;
 					}
-					else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
-						tocando = !tocando;
-					}
+					//livro3
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Livro3))
 					{
 						arrastando = 3;
@@ -207,6 +218,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Livro3;
 						aux = Livro3->y;
 					}
+					//livro4
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Livro4))
 					{
 						arrastando = 4;
@@ -215,6 +227,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Livro4;
 						aux = Livro4->y;
 					}
+					//País1
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Pais1))
 					{
 						arrastando = 5;
@@ -223,6 +236,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Pais1;
 						aux = Pais1->y;
 					}
+					//País2
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Pais2))
 					{
 						arrastando = 6;
@@ -231,6 +245,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Pais2;
 						aux = Pais2->y;
 					}
+					//País3
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Pais3))
 					{
 						arrastando = 7;
@@ -239,6 +254,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Pais3;
 						aux = Pais3->y;
 					}
+					//País4
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Pais4))
 					{
 						arrastando = 8;
@@ -247,6 +263,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Pais4;
 						aux = Pais4->y;
 					}
+					//Foto1
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Foto1))
 					{
 						arrastando = 9;
@@ -255,6 +272,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto1;
 						aux = Foto1->y;
 					}
+					//Foto2
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Foto2))
 					{
 						arrastando = 10;
@@ -263,6 +281,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto2;
 						aux = Foto2->y;
 					}
+					//Foto3
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Foto3))
 					{
 						arrastando = 11;
@@ -271,6 +290,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto3;
 						aux = Foto3->y;
 					}
+					//Foto4
 					else if (IsInside(evento.mouse.x, evento.mouse.y, Foto4))
 					{
 						arrastando = 12;
@@ -279,35 +299,36 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 						SendoArrastado = Foto4;
 						aux = Foto4->y;
 					}
-					else if(IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda))
-					{
-						prog->proximaSala = 14;
-						al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-						gameOver = 1;
-					}
-				}				
-				else {
+					//Zera as informações do arraste
+					else {
 					arrastando = 0;
 					SendoArrastado = NULL;
-				}
-				if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaPaises) && !prog->Itens[7] != NULL)
+					}
+				}					
+
+				//Saída Cima
+				if (IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda))
 				{
-					prog->Itens[7] = miniaturaPaises;
+					prog->proximaSala = 14;
+					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}				
+				
+				//Item do invnetário
+				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises))
+				{
 					prog->Inventario[7] = 1;
 				}
 
+				//Função do inventário
 				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
-				/*if (prog->Itens[7] != NULL)
-				{
-					if (evento.mouse.x >= 0 && evento.mouse.x <= prog->Itens[7]->largura * 0.5 && evento.mouse.y >= 600 && evento.mouse.y <= 600 + 136 / 2)
-					{
-						//printf("certo");
-						prog->inventClick[7] = 1;
-					}
-				}*/
+
 			}
+
+			//Realiza a troca ao soltar o btn do mouse
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
+				//Pra cada elemento checa se ele está sendo trocado pro alguém da mesma coluna que não ele próprio
 				if (IsInside(evento.mouse.x, evento.mouse.y, Livro1) && arrastando != 1 && arrastando < 5 && arrastando > 0) {
 					SendoArrastado->y = Livro1->y;
 					Livro1->y = aux;
@@ -356,22 +377,26 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 					SendoArrastado->y = Foto4->y;
 					Foto4->y = aux;
 				}
+				//Volta o arrastado para posição inicial caso ele não seja trocado com ninguém
 				else {
 					if(SendoArrastado)
 						SendoArrastado->y = aux;
 				}
+
+				//Zera as vars do arrasto
 				SendoArrastado = NULL;
 				arrastando = 0;
 			}
 
+			//Move as coisas
 			ALLEGRO_MOUSE_STATE state;
 
 			al_get_mouse_state(&state);
 
-			if (state.buttons & 2)
+			/*if (state.buttons & 2)//printa a posição do mouse
 			{
 				printf("x: %d; y: %d\n", evento.mouse.x, evento.mouse.y);
-			}
+			}*/
 			if (state.buttons & 1 && arrastando)
 			{
 				switch (arrastando)
@@ -442,10 +467,12 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			}
 		}
 
+		//Verifica a condição de vitória
 		if (A1->y == Foto1->y && A1->y == Pais1->y && A1->y == Livro1->y && A2->y == Foto2->y && A2->y == Pais2->y && A2->y == Livro2->y && A3->y == Foto3->y && A3->y == Pais3->y && A3->y == Livro3->y) {
 			prog->Salas[15] = 1;
 		}
 
+		//Desenhos
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
 		al_draw_bitmap(A1->bitmap, A1->x, A1->y, 0);
@@ -470,12 +497,14 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_draw_bitmap(Foto3->bitmap, Foto3->x, Foto3->y, 0);
 		al_draw_bitmap(Foto4->bitmap, Foto4->x, Foto4->y, 0);
 
-		som(prog);
 		if(prog->Salas[15] && !prog->Inventario[7])
-			al_draw_bitmap(miniaturaPaises->bitmap, miniaturaPaises->x, miniaturaPaises->y, 0);
+			al_draw_bitmap(prog->cenario->miniaturaPaises->bitmap, prog->cenario->miniaturaPaises->x, prog->cenario->miniaturaPaises->y, 0);
 
+		//Funções padrões
+		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+
 		al_flip_display();
 	}
 }

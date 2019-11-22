@@ -88,7 +88,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 0;
+	progresso.proximaSala = 15;
 	progresso.Gameover = 0;
 	//prog de todas as salas
 	progresso.Salas[0] = 0;
@@ -199,6 +199,23 @@ int main(void) {
 
 	loadFotosGlobais();//Fotos para o inventário
 
+	progresso.cenario->PostIt2 = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->PostIt2->altura = 183;
+	progresso.cenario->PostIt2->largura = 201;
+	progresso.cenario->PostIt2->x = -500;
+	progresso.cenario->PostIt2->y = -500;
+	progresso.cenario->PostIt2->bitmap = al_load_bitmap("Imgs/PostIts/postDali.png");
+	progresso.Itens[2] = progresso.cenario->PostIt2;
+
+	progresso.cenario->postIt3 = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->postIt3->altura = 183;
+	progresso.cenario->postIt3->largura = 201;
+	progresso.cenario->postIt3->x = -500;
+	progresso.cenario->postIt3->y = -500;
+	progresso.cenario->postIt3->bitmap = NULL;
+	progresso.cenario->postIt3->bitmap = al_load_bitmap("Imgs/PostIts/postMonet.png");
+	progresso.Itens[1] = progresso.cenario->postIt3;
+
 	progresso.cenario->postIt4 = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->postIt4->altura = 183;
 	progresso.cenario->postIt4->largura = 201;
@@ -222,6 +239,30 @@ int main(void) {
 	progresso.cenario->miniatura->y = 100;
 	progresso.cenario->miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaAni.png");
 	progresso.Itens[4] = progresso.cenario->miniatura;
+
+	progresso.cenario->miniaturaObras = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->miniaturaObras->largura = 95;
+	progresso.cenario->miniaturaObras->altura = 136;
+	progresso.cenario->miniaturaObras->x = 700;
+	progresso.cenario->miniaturaObras->y = 100;
+	progresso.cenario->miniaturaObras->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaObras.png");
+	progresso.Itens[5] = progresso.cenario->miniaturaObras;
+
+	progresso.cenario->miniaturaElem = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->miniaturaElem->largura = 137;
+	progresso.cenario->miniaturaElem->altura = 100;
+	progresso.cenario->miniaturaElem->x = 700;
+	progresso.cenario->miniaturaElem->y = 100;
+	progresso.cenario->miniaturaElem->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaElem.png");
+	progresso.Itens[6] = progresso.cenario->miniaturaElem;
+
+	progresso.cenario->miniaturaPaises = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->miniaturaPaises->largura = 95;
+	progresso.cenario->miniaturaPaises->altura = 136;
+	progresso.cenario->miniaturaPaises->x = 700;
+	progresso.cenario->miniaturaPaises->y = 100;
+	progresso.cenario->miniaturaPaises->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaPaises.png");
+	progresso.Itens[7] = progresso.cenario->miniaturaPaises;
 
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;

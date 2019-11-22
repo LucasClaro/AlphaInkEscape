@@ -48,9 +48,14 @@ typedef struct scene {
 	Objeto* xMiniMapa;
 	Objeto* saida;
 	ALLEGRO_FONT* fonte;
+	Objeto* PostIt2;
+	Objeto* postIt3;
 	Objeto* postIt4;
 	Objeto* sobreBi;
 	Objeto* miniatura;
+	Objeto* miniaturaObras;
+	Objeto* miniaturaElem;
+	Objeto* miniaturaPaises;
 } Cenario;
 
 // Struct de progresso

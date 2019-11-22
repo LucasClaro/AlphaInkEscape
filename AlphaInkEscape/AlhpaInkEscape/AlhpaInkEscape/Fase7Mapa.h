@@ -11,10 +11,10 @@
 #include "Struct.h"
 #include <string.h>
 
-Objeto* miniaturaObras = NULL;
-//a
+//Função Main da fase
 int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {	
 
+	//Cria Objs
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
@@ -38,16 +38,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
 	SaidaCima->bitmap = prog->cenario->setaCima;	
-
-	if (miniaturaObras == NULL)
-	{
-		miniaturaObras = (Objeto*)malloc(sizeof(Objeto));
-		miniaturaObras->largura = 95;
-		miniaturaObras->altura = 136;
-		miniaturaObras->x = 700;
-		miniaturaObras->y = 100;
-		miniaturaObras->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaObras.png");
-	}
 
 	//======================================IMAGENS=======================================================================
 	Objeto* tabela;
@@ -247,7 +237,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	exemplo4->x = mundo->x + mundo->largura / 2 - 90;
 	exemplo4->y = mundo->y + mundo->altura / 2 - 50;
 
-	//=========================================================================================================
+	//Preenche as imagens===============================================================================
 	ALLEGRO_BITMAP* seta1 = al_load_bitmap("Imgs/MapaFase7/setaZ.png");
 	ALLEGRO_BITMAP* seta2 = al_load_bitmap("Imgs/MapaFase7/setaT.png");
 	ALLEGRO_BITMAP* seta3 = al_load_bitmap("Imgs/MapaFase7/setaQ.png");
@@ -274,11 +264,13 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	setabaixo3->bitmap = btnB;
 	setabaixo4->bitmap = btnB;
 
+	//vars de controle
 	int j = 2;
 	int k = 2;
 	int o = 2;
 	int g = 2;
 
+	//Coloca as imagens da "roda" nos elementos 
 	item1->bitmap = itens[j];
 	item2->bitmap = itens[k];
 	item3->bitmap = itens[o];
@@ -289,8 +281,9 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	exemplo3->bitmap = exemplos[o];
 	exemplo4->bitmap = exemplos[g];
 
-
+	//Controle da fase
 	bool sair = false;
+	//Loop da fase
 	while (!sair)
 	{
 		ALLEGRO_EVENT evento;
@@ -300,6 +293,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_get_mouse_state(&state);
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+			//Konami Code
 			if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
 				j = 0;
 				k = 1;
@@ -315,20 +309,23 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-
+			//Função do Inventário
 			limpaClick(prog);
 
+			//Mute
 			if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
+			//SetaUp primeiro bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1) && !prog->Salas[7]) {
 
-				j--;
+				j--;//Muda o valor da "roda" de imgs
 				if (j == -1)
 					j = 3;
 
-				setacima1->bitmap = btnPressionadoC;
+				setacima1->bitmap = btnPressionadoC;//Muda o desenho do btn
 			}
+			//SetaUp segundo bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima2) && !prog->Salas[7]) {
 				k--;
 				if (k == -1)
@@ -336,6 +333,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setacima2->bitmap = btnPressionadoC;
 			}
+			//SetaUp terceiro bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima3) && !prog->Salas[7]) {
 				o--;
 				if (o == -1)
@@ -343,6 +341,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setacima3->bitmap = btnPressionadoC;
 			}
+			//SetaUp quarto bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima4) && !prog->Salas[7]) {
 				g--;
 				if (g == -1)
@@ -350,6 +349,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setacima4->bitmap = btnPressionadoC;
 			}
+			//SetaBaixo primeiro bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo1) && !prog->Salas[7]) {					
 				j++;
 				if (j == 4)
@@ -357,6 +357,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setabaixo1->bitmap = btnPressionadoB;
 			}
+			//SetaBaixo segundo bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo2) && !prog->Salas[7]) {
 				k++;
 				if (k == 4)
@@ -364,6 +365,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setabaixo2->bitmap = btnPressionadoB;
 			}
+			//SetaBaixo terceiro bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo3) && !prog->Salas[7]) {
 				o++;
 				if (o == 4)
@@ -371,6 +373,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 				setabaixo3->bitmap = btnPressionadoB;
 			}
+			//SetaBaixo quarto bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setabaixo4) && !prog->Salas[7]) {
 					g++;
 					if (g == 4)
@@ -378,30 +381,34 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 					setabaixo4->bitmap = btnPressionadoB;
 			}
+			//Saida Cima
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
 				prog->proximaSala = 3;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
+			//Saida Esquerda
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 			{
 				prog->proximaSala = 6;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
+			//Saida Baixo
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[7])
 			{
 				prog->proximaSala = 11;
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, miniaturaObras) && !prog->Itens[5])
+			//Item
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaObras) && !prog->Itens[5])
 			{
-				prog->Itens[5] = miniaturaObras;
 				prog->Inventario[5] = 1;
 			}
 
+			//Atribui as imagens aos blocos
 			item1->bitmap = itens[j];
 			item2->bitmap = itens[k];
 			item3->bitmap = itens[o];
@@ -412,11 +419,12 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			exemplo3->bitmap = exemplos[o];
 			exemplo4->bitmap = exemplos[g];
 
-
+			//Função do inventário
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
+			//Volta o desenho padrão dos btns
 			setacima1->bitmap = btnC;
 			setacima2->bitmap = btnC;
 			setacima3->bitmap = btnC;
@@ -428,11 +436,13 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		}
 
+		//X do Windows
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			sair = true;
 			prog->Gameover = true;
 		}
 
+		//Verefica condição de vitória
 		if (j == 0 && k == 1 && o == 2 && g == 3) {
 			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 			prog->Salas[7] = 1;
@@ -476,11 +486,15 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		al_draw_bitmap(exemplo4->bitmap, exemplo4->x, exemplo4->y, 0);
 
 		if(!prog->Inventario[5])
-			al_draw_bitmap(miniaturaObras->bitmap, miniaturaObras->x, miniaturaObras->y, 0);
+			al_draw_bitmap(prog->cenario->miniaturaObras->bitmap, prog->cenario->miniaturaObras->x, prog->cenario->miniaturaObras->y, 0);
+
+		//Funções padrões
 		//abrirMapa(prog);
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+
+
 		al_flip_display();
 	}
 
@@ -497,10 +511,6 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	al_destroy_bitmap(caixa2->bitmap);
 	al_destroy_bitmap(caixa3->bitmap);
 	al_destroy_bitmap(caixa4->bitmap);
-	//al_destroy_bitmap(item->bitmap);
-	//al_destroy_bitmap(item2->bitmap);
-	//al_destroy_bitmap(item3->bitmap);
-	//al_destroy_bitmap(item4->bitmap);
 
 
 	free(SaidaBaixo);
