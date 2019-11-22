@@ -155,6 +155,8 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 						else if (i < 36)
 							prog->proximaSala = leitor;
 
+
+
 						i++;
 					}
 

@@ -12,12 +12,14 @@
 
 #define PI 3.14159265
 
-
+//Cria os objs
 Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala;
 Objeto* alvo1, * alvo2, * alvo3, * alvo4, * alvo5;
 
+//Função principal do arco
 int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
+	//Preenchendo os objs
 	arco = (Objeto*)malloc(sizeof(Objeto));
 	arco->bitmap = NULL;
 	arco->x = 160;
@@ -133,14 +135,17 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	alvo4->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 	alvo5->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 
+	//Vars de controle
 	int gameOver = 0;
 	int arrastando = 0;
-	int angulo = 0;
-	int anguloArco = 45;
+	int angulo = 0;//Usado para calculos
+	int anguloArco = 45;//Usado para desenho
 	int velocidade = 0;
-	int contador = 0;
+	int contador = 0;//Usado para "animar" o tiro
 	int acertos[] = { 0, 0, 0, 0, 0 };
+	int tentativas = 0;
 
+	//loop do game
 	while (!gameOver)
 	{
 		while (!al_is_event_queue_empty(fila_eventos))
@@ -150,22 +155,23 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
-			//se teve eventos e foi um evento de fechar janela, encerra repeti��o	
+			//X do Windows
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
 				gameOver = 1;
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+				//Função do inventário
 				limpaClick(prog);
+
+				//Saida direita
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaBaixo) && prog->Salas[10])
 				{
 					prog->proximaSala = 14;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
-					tocando = !tocando;
-				}
+				//Saida Cima
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
 					prog->proximaSala = 6;////////////////////////////////
@@ -173,18 +179,25 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					gameOver = 1;
 
 				}
+				//Saida esquerda
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda) && prog->Salas[10])
 				{
 					prog->proximaSala = 9;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				//Mute
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+					tocando = !tocando;
+				}
+				//Marcador de Velocidade
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaH))
 				{
 					arrastando = 1;
 					marcaH->cliqueX = MapearDistancia(evento.mouse.x, marcaH->x);
 					marcaH->cliqueY = MapearDistancia(evento.mouse.y, marcaH->y);
 				}
+				//Marcador de Angulo
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaV))
 				{
 					arrastando = 2;
@@ -193,42 +206,58 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, barraV))//Deixa o user clicar na barra pra mover a marca
 				{					
-					marcaV->y = evento.mouse.y - marcaV->altura / 2;					
+					marcaV->y = evento.mouse.y - marcaV->altura / 2;//Desenha o marcador sob o mouse
+
+					//Ajusta o marcador na barra
 					if (evento.mouse.y - marcaV->altura / 2 < barraV->y)
 						marcaV->y = barraV->y;
 					else if (evento.mouse.y - marcaV->altura / 2 > barraV->y + barraV->altura - marcaV->altura)
 						marcaV->y = barraV->y + barraV->altura - marcaV->altura;
+
+					//Permite o marcador ser arrastado caso o btn do mouse continue precionado
 					arrastando = 2;
 					marcaV->cliqueX = MapearDistancia(evento.mouse.x, marcaV->x);
 					marcaV->cliqueY = MapearDistancia(evento.mouse.y, marcaV->y);
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, barraH))//Deixa o user clicar na barra pra mover a marca
 				{					
-					marcaH->x = evento.mouse.x - marcaH->largura / 2;					
+					marcaH->x = evento.mouse.x - marcaH->largura / 2;//Desenha o marcador sob o mouse
+
+					//Ajusta o marcador na barra
 					if (evento.mouse.x - marcaH->largura / 2 < barraH->x)
 						marcaH->x = barraH->x;
 					else if (evento.mouse.x - marcaH->largura / 2 > barraH->x + barraH->largura - marcaH->largura)
 						marcaH->x = barraH->x + barraH->largura - marcaH->largura;
-					
+
+					//Permite o marcador ser arrastado caso o btn do mouse continue precionado
 					arrastando = 1;
 					marcaH->cliqueX = MapearDistancia(evento.mouse.x, marcaH->x);
 					marcaH->cliqueY = MapearDistancia(evento.mouse.y, marcaH->y);
 				}
+				//Zera o arrastar do mouse
 				else {
 					arrastando = 0;
 				}
+
+				//Função do inventário
 				checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
+				//Muda o valor do angulo do desenho
 				anguloArco = 90 + (barraV->y - marcaV->y);
+
+				//Caso o mouse estivesse movendo o marcador de angulo, muda o angulo do cálculo a velocidade e o contador da animação
 				if (arrastando == 1) {					
 					angulo = 90 + (barraV->y - marcaV->y);
 					velocidade = 30 + (barraH->x - marcaH->x) / 3;
 					contador = 1;
 				}
+
+				//Volta o marcador de velocidade para o início
 				marcaH->x = barraH->x + barraH->largura - 10;
 
+				//Zera o arrastar
 				arrastando = 0;
 			}
 
@@ -240,6 +269,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				switch (arrastando)
 				{
 				case 1:
+					//Muda o valor do marcador de velocidade ao ser arrastado
 					if (evento.mouse.x - marcaH->cliqueX <= barraH->x) {
 						//Passou pra esquerda
 						marcaH->x = barraH->x;
@@ -254,6 +284,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					}
 					break;
 				case 2:
+					//Muda o valor do marcador de angulo ao ser arrastado
 					if (evento.mouse.y - marcaV->cliqueY <= barraV->y) {
 						//Passou pra esquerda
 						marcaV->y = barraV->y;
@@ -273,18 +304,23 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			}
 		}
 
-		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
-
-		contador = CalcularTiro(angulo, velocidade, contador, acertos);
-
+		//Verifica se a fase está completa
 		if (acertos[0] && acertos[1] && acertos[2] && acertos[4] && acertos[5])
 		{
 			prog->Salas[10] = 1;
 		}
+		//Muda o desenho das setas
 		if (prog->Salas[10]){
 			saidaBaixo->bitmap = prog->cenario->setaBaixo;
 			saidaEsquerda->bitmap = prog->cenario->setaEsquerda;
 		}
+
+		//Desenhos-----------
+		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
+
+		//Chama a função de plot para desenhar a tragetória
+		contador = CalcularTiro(angulo, velocidade, contador, acertos);
+
 
 		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
@@ -325,22 +361,31 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 }
 
 int CalcularTiro(int angulo, int velocidade, int cont, int* acertos) {
+	//Executa somente se a velocidade for maior que 0
 	if (!velocidade == 0)
 	{
-		float VelVertical = sin(angulo * PI / 180) * velocidade;
-		VelVertical *= -1;
-		float VelHorizontal = cos(angulo * PI / 180) * velocidade;
-		int t;
+		float VelVertical = sin(angulo * PI / 180) * velocidade;//Calcula a Velociade vertical pelo seno do angulo em Radianos
+		VelVertical *= -1;//Inverte o sentido da velocidade
+
+		float VelHorizontal = cos(angulo * PI / 180) * velocidade;//Calcula a Velociade horizontal pelo cosseno do angulo em Radianos
+		
+		int t;//Var que simula o tempo
+
+		//Posição da bolinha desenhada
 		int posX = arco->x + arco->largura/2 - 10;
 		int posY = arco->y + arco->altura/2 - 10;
 
+		//O tempo corre até o contador que cresce a cada execução da função
+		//Para dar o efeito de movimento
 		for (t = 0; t <= cont; t++)
 		{
+			//Incrementa a posição da bolinha
 			posX += VelHorizontal;
 			posY += VelVertical;
-			VelVertical += 0.5;
 
+			VelVertical += 0.5;//Aplica uma gravidade na velocidade vertical
 
+			//Verifica se algo foi acertado
 			if (IsInside(posX, posY, alvo1) && !acertos[0])
 				acertos[0] = 1;
 			if (IsInside(posX, posY, alvo2) && !acertos[1])
@@ -356,5 +401,6 @@ int CalcularTiro(int angulo, int velocidade, int cont, int* acertos) {
 		}
 	}
 
+	//Aumenta o contador para a próxima execução
 	return cont += 1;
 }

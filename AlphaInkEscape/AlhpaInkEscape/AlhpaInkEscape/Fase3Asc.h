@@ -12,8 +12,6 @@
 #include "ctype.h"
 #include <string.h>
 
-Objeto* sobreBi = NULL, * miniatura = NULL;
-
 int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 	//variaveis
 	bool sair = false;
@@ -22,16 +20,6 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	ALLEGRO_FONT* enigma = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);
 	ALLEGRO_FONT* digitado = NULL;
 	ALLEGRO_FONT* fonte = NULL;
-	
-	if (sobreBi == NULL)
-	{
-		sobreBi = (Objeto*)malloc(sizeof(Objeto));
-		sobreBi->altura = 183;
-		sobreBi->largura = 201;
-		sobreBi->x = 110;
-		sobreBi->y = 0;
-		sobreBi->bitmap = al_load_bitmap("Imgs/ASc/miniaturaBin.png");
-	}
 
 	enigmaStr* enigma1;
 	enigma1 = (enigmaStr*)malloc(sizeof(enigmaStr));
@@ -73,16 +61,6 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	tabela->x = 150;
 	tabela->y = (ALTURA_TELA / 2) - (tabela->altura / 2);
 
-	if (miniatura == NULL)
-	{
-		miniatura = (Objeto*)malloc(sizeof(Objeto));
-		miniatura->largura = 140;
-		miniatura->altura = 200;
-		miniatura->x = 700;
-		miniatura->y = 100;
-		miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaAni.png");
-	}
-
 	bool arrastando = false;
 	char arrEnigma[10] = "";
 	bool verDigitado = 0;
@@ -118,19 +96,18 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
-			else if(IsInside(evento.mouse.x, evento.mouse.y, sobreBi))
-			{
-				prog->Itens[3] = sobreBi;
-				prog->Inventario[3] = 1;
-				prog->inventCount++;
-			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo)) {
 				verDigitado = 1;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, miniatura) && !prog->Itens[4] && prog->Salas[3])
+			else if(IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->sobreBi))
 			{
-				prog->Itens[4] = miniatura;
+				prog->Inventario[3] = 1;
+				prog->inventCount++;
+			}
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniatura))// && !prog->Itens[4] && prog->Salas[3])
+			{
 				prog->Inventario[4] = 1;
+				prog->inventCount++;
 			}
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			
@@ -167,15 +144,14 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		al_draw_bitmap(campo->bitmap, campo->x, campo->y, 0);
 		al_draw_bitmap(tabela->bitmap, tabela->x, tabela->y, 0);
 		if(!prog->Inventario[3])
-			al_draw_bitmap(sobreBi->bitmap, sobreBi->x, sobreBi->y, 0);
+			al_draw_bitmap(prog->cenario->sobreBi->bitmap, prog->cenario->sobreBi->x, prog->cenario->sobreBi->y, 0);
 
 		//teste master
 		al_draw_text(enigma, al_map_rgb(0, cor,0), LARGURA_TELA/2 - 45, ALTURA_TELA/2 - 25, 0, arrEnigma);
-		al_draw_text(enigma, al_map_rgb(0, 0, 0), sobreBi->x + sobreBi->largura + 10, sobreBi->altura /2, 0, "BINARIO");
 		som(prog);
 
 		if (prog->Salas[3] && !prog->Inventario[4])
-			al_draw_bitmap(miniatura->bitmap, miniatura->x, miniatura->y, 0);
+			al_draw_bitmap(prog->cenario->miniatura->bitmap, prog->cenario->miniatura->x, prog->cenario->miniatura->y, 0);
 
 		caregaInventario(prog);
 		abreOrdem(prog);

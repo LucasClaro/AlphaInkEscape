@@ -197,7 +197,32 @@ int main(void) {
 	progresso.cenario->xMiniMapa->y = progresso.cenario->xMiniMapa->altura / 4;
 	progresso.cenario->fonte = al_load_font("ArquivosAux/fonts/Kindergarten.ttf", 60, 0);	
 
-	loadFotosGlobais();
+	loadFotosGlobais();//Fotos para o inventário
+
+	progresso.cenario->postIt4 = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->postIt4->altura = 183;
+	progresso.cenario->postIt4->largura = 201;
+	progresso.cenario->postIt4->x = -500;
+	progresso.cenario->postIt4->y = -500;
+	progresso.cenario->postIt4->bitmap = al_load_bitmap("Imgs/PostIts/postVan.png");
+	progresso.Itens[0] = progresso.cenario->postIt4;
+
+	progresso.cenario->sobreBi = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->sobreBi->altura = 183;
+	progresso.cenario->sobreBi->largura = 201;
+	progresso.cenario->sobreBi->x = 110;
+	progresso.cenario->sobreBi->y = 0;
+	progresso.cenario->sobreBi->bitmap = al_load_bitmap("Imgs/ASc/miniaturaBin.png");
+	progresso.Itens[3] = progresso.cenario->sobreBi;
+
+	progresso.cenario->miniatura = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->miniatura->largura = 140;
+	progresso.cenario->miniatura->altura = 200;
+	progresso.cenario->miniatura->x = 700;
+	progresso.cenario->miniatura->y = 100;
+	progresso.cenario->miniatura->bitmap = al_load_bitmap("Imgs/Clicavel/miniaturaAni.png");
+	progresso.Itens[4] = progresso.cenario->miniatura;
+
 	// Cria o ponteiro para progresso que ser� mandado para o resto do programa
 	Progresso* prog = &progresso;
 	

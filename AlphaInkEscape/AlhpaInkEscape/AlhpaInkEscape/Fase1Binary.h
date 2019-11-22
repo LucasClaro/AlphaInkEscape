@@ -17,8 +17,6 @@ typedef struct EnigmaStr
 	int verCampo;
 	bool acertou;
 } enigmaStr;
-
-Objeto* postIt4 = NULL;
 //bool sobreposto = false;
 
 
@@ -28,17 +26,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	//ponteiros
 	ALLEGRO_FONT* enigma = NULL;
 	ALLEGRO_FONT* digitado = NULL;
-	ALLEGRO_FONT* fonte = NULL;
-
-
-	postIt4 = (Objeto*)malloc(sizeof(Objeto));
-	postIt4->altura = 183;
-	postIt4->largura = 201;
-	postIt4->x = -500;
-	postIt4->y = -500;
-	postIt4->bitmap = NULL;
-	
-	postIt4->bitmap = al_load_bitmap("Imgs/PostIts/postVan.png");
+	ALLEGRO_FONT* fonte = NULL;	
 
 	Objeto* conta1;
 	conta1 = (Objeto*)malloc(sizeof(Objeto));
@@ -191,9 +179,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, postIt4) && !prog->Inventario[0])
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt4) && !prog->Inventario[0])
 			{
-				prog->Itens[0] = postIt4;
 				prog->Inventario[0] = 1;
 				prog->inventCount++;
 			}
@@ -252,8 +239,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					enigma3->acertou = true;
 					enigma4->acertou = true;
 					prog->Salas[1] = 1;
-					postIt4->x = (LARGURA_TELA / 2) - (postIt4->largura / 2);
-					postIt4->y = ALTURA_TELA - postIt4->altura;
+					prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
+					prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
 				}
 			}
 			 else if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -263,8 +250,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				 prog->Salas[1] = 1;
 				 prog->Salas[2] = 1;
 				 prog->Salas[10] = 1;
-				 postIt4->x = (LARGURA_TELA / 2) - (postIt4->largura / 2);
-				 postIt4->y = ALTURA_TELA - postIt4->altura;
+				 prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
+				 prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
 			 }
 			 else {
 				if (verCampo == 1)
@@ -322,7 +309,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 		if (prog->Salas[1] && !prog->Inventario[0])
 		{
-			al_draw_bitmap(postIt4->bitmap, postIt4->x, postIt4->y, 0);
+			al_draw_bitmap(prog->cenario->postIt4->bitmap, prog->cenario->postIt4->x, prog->cenario->postIt4->y, 0);
 		}
 
 		som(prog);
