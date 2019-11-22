@@ -174,8 +174,19 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				//Mute
 				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
 					tocando = !tocando;
+				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->saida)) {
+					gameOver = 1;
+					salvar(progresso);
 				}
 				
 				else if (IsInside(evento.mouse.x, evento.mouse.y, Ba) && !Arrastando) {
@@ -308,9 +319,15 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 			al_draw_bitmap(Na->bitmap, fundoNa->x+5, fundoNa->y+5, 0);
 			al_draw_bitmap(C->bitmap, fundoC->x+5, fundoC->y+5, 0);
 		}
+
+		al_draw_bitmap(progresso->cenario->saida->bitmap, progresso->cenario->saida->x, progresso->cenario->saida->y, 0);
+
+		//Funções padrões
+		abrirMapa(progresso);
 		som(progresso);
 		caregaInventario(progresso);
 		abreOrdem(progresso);
+
 		al_flip_display();
 	}
 

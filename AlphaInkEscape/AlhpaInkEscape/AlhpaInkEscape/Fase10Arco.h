@@ -190,6 +190,16 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 					tocando = !tocando;
 				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					gameOver = 1;
+					salvar(prog);
+				}
 				//Marcador de Velocidade
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaH))
 				{
@@ -347,9 +357,14 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		if (!acertos[4])
 			al_draw_bitmap(alvo5->bitmap, alvo5->x, alvo5->y, 0);
 
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
+
+		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+		abrirMapa(prog);
+
 		al_flip_display();
 	}
 

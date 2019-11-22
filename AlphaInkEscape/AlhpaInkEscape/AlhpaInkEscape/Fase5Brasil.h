@@ -136,6 +136,16 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 					tocando = !tocando;
 				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					gameOver = 1;
+					salvar(prog);
+				}
 				//Marcador da Onça
 				else if (IsInside(evento.mouse.x, evento.mouse.y, marcaOnca))
 				{
@@ -259,11 +269,14 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(prog->cenario->postIt3->bitmap, prog->cenario->postIt3->x, prog->cenario->postIt3->y, 0);
 		}
 
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
+
 
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+		abrirMapa(prog);
 
 		al_flip_display();
 	}

@@ -184,8 +184,19 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				prog->Inventario[0] = 1;
 				prog->inventCount++;
 			}
+			//Mute
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
+			}
+			//Clique no minimapa
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+			{
+				aberto = !aberto;
+			}
+			//Clique na saída
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+				sair = 1;
+				salvar(prog);
 			}
 
 			else if (IsInside(evento.mouse.x, evento.mouse.y, campo1))
@@ -312,8 +323,10 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_bitmap(prog->cenario->postIt4->bitmap, prog->cenario->postIt4->x, prog->cenario->postIt4->y, 0);
 		}
 
-		som(prog);
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
 
+		som(prog);
+		abrirMapa(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
 		al_flip_display();

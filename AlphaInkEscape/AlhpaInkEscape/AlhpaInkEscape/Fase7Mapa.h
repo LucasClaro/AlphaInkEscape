@@ -316,6 +316,16 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 				tocando = !tocando;
 			}
+			//Clique no minimapa
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+			{
+				aberto = !aberto;
+			}
+			//Clique na saída
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+				sair = 1;
+				salvar(prog);
+			}
 			//SetaUp primeiro bloco
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setacima1) && !prog->Salas[7]) {
 
@@ -488,8 +498,10 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		if(!prog->Inventario[5])
 			al_draw_bitmap(prog->cenario->miniaturaObras->bitmap, prog->cenario->miniaturaObras->x, prog->cenario->miniaturaObras->y, 0);
 
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
+
 		//Funções padrões
-		//abrirMapa(prog);
+		abrirMapa(prog);
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);

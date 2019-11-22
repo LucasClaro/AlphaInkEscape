@@ -217,7 +217,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					campoesquerda->bitmap = btnPressionado;
 				}
 
-				//Adiciona a resposta na fila e checa a respsota
+				//Adiciona a resposta na fila e checa a resposta
 				if (FilaCheia(f)) {
 					DeQueue(f);
 				}
@@ -232,7 +232,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					pressionado = true;
 					campodireita->bitmap = btnPressionado;
 				}
-				//Adiciona a resposta na fila e checa a respsota
+				//Adiciona a resposta na fila e checa a resposta
 				if (FilaCheia(f)) {
 					DeQueue(f, vetorResposta);
 				}
@@ -241,10 +241,6 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					//printf("Acertou!");
 					prog->Salas[6] = 1;
 				}
-			}
-			//Clique no mute
-			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
-				tocando = !tocando;
 			}
 			//Saídas-----------
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima) && prog->Salas[6])
@@ -271,11 +267,16 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
 			}
+			//Clique no mute
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
+				tocando = !tocando;
+			}
 			//Clique no minimapa
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
 			{
 				aberto = !aberto;
 			}
+			//Clique na saída
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)){
 				sair = 1;
 				salvar(prog);

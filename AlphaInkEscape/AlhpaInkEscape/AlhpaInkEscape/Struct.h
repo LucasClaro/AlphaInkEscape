@@ -59,7 +59,7 @@ typedef struct scene {
 } Cenario;
 
 // Struct de progresso
-typedef struct prog
+typedef struct progresso
 {
 	int proximaSala;
 	int Gameover;

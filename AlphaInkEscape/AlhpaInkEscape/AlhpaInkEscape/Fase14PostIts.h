@@ -105,14 +105,26 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 				limpaClick(progresso);
-				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
+
+				//Mute
+				if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
+					tocando = !tocando;
+				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->saida)) {
+					gameOver = 1;
+					salvar(progresso);
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 				{
 					progresso->proximaSala = 10;
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
-					tocando = !tocando;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
@@ -378,10 +390,15 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			if (progresso->inventClick[2])
 				al_draw_bitmap(progresso->Itens[2]->bitmap, fundoC->x + 5, fundoC->y + 5, 0);
 		}
+
+		al_draw_bitmap(progresso->cenario->saida->bitmap, progresso->cenario->saida->x, progresso->cenario->saida->y, 0);
 		
+		//Funções padrões
 		som(progresso);
 		caregaInventario(progresso);
 		abreOrdem(progresso);
+		abrirMapa(progresso);
+			
 		al_flip_display();
 	}
 

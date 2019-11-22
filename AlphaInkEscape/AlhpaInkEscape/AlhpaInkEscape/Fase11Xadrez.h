@@ -160,8 +160,19 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
+				//Mute
 				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnSom)) {
 					tocando = !tocando;
+				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->saida)) {
+					gameOver = 1;
+					salvar(progresso);
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
@@ -618,8 +629,14 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		if(errado)
 			al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
 
+		al_draw_bitmap(progresso->cenario->saida->bitmap, progresso->cenario->saida->x, progresso->cenario->saida->y, 0);
+
+		//Funções padrões
 		som(progresso);
 		caregaInventario(progresso);
+		abreOrdem(progresso);
+		abrirMapa(progresso);
+
 		al_flip_display();
 	}
 

@@ -340,6 +340,16 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 					tocando = !tocando;
 				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					gameOver = 1;
+					salvar(prog);
+				}
 				//Primeiro Objeto da linha corrente
 				else if (IsInside(evento.mouse.x, evento.mouse.y, &eventos[0 + 6 * prog->linhaInGame]) && !prog->Salas[9])
 				{
@@ -559,10 +569,13 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		if (prog->Salas[9] && !prog->Inventario[6])
 			al_draw_bitmap(prog->cenario->miniaturaElem->bitmap, prog->cenario->miniaturaElem->x, prog->cenario->miniaturaElem->y, 0);
 
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
+
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+		abrirMapa(prog);
 
 		al_flip_display();
 	}

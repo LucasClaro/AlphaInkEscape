@@ -185,6 +185,16 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
 					tocando = !tocando;
 				}
+				//Clique no minimapa
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnMiniMapa))
+				{
+					aberto = !aberto;
+				}
+				//Clique na saída
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					gameOver = 1;
+					salvar(prog);
+				}
 
 				//Bloqueia todos os arrastes caso a fase esteja completa
 				if (!prog->Salas[15]) {
@@ -500,10 +510,13 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		if(prog->Salas[15] && !prog->Inventario[7])
 			al_draw_bitmap(prog->cenario->miniaturaPaises->bitmap, prog->cenario->miniaturaPaises->x, prog->cenario->miniaturaPaises->y, 0);
 
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
+
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
 		abreOrdem(prog);
+		abrirMapa(prog);
 
 		al_flip_display();
 	}
