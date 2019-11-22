@@ -154,6 +154,7 @@ int main(void) {
 	progresso.cenario->background = al_load_bitmap("Imgs/fundo.png");
 	progresso.cenario->semSom = al_load_bitmap("Imgs/semaudio.png");
 	progresso.cenario->comSom = al_load_bitmap("Imgs/comaudio.png");
+	progresso.cenario->localizacao = al_load_bitmap("Imgs/amigoEstouAq.png");
 
 	//Saida cenario
 	progresso.cenario->saida = (Objeto*)malloc(sizeof(Objeto));

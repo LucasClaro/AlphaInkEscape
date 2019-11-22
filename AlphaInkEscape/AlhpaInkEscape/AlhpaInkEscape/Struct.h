@@ -40,6 +40,7 @@ typedef struct scene {
 	ALLEGRO_BITMAP* background;
 	ALLEGRO_BITMAP* comSom;
 	ALLEGRO_BITMAP* semSom;
+	ALLEGRO_BITMAP* localizacao;
 	ALLEGRO_SAMPLE* somSeta;
 	ALLEGRO_AUDIO_STREAM* musica;
 	Objeto* btnSom;

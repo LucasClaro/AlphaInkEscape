@@ -90,7 +90,7 @@ void abrirMapa(Progresso* prog) {
 	int x = 0;
 	int y = 0;
 
-	/*if (prog->proximaSala < 4)
+	if (prog->proximaSala < 4)
 		y = 185;
 	else if (prog->proximaSala < 8)
 		y = 285;
@@ -100,11 +100,11 @@ void abrirMapa(Progresso* prog) {
 		y = 470;
 
 	if (prog->proximaSala == 1 || prog->proximaSala == 5 || prog->proximaSala == 9 || prog->proximaSala == 13)
-		x = 185;
+		x = 372;
 	else if (prog->proximaSala == 2 || prog->proximaSala == 6 || prog->proximaSala == 10 || prog->proximaSala == 14)
-		x = 285;
+		x = 548;
 	else if (prog->proximaSala == 3 || prog->proximaSala == 7 || prog->proximaSala == 11 || prog->proximaSala == 15)
-		x = 375;*/
+		x = 760;
 
 	//Desenha o mapa
 	if (aberto) {
@@ -160,7 +160,7 @@ void abrirMapa(Progresso* prog) {
 		
 		
 		//x
-		al_draw_text(prog->cenario->fonte, al_map_rgb(0, 0, 0), x, y, 0, "X");
+		al_draw_bitmap(prog->cenario->localizacao, x+80, y+30, 0);
 	}
 }
 
