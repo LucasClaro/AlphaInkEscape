@@ -317,13 +317,14 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			al_draw_text(enigma, al_map_rgb(cor[2], 0, 0), campo3->x + 95, (ALTURA_TELA / 3) + 100, 0, arrEnigma3);
 			al_draw_text(enigma, al_map_rgb(cor[3], 0, 0), campo4->x + 95, (ALTURA_TELA / 3) + 270, 0, arrEnigma4);
 		}
+		
+		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
 
 		if (prog->Salas[1] && !prog->Inventario[0])
 		{
 			al_draw_bitmap(prog->cenario->postIt4->bitmap, prog->cenario->postIt4->x, prog->cenario->postIt4->y, 0);
 		}
 
-		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
 
 		som(prog);
 		abrirMapa(prog);

@@ -13,19 +13,36 @@
 #define PI 3.14159265
 
 //Cria os objs
-Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala;
+Objeto* arco, * barraV, * barraH, * marcaV, * marcaH, * bala, * tentativasEscrito;
 Objeto* alvo1, * alvo2, * alvo3, * alvo4, * alvo5;
+Objeto* Reset;
 
 //Função principal do arco
 int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
 
+	ALLEGRO_FONT* font = al_load_font("ArquivosAux/fonts/InkFree.ttf", 60, 0);;
+
 	//Preenchendo os objs
+	tentativasEscrito = (Objeto*)malloc(sizeof(Objeto));
+	tentativasEscrito->bitmap = NULL;
+	tentativasEscrito->x = 130;
+	tentativasEscrito->y = 115;
+	tentativasEscrito->largura = 200;
+	tentativasEscrito->altura = 100;
+
 	arco = (Objeto*)malloc(sizeof(Objeto));
 	arco->bitmap = NULL;
 	arco->x = 160;
 	arco->y = ALTURA_TELA - 150;
 	arco->largura = 100;
 	arco->altura = 100;
+
+	Reset = (Objeto*)malloc(sizeof(Objeto));
+	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
+	Reset->x = LARGURA_TELA - 150;
+	Reset->y = ALTURA_TELA - 150;
+	Reset->largura = 100;
+	Reset->altura = 100;
 
 	bala = (Objeto*)malloc(sizeof(Objeto));
 	bala->bitmap = NULL;
@@ -129,6 +146,9 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	arco->bitmap = al_load_bitmap("Imgs/Arco/arco.png");
 	bala->bitmap = al_load_bitmap("Imgs/Arco/x.png");
+
+	tentativasEscrito->bitmap = al_load_bitmap("Imgs/Arco/tentativas.png");
+
 	alvo1->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 	alvo2->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
 	alvo3->bitmap = al_load_bitmap("Imgs/Arco/alvo.png");
@@ -185,6 +205,12 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 					prog->proximaSala = 9;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
+				}
+				//Reset
+				else if (IsInside(evento.mouse.x, evento.mouse.y, Reset) && !prog->Salas[13]) {
+					for (tentativas = 0; tentativas < 5; tentativas++)
+						acertos[tentativas] = 0;
+					tentativas = 10;
 				}
 				//Mute
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
@@ -260,16 +286,11 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 				int i = 0;
 				//Caso o mouse estivesse movendo o marcador de angulo, muda o angulo do cálculo a velocidade e o contador da animação
 				if (arrastando == 1) {					
-					tentativas--;
 					if (tentativas > 0) {
+						tentativas--;
 						angulo = 90 + (barraV->y - marcaV->y);
 						velocidade = 30 + (barraH->x - marcaH->x) / 3;
 						contador = 1;
-					}
-					else {
-						tentativas = 10;
-						for(i = 0; i < 5; i++)
-							acertos[i] = 0;
 					}
 				}
 
@@ -324,7 +345,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		}
 
 		//Verifica se a fase está completa
-		if (acertos[0] && acertos[1] && acertos[2] && acertos[4] && acertos[5])
+		if (acertos[0] && acertos[1] && acertos[2] && acertos[3] && acertos[4])
 		{
 			prog->Salas[10] = 1;
 		}
@@ -344,6 +365,8 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		al_draw_bitmap(saidaBaixo->bitmap, saidaBaixo->x, saidaBaixo->y, 0);
 		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		al_draw_bitmap(saidaEsquerda->bitmap, saidaEsquerda->x, saidaEsquerda->y, 0);
+
+		al_draw_bitmap(tentativasEscrito->bitmap, tentativasEscrito->x, tentativasEscrito->y, 0);
 
 		al_draw_bitmap(barraH->bitmap, barraH->x, barraH->y, 0);
 		al_draw_bitmap(barraV->bitmap, barraV->x, barraV->y, 0);
@@ -365,6 +388,10 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			al_draw_bitmap(alvo4->bitmap, alvo4->x, alvo4->y, 0);
 		if (!acertos[4])
 			al_draw_bitmap(alvo5->bitmap, alvo5->x, alvo5->y, 0);
+
+		al_draw_textf(font, al_map_rgb(0, 0, 0), tentativasEscrito->x + tentativasEscrito->largura - 25, 115, 0, "%d", tentativas);
+
+		al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
 
 		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
 
