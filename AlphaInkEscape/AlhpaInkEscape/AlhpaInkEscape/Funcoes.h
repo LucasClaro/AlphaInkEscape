@@ -203,6 +203,8 @@ void salvar(Progresso *prog) {
 	fprintf_s(tm, "%d ", prog->linhaInGame);
 
 	fprintf_s(tm, "%d ", prog->proximaSala);
+
+	fprintf_s(tm, "%d ", tocando);
 	
 	fclose(tm);
 	prog->proximaSala = 0;

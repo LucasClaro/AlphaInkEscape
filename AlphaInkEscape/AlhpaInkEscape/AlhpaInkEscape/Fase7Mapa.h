@@ -19,8 +19,8 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->altura = 20;
 	SaidaBaixo->largura = 20;
-	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2) - 100;
-	SaidaBaixo->y = ALTURA_TELA - (SaidaBaixo->altura / 2);
+	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
+	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = prog->cenario->cadeado;
 
 	Objeto* SaidaEsquerda;

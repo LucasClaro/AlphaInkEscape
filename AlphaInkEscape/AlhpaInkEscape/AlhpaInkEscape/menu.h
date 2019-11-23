@@ -15,6 +15,7 @@
 Objeto* title, * jogar, * sair, * linha, * novo, * cont;
 ALLEGRO_BITMAP* hist1, * hist2, * hist3, * hist4;
 ALLEGRO_BITMAP* Background;
+float volume;
 
 //Função main do menu
 int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {
@@ -169,7 +170,6 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					while (!feof(file))
 					{
 						fscanf_s(file, "%d", &leitor);
-
 						if (i < 17)
 							prog->Salas[i] = leitor;
 						else if (i < 25)
@@ -182,8 +182,8 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 							prog->linhaInGame = leitor;
 						else if (i < 36)
 							prog->proximaSala = leitor;
-
-
+						else if (i < 37)
+							tocando = leitor;
 
 						i++;
 					}
@@ -206,7 +206,6 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					
 					fclose(file);
 
-					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				//Sair			
