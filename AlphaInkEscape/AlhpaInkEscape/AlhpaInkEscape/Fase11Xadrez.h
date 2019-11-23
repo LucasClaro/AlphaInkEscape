@@ -157,7 +157,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 10;
-					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				//Mute
@@ -177,7 +177,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
 					progresso->proximaSala = 15;
-					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, peao1) && !Arrastando && !progresso->Salas[11] && !errado) {

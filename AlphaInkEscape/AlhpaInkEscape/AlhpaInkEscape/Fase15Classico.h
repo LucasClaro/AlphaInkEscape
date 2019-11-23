@@ -320,7 +320,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda))
 				{
 					prog->proximaSala = 14;
-					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}				
 				

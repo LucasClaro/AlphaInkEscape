@@ -171,12 +171,12 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			limpaClick(prog);
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
 				prog->proximaSala = 5;
-					al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
 				prog->proximaSala = 2;
-				al_play_sample(prog->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt4) && !prog->Inventario[0])

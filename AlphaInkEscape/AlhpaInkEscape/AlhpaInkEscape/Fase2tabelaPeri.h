@@ -35,8 +35,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 
 	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
-	SaidaEsquerda->altura = 20;
-	SaidaEsquerda->largura = 20;
+	SaidaEsquerda->altura = 50;
+	SaidaEsquerda->largura = 50;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA/2) - (SaidaBaixo->altura/2);
 	SaidaEsquerda->bitmap = progresso->cenario->cadeado;
@@ -165,13 +165,13 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo))
 				{
 					progresso->proximaSala = 6;
-					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda) && progresso->Salas[2])
 				{
 					progresso->proximaSala = 1;
-					al_play_sample(progresso->cenario->somSeta, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				//Mute
@@ -296,6 +296,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 
 		if (progresso->Salas[2])
 		{
+			SaidaEsquerda->altura = 20;
+			SaidaEsquerda->largura = 20;
 			SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 		}
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);

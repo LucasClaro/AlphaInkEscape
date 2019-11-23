@@ -13,6 +13,7 @@
 
 //Controle da música
 bool tocando = true;
+float volume = 1.0;
 //Controle do minimapa
 bool aberto = false;
 
@@ -71,12 +72,14 @@ void som(Progresso *prog) {
 
 	al_draw_bitmap(prog->cenario->btnSom->bitmap, prog->cenario->btnSom->x, prog->cenario->btnSom->y,0);
 	if (tocando) {
+		volume = 1.0;
 		prog->cenario->btnSom->bitmap = prog->cenario->comSom;
-		al_set_audio_stream_gain(prog->cenario->musica, 1.0);
+		al_set_audio_stream_gain(prog->cenario->musica, volume); 
 	}
 	else {
+		volume = 0.0;
 		prog->cenario->btnSom->bitmap = prog->cenario->semSom;
-		al_set_audio_stream_gain(prog->cenario->musica, 0.0);
+		al_set_audio_stream_gain(prog->cenario->musica, volume);
 	} 
 }
 
