@@ -139,7 +139,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					gameOver = 1;
 				}
 				
-				if (progresso->Itens[0] != NULL)
+				if (progresso->Inventario[0])
 				{
 					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[0]->largura && evento.mouse.y >= 95 && evento.mouse.y <= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[0]->altura * 0.5) && !progresso->inventClick[0])
 					{
@@ -147,7 +147,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						progresso->inventClick[0] = 1;
 					}
 				}
-				if (progresso->Itens[1] != NULL)
+				if (progresso->Inventario[1])
 				{
 					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[1]->largura && evento.mouse.y >= 95 + ((0 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && evento.mouse.y <= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[1]->altura * 0.5) && !progresso->inventClick[1])
 					{
@@ -155,7 +155,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 						progresso->inventClick[1] = 1;
 					}
 				}
-				if (progresso->Itens[2] != NULL)
+				if (progresso->Inventario[2])
 				{
 					if (evento.mouse.x >= 0 && evento.mouse.x <= progresso->Itens[2]->largura && evento.mouse.y >= 95 + ((1 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && evento.mouse.y <= 95 + ((2 * ALTURA_TELA / 10) + progresso->Itens[2]->altura * 0.5) && !progresso->inventClick[2])
 					{
@@ -164,33 +164,33 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					}
 				}
 
-				if (progresso->Itens[0] != NULL)
+				if (progresso->Inventario[0] && progresso->inventClick[0])
 				{
-					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando) {
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[0]) && !Arrastando && !progresso->Salas[14]) {
 						Arrastando = 1;
 						progresso->Itens[0]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[0]->x);
 						progresso->Itens[0]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[0]->y);
 					}
 				}
-				if (progresso->Itens[1] != NULL)
+				if (progresso->Inventario[1] && progresso->inventClick[1])
 				{
-					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[1]) && !Arrastando) {
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[1]) && !Arrastando && !progresso->Salas[14]) {
 						Arrastando = 2;
 						progresso->Itens[1]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[1]->x);
 						progresso->Itens[1]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[1]->y);
 					}
 				}
-				
-				if (progresso->Itens[2] != NULL)
+
+				if (progresso->Inventario[2] && progresso->inventClick[2])
 				{
-					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[2]) && !Arrastando) {
+					if (IsInside(evento.mouse.x, evento.mouse.y, progresso->Itens[2]) && !Arrastando && !progresso->Salas[14]) {
 						Arrastando = 4;
 						progresso->Itens[2]->cliqueX = MapearDistancia(evento.mouse.x, progresso->Itens[2]->x);
 						progresso->Itens[2]->cliqueY = MapearDistancia(evento.mouse.y, progresso->Itens[2]->y);
 					}
 				}
 
-				if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando && !progresso->Salas[14]) {
 					Arrastando = 3;
 					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
 					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
@@ -249,100 +249,31 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					SaidaDireita->bitmap = progresso->cenario->setaDireita;
 				}
 			}
-			/*
-			if (IsInsideImagem(PostIt, fundoA))
+
+			
+		}
+
+		if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
+		{
+			if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(progresso->Itens[2], fundoA) || IsInsideImagem(PostIt, fundoA))
 				fundoA->bitmap = posicionado;
-			else if (IsInsideImagem(PostIt, fundoB))
+			else
+				fundoA->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(progresso->Itens[2], fundoB) || IsInsideImagem(PostIt, fundoB))
 				fundoB->bitmap = posicionado;
-			else if (IsInsideImagem(PostIt, fundoC))
+			else
+				fundoB->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(progresso->Itens[2], fundoC) || IsInsideImagem(PostIt, fundoC))
 				fundoC->bitmap = posicionado;
-			else if (IsInsideImagem(PostIt, fundoD))
+			else
+				fundoC->bitmap = NULL;
+
+			if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(progresso->Itens[2], fundoD) || IsInsideImagem(PostIt, fundoD))
 				fundoD->bitmap = posicionado;
 			else
-			{
-				fundoA->bitmap = NULL;
-				fundoB->bitmap = NULL;
-				fundoC->bitmap = NULL;
 				fundoD->bitmap = NULL;
-			}
-			if (progresso->Itens[0] != NULL)
-			{
-				if (IsInsideImagem(progresso->Itens[0], fundoA))
-					fundoA->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[0], fundoB))
-					fundoB->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[0], fundoC))
-					fundoC->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[0], fundoD))
-					fundoD->bitmap = posicionado;
-				else
-				{
-					fundoA->bitmap = NULL;
-					fundoB->bitmap = NULL;
-					fundoC->bitmap = NULL;
-					fundoD->bitmap = NULL;
-				}
-			}
-			if (progresso->Itens[1] != NULL)
-			{
-				if (IsInsideImagem(progresso->Itens[1], fundoA))
-					fundoA->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[1], fundoB))
-					fundoB->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[1], fundoC))
-					fundoC->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[1], fundoD))
-					fundoD->bitmap = posicionado;
-				else
-				{
-					fundoA->bitmap = NULL;
-					fundoB->bitmap = NULL;
-					fundoC->bitmap = NULL;
-					fundoD->bitmap = NULL;
-				}
-			}
-
-			if (progresso->Itens[2] != NULL)
-			{
-				if (IsInsideImagem(progresso->Itens[2], fundoA))
-					fundoA->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[2], fundoB))
-					fundoB->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[2], fundoC))
-					fundoC->bitmap = posicionado;
-				else if (IsInsideImagem(progresso->Itens[2], fundoD))
-					fundoD->bitmap = posicionado;
-				else
-				{
-					fundoA->bitmap = NULL;
-					fundoB->bitmap = NULL;
-					fundoC->bitmap = NULL;
-					fundoD->bitmap = NULL;
-				}
-			}
-			*/
-			if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
-			{
-				if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(progresso->Itens[2], fundoA) || IsInsideImagem(PostIt, fundoA))
-					fundoA = posicionado;
-				else
-					fundoA = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(progresso->Itens[2], fundoB) || IsInsideImagem(PostIt, fundoB))
-					fundoB = posicionado;
-				else
-					fundoB = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(progresso->Itens[2], fundoC) || IsInsideImagem(PostIt, fundoC))
-					fundoC = posicionado;
-				else
-					fundoC = NULL;
-
-				if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(progresso->Itens[2], fundoD) || IsInsideImagem(PostIt, fundoD))
-					fundoD = posicionado;
-				else
-					fundoD = NULL;
-			}
 		}
 
 		al_draw_bitmap(progresso->cenario->background, 0, 0, 0);
@@ -389,6 +320,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 			if (progresso->inventClick[2])
 				al_draw_bitmap(progresso->Itens[2]->bitmap, fundoC->x + 5, fundoC->y + 5, 0);
+
 		}
 
 		al_draw_bitmap(progresso->cenario->saida->bitmap, progresso->cenario->saida->x, progresso->cenario->saida->y, 0);
