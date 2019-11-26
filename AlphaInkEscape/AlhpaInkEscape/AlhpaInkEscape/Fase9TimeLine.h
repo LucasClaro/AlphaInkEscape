@@ -24,13 +24,29 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	int i, j;
 
 	//Preenche os Objs
-	Objeto* saidaCima;
-	saidaCima = (Objeto*)malloc(sizeof(Objeto));
-	saidaCima->largura = 50;
-	saidaCima->altura = 50;
-	saidaCima->bitmap = prog->cenario->setaCima;
-	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura/2);
-	saidaCima->y = 1;
+	Objeto* SaidaBaixo;
+	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
+	SaidaBaixo->altura = 50;
+	SaidaBaixo->largura = 50;
+	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
+	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
+	SaidaBaixo->bitmap = prog->cenario->setaBaixo;
+
+	Objeto* SaidaDireita;
+	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	SaidaDireita->altura = 50;
+	SaidaDireita->largura = 50;
+	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
+	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
+	SaidaDireita->bitmap = prog->cenario->setaDireita;
+
+	Objeto* SaidaCima;
+	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
+	SaidaCima->altura = 50;
+	SaidaCima->largura = 50;
+	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
+	SaidaCima->y = 1;
+	SaidaCima->bitmap = prog->cenario->setaCima;
 
 	linha1 = (Objeto*)malloc(sizeof(Objeto));
 	linha1->bitmap = NULL;
@@ -331,7 +347,19 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				limpaClick(prog);
 
 				//Saída Cima
-				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima) && prog->Salas[5]) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima)) {
+					prog->proximaSala = 5;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}
+				//Saída Direita
+				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita)) {
+					prog->proximaSala = 10;////////////////////////////////
+					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}
+				//Saída Baixo
+				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[14]) {
 					prog->proximaSala = 5;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
@@ -396,10 +424,6 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Inventario[6])
 				{
 					prog->Inventario[6] = 1;
-				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima)) {
-					prog->proximaSala = 5;
-					gameOver = true;
 				}
 				//Zera o arrastar
 				else {
@@ -493,8 +517,6 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 		//Desenhos
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
-
-		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
 		
 		al_draw_bitmap(linha1->bitmap, linha1->x, linha1->y, 0);
 		if (prog->linhaInGame >= 1)
@@ -569,6 +591,11 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				al_draw_bitmap(eventos[i].bitmap, datas[i].x+25, datas[i].y+25, 0);
 			}
 		}
+
+		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
+		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
+		if(prog->Salas[14])
+			al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
 
 		if (prog->Salas[9] && !prog->Inventario[6])
 			al_draw_bitmap(prog->cenario->miniaturaElem->bitmap, prog->cenario->miniaturaElem->x, prog->cenario->miniaturaElem->y, 0);
