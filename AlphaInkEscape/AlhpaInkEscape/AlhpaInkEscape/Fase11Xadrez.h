@@ -14,7 +14,7 @@ Objeto* peao1 = NULL, * peao2 = NULL, * peao3 = NULL, * bispo = NULL, * torre1 =
 int  errado = 0;
 int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
-	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL,* Reset;
+	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaBaixo = NULL,* Reset, * SaidaDireita = NULL;
 	ALLEGRO_BITMAP* peaoazul1 = NULL, * peaoazul2 = NULL, * peaoazul3 = NULL, * bispoazul = NULL, * torreazul1 = NULL, * torreazul2 = NULL, * reiazul = NULL;
 	int Arrastando = 0;
 
@@ -36,6 +36,13 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaCima->altura / 2);
 	SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
+	
+	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	SaidaDireita->altura = 50;
+	SaidaDireita->largura = 50;
+	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
+	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
+	SaidaDireita->bitmap = progresso->cenario->cadeado;
 
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	SaidaBaixo->largura = 50;
@@ -157,6 +164,12 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda)) //&& progresso->Salas[1]
 				{
 					progresso->proximaSala = 10;
+					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					gameOver = 1;
+				}
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita) && progresso->Salas[11]) //&& progresso->Salas[1]
+				{
+					progresso->proximaSala = 42;
 					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
@@ -604,12 +617,14 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
 		al_draw_bitmap(SaidaBaixo->bitmap, SaidaBaixo->x, SaidaBaixo->y, 0);
+		al_draw_bitmap(SaidaDireita->bitmap, SaidaDireita->x, SaidaDireita->y, 0);
 
 		desenharAndar(Arrastando, podeAndar);
 
-		if(progresso->Salas[11])
+		if (progresso->Salas[11]){
+			SaidaDireita->bitmap = progresso->cenario->setaDireita;
 			al_draw_bitmap(checkmate, Tabuleiro[0][5].x, Tabuleiro[0][5].y, 0);
-
+		}
 		al_draw_bitmap(peaoazul1, Tabuleiro[2][0].x, Tabuleiro[2][0].y, 0);
 		al_draw_bitmap(peaoazul2, Tabuleiro[3][2].x, Tabuleiro[3][2].y, 0);
 		al_draw_bitmap(peaoazul3, Tabuleiro[1][7].x, Tabuleiro[1][7].y, 0);

@@ -42,7 +42,14 @@ int JogarFim(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progres
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 				Hist++;
 			}			
+
+			if (Hist > 3) {
+				prog->proximaSala = 0;
+				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				gameOver = 1;
+			}
 		}
+		
 
 
 		al_draw_bitmap(Background, 0, 0, 0);

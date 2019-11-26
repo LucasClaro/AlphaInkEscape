@@ -47,7 +47,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 	SaidaDireita->largura = 50;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
-	SaidaDireita->bitmap = progresso->cenario->cadeado;
+	SaidaDireita->bitmap = progresso->cenario->setaDireita;
 
 	Ba = (Objeto*)malloc(sizeof(Objeto));
 	Ba->altura = 61;
@@ -182,7 +182,7 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
-				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
+				else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita))
 				{
 					progresso->proximaSala = 3;
 					al_play_sample(progresso->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);

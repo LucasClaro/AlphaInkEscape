@@ -49,6 +49,7 @@ typedef struct scene {
 	Objeto* xMiniMapa;
 	Objeto* saida;
 	ALLEGRO_FONT* fonte;
+	Objeto* PostIt;
 	Objeto* PostIt2;
 	Objeto* postIt3;
 	Objeto* postIt4;

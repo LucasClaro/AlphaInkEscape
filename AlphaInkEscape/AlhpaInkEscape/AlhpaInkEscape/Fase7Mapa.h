@@ -34,7 +34,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
 	SaidaCima->altura = 50;
-	SaidaCima->largura = 20;
+	SaidaCima->largura = 50;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
 	SaidaCima->bitmap = prog->cenario->setaCima;	
@@ -269,6 +269,13 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	int k = 2;
 	int o = 2;
 	int g = 2;
+
+	if (prog->Salas[7]) {
+		j = 1;
+		k = 0;
+		o = 2;
+		g = 3;
+	}
 
 	//Coloca as imagens da "roda" nos elementos 
 	item1->bitmap = itens[j];

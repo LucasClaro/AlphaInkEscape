@@ -6,7 +6,6 @@
 
 #include "Struct.h"
 #include "Funcoes.h"
-Objeto* PostIt = NULL;
 int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* progresso)
 {
 	Objeto* SaidaCima = NULL, * SaidaEsquerda = NULL, * SaidaDireita = NULL;
@@ -34,14 +33,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaDireita->altura = 50;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
-	SaidaDireita->bitmap = progresso->cenario->cadeado;
-
-	PostIt = (Objeto*)malloc(sizeof(Objeto));
-	PostIt->altura = 183;
-	PostIt->largura = 201;
-	PostIt->x = 730;
-	PostIt->y = 220;
-	PostIt->bitmap = NULL;
+	SaidaDireita->bitmap = progresso->cenario->cadeado;	
 	
 	fundoA = (Objeto*)malloc(sizeof(Objeto));
 	fundoA->largura = 220;
@@ -70,9 +62,6 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	fundoD->x = 730;
 	fundoD->y = 485;
 	fundoD->bitmap = NULL;
-
-	
-	PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
 
 	mural = al_load_bitmap("Imgs/PostIts/Separacao.png");
 	posicionado = al_load_bitmap("Imgs/PostIts/posicionado.png");
@@ -187,10 +176,10 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					}
 				}
 
-				if (IsInside(evento.mouse.x, evento.mouse.y, PostIt) && !Arrastando && !progresso->Salas[14]) {
+				if (IsInside(evento.mouse.x, evento.mouse.y, progresso->cenario->PostIt) && !Arrastando && !progresso->Salas[14]) {
 					Arrastando = 3;
-					PostIt->cliqueX = MapearDistancia(evento.mouse.x, PostIt->x);
-					PostIt->cliqueY = MapearDistancia(evento.mouse.y, PostIt->y);
+					progresso->cenario->PostIt->cliqueX = MapearDistancia(evento.mouse.x, progresso->cenario->PostIt->x);
+					progresso->cenario->PostIt->cliqueY = MapearDistancia(evento.mouse.y, progresso->cenario->PostIt->y);
 				}
 				
 
@@ -219,9 +208,9 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					}
 					break;
 				case 3:
-					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, PostIt)) {
-						PostIt->x = evento.mouse.x - PostIt->cliqueX;
-						PostIt->y = evento.mouse.y - PostIt->cliqueY;
+					if (!VerificarBordas(evento.mouse.x, evento.mouse.y, progresso->cenario->PostIt)) {
+						progresso->cenario->PostIt->y = evento.mouse.y - progresso->cenario->PostIt->cliqueY;
+						progresso->cenario->PostIt->x = evento.mouse.x - progresso->cenario->PostIt->cliqueX;
 					}
 					break;
 				case 4:
@@ -240,7 +229,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			}*/
 			if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
 			{
-				if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(PostIt, fundoD))
+				if (IsInsideImagem(progresso->Itens[1], fundoA) && IsInsideImagem(progresso->Itens[0], fundoB) && IsInsideImagem(progresso->Itens[2], fundoC) && IsInsideImagem(progresso->cenario->PostIt, fundoD))
 				{
 					progresso->Salas[14] = 1;
 					SaidaDireita->bitmap = progresso->cenario->setaDireita;
@@ -252,22 +241,22 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 		if (progresso->Itens[0] != NULL && progresso->Itens[1] != NULL && progresso->Itens[2] != NULL)
 		{
-			if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(progresso->Itens[2], fundoA) || IsInsideImagem(PostIt, fundoA))
+			if (IsInsideImagem(progresso->Itens[0], fundoA) || IsInsideImagem(progresso->Itens[1], fundoA) || IsInsideImagem(progresso->Itens[2], fundoA) || IsInsideImagem(progresso->cenario->PostIt, fundoA))
 				fundoA->bitmap = posicionado;
 			else
 				fundoA->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(progresso->Itens[2], fundoB) || IsInsideImagem(PostIt, fundoB))
+			if (IsInsideImagem(progresso->Itens[0], fundoB) || IsInsideImagem(progresso->Itens[1], fundoB) || IsInsideImagem(progresso->Itens[2], fundoB) || IsInsideImagem(progresso->cenario->PostIt, fundoB))
 				fundoB->bitmap = posicionado;
 			else
 				fundoB->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(progresso->Itens[2], fundoC) || IsInsideImagem(PostIt, fundoC))
+			if (IsInsideImagem(progresso->Itens[0], fundoC) || IsInsideImagem(progresso->Itens[1], fundoC) || IsInsideImagem(progresso->Itens[2], fundoC) || IsInsideImagem(progresso->cenario->PostIt, fundoC))
 				fundoC->bitmap = posicionado;
 			else
 				fundoC->bitmap = NULL;
 
-			if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(progresso->Itens[2], fundoD) || IsInsideImagem(PostIt, fundoD))
+			if (IsInsideImagem(progresso->Itens[0], fundoD) || IsInsideImagem(progresso->Itens[1], fundoD) || IsInsideImagem(progresso->Itens[2], fundoD) || IsInsideImagem(progresso->cenario->PostIt, fundoD))
 				fundoD->bitmap = posicionado;
 			else
 				fundoD->bitmap = NULL;
@@ -294,7 +283,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 		if (!progresso->Salas[14])
 		{
-			al_draw_bitmap(PostIt->bitmap, PostIt->x, PostIt->y, 0);
+			al_draw_bitmap(progresso->cenario->PostIt->bitmap, progresso->cenario->PostIt->x, progresso->cenario->PostIt->y, 0);
 
 			if (progresso->inventClick[0])
 				al_draw_bitmap(progresso->Itens[0]->bitmap, progresso->Itens[0]->x, progresso->Itens[0]->y, 0);
@@ -307,7 +296,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		}
 		else
 		{
-			al_draw_bitmap(PostIt->bitmap, fundoD->x + 5, fundoD->y + 5, 0);
+			al_draw_bitmap(progresso->cenario->PostIt->bitmap, fundoD->x + 5, fundoD->y + 5, 0);
 
 			if (progresso->inventClick[0])
 				al_draw_bitmap(progresso->Itens[0]->bitmap, fundoB->x  + 5, fundoB->y + 5, 0);
@@ -332,7 +321,6 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	}
 
 	//Desalocação das coisas
-	al_destroy_bitmap(PostIt->bitmap);
 
 	/*al_destroy_bitmap(fundoA->bitmap);
 	al_destroy_bitmap(fundoB->bitmap);

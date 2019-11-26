@@ -200,6 +200,13 @@ int main(void) {
 
 	loadFotosGlobais();//Fotos para o inventário
 
+	progresso.cenario->PostIt = (Objeto*)malloc(sizeof(Objeto));
+	progresso.cenario->PostIt->altura = 183;
+	progresso.cenario->PostIt->largura = 201;
+	progresso.cenario->PostIt->x = 730;
+	progresso.cenario->PostIt->y = 220;
+	progresso.cenario->PostIt->bitmap = al_load_bitmap("Imgs/PostIts/postdaVinci.png");
+
 	progresso.cenario->PostIt2 = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->PostIt2->altura = 183;
 	progresso.cenario->PostIt2->largura = 201;
