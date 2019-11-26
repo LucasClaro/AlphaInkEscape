@@ -192,6 +192,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				}
 				//Clique na saída
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					coletarAutomatico(prog);
 					gameOver = 1;
 					salvar(prog);
 				}
@@ -319,13 +320,14 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				//Saída Cima
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaEsquerda))
 				{
+					coletarAutomatico(prog);
 					prog->proximaSala = 14;
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}				
 				
 				//Item do invnetário
-				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises) && !prog->Inventario[7])
+				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises) && !prog->Inventario[7] && prog->Salas[15])
 				{
 					prog->Inventario[7] = 1;
 				}

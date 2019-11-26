@@ -323,6 +323,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			}
 			//Clique na sa�da
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+				coletarAutomatico(prog);
 				sair = 1;
 				salvar(prog);
 			}
@@ -394,6 +395,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			//Saida Cima
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima))
 			{
+				coletarAutomatico(prog);
 				prog->proximaSala = 3;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
@@ -401,6 +403,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			//Saida Esquerda
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaEsquerda))
 			{
+				coletarAutomatico(prog);
 				prog->proximaSala = 6;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;
@@ -408,6 +411,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			//Saida Baixo
 			else if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[7])
 			{
+				coletarAutomatico(prog);
 				prog->proximaSala = 11;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = 1;

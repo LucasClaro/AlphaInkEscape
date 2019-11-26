@@ -323,26 +323,56 @@ int coletarAutomatico(Progresso* prog)
 {
 	switch (prog->proximaSala)
 	{
-	case 1:
-		if (prog->Salas[1] && !prog->Inventario[0])
-		{
-			prog->Inventario[0] = 1;
-		}
-		break;
-	case 5:
-		if (prog->Salas[5] && !prog->Inventario[1])
-		{
-			prog->Inventario[1] = 1;
-		}
-		break;
-	case 13:
-		if (prog->Salas[13] && !prog->Inventario[2])
-		{
-			prog->Inventario[2] = 1;
-		}
-		break;
-	default: return 0;
-		break;
+		//Post its
+		case 1:
+			if (prog->Salas[1] && !prog->Inventario[0])
+			{
+				prog->Inventario[0] = 1;
+			}
+			break;
+		case 5:
+			if (prog->Salas[5] && !prog->Inventario[1])
+			{
+				prog->Inventario[1] = 1;
+			}
+			break;
+		case 13:
+			if (prog->Salas[13] && !prog->Inventario[2])
+			{
+				prog->Inventario[2] = 1;
+			}
+			break;
+		//Clicaveis
+		case 3:
+			if (!prog->Inventario[3])
+			{
+				prog->Inventario[3] = 1;
+			}
+			if (prog->Salas[3] && !prog->Inventario[4])
+			{
+				prog->Inventario[4] = 1;
+			}
+			break;
+		case 7:
+			if (!prog->Inventario[5])
+			{
+				prog->Inventario[5] = 1;
+			}
+			break;
+		case 9:
+			if (prog->Salas[9] && !prog->Inventario[6])
+			{
+				prog->Inventario[6] = 1;
+			}
+			break;
+		case 15:
+			if (prog->Salas[15] && !prog->Inventario[7])
+			{
+				prog->Inventario[7] = 1;
+			}
+			break;
+		default: return 0;
+			break;
 	}
 
 	

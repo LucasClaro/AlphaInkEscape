@@ -75,19 +75,16 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 			limpaClick(prog);
-			if (prog->inventClick[4] || prog->inventClick[5])
-			{
-				prog->inventClick[4] = 0;
-				prog->inventClick[5] = 0;
-			}
 
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaEsquerda)) {
+				coletarAutomatico(prog);
 				prog->proximaSala = 2;
 				//return;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+				coletarAutomatico(prog);
 				prog->proximaSala = 7;
 				//return;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
@@ -104,6 +101,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			}
 			//Clique na saída
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+				coletarAutomatico(prog);
 				sair = 1;
 				salvar(prog);
 			}
