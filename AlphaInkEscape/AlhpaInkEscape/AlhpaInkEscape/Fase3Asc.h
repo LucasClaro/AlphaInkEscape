@@ -56,10 +56,10 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	Objeto* tabela;
 	tabela = (Objeto*)malloc(sizeof(Objeto));
 	tabela->bitmap = al_load_bitmap("Imgs/Asc/ascii.png");
-	tabela->altura = 212;
-	tabela->largura = 200;
-	tabela->x = 150;
-	tabela->y = (ALTURA_TELA / 2) - (tabela->altura / 2);
+	tabela->altura = 360;
+	tabela->largura = 435;
+	tabela->x = 160;
+	tabela->y = 150;
 
 	bool arrastando = false;
 	char arrEnigma[10] = "";

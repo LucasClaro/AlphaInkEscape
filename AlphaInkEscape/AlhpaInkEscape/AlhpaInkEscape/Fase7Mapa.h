@@ -462,7 +462,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			prog->Salas[7] = 1;
 		}
 
-		printf("%d %d %d %d\n", j, k, o, g);
+		//printf("%d %d %d %d\n", j, k, o, g);
 
 		//===========================================DESENHAR========================================================================
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
