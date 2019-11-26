@@ -21,7 +21,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaOnca = (Objeto*)malloc(sizeof(Objeto));
 	notaOnca->bitmap = NULL;
 	notaOnca->x = 120;
-	notaOnca->y = 105;
+	notaOnca->y = 95;
 	notaOnca->largura = 230;
 	notaOnca->altura = 260;
 
@@ -42,7 +42,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	notaJacare = (Objeto*)malloc(sizeof(Objeto));
 	notaJacare->bitmap = NULL;
 	notaJacare->x = LARGURA_TELA - 240;
-	notaJacare->y = 105;
+	notaJacare->y = 95;
 	notaJacare->largura = 230;
 	notaJacare->altura = 260;
 

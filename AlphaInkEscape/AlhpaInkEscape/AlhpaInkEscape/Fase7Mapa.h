@@ -453,10 +453,12 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		//Verefica condição de vitória
-		if (j == 0 && k == 1 && o == 2 && g == 3) {
+		if (j == 1 && k == 0 && o == 2 && g == 3) {
 			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 			prog->Salas[7] = 1;
 		}
+
+		printf("%d %d %d %d\n", j, k, o, g);
 
 		//===========================================DESENHAR========================================================================
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
