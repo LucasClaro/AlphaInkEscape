@@ -36,15 +36,12 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = progresso->cenario->cadeado;
 
-	if (PostIt == NULL)
-	{
-		PostIt = (Objeto*)malloc(sizeof(Objeto));
-		PostIt->altura = 183;
-		PostIt->largura = 201;
-		PostIt->x = 730;
-		PostIt->y = 220;
-		PostIt->bitmap = NULL;
-	}
+	PostIt = (Objeto*)malloc(sizeof(Objeto));
+	PostIt->altura = 183;
+	PostIt->largura = 201;
+	PostIt->x = 730;
+	PostIt->y = 220;
+	PostIt->bitmap = NULL;
 	
 	fundoA = (Objeto*)malloc(sizeof(Objeto));
 	fundoA->largura = 220;

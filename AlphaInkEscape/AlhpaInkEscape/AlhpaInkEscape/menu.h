@@ -138,7 +138,7 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					}						
 
 					for (i = 0; i < 8; i++) {
-						prog->Inventario[i - 17] = 0;
+						prog->Inventario[i] = 0;
 						fprintf_s(file, "0 ", prog->Inventario[i]);
 					}						
 
@@ -146,9 +146,16 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					fprintf_s(file, "0 ");
 
 					for (i = 0; i < 8; i++) {
-						prog->inventClick[i - 26] = 0;
+						prog->inventClick[i] = 0;
 						fprintf_s(file, "0 ");
 					}						
+
+					prog->cenario->PostIt2->x = (LARGURA_TELA / 2) - (prog->cenario->PostIt2->largura / 2);
+					prog->cenario->PostIt2->y = ALTURA_TELA - prog->cenario->PostIt2->altura;
+					prog->cenario->postIt3->x = (LARGURA_TELA / 2) - (prog->cenario->postIt3->largura / 2);
+					prog->cenario->postIt3->y = ALTURA_TELA - prog->cenario->postIt3->altura;
+					prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
+					prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
 
 					prog->linhaInGame = 0;
 					fprintf_s(file, "0 ");
@@ -159,6 +166,22 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					fclose(file);
 
 					Hist++;
+
+					//Validador
+					printf("\n");
+					for (i = 0; i < 17; i++) {
+						printf("%d", prog->Salas[i]);
+					}
+					printf("\n");
+					for (i = 0; i < 8; i++) {
+						printf("%d", prog->Inventario[i]);
+					}
+					printf("\n%d", prog->inventCount);
+					for (i = 0; i < 8; i++) {
+						printf("%d", prog->inventClick[i]);
+					}
+					printf("\n%d", prog->linhaInGame);
+					printf("\n%d", prog->proximaSala);
 				}
 				else if (IsInside(evento.mouse.x, evento.mouse.y, cont) && Hist == 0 && podeContinuar) {
 					//preenche o progresso 
