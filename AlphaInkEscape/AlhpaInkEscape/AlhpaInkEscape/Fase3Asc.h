@@ -31,15 +31,15 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 	Objeto* setaEsquerda;
 	setaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	setaEsquerda->bitmap = prog->cenario->setaEsquerda;
-	setaEsquerda->altura = 20;
-	setaEsquerda->largura = 20;
+	setaEsquerda->altura = 50;
+	setaEsquerda->largura = 50;
 	setaEsquerda->x = 110;
 	setaEsquerda->y = (ALTURA_TELA / 2) - (setaEsquerda->altura / 2);
 
 	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	setaBaixo->altura = 20;
-	setaBaixo->largura = 20;
+	setaBaixo->altura = 50;
+	setaBaixo->largura = 50;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
 	setaBaixo->bitmap = prog->cenario->setaBaixo;

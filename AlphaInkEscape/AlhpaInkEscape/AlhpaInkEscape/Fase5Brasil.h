@@ -84,8 +84,8 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	saidaDireita->bitmap = prog->cenario->setaDireita;
-	saidaDireita->largura = 20;
-	saidaDireita->altura = 20;
+	saidaDireita->largura = 50;
+	saidaDireita->altura = 50;
 	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;
 	saidaDireita->y = (ALTURA_TELA/2) - (saidaDireita->altura / 2);	
 

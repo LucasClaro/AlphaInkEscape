@@ -17,23 +17,23 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	//Cria Objs
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	SaidaBaixo->altura = 20;
-	SaidaBaixo->largura = 20;
+	SaidaBaixo->altura = 50;
+	SaidaBaixo->largura = 50;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = prog->cenario->cadeado;
 
 	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
-	SaidaEsquerda->altura = 20;
-	SaidaEsquerda->largura = 20;
+	SaidaEsquerda->altura = 50;
+	SaidaEsquerda->largura = 50;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
 	SaidaEsquerda->bitmap = prog->cenario->setaEsquerda;
 
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
-	SaidaCima->altura = 20;
+	SaidaCima->altura = 50;
 	SaidaCima->largura = 20;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;

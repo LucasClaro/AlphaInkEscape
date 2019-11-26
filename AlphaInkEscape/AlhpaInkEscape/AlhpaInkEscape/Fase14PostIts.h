@@ -16,22 +16,22 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	ALLEGRO_BITMAP* mural = NULL, *posicionado = NULL;
 
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
-	SaidaCima->largura = 20;
-	SaidaCima->altura = 20;
+	SaidaCima->largura = 50;
+	SaidaCima->altura = 50;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 0;
 	SaidaCima->bitmap = progresso->cenario->setaCima;
 
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
-	SaidaEsquerda->largura = 20;
-	SaidaEsquerda->altura = 20;
+	SaidaEsquerda->largura = 50;
+	SaidaEsquerda->altura = 50;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaCima->altura / 2);
 	SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 
 	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	SaidaDireita->largura = 20;
-	SaidaDireita->altura = 20;
+	SaidaDireita->largura = 50;
+	SaidaDireita->altura = 50;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = progresso->cenario->cadeado;

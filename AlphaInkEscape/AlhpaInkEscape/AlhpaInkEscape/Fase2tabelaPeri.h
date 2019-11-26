@@ -27,8 +27,8 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 {
 	Objeto* SaidaBaixo;
 	SaidaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	SaidaBaixo->altura = 20;
-	SaidaBaixo->largura = 20;
+	SaidaBaixo->altura = 50;
+	SaidaBaixo->largura = 50;
 	SaidaBaixo->x = 110 + (LARGURA_TELA / 2) - (SaidaBaixo->largura / 2);
 	SaidaBaixo->y = ALTURA_TELA - SaidaBaixo->altura;
 	SaidaBaixo->bitmap = progresso->cenario->setaBaixo;
@@ -296,8 +296,6 @@ int JogarFase2TabelaPeri(ALLEGRO_DISPLAY *janela, ALLEGRO_EVENT_QUEUE * fila_eve
 
 		if (progresso->Salas[2])
 		{
-			SaidaEsquerda->altura = 20;
-			SaidaEsquerda->largura = 20;
 			SaidaEsquerda->bitmap = progresso->cenario->setaEsquerda;
 		}
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);

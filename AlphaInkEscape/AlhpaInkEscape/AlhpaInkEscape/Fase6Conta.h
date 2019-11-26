@@ -91,24 +91,24 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 	Objeto* SaidaEsquerda;
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
-	SaidaEsquerda->altura = 20;
-	SaidaEsquerda->largura = 20;
+	SaidaEsquerda->altura = 50;
+	SaidaEsquerda->largura = 50;
 	SaidaEsquerda->x = 110;
 	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
 	SaidaEsquerda->bitmap = prog->cenario->cadeado;
 
 	Objeto* SaidaDireita;
 	SaidaDireita = (Objeto*)malloc(sizeof(Objeto));
-	SaidaDireita->altura = 20;
-	SaidaDireita->largura = 20;
+	SaidaDireita->altura = 50;
+	SaidaDireita->largura = 50;
 	SaidaDireita->x = LARGURA_TELA - SaidaDireita->largura;
 	SaidaDireita->y = (ALTURA_TELA / 2) - (SaidaDireita->altura / 2);
 	SaidaDireita->bitmap = prog->cenario->cadeado;
 	
 	Objeto* SaidaCima;
 	SaidaCima = (Objeto*)malloc(sizeof(Objeto));
-	SaidaCima->altura = 20;
-	SaidaCima->largura = 20;
+	SaidaCima->altura = 50;
+	SaidaCima->largura = 50;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
 	SaidaCima->y = 1;
 	SaidaCima->bitmap = prog->cenario->cadeado;
@@ -331,17 +331,9 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 
 		//Libera as setas quando o jogo está completo
 		if (prog->Salas[6]) {
-			SaidaEsquerda->altura = 20;
-			SaidaEsquerda->largura = 20;
 			SaidaEsquerda->bitmap = prog->cenario->setaEsquerda;
-			SaidaDireita->altura = 20;
-			SaidaDireita->largura = 20;
 			SaidaDireita->bitmap = prog->cenario->setaDireita;
-			SaidaCima->altura = 20;
-			SaidaCima->largura = 20;
 			SaidaCima->bitmap = prog->cenario->setaCima;
-			SaidaBaixo->altura = 20;
-			SaidaBaixo->largura = 20;
 			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 		}
 

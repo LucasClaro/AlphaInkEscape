@@ -99,16 +99,16 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 
 	Objeto* setaBaixo;
 	setaBaixo = (Objeto*)malloc(sizeof(Objeto));
-	setaBaixo->altura = 20;
-	setaBaixo->largura = 20;
+	setaBaixo->altura = 50;
+	setaBaixo->largura = 50;
 	setaBaixo->x = 110 + (LARGURA_TELA / 2) - (setaBaixo->largura / 2);
 	setaBaixo->y = ALTURA_TELA - setaBaixo->altura;
 	setaBaixo->bitmap = prog->cenario->setaBaixo;
 
 	Objeto* setaDireita;
 	setaDireita = (Objeto*)malloc(sizeof(Objeto));
-	setaDireita->altura = 20;
-	setaDireita->largura = 20;
+	setaDireita->altura = 50;
+	setaDireita->largura = 50;
 	setaDireita->x = LARGURA_TELA - 20;
 	setaDireita->y = ALTURA_TELA/2 - setaDireita->altura/2;
 	setaDireita->bitmap = prog->cenario->setaDireita;

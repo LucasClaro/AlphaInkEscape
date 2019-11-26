@@ -30,8 +30,8 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 	Objeto* saidaEsquerda;
 	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	saidaEsquerda->bitmap = prog->cenario->setaEsquerda;
-	saidaEsquerda->largura = 20;
-	saidaEsquerda->altura = 20;
+	saidaEsquerda->largura = 50;
+	saidaEsquerda->altura = 50;
 	saidaEsquerda->x = 110;
 	saidaEsquerda->y = (ALTURA_TELA/2)-(saidaEsquerda->altura / 2);
 

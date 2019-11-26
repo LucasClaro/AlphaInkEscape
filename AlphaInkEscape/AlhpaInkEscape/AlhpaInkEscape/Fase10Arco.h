@@ -119,24 +119,24 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	saidaEsquerda->bitmap = prog->cenario->cadeado;
 	saidaEsquerda->x = 110;
 	saidaEsquerda->y = ALTURA_TELA / 2 - 10;
-	saidaEsquerda->largura = 20;
-	saidaEsquerda->altura = 20;
+	saidaEsquerda->largura = 50;
+	saidaEsquerda->altura = 50;
 
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = prog->cenario->setaCima;
 	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaCima->y = 0;
-	saidaCima->largura = 20;
-	saidaCima->altura = 20;
+	saidaCima->largura = 50;
+	saidaCima->altura = 50;
 
 	Objeto* saidaBaixo;
 	saidaBaixo = (Objeto*)malloc(sizeof(Objeto));
 	saidaBaixo->bitmap = prog->cenario->cadeado;
 	saidaBaixo->x = 110 + LARGURA_TELA / 2 - 10;
 	saidaBaixo->y = ALTURA_TELA - 20;
-	saidaBaixo->largura = 20;
-	saidaBaixo->altura = 20;
+	saidaBaixo->largura = 50;
+	saidaBaixo->altura = 50;
 
 	barraH->bitmap = al_load_bitmap("Imgs/Arco/barraH.png");
 	barraV->bitmap = al_load_bitmap("Imgs/Arco/barraV.png");
