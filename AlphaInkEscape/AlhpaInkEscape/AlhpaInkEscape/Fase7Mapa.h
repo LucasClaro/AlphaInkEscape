@@ -11,7 +11,7 @@
 #include "Struct.h"
 #include <string.h>
 
-//Função Main da fase
+//Funï¿½ï¿½o Main da fase
 int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progresso* prog) {	
 
 	//Cria Objs
@@ -309,7 +309,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		}
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-			//Função do Inventário
+			//Funï¿½ï¿½o do Inventï¿½rio
 			limpaClick(prog);
 
 			//Mute
@@ -321,7 +321,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			{
 				aberto = !aberto;
 			}
-			//Clique na saída
+			//Clique na saï¿½da
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
 				sair = 1;
 				salvar(prog);
@@ -429,12 +429,12 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			exemplo3->bitmap = exemplos[o];
 			exemplo4->bitmap = exemplos[g];
 
-			//Função do inventário
+			//Funï¿½ï¿½o do inventï¿½rio
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 		}
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
-			//Volta o desenho padrão dos btns
+			//Volta o desenho padrï¿½o dos btns
 			setacima1->bitmap = btnC;
 			setacima2->bitmap = btnC;
 			setacima3->bitmap = btnC;
@@ -452,7 +452,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			prog->Gameover = true;
 		}
 
-		//Verefica condição de vitória
+		//Verefica condiï¿½ï¿½o de vitï¿½ria
 		if (j == 1 && k == 0 && o == 2 && g == 3) {
 			SaidaBaixo->bitmap = prog->cenario->setaBaixo;
 			prog->Salas[7] = 1;
@@ -502,7 +502,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 
 		al_draw_bitmap(prog->cenario->saida->bitmap, prog->cenario->saida->x, prog->cenario->saida->y, 0);
 
-		//Funções padrões
+		//Funï¿½ï¿½es padrï¿½es
 		abrirMapa(prog);
 		som(prog);
 		caregaInventario(prog);
