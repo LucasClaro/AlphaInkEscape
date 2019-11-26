@@ -599,7 +599,7 @@ int JogarFase11xadrez(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos
 
 		al_draw_bitmap(progresso->cenario->background, 0, 0, 0);
 		al_draw_bitmap(tab, 135, 98, 0);
-		al_draw_bitmap(texto, 110 + (LARGURA_TELA/2) - (688/2) , 20, 0);
+		al_draw_bitmap(texto, 110 + (LARGURA_TELA / 2) - (688 / 2), 35, 0);
 
 		al_draw_bitmap(SaidaEsquerda->bitmap, SaidaEsquerda->x, SaidaEsquerda->y, 0);
 		al_draw_bitmap(SaidaCima->bitmap, SaidaCima->x, SaidaCima->y, 0);
