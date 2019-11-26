@@ -20,18 +20,18 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	saidaDireita->bitmap = prog->cenario->setaDireita;
-	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;;
-	saidaDireita->y = (ALTURA_TELA / 2) - (saidaDireita->altura / 2);
 	saidaDireita->largura = 50;
 	saidaDireita->altura = 50;
+	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;;
+	saidaDireita->y = (ALTURA_TELA / 2) - (saidaDireita->altura / 2);
 
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = prog->cenario->setaCima;
-	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura / 2);
-	saidaCima->y = 1;
 	saidaCima->largura = 50;
 	saidaCima->altura = 50;
+	saidaCima->y = 1;
+	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura / 2);
 
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
@@ -256,7 +256,6 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		//Desenhos
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 
-		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
 
 		al_draw_bitmap(D1->bitmap, D1->x, D1->y, 0);
 		al_draw_bitmap(D2->bitmap, D2->x, D2->y, 0);
@@ -266,6 +265,10 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_draw_bitmap(E5->bitmap, E5->x, E5->y, 0);
 		al_draw_bitmap(E6->bitmap, E6->x, E6->y, 0);
 
+
+		al_draw_bitmap(saidaDireita->bitmap, saidaDireita->x, saidaDireita->y, 0);
+		al_draw_bitmap(saidaCima->bitmap, saidaCima->x, saidaCima->y, 0);
+		
 		al_draw_bitmap(Reset->bitmap, Reset->x, Reset->y, 0);
 
 		if (prog->Salas[13] && !prog->Inventario[2])
