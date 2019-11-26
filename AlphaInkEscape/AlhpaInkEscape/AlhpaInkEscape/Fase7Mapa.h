@@ -28,7 +28,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 	SaidaEsquerda->altura = 50;
 	SaidaEsquerda->largura = 50;
 	SaidaEsquerda->x = 110;
-	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaBaixo->altura / 2);
+	SaidaEsquerda->y = (ALTURA_TELA / 2) - (SaidaEsquerda->altura / 2);
 	SaidaEsquerda->bitmap = prog->cenario->setaEsquerda;
 
 	Objeto* SaidaCima;

@@ -19,7 +19,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	SaidaCima->largura = 50;
 	SaidaCima->altura = 50;
 	SaidaCima->x = 110 + (LARGURA_TELA / 2) - (SaidaCima->largura / 2);
-	SaidaCima->y = 0;
+	SaidaCima->y = 1;
 	SaidaCima->bitmap = progresso->cenario->setaCima;
 
 	SaidaEsquerda = (Objeto*)malloc(sizeof(Objeto));

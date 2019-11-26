@@ -27,8 +27,8 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = prog->cenario->setaCima;
-	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
-	saidaCima->y = 0;
+	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura/2);
+	saidaCima->y = 1;
 	saidaCima->largura = 50;
 	saidaCima->altura = 50;
 

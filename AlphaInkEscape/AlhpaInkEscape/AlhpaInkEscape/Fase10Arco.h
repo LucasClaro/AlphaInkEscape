@@ -118,7 +118,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 	saidaEsquerda = (Objeto*)malloc(sizeof(Objeto));
 	saidaEsquerda->bitmap = prog->cenario->cadeado;
 	saidaEsquerda->x = 110;
-	saidaEsquerda->y = ALTURA_TELA / 2 - 10;
+	saidaEsquerda->y =(ALTURA_TELA / 2) - (saidaEsquerda->altura / 2);;
 	saidaEsquerda->largura = 50;
 	saidaEsquerda->altura = 50;
 

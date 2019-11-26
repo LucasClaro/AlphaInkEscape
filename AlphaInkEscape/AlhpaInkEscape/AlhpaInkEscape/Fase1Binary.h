@@ -109,7 +109,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	setaDireita = (Objeto*)malloc(sizeof(Objeto));
 	setaDireita->altura = 50;
 	setaDireita->largura = 50;
-	setaDireita->x = LARGURA_TELA - 20;
+	setaDireita->x = LARGURA_TELA - setaDireita->largura;
 	setaDireita->y = ALTURA_TELA/2 - setaDireita->altura/2;
 	setaDireita->bitmap = prog->cenario->setaDireita;
 	

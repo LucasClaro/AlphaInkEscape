@@ -20,16 +20,16 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
 	saidaDireita->bitmap = prog->cenario->setaDireita;
-	saidaDireita->x = LARGURA_TELA - 20;
-	saidaDireita->y = ALTURA_TELA / 2 - 10;
+	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;;
+	saidaDireita->y = (ALTURA_TELA / 2) - (saidaDireita->altura / 2);
 	saidaDireita->largura = 50;
 	saidaDireita->altura = 50;
 
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
 	saidaCima->bitmap = prog->cenario->setaCima;
-	saidaCima->x = 110 + LARGURA_TELA / 2 - 10;
-	saidaCima->y = 0;
+	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura / 2);
+	saidaCima->y = 1;
 	saidaCima->largura = 50;
 	saidaCima->altura = 50;
 
