@@ -19,19 +19,19 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 	//Preenche Objs
 	Objeto* saidaDireita;
 	saidaDireita = (Objeto*)malloc(sizeof(Objeto));
+	saidaDireita->largura = 50;
+	saidaDireita->altura = 50;
 	saidaDireita->bitmap = prog->cenario->setaDireita;
 	saidaDireita->x = LARGURA_TELA - saidaDireita->largura;;
 	saidaDireita->y = (ALTURA_TELA / 2) - (saidaDireita->altura / 2);
-	saidaDireita->largura = 50;
-	saidaDireita->altura = 50;
 
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	saidaCima->largura = 50;
+	saidaCima->altura = 50;
 	saidaCima->bitmap = prog->cenario->setaCima;
 	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura / 2);
 	saidaCima->y = 1;
-	saidaCima->largura = 50;
-	saidaCima->altura = 50;
 
 	Reset = (Objeto*)malloc(sizeof(Objeto));
 	Reset->bitmap = al_load_bitmap("Imgs/Sapos/reset.png");
@@ -111,12 +111,14 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//Saída Cima
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaCima))
 				{
+					coletarAutomatico(prog);
 					prog->proximaSala = 9;
 					gameOver = 1;
 				}
 				//Saída Direita
 				else if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
+					coletarAutomatico(prog);
 					prog->proximaSala = 14;
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
@@ -132,6 +134,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 				//Clique na saída
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					coletarAutomatico(prog);
 					gameOver = 1;
 					salvar(prog);
 				}
@@ -240,8 +243,6 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			if (confere(casas, correto, 7))
 			{
 				prog->Salas[13] = 1;
-				prog->cenario->PostIt2->x = (LARGURA_TELA / 2) - (prog->cenario->PostIt2->largura / 2);
-				prog->cenario->PostIt2->y = ALTURA_TELA - prog->cenario->PostIt2->altura;
 			}
 		}
 

@@ -26,11 +26,11 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 	//Preenche os Objs
 	Objeto* saidaCima;
 	saidaCima = (Objeto*)malloc(sizeof(Objeto));
+	saidaCima->largura = 50;
+	saidaCima->altura = 50;
 	saidaCima->bitmap = prog->cenario->setaCima;
 	saidaCima->x = 110 + (LARGURA_TELA / 2) - (saidaCima->largura/2);
 	saidaCima->y = 1;
-	saidaCima->largura = 50;
-	saidaCima->altura = 50;
 
 	linha1 = (Objeto*)malloc(sizeof(Objeto));
 	linha1->bitmap = NULL;
@@ -393,7 +393,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					eventos[5 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[5 + 6 * prog->linhaInGame].y);
 				}
 				//item do iventário
-				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Itens[6])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Inventario[6])
 				{
 					prog->Inventario[6] = 1;
 				}

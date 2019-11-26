@@ -413,7 +413,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 				sair = 1;
 			}
 			//Item
-			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaObras) && !prog->Itens[5])
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaObras) && !prog->Inventario[5])
 			{
 				prog->Inventario[5] = 1;
 			}

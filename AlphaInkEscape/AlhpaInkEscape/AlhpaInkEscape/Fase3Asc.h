@@ -115,7 +115,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 				prog->Inventario[3] = 1;
 				prog->inventCount++;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniatura))// && !prog->Itens[4] && prog->Salas[3])
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniatura) && !prog->Inventario[4] && prog->Salas[3])
 			{
 				prog->Inventario[4] = 1;
 				prog->inventCount++;

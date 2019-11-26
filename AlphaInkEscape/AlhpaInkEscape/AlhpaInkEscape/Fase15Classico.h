@@ -325,7 +325,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				}				
 				
 				//Item do invnetário
-				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises))
+				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises) && !prog->Inventario[7])
 				{
 					prog->Inventario[7] = 1;
 				}
@@ -521,7 +521,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		al_flip_display();
 	}
 	//destroy
-	al_destroy_bitmap(saidaEsquerda->bitmap);
+	//al_destroy_bitmap(saidaEsquerda->bitmap);
 	al_destroy_bitmap(A1->bitmap);
 	al_destroy_bitmap(A2->bitmap);
 	al_destroy_bitmap(A3->bitmap);

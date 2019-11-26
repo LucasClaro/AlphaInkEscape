@@ -128,6 +128,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				//Saída Direita
 				if (IsInside(evento.mouse.x, evento.mouse.y, saidaDireita))
 				{
+					coletarAutomatico(prog);
 					prog->proximaSala = 6;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
@@ -143,6 +144,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				}
 				//Clique na saída
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					coletarAutomatico(prog);
 					gameOver = 1;
 					salvar(prog);
 				}
@@ -175,7 +177,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					marcaMico->cliqueY = MapearDistancia(evento.mouse.y, marcaMico->y);
 				}
 				//Postit
-				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt3) && !prog->Inventario[1])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt3) && !prog->Inventario[1] && prog->Salas[5])
 				{
 					prog->Inventario[1] = 1;
 					prog->inventCount++;
@@ -197,8 +199,6 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				if (InCaatinga() && InAmazonia() && InPantanal() && InMata())
 				{
 					prog->Salas[5] = 1;
-					prog->cenario->postIt3->x = (LARGURA_TELA / 2) - (prog->cenario->postIt3->largura / 2);
-					prog->cenario->postIt3->y = ALTURA_TELA - prog->cenario->postIt3->altura;
 				}
 			}
 
@@ -339,4 +339,3 @@ int InAmazonia() {
 	}
 	return 0;
 }
-

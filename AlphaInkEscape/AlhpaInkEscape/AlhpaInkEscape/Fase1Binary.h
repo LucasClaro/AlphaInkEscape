@@ -170,16 +170,18 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		{
 			limpaClick(prog);
 			if (IsInside(evento.mouse.x, evento.mouse.y, setaBaixo)) {
+				coletarAutomatico(prog);
 				prog->proximaSala = 5;
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, setaDireita)) {
+				coletarAutomatico(prog);
 				prog->proximaSala = 2;
 				al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				sair = true;
 			}
-			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt4) && !prog->Inventario[0])
+			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt4) && !prog->Inventario[0] && prog->Salas[1])
 			{
 				prog->Inventario[0] = 1;
 				prog->inventCount++;
@@ -195,6 +197,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			}
 			//Clique na saída
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+				coletarAutomatico(prog);
 				sair = 1;
 				salvar(prog);
 			}
@@ -250,8 +253,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 					enigma3->acertou = true;
 					enigma4->acertou = true;
 					prog->Salas[1] = 1;
-					prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
-					prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
+					/*prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
+					prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;*/
 				}
 			}
 			 else if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -261,8 +264,8 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 				 prog->Salas[1] = 1;
 				 prog->Salas[2] = 1;
 				 prog->Salas[10] = 1;
-				 prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
-				 prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
+				 //prog->cenario->postIt4->x = (LARGURA_TELA / 2) - (prog->cenario->postIt4->largura / 2);
+				 //prog->cenario->postIt4->y = ALTURA_TELA - prog->cenario->postIt4->altura;
 			 }
 			 else {
 				if (verCampo == 1)
@@ -404,3 +407,4 @@ int digitarCampo(enigmaStr* enigma, char arrEnigma[], ALLEGRO_EVENT evento, bool
 
 	return 0;
 }
+

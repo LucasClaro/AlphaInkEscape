@@ -88,7 +88,7 @@ int main(void) {
 
 	// Preenche o objeto de progresso
 	Progresso progresso;
-	progresso.proximaSala = 5;
+	progresso.proximaSala = 0;
 	progresso.Gameover = 0;
 	//prog de todas as salas
 	progresso.Salas[0] = 0;
@@ -203,16 +203,16 @@ int main(void) {
 	progresso.cenario->PostIt2 = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->PostIt2->altura = 183;
 	progresso.cenario->PostIt2->largura = 201;
-	progresso.cenario->PostIt2->x = -500;
-	progresso.cenario->PostIt2->y = -500;
+	progresso.cenario->PostIt2->x = (LARGURA_TELA / 2) - (progresso.cenario->PostIt2->largura / 2);
+	progresso.cenario->PostIt2->y = ALTURA_TELA - progresso.cenario->PostIt2->altura;
 	progresso.cenario->PostIt2->bitmap = al_load_bitmap("Imgs/PostIts/postDali.png");
 	progresso.Itens[2] = progresso.cenario->PostIt2;
 
 	progresso.cenario->postIt3 = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->postIt3->altura = 183;
 	progresso.cenario->postIt3->largura = 201;
-	progresso.cenario->postIt3->x = -500;
-	progresso.cenario->postIt3->y = -500;
+	progresso.cenario->postIt3->x = (LARGURA_TELA / 2) - (progresso.cenario->postIt3->largura / 2);
+	progresso.cenario->postIt3->y = ALTURA_TELA - progresso.cenario->postIt3->altura;
 	progresso.cenario->postIt3->bitmap = NULL;
 	progresso.cenario->postIt3->bitmap = al_load_bitmap("Imgs/PostIts/postMonet.png");
 	progresso.Itens[1] = progresso.cenario->postIt3;
@@ -220,8 +220,8 @@ int main(void) {
 	progresso.cenario->postIt4 = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->postIt4->altura = 183;
 	progresso.cenario->postIt4->largura = 201;
-	progresso.cenario->postIt4->x = -500;
-	progresso.cenario->postIt4->y = -500;
+	progresso.cenario->postIt4->x = (LARGURA_TELA / 2) - (progresso.cenario->postIt4->largura / 2);
+	progresso.cenario->postIt4->y = ALTURA_TELA - progresso.cenario->postIt4->altura;
 	progresso.cenario->postIt4->bitmap = al_load_bitmap("Imgs/PostIts/postVan.png");
 	progresso.Itens[0] = progresso.cenario->postIt4;
 

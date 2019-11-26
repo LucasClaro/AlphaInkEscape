@@ -318,4 +318,34 @@ int limpaClick(Progresso* prog)
 	}
 }
 
+//Confere se já completou a fase mas saiu sem pegar o post it
+int coletarAutomatico(Progresso* prog)
+{
+	switch (prog->proximaSala)
+	{
+	case 1:
+		if (prog->Salas[1] && !prog->Inventario[0])
+		{
+			prog->Inventario[0] = 1;
+		}
+		break;
+	case 5:
+		if (prog->Salas[5] && !prog->Inventario[1])
+		{
+			prog->Inventario[1] = 1;
+		}
+		break;
+	case 13:
+		if (prog->Salas[13] && !prog->Inventario[2])
+		{
+			prog->Inventario[2] = 1;
+		}
+		break;
+	default: return 0;
+		break;
+	}
+
+	
+}
+
 #endif
