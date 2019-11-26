@@ -348,18 +348,21 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 
 				//Saída Cima
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaCima)) {
+					coletarAutomatico(prog);
 					prog->proximaSala = 5;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				//Saída Direita
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaDireita)) {
+					coletarAutomatico(prog);
 					prog->proximaSala = 10;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
 				}
 				//Saída Baixo
 				if (IsInside(evento.mouse.x, evento.mouse.y, SaidaBaixo) && prog->Salas[14]) {
+					coletarAutomatico(prog);
 					prog->proximaSala = 5;////////////////////////////////
 					al_play_sample(prog->cenario->somSeta, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 					gameOver = 1;
@@ -375,6 +378,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				}
 				//Clique na saída
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->saida)) {
+					coletarAutomatico(prog);
 					gameOver = 1;
 					salvar(prog);
 				}
@@ -421,7 +425,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 					eventos[5 + 6 * prog->linhaInGame].cliqueY = MapearDistancia(evento.mouse.y, eventos[5 + 6 * prog->linhaInGame].y);
 				}
 				//item do iventário
-				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Inventario[6])
+				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Inventario[6] && prog->Salas[9])
 				{
 					prog->Inventario[6] = 1;
 				}
