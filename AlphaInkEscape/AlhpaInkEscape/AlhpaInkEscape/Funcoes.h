@@ -504,7 +504,10 @@ int chamaAtencaoItem(Progresso * prog) {
 		al_draw_bitmap(atencao, prog->Itens[5]->x - 50, prog->Itens[5]->y - 30, 0);
 	}
 	if (prog->proximaSala == 7 && !prog->Inventario[6] && prog->Salas[7]) {
-		al_draw_bitmap(atencao, prog->Itens[7]->x, prog->Itens[7]->y, 0);
+		al_draw_bitmap(atencao, prog->Itens[6]->x, prog->Itens[7]->y, 0);
+	}
+	if (prog->proximaSala == 9 && !prog->Inventario[6] && prog->Salas[9]) {
+		al_draw_bitmap(atencao, prog->Itens[7]->x-30, prog->Itens[7]->y-30, 0);
 	}
 	if (prog->proximaSala == 13 && !prog->Inventario[2] && prog->Salas[13]) {
 
