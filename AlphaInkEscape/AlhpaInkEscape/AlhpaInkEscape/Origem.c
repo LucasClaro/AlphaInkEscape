@@ -128,8 +128,15 @@ int main(void) {
 	progresso.Itens[6] = NULL;
 	progresso.Itens[7] = NULL;
 	
-	//quantidade de itens no inventario
-	progresso.inventCount = 0;
+	//Itens adicionados ficam com uma notificação de novo
+	progresso.inventNew[0] = 0;
+	progresso.inventNew[1] = 0;
+	progresso.inventNew[2] = 0;
+	progresso.inventNew[3] = 0;
+	progresso.inventNew[4] = 0;
+	progresso.inventNew[5] = 0;
+	progresso.inventNew[6] = 0;
+	progresso.inventNew[7] = 0;
 
 	//manipulção das posiçoes do inventario
 	progresso.inventClick[0] = 0;

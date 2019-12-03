@@ -337,6 +337,11 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+			}
+
 			//X do Windows	
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
@@ -428,6 +433,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 				else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaElem) && !prog->Inventario[6] && prog->Salas[9])
 				{
 					prog->Inventario[6] = 1;
+					prog->inventNew[6] = 1;
 				}
 				//Zera o arrastar
 				else {
@@ -609,6 +615,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
 

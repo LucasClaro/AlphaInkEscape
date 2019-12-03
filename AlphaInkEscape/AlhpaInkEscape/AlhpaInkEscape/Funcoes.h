@@ -18,7 +18,7 @@ float volume = 1.0;
 bool aberto = false;
 
 //Imagens inventário
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL, * novoItem = NULL;
 
 // Vereifica se as coordenadas (X,Y) estão dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
@@ -194,8 +194,8 @@ void salvar(Progresso *prog) {
 
 	for (i = 0; i < 8; i++)
 		fprintf_s(tm, "%d ", prog->Inventario[i]);
-
-	fprintf_s(tm, "%d ", prog->inventCount);
+	for (i = 0; i < 8; i++)
+		fprintf_s(tm, "%d ", prog->inventNew[i]);
 
 	for (i = 0; i < 8; i++)
 		fprintf_s(tm, "%d ", prog->inventClick[i]);
@@ -221,6 +221,7 @@ int loadFotosGlobais()
 	ordemPaises = al_load_bitmap("Imgs/Clicavel/ordemPaises.png");
 	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc4.png");
 	semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
+	novoItem = al_load_bitmap("Imgs/Clicavel/novo.png");
 }
 
 //Destroi as fotos do inventário/
@@ -234,6 +235,7 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(ordemPaises);
 	al_destroy_bitmap(fundoAsc);
 	al_destroy_bitmap(semAcesso);
+	al_destroy_bitmap(novoItem);
 }
 
 //Exibe os itens que podem ser abertos
@@ -328,18 +330,21 @@ int coletarAutomatico(Progresso* prog)
 			if (prog->Salas[1] && !prog->Inventario[0])
 			{
 				prog->Inventario[0] = 1;
+				prog->inventNew[0] = 1;
 			}
 			break;
 		case 5:
 			if (prog->Salas[5] && !prog->Inventario[1])
 			{
 				prog->Inventario[1] = 1;
+				prog->inventNew[1] = 1;
 			}
 			break;
 		case 13:
 			if (prog->Salas[13] && !prog->Inventario[2])
 			{
 				prog->Inventario[2] = 1;
+				prog->inventNew[2] = 1;
 			}
 			break;
 		//Clicaveis
@@ -347,28 +352,33 @@ int coletarAutomatico(Progresso* prog)
 			if (!prog->Inventario[3])
 			{
 				prog->Inventario[3] = 1;
+				prog->inventNew[3] = 1;
 			}
 			if (prog->Salas[3] && !prog->Inventario[4])
 			{
 				prog->Inventario[4] = 1;
+				prog->inventNew[4] = 1;
 			}
 			break;
 		case 7:
 			if (!prog->Inventario[5])
 			{
 				prog->Inventario[5] = 1;
+				prog->inventNew[5] = 1;
 			}
 			break;
 		case 9:
 			if (prog->Salas[9] && !prog->Inventario[6])
 			{
 				prog->Inventario[6] = 1;
+				prog->inventNew[6] = 1;
 			}
 			break;
 		case 15:
 			if (prog->Salas[15] && !prog->Inventario[7])
 			{
 				prog->Inventario[7] = 1;
+				prog->inventNew[7] = 1;
 			}
 			break;
 		default: return 0;
@@ -378,4 +388,100 @@ int coletarAutomatico(Progresso* prog)
 	
 }
 
+int drawNovo(Progresso* prog)
+{
+	if (prog->inventNew[0])
+	{
+		al_draw_bitmap(novoItem, 0, 95 + (0 * ALTURA_TELA / 10), 0);
+	}
+	if (prog->inventNew[1])
+	{
+		al_draw_bitmap(novoItem, 0, 95 + (1 * ALTURA_TELA / 10), 0);
+	}
+	if (prog->inventNew[2])
+	{
+		al_draw_bitmap(novoItem, 0, 95 + (2 * ALTURA_TELA / 10), 0);
+	}
+	if (prog->inventNew[3])
+	{
+		al_draw_bitmap(novoItem, 0, 310, 0);
+	}
+	if (prog->inventNew[4])
+	{
+		al_draw_bitmap(novoItem, 0, 385, 0);
+	}
+	if (prog->inventNew[5])
+	{
+		al_draw_bitmap(novoItem, 0, 458, 0);
+	}
+	if (prog->inventNew[6])
+	{
+		al_draw_bitmap(novoItem, 0, 528, 0);
+	}
+	if (prog->inventNew[7])
+	{
+		al_draw_bitmap(novoItem, 0, 600, 0);
+	}
+}
+
+int checaNovoItem(int x, int y, Progresso* prog)
+{
+	if (prog->Inventario[0] && prog->inventNew[0])
+	{
+		if (x >= 0 && x <= prog->Itens[0]->largura * 0.5 && y >= 95 && y <= 95 + (0 * ALTURA_TELA / 10) + prog->Itens[0]->largura * 0.5) {
+			prog->inventNew[0] = 0;
+		}
+	}
+	if (prog->Inventario[1] && prog->inventNew[1])
+	{
+		if (x >= 0 && x <= prog->Itens[1]->largura * 0.5 && y >= 95 + (0 * ALTURA_TELA / 10) + prog->Itens[0]->largura * 0.5 && y <= 95 + (1 * ALTURA_TELA / 10) + prog->Itens[1]->largura * 0.5) {
+			prog->inventNew[1] = 0;
+		}
+	}
+	if (prog->Inventario[2] && prog->inventNew[2])
+	{
+		if (x >= 0 && x <= prog->Itens[2]->largura * 0.5 && y >= 95 + (1 * ALTURA_TELA / 10) + prog->Itens[1]->largura * 0.5 && y <= 95 + (2 * ALTURA_TELA / 10) + prog->Itens[2]->largura * 0.5) {
+			prog->inventNew[2] = 0;
+		}
+	}
+	if (prog->Inventario[3] && prog->inventNew[3])
+	{
+		if (x >= 0 && x <= prog->Itens[3]->largura * 0.5 && y >= 310 && y <= 395) {
+			prog->inventNew[3] = 0;
+		}
+	}
+	if (prog->Inventario[4] && prog->inventNew[4])
+	{
+		if (x >= 0 && x <= prog->Itens[4]->largura * 0.5 && y >= 385 && y <= 435)
+		{
+			//printf("certo");
+			prog->inventNew[4] = 0;
+		}
+	}
+	if (prog->Inventario[5] && prog->inventNew[5])
+	{
+		if (x >= 0 && x <= prog->Itens[5]->largura * 0.5 && y >= 458 && y <= 458 + 136 / 2)
+		{
+			//printf("certo");
+
+			prog->inventNew[5] = 0;
+		}
+	}
+	if (prog->Inventario[6] && prog->inventNew[6])
+	{
+		if (x >= 0 && x <= prog->Itens[6]->largura * 0.5 && y >= 528 && y <= 528 + 100 / 2)
+		{
+			//printf("certo");
+			prog->inventNew[6] = 0;
+		}
+	}
+	if (prog->Inventario[7] && prog->inventNew[7])
+	{
+		if (x >= 0 && x <= prog->Itens[7]->largura * 0.5 && y >= 600 && y <= 600 + 136 / 2)
+		{
+			//printf("certo");
+			prog->inventNew[7] = 0;
+		}
+	}
+}
 #endif

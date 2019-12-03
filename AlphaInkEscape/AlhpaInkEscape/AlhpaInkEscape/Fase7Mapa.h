@@ -299,6 +299,11 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
 
+		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+		{
+			checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+		}
+
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 			//Konami Code
 			if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -427,6 +432,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaObras) && !prog->Inventario[5])
 			{
 				prog->Inventario[5] = 1;
+				prog->inventNew[5] = 1;
 			}
 
 			//Atribui as imagens aos blocos
@@ -517,6 +523,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		abrirMapa(prog);
 		som(prog);
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 
 

@@ -72,6 +72,11 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		al_set_target_bitmap(al_get_backbuffer(janela));
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
+		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+		{
+			checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+		}
+
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 			limpaClick(prog);
@@ -111,12 +116,12 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			else if(IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->sobreBi))
 			{
 				prog->Inventario[3] = 1;
-				prog->inventCount++;
+				prog->inventNew[3] = 1;
 			}
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniatura) && !prog->Inventario[4] && prog->Salas[3])
 			{
 				prog->Inventario[4] = 1;
-				prog->inventCount++;
+				prog->inventNew[4] = 1;
 			}
 			checaClickOrdem(evento.mouse.x, evento.mouse.y, prog);
 			
@@ -145,8 +150,6 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 			prog->Gameover = true;
 		}
 
-
-
 		al_draw_bitmap(prog->cenario->background, 0, 0, 0);
 		al_draw_bitmap(setaEsquerda->bitmap, setaEsquerda->x, setaEsquerda->y, 0);
 		al_draw_bitmap(setaBaixo->bitmap, setaBaixo->x, setaBaixo->y, 0);
@@ -165,6 +168,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 
 		//Funções padrões
 		caregaInventario(prog);
+		drawNovo(prog);
 		abrirMapa(prog);
 		abreOrdem(prog);
 		som(prog);

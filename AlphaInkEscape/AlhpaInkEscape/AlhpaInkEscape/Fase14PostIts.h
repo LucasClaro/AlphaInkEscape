@@ -84,6 +84,11 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				checaNovoItem(evento.mouse.x, evento.mouse.y, progresso);
+			}
+
 			//se teve eventos e foi um evento de fechar janela, encerra repetição			
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				progresso->Gameover = 1;
@@ -314,6 +319,7 @@ int JogarFase14PostIts(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		//Funções padrões
 		som(progresso);
 		caregaInventario(progresso);
+		drawNovo(progresso);
 		abreOrdem(progresso);
 		abrirMapa(progresso);
 			

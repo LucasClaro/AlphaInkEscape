@@ -175,6 +175,11 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+			}
+
 			//X do Windows
 			if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				prog->Gameover = 1;
@@ -398,6 +403,7 @@ int JogarFase10Arco(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
 

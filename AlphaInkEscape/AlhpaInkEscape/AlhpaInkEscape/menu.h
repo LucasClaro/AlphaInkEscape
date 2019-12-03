@@ -142,9 +142,11 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 						fprintf_s(file, "0 ", prog->Inventario[i]);
 					}						
 
-					prog->inventCount = 0;
-					fprintf_s(file, "0 ");
-
+					for (i = 0; i < 8; i++) {
+						prog->inventNew[i] = 0;
+						fprintf_s(file, "0 ", prog->inventNew[i]);
+					}
+					
 					for (i = 0; i < 8; i++) {
 						prog->inventClick[i] = 0;
 						fprintf_s(file, "0 ");
@@ -175,8 +177,10 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 					printf("\n");
 					for (i = 0; i < 8; i++) {
 						printf("%d", prog->Inventario[i]);
-					}
-					printf("\n%d", prog->inventCount);
+					}printf("\n");
+					for (i = 0; i < 8; i++) {
+						printf("%d", prog->inventNew[i]);
+					}printf("\n");
 					for (i = 0; i < 8; i++) {
 						printf("%d", prog->inventClick[i]);
 					}
@@ -197,15 +201,15 @@ int JogarMenu(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Progre
 							prog->Salas[i] = leitor;
 						else if (i < 25)
 							prog->Inventario[i - 17] = leitor;
-						else if (i < 26)
-							prog->inventCount = leitor;
-						else if (i < 34)
-							prog->inventClick[i - 26] = leitor;
-						else if (i < 35)
+						else if (i < 33)
+							prog->inventNew[i - 25] = leitor;
+						else if (i < 41)
+							prog->inventClick[i - 33] = leitor;
+						else if (i < 42)
 							prog->linhaInGame = leitor;
-						else if (i < 36)
+						else if (i < 43)
 							prog->proximaSala = leitor;
-						else if (i < 37)
+						else if (i < 44)
 							tocando = leitor;
 
 						i++;

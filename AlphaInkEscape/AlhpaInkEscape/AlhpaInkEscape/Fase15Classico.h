@@ -166,6 +166,11 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 			//espero por um evento da fila, e guarda em evento
 			al_wait_for_event(fila_eventos, &evento);
 
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+			}
+
 			//Konami Code
 			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
@@ -330,6 +335,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 				if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->miniaturaPaises) && !prog->Inventario[7] && prog->Salas[15])
 				{
 					prog->Inventario[7] = 1;
+					prog->inventNew[7] = 1;
 				}
 
 				//Função do inventário
@@ -517,6 +523,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		//Funções padrões
 		som(prog);
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
 

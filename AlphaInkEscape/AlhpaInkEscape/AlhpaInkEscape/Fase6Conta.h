@@ -198,6 +198,11 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		ALLEGRO_MOUSE_STATE state;
 		al_get_mouse_state(&state);
 
+		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+		{
+			checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+		}
+
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			//Função para o inventário
 			limpaClick(prog);
@@ -364,6 +369,7 @@ int JogarFase6Conta(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, 
 		abrirMapa(prog);
 		som(prog);	  	   	
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 		al_flip_display();
 	}

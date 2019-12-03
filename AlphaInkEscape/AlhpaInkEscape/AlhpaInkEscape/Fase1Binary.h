@@ -166,6 +166,11 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		al_set_target_bitmap(al_get_backbuffer(janela));
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
+		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+		{
+			checaNovoItem(evento.mouse.x, evento.mouse.y, prog);
+		}
+
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 			limpaClick(prog);
@@ -184,7 +189,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->postIt4) && !prog->Inventario[0] && prog->Salas[1])
 			{
 				prog->Inventario[0] = 1;
-				prog->inventCount++;
+				prog->inventNew[0] = 1;
 			}
 			//Mute
 			else if (IsInside(evento.mouse.x, evento.mouse.y, prog->cenario->btnSom)) {
@@ -284,7 +289,6 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 			 }
 		}
 
-
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			sair = true;
 			prog->Gameover = true;
@@ -332,6 +336,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		som(prog);
 		abrirMapa(prog);
 		caregaInventario(prog);
+		drawNovo(prog);
 		abreOrdem(prog);
 		al_flip_display();
 	}

@@ -68,7 +68,7 @@ typedef struct progresso
 	int Salas[17];// Progresso de cada sala. Deixei 17 pois a fase 0 vai ser o menu. 
 	int Inventario[TAMANHO_INVENTARIO];// Ter ou não o item
 	Objeto* Itens[TAMANHO_INVENTARIO];// Item propriamente dito
-	int inventCount;//contador de itens no  inventario
+	int inventNew[TAMANHO_INVENTARIO];//contador de itens no  inventario
 	int inventClick[TAMANHO_INVENTARIO];//saber qual item ja foi usado no inventario
 	int linhaInGame;
 	Cenario* cenario;
