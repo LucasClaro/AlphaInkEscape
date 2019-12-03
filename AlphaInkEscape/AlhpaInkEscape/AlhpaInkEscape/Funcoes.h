@@ -491,28 +491,28 @@ int chamaAtencaoItem(Progresso * prog) {
 	if (prog->proximaSala == 1 && !prog->Inventario[0] && prog->Salas[1]) {
 		al_draw_bitmap(atencao,prog->Itens[0]->x, prog->Itens[0]->y,0);
 	}
-	else if (prog->proximaSala == 3 && !prog->Inventario[3]) {
-		al_draw_bitmap(atencao, prog->Itens[3]->x, prog->Itens[3]->y, 0);
+	if (prog->proximaSala == 3 && !prog->Inventario[3]) {
+		al_draw_bitmap(atencao, prog->Itens[3]->x, prog->Itens[3]->y - 50, 0);
 	}
-	else if (prog->proximaSala == 3 && !prog->Inventario[4] && prog->Salas[3]) {
-		al_draw_bitmap(atencao, prog->Itens[4]->x, prog->Itens[4]->y, 0);
+	if (prog->proximaSala == 3 && !prog->Inventario[4] && prog->Salas[3]) {
+		al_draw_bitmap(atencao, prog->Itens[4]->x - 50, prog->Itens[4]->y - 30, 0);
 	}
-	else if (prog->proximaSala == 5 && !prog->Inventario[1] && prog->Salas[5]) {
+	if (prog->proximaSala == 5 && !prog->Inventario[1] && prog->Salas[5]) {
 		al_draw_bitmap(atencao, prog->Itens[1]->x, prog->Itens[1]->y, 0);
 	}
-	else if (prog->proximaSala == 7 && !prog->Inventario[5]) {
-		al_draw_bitmap(atencao, prog->Itens[5]->x, prog->Itens[5]->y, 0);
+	if (prog->proximaSala == 7 && !prog->Inventario[5]) {
+		al_draw_bitmap(atencao, prog->Itens[5]->x - 50, prog->Itens[5]->y - 30, 0);
 	}
-	else if (prog->proximaSala == 7 && !prog->Inventario[6] && prog->Salas[7]) {
+	if (prog->proximaSala == 7 && !prog->Inventario[6] && prog->Salas[7]) {
 		al_draw_bitmap(atencao, prog->Itens[7]->x, prog->Itens[7]->y, 0);
 	}
-	else if (prog->proximaSala == 13 && !prog->Inventario[2] && prog->Salas[13]) {
+	if (prog->proximaSala == 13 && !prog->Inventario[2] && prog->Salas[13]) {
 
 		al_draw_bitmap(atencao, prog->Itens[2]->x, prog->Itens[2]->y, 0);
 	}
-	else if (prog->proximaSala == 15 && !prog->Inventario[7] && prog->Salas[15]) {
+	if (prog->proximaSala == 15 && !prog->Inventario[7] && prog->Salas[15]) {
 
-		al_draw_bitmap(atencao, prog->Itens[7]->x, prog->Itens[7]->y, 0);
+		al_draw_bitmap(atencao, prog->Itens[7]->x - 50, prog->Itens[7]->y - 30, 0);
 	}
 }
 #endif

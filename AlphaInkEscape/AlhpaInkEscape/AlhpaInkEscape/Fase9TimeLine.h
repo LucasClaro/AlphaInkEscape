@@ -467,6 +467,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 			if (evento.type == ALLEGRO_EVENT_KEY_CHAR) {
 				if (evento.keyboard.keycode == ALLEGRO_KEY_F1) {
 					prog->Salas[9] = 1;
+					prog->linhaInGame = 4;
 				}
 			}
 
