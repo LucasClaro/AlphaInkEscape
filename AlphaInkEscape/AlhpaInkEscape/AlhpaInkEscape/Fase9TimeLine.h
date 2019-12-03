@@ -618,6 +618,7 @@ int JogarFase9TimeLine(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_evento
 		drawNovo(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
+		chamaAtencaoItem(prog);
 
 		al_flip_display();
 	}

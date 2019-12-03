@@ -281,6 +281,7 @@ int JogarFase5Brasil(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		som(prog);
 		caregaInventario(prog);
 		drawNovo(prog);
+		chamaAtencaoItem(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
 

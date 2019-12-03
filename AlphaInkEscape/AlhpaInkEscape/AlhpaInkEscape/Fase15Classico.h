@@ -525,6 +525,7 @@ int JogarFase15Classico(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_event
 		caregaInventario(prog);
 		drawNovo(prog);
 		abreOrdem(prog);
+		chamaAtencaoItem(prog);
 		abrirMapa(prog);
 
 		al_flip_display();

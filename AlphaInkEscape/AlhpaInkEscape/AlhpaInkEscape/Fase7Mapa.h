@@ -523,6 +523,7 @@ int JogarFase7Mapa(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, P
 		abrirMapa(prog);
 		som(prog);
 		caregaInventario(prog);
+		chamaAtencaoItem(prog);
 		drawNovo(prog);
 		abreOrdem(prog);
 

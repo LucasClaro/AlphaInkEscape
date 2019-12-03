@@ -337,6 +337,7 @@ int JogarFase1Binary(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		abrirMapa(prog);
 		caregaInventario(prog);
 		drawNovo(prog);
+		chamaAtencaoItem(prog);
 		abreOrdem(prog);
 		al_flip_display();
 	}

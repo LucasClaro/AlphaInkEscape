@@ -170,6 +170,7 @@ int JogarFase3Asc(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos, Pr
 		caregaInventario(prog);
 		drawNovo(prog);
 		abrirMapa(prog);
+		chamaAtencaoItem(prog);
 		abreOrdem(prog);
 		som(prog);
 

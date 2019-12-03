@@ -18,7 +18,7 @@ float volume = 1.0;
 bool aberto = false;
 
 //Imagens inventário
-ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL, * novoItem = NULL;
+ALLEGRO_BITMAP* usado = NULL, * textoitens = NULL, * ordemBrasil = NULL, * ordemObras = NULL, * ordemElem = NULL, * ordemPaises = NULL, * fundoAsc = NULL, * semAcesso =  NULL, * novoItem = NULL, * atencao = NULL;
 
 // Vereifica se as coordenadas (X,Y) estão dentro de uma imagem
 int IsInside(int x, int y, Objeto *objeto) {
@@ -222,6 +222,7 @@ int loadFotosGlobais()
 	fundoAsc = al_load_bitmap("Imgs/Asc/fundoAsc4.png");
 	semAcesso = al_load_bitmap("Imgs/Minimapa/bloc.png");
 	novoItem = al_load_bitmap("Imgs/Clicavel/novo.png");
+	atencao = al_load_bitmap("Imgs/circulo.png");
 }
 
 //Destroi as fotos do inventário/
@@ -236,6 +237,7 @@ int destroyFotosGlobais()
 	al_destroy_bitmap(fundoAsc);
 	al_destroy_bitmap(semAcesso);
 	al_destroy_bitmap(novoItem);
+	al_destroy_bitmap(atencao);
 }
 
 //Exibe os itens que podem ser abertos
@@ -482,6 +484,35 @@ int checaNovoItem(int x, int y, Progresso* prog)
 			//printf("certo");
 			prog->inventNew[7] = 0;
 		}
+	}
+}
+
+int chamaAtencaoItem(Progresso * prog) {
+	if (prog->proximaSala == 1 && !prog->Inventario[0] && prog->Salas[1]) {
+		al_draw_bitmap(atencao,prog->Itens[0]->x, prog->Itens[0]->y,0);
+	}
+	else if (prog->proximaSala == 3 && !prog->Inventario[3]) {
+		al_draw_bitmap(atencao, prog->Itens[3]->x, prog->Itens[3]->y, 0);
+	}
+	else if (prog->proximaSala == 3 && !prog->Inventario[4] && prog->Salas[3]) {
+		al_draw_bitmap(atencao, prog->Itens[4]->x, prog->Itens[4]->y, 0);
+	}
+	else if (prog->proximaSala == 5 && !prog->Inventario[1] && prog->Salas[5]) {
+		al_draw_bitmap(atencao, prog->Itens[1]->x, prog->Itens[1]->y, 0);
+	}
+	else if (prog->proximaSala == 7 && !prog->Inventario[5]) {
+		al_draw_bitmap(atencao, prog->Itens[5]->x, prog->Itens[5]->y, 0);
+	}
+	else if (prog->proximaSala == 7 && !prog->Inventario[6] && prog->Salas[7]) {
+		al_draw_bitmap(atencao, prog->Itens[7]->x, prog->Itens[7]->y, 0);
+	}
+	else if (prog->proximaSala == 13 && !prog->Inventario[2] && prog->Salas[13]) {
+
+		al_draw_bitmap(atencao, prog->Itens[2]->x, prog->Itens[2]->y, 0);
+	}
+	else if (prog->proximaSala == 15 && !prog->Inventario[7] && prog->Salas[15]) {
+
+		al_draw_bitmap(atencao, prog->Itens[7]->x, prog->Itens[7]->y, 0);
 	}
 }
 #endif

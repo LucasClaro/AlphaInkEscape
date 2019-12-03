@@ -290,6 +290,7 @@ int JogarFase13Sapos(ALLEGRO_DISPLAY* janela, ALLEGRO_EVENT_QUEUE* fila_eventos,
 		drawNovo(prog);
 		abreOrdem(prog);
 		abrirMapa(prog);
+		chamaAtencaoItem(prog);
 
 		al_flip_display();
 	}
