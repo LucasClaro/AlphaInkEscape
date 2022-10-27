@@ -2,5 +2,5 @@ Grupo Itália
 
 Felipe Aguiar
 Gustavo Yamauchi
-Igor Kenso
+Igor Kenzo
 Lucas Claro
